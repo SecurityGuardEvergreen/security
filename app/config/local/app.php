@@ -14,5 +14,5 @@ return array(
 	*/
 
 	'debug' => true,
-
+	'domain' => 'security_guard',
 );

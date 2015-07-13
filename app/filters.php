@@ -37,14 +37,15 @@ Route::filter('auth', function()
 {
 	if (Auth::guest())
 	{
-		if (Request::ajax())
-		{
-			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
-			return Redirect::guest('login');
-		}
+		// if (Request::ajax())
+		// {
+		// 	return Response::make('Unauthorized', 401);
+		// }
+		// else
+		// {
+		// 	return Redirect::guest('login');
+		// }
+		return Redirect::guest('/')->with('msg','Debes autenticarte');
 	}
 });
 
