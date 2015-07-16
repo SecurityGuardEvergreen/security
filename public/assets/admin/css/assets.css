@@ -2763,7 +2763,8 @@ select.form-control {
 }#prey-login .btn-link {
     margin: 10px 0;
     font-weight: bold;
-    text-align: left;
+    text-align: left;    
+    text-decoration: none;
 }
 #prey-login .btn-link:focus {
     outline: none !important;

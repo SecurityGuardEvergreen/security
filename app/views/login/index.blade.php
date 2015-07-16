@@ -1,4 +1,4 @@
-@extends('layouts.login')
+@extends('layouts.index')
 
 @section('title')
 Login - 
@@ -25,17 +25,16 @@ Login -
 </figure>
 </div>
 <div class="current-form">
-@if(Session::get('msg'))
-  <p>{{ Session::get('msg') }}</p>
+@if(Session::get('msg') || Session::get('error_message'))
+  <p>{{ Session::get('msg') }} <span style="color: #d9534f;">{{ Session::get('error_message') }}</span></p>
+
 @endif
 <!-- /if -->
 
 
-{{ Form::open(array('url' => '/login', 'method' => 'post', 'class' => 'form form-session', 'id' => 'new-session')) }}
+{{ Form::open(array('url' => 'login', 'method' => 'post', 'class' => 'form form-session', 'id' => 'new-session')) }}
 
   <div style="margin:0;padding:0;display:inline">
-
-  <input name="authenticity_token" type="hidden" value="vAhRwZHnHMYIS9qKrA56eOmrqROHRlzUeT2ApJKKAHY="></div>
 
 
 <ul class="sign-form">
@@ -49,13 +48,8 @@ Login -
   <input class="form-control" id="password" name="password" placeholder="Tu contraseña" tabindex="2" type="password">
 </li>
 <li class="checkbox">
-<label>
-<input id="remember_me" name="remember_me" tabindex="3" type="checkbox" value="1">
-<span></span>
-<label for="remember_me">Recordarme</label>
 
-</label>
-<a href="#"><p class="recovery_pass">Olvidaste tu contrase&ntilde;a?</p></a>
+<a href="forgot"><p class="recovery_pass">Olvidaste tu contrase&ntilde;a?</p></a>
 </li>
 <li><input class="cta" data-disable-with="Ingresando..." name="commit" tabindex="4" type="submit" value="Ingresar"></li>
 

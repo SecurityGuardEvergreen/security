@@ -11,12 +11,27 @@
 |
 */
 
-// Route::get('/', function()
-// {
-// 	return View::make('hello');
-// });
+Route::get('/', function()
+{
+	return View::make('movil.index');
+});
 
 // Pagina principal donde está la autenticación
-Route::get('/',['before' => 'guest', function(){
-	return View::make('login.index');
-}]);
+Route::get('login','UserLogin@login');
+
+
+// =========Admin System=========
+Route::group(array('before' => 'auth','prefix' => 'admin') ,function(){
+	Route::any('/','HomeController@dashboard');
+
+});
+// =========Admin System=========
+
+// Rutas referente al logueo y pass
+Route::post('login','UserLogin@user');
+Route::get('logout', 'UserLogin@logout');
+Route::get('forgot','RemindersController@getRemind');
+Route::post('forgot','RemindersController@postRemind');
+Route::get('password/reset/{token?}','RemindersController@getReset');
+Route::post('password/reset/t','RemindersController@postReset');
+// ---------------------------

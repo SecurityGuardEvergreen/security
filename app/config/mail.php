@@ -28,7 +28,8 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mailgun.org',
+	// 'host' => 'smtp.gmail.com',
+	'host' => 'mail.rsmappdevelopers.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +55,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array('address' => 'elvisreyes@rsmappdevelopers.com', 'name' => 'Elvis Reyes'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +81,7 @@ return array(
 	|
 	*/
 
-	'username' => null,
+	'username' => 'elvisreyes@rsmappdevelopers.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +94,7 @@ return array(
 	|
 	*/
 
-	'password' => null,
+	'password' => 'cesarmanuelelvis2014',
 
 	/*
 	|--------------------------------------------------------------------------

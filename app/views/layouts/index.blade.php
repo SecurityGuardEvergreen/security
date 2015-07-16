@@ -30,20 +30,20 @@ if(!isset($page)){
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>@yield('title')  Security Guard </title>
-<link href="./login/css/assets.css" media="screen" rel="stylesheet">
+<link href="/assets/admin/css/assets.css" media="screen" rel="stylesheet">
 <meta charset="utf-8" content="text/html" http-equiv="content-type">
 <meta content="ie=edge,chrome=1" http-equiv="x-ua-compatible">
 
 
-<link href="./login/images/favi.png" rel="shortcut icon">
-<link href="./login/images/favi.png" rel="apple-touch-icon">
-<link href="./login/images/favi.png" rel="apple-touch-icon" sizes="76x76">
-<link href="./login/images/favi.png" rel="apple-touch-icon" sizes="120x120">
-<link href="./login/images/favi.png" rel="apple-touch-icon" sizes="152x152">
+<link href="/assets/admin/images/favi.png" rel="shortcut icon">
+<link href="/assets/admin/images/favi.png" rel="apple-touch-icon">
+<link href="/assets/admin/images/favi.png" rel="apple-touch-icon" sizes="76x76">
+<link href="/assets/admin/images/favi.png" rel="apple-touch-icon" sizes="120x120">
+<link href="/assets/admin/images/favi.png" rel="apple-touch-icon" sizes="152x152">
 
 <meta content="authenticity_token" name="csrf-param">
 <meta content="=" name="csrf-token">
-<link href="./login/css/style.css" rel="stylesheet" type="text/css">
+<link href="/assets/admin/css/style.css" rel="stylesheet" type="text/css">
 
 
 </head>

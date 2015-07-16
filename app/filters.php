@@ -37,17 +37,21 @@ Route::filter('auth', function()
 {
 	if (Auth::guest())
 	{
-		// if (Request::ajax())
-		// {
-		// 	return Response::make('Unauthorized', 401);
-		// }
-		// else
-		// {
-		// 	return Redirect::guest('login');
-		// }
-		return Redirect::guest('/')->with('msg','Debes autenticarte');
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		else
+		{
+			return Redirect::guest('login');
+		}
+		// return Redirect::guest('/')->with('msg','Debes autenticarte');
 	}
 });
+// Route::filter('auth', function()
+// {
+// 	if (Auth::guest()) return Redirect::guest('login');
+// });
 
 
 Route::filter('auth.basic', function()

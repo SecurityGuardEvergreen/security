@@ -1,0 +1,630 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+margin: 0;
+padding: 0;
+border: 0;
+font: inherit;
+font-size: 100%;
+vertical-align: baseline
+}
+html {
+line-height: 1
+}
+ol, ul {
+list-style: none
+}
+table {
+border-collapse: collapse;
+border-spacing: 0
+}
+caption, th, td {
+text-align: left;
+font-weight: normal;
+vertical-align: middle
+}
+q, blockquote {
+quotes: none
+}
+q:before, q:after, blockquote:before, blockquote:after {
+content: "";
+content: none
+}
+a img {
+border: none
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+display: block
+}
+html, button, input, select, textarea {
+color: #222
+}
+html {
+font-size: 1em;
+line-height: 1.4
+}
+::-moz-selection {
+background:#b3d4fc;
+text-shadow:none
+}
+::selection {
+background: #b3d4fc;
+text-shadow: none
+}
+hr {
+display: block;
+height: 1px;
+border: 0;
+border-top: 1px solid #ccc;
+margin: 1em 0;
+padding: 0
+}
+audio, canvas, img, video {
+vertical-align: middle
+}
+fieldset {
+border: 0;
+margin: 0;
+padding: 0
+}
+textarea {
+resize: vertical
+}
+.browsehappy {
+margin: 0.2em 0;
+background: #ccc;
+color: #000;
+padding: 0.2em 0
+}
+body {
+font: 100% 'Open Sans', sans-serif;
+background: #fff
+}
+.dialPad .dials .digits:active {
+background: #58CE99;
+border-top-color: #16a765;
+}
+
+.compact .dials .pad-action:active {
+background: #0c3
+}
+.dialPad .dials .digits p strong:active{
+	color:#fff;
+}
+.rotar45 {
+	-ms-transform: rotate(45deg) !important; /* IE 9 */
+    -webkit-transform: rotate(45deg) !important; /* Chrome, Safari, Opera */
+    transform: rotate(45deg) !important;
+}
+
+.dialPad .dials:before, .dialPad .dials:after {
+content: "\0020";
+display: block;
+height: 0;
+overflow: hidden
+}
+.dialPad .dials:after {
+clear: both
+}
+.dialPad .dials .digits {
+float: left;
+width: 120px;
+height: 120px;
+margin: 7px;
+border-radius: 60px;
+border: 1px solid #16a765;
+}
+.dialPad .dials .digits p {
+position:relative;
+//padding: 15px 25px;
+}
+.dialPad .dials .digits p strong {
+font-size: 30px;
+margin-right: 8px;
+color: #A9A9A9;
+font-family: Helvetica,Arial;
+}
+
+.compact .dials .digits p {
+  padding-left: 50px;
+}
+.compact .dials .digits p strong {
+font-size: 30px;
+line-height: 114px;
+}
+.compact .dials .digits p sup {
+text-transform: uppercase;
+color: #ffffff
+}
+.compact .dials .pad-action {
+background: #5bc26c
+}
+
+.ir {
+background-color: transparent;
+border: 0;
+overflow: hidden;
+*text-indent:-9999px
+}
+.ir:before {
+content: "";
+display: block;
+width: 0;
+height: 150%
+}
+.hidden {
+display: none !important;
+visibility: hidden
+}
+.visuallyhidden {
+border: 0;
+clip: rect(0 0 0 0);
+height: 1px;
+margin: -1px;
+overflow: hidden;
+padding: 0;
+position: absolute;
+width: 1px
+}
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+clip: auto;
+height: auto;
+margin: 0;
+overflow: visible;
+position: static;
+width: auto
+}
+.invisible {
+visibility: hidden
+}
+.clearfix:before, .clearfix:after {
+content: " ";
+display: table
+}
+.clearfix:after {
+clear: both
+}
+.clearfix {
+*zoom:1
+}
+.compact{
+-background-color:red;
+}
+.dialPad .number {
+	color: #4d4d4d;
+	background: #fff;
+	text-align:center;
+	}
+	
+	#send{
+		background-color:#4CDA64;			
+	}
+	#panic{
+		color:red;
+	}
+	#panic:active{
+		color:rgb(155, 0, 0);
+	}
+	#label_send{
+		color:#fff;	
+	}
+	#comment textarea{
+		font-family:Arial;
+		font-size:13px;
+		color:rgb(107, 107, 107);
+		text-transform:uppercase;
+		
+	}
+	#deleted{
+		font-size:30px;
+		color:#A72116;
+		}
+	#deleted:active{
+		color:red;
+		}
+	#deleted_all{
+		font-size:30px;
+		color:#A72116;
+	}
+	#deleted_all:active{
+		color:red;
+		}
+	.dialPad .dials .digits {
+		float: left;
+		position: relative;
+		color: #000;
+		width: 60px;
+		height: 60px;
+		margin: 0 0 10px 28px;
+		border-radius: 100%;
+		background: 0;
+		border: 1px solid #16a765;
+		cursor: pointer;
+	}
+	.dialPad .dials .digits p strong {
+		color: #000;	
+	}
+	.compact .dials .digits p sup {
+	  font-size: 10px;
+	  text-transform: uppercase;
+	  color: #888;
+	  position: relative;
+	}
+	/* ============================================
+==================== MEDIA ====================
+=============================================== */
+
+/* Tabletas (Vertical y Horizontal) ----------- */
+
+
+/* =======iPhone 4 & 5======== */
+@media screen and (min-width: 320px) {
+
+	
+	.dialPad .number {
+	position: relative;
+	z-index: 2;
+	padding: 15px 20px;
+	font-weight: 300;
+	font-size: 30px;
+	height: 28px;
+	-margin:0 auto
+	}
+	 .dialPad .dials {
+		width:100%
+		}
+
+ 	/* Boton enviar */
+	#send{
+		position:relative;
+		left:90px;
+		top:60px;		
+	}
+	#panic{
+		position: absolute;
+		top:425px;
+		left:30px;
+		font-size:30px;
+	}
+	#label_send{
+		padding-top:30%;
+		font-size:30px;	
+	}
+	#comment{
+	position:absolute;
+	top:350px;
+	left:15%;
+	}
+	#comment textarea{
+		width:80%;
+		
+	}
+	#deleted{
+		position:absolute;
+		right:20px;
+		top:20px;
+		z-index:3;
+		}
+	#deleted_all{
+	position:absolute;
+	left:20px;
+	top:20px;
+	z-index:3;
+	}
+	/* Fin Boton enviar */
+	.dialPad .dials .digits {
+		float: left;
+		position: relative;
+		color: #000;
+		width: 60px;
+		height: 60px;
+		margin: 0 0 10px 10%;
+		border-radius: 100%;
+		background: 0;
+		border: 1px solid #16a765;
+		cursor: pointer;
+	}
+	.dialPad .dials .digits p strong {
+		font-size: 32px;
+		line-height: 55px;	
+	}
+	.compact .dials .digits p {
+	  padding-left: 22px;
+	}
+	.compact .dials .digits p sup {
+	  top: 15px;
+	  left: -30px;
+	}
+	.dials{
+		margin-left:10px;
+	}
+	
+	
+}
+/* ======= /iPhone 4 & 5======== */
+/* =======iPhone 6======== */
+@media screen and (min-width: 375px) {
+	.dialPad .number {
+		position: relative;
+		z-index: 2;
+		padding: 25px 40px;
+		font-weight: 300;
+		font-size: 50px;
+		height: 48px;
+		-margin:0 auto
+	}
+	.dials{
+		margin-left:3%;
+	}
+	.dialPad .dials {
+		width:375px
+		}
+	.dialPad .dials .digits {
+		float: left;
+		position: relative;
+		width: 80px;
+		height: 80px;
+		margin: 0 0 10px 30px;
+	}
+	
+	.dialPad .dials .digits p strong {
+		font-size: 42px;
+		line-height: 75px;	
+	}
+	.compact .dials .digits p {
+		padding-left: 28px;
+	}
+	
+	/* Boton enviar */
+	#send{
+		position:relative;
+		left:110px;
+		top:100px;		
+	}
+	#panic{
+		position: absolute;
+		top:580px;
+		left:30px;
+		font-size:50px;
+	}
+	#label_send{
+		padding-top:30%;
+		font-size:40px;	
+	}
+	#comment{
+		position:absolute;
+		top:490px;
+		left:8%;
+	}
+	#comment textarea{
+		width:80%;
+		height:60px;
+		font-size:20px;
+	}
+	#deleted{
+		position:absolute;
+		right:20px;
+		top:20px;
+		z-index:3;
+		font-size:50px;
+	}
+	#deleted_all{
+		position:absolute;
+		left:20px;
+		top:20px;
+		z-index:3;
+		font-size:50px;
+	}
+	/* Fin Boton enviar */
+
+
+	
+}
+/* =======iPhone /6======== */
+/* =======iPhone 6 plus======== */
+@media screen and (min-width: 414px) {
+.center{left:25%;width:50%;height:50%;top:25%;background:#f0f;position:absolute;text-align:center;}
+	.dialPad .number {
+		position: relative;
+		z-index: 2;
+		padding: 25px 40px;
+		font-weight: 300;
+		font-size: 50px;
+		height: 48px;
+	}
+	
+	 .dialPad .dials {
+
+		margin: 0 auto;
+		background: #fff;
+		cursor: pointer;
+		width:423px
+		}
+	
+	.dialPad .dials .digits {
+		margin: 0 0 15px 11%;
+	}
+	
+	.dialPad .dials .digits p strong {
+		font-size: 42px;
+		line-height: 75px;	
+	}
+	.compact .dials .digits p {
+		padding-left: 37%;
+		
+	}
+	
+	/* Boton enviar */
+	#send{
+		position:relative;
+		left:30%;
+		top:100px;		
+	}
+	#panic{
+		position: absolute;
+		top:600px;
+		left:30px;
+		font-size:50px;
+	}
+	#label_send{
+		padding-top:30%;
+		font-size:40px;	
+	}
+
+	#comment{
+		position:absolute;
+		top:490px;	
+		height:50%;
+		left:10%
+	}
+	#comment textarea{
+		-width:100%;
+		height:80px;
+		font-size:25px;
+		
+	}
+	#deleted{
+		position:absolute;
+		right:20px;
+		top:20px;
+		z-index:3;
+		font-size:50px;
+	}
+	#deleted_all{
+		position:absolute;
+		left:20px;
+		top:20px;
+		z-index:3;
+		font-size:50px;
+	}
+	/* Fin Boton enviar */
+
+
+	
+}
+/* =======iPhone /6 plus======== */
+
+/* ======= screen 768======== */
+@media (min-width : 768px) {
+.dialPad .number {
+position: relative;
+z-index: 2;
+padding: 15px 20px;
+color: #4d4d4d;
+font-weight: 300;
+font-size: 30px;
+width:350px;
+height: 78px;
+text-align:center;
+
+}
+ .dialPad .dials {
+
+margin: 0 auto;
+background: #fff;
+cursor: pointer;
+width:423px
+}
+
+
+#comment{
+	left:25%;
+	}
+#deleted{
+	right:240px;
+			
+	}
+#deleted_all{
+	left:200px;		
+}	
+#panic{
+	left:180px;
+}
+}
+/* ======= fin screen 768======== */
+
+/* ======= screen 1024======== */
+@media (min-width : 1024px) {
+.dialPad .number {
+position: relative;
+z-index: 2;
+padding: 15px 20px;
+color: #4d4d4d;
+font-weight: 300;
+font-size: 30px;
+width:300px;
+height: 78px;
+text-align:center;
+}
+ .dialPad .dials {
+margin: 0 auto;
+background: #fff;
+cursor: pointer;
+width:400px
+}
+
+#comment{
+	position:absolute;
+	top:490px;
+	left:30%;
+	margin:0 auto;
+	}
+#deleted{
+	right:28%;
+			
+	}
+#deleted_all{
+	left:300px;		
+}	
+#panic{
+	left:330px;
+}
+}
+/* ======= fin screen 1024======== */
+/*=============Screen 1370px================*/
+@media (min-width: 1360px){
+/* .dialPad .dials {
+
+background: #fff;
+cursor: pointer;
+margin:0% auto;
+width:423px
+} */
+.dialPad .number {
+position: relative;
+z-index: 2;
+padding: 15px 20px;
+font-weight: 300;
+font-size: 30px;
+background: #fff;
+height: 48px;
+text-align:center;
+margin:0% auto
+}
+
+#comment{
+	position:absolute;
+	top:460px;
+	left:39%;
+	margin:0 auto;
+	}
+#deleted{
+	right:35%;
+			
+	}
+#deleted_all{
+	left:37%;		
+}	
+#panic{
+	left:37%;
+	top:560px;
+}
+#comment textarea{
+		width:320px;
+		height:80px;
+		font-size:25px;
+	}
+#send{
+	top:80px;		
+	}
+	
+}
+/* ======= fin screen 1370px======== */

@@ -20,4 +20,32 @@ class HomeController extends BaseController {
 		return View::make('hello');
 	}
 
+	public function login()
+	{
+		// Get post
+		$userdata = array(
+			'name' => Input::get('nickname'),
+			'password' =>  Input::get('password')
+			);
+
+		if(Auth::attempt($userdata))
+		{
+			return "Usuario logeado correctamente";
+		}
+		else
+		{
+			return Redirect::back()->with('error_message', 'Datos incorrectos, intenta nuevamente !!!');
+		}
+	}
+
+	// -Dashboard-
+	public function dashboard()
+	{	
+		// $email = Auth::user()->remember_token;
+		// return "en el Dashborad Sr ".$email;
+		return View::make('admin.dashboard');
+
+	}
+	// -----------
+
 }
