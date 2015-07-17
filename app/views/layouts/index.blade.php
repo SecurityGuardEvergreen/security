@@ -49,36 +49,12 @@ if(!isset($page)){
 </head>
 <body class="session">
 
-<div>
+
 @yield('content')
-</div>
 
 
-
-
-
-<script>
-  var body = document.body,
-  timer;
-  
-  window.addEventListener('scroll', function() {
-    clearTimeout(timer);
-    if(!body.classList.contains('disable-hover')) {
-      body.classList.add('disable-hover')
-    }
-  
-    timer = setTimeout(function(){
-      body.classList.remove('disable-hover')
-    },500);
-  }, false);
-</script>
-
-
-
-
-<div>
+<script type="text/javascript" src="/assets/admin/js/jquery-1.11.3.min.js"></script>
 @yield('scripts')
-</div>
 </body>
 
 </html>

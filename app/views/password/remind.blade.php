@@ -4,7 +4,13 @@
 Forgot - 
 @stop
 
+@section('scripts')
+<!-- Css escondido -->
+<link rel="stylesheet" href="/assets/admin/asset/css/bootstrap.min.css">
 
+<script type="text/javascript" src="/assets/admin/js/remind.js"></script>
+@stop
+<!-- /@scripts -->
 
 @section('content')
 
@@ -34,18 +40,50 @@ Forgot -
 
 <ul class="sign-form">
 <li>
-@if(Session::get('error') || Session::get('status'))
-	<p class="here"><span style="color: #d9534f;">{{ Session::get('error') }}</span> </p>
+	
+@if(Session::get('status'))
+<p class="here">
+	<span style="color: #00904e;">{{ Session::get('status') }}</span> 
+	<br><br>
+	<div class="alert alert-success">
+		Ya puedes dirigirte a tu correo electrónico y revisar el email 
+	que te enviamos con los	pasos necesarios para restablecer tu contraseña.
+	</div>	
+	</p>
+<br><br>
+@else
+
+@if(Session::get('error'))
+	<p class="here">
+		<span style="color: #d9534f;">{{ Session::get('error') }}</span> 
+	</p>
 @else
 	<p class="here">Olvidaste tu contraseña, al parecer.</p>
 @endif
 
+
 </li>
 <li class="sep">
-  <input autofocus="autofocus" class="form-control" id="email" name="email" placeholder="Ingresa tu email" tabindex="1" type="text">
+	{{Form::text('email',Input::old('email'),array(
+	'autofocus',
+	'class' => 'form-control',
+	'id' => 'email',
+	'placeholder' => 'Ingresa tu email'
+	))}}
+	@if( $errors->has('email') )
+		@foreach($errors->get('email') as $error )
+		  <br/> <span style="color:red">* {{ $error }}</span>
+		@endforeach
+	@endif
+
+
 </li>
 
-<li><input class="cta"  name="commit" tabindex="4" type="submit" value="Enviar instrucciones"></li>
+<li>
+	<input class="cta"  name="commit" id="commit" tabindex="4" type="submit" value="Enviar instrucciones">
+  @endif
+  <!-- /session::get('status') -->
+</li>
 
 <li>
 <a class="btn-link btn-block" href="login">Regresar al login</a>
@@ -60,5 +98,8 @@ Forgot -
 </div>
 </div>
 </div>
+</div>
+<!-- /prey-login -->
 @stop
 <!-- /@content -->
+

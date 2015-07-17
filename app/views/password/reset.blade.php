@@ -19,6 +19,8 @@ Reset Password -
 <div class="logoP logo-wP"></div>
 </figure>
 </div>
+
+
 <div class="current-form">
 
 <!-- /if -->
@@ -34,13 +36,11 @@ Reset Password -
 
 <ul class="sign-form">
 <li>
-@if(Session::get('error') || Session::get('status'))
+@if(Session::get('error'))
 	<p class="here"><span style="color: #d9534f;">{{ Session::get('error') }}</span> </p>
 @else
 	<p class="here">Restablezca su contraseña.</p>
 @endif
-
-
 
 </li>
 <input type="hidden" name="token" value="{{ $token }}">

@@ -5,8 +5,27 @@ class UserLogin extends BaseController {
 
 	public function user()
 	{	
+		$reglas =  array(
+            // validamos que el nombre sea un campo obligatorio
+        'nickname' => array('required', 'min:4'),
+            // validamos que el usuario sea un campo obligatorio y de mínimo 8 caracteres
+        'password'  => array('required')
+    	);
+    	 $validator = Validator::make(Input::all(), $reglas);
 
-		$userdata = array(
+    	 if ( $validator->fails() ){
+
+        // en caso de que la validación falle vamos a retornar al formulario
+        // pero vamos a enviar los errores que devolvió Validator
+        // y también los datos que el usuario escribió
+        return Redirect::back()
+                // Aquí se esta devolviendo a la vista los errores
+                ->withErrors($validator)
+                // Aquí se esta devolviendo a la vista todos los datos del formulario
+                ->withInput();
+    }else{
+        
+    	$userdata = array(
 			'nickname' => Input::get('nickname'),
             'password' => Input::get('password')
 			);
@@ -14,8 +33,15 @@ class UserLogin extends BaseController {
 		if (Auth::attempt($userdata)) {
 			return Redirect::to('admin');
 		}else{
-			return Redirect::to('login')->with('error_message','Datos incorrectos, intenta nuevamente !!!');
+			return Redirect::back()
+			->with('error_message','Los datos suministrados son incorrectos !!!');
 		}
+
+        exit;
+    }
+
+		
+
 	}
 	// Fin función user validar sesion
 

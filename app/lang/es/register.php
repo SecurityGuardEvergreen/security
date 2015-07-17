@@ -11,7 +11,7 @@ return array(
 	'reestablecer'=>'Reestablecer contraseña',
 	'minutos'=>'minutos',
 	'enlace_caducara'=> 'Este enlace caducará en',
-	'restablecer_completa'=>'Para restablecer tu contraseña, por favor completa los datos de este enlace',
+	'restablecer_pass'=>'Para restablecer tu contraseña, por favor completa los datos de este enlace',
 	'login_incorrecto'=>'Usuario o contraseña incorrecta. <a href="/password/reset">¿Recordar contraseña?</a>',
 	'contrasena'=>'contraseña',
 	'login'=>'Entrar',

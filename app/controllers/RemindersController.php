@@ -18,8 +18,24 @@ class RemindersController extends Controller {
 	 * @return Response
 	 */
 	public function postRemind()
-	{
-		switch ($response = Password::remind(Input::only('email')))
+	{	
+
+		$reglas =  array('email' => array('required', 'email'));
+		$validator = Validator::make(Input::all(), $reglas);
+
+		if ( $validator->fails() ){
+
+        // en caso de que la validación falle vamos a retornar al formulario
+        // pero vamos a enviar los errores que devolvió Validator
+        // y también los datos que el usuario escribió
+        return Redirect::back()
+                // Aquí se esta devolviendo a la vista los errores
+                ->withErrors($validator)
+                // Aquí se esta devolviendo a la vista todos los datos del formulario
+                ->withInput();
+    }else
+    {
+    	switch ($response = Password::remind(Input::only('email')))
 		{
 			case Password::INVALID_USER:
 
@@ -28,6 +44,8 @@ class RemindersController extends Controller {
 			case Password::REMINDER_SENT:
 				return Redirect::back()->with('status', Lang::get($response));
 		}
+    }
+		
 	}
 
 	/**

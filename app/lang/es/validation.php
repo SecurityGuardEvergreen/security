@@ -82,7 +82,26 @@ return array(
 	|
 	*/
 
-	'custom' => array(),
+	'custom' => array(
+		'nickname' => array(
+        'required' => '¡Necesitamos saber tu nombre de usuario! por lo tanto
+        el campo :attribute no puede estar vacío',
+        'min' => 'Hemos notado que tu nombre de usuario es muy corto. Verifica que en el
+        campo :attribute tenga al menos :min caracteres'
+    	),
+    	'password' => array(
+    		'required' => '¡Necesitamos conocer tu contraseña! por lo tanto el campo :attribute
+    		 no puede estar vacío'
+    		),
+    	'email' => array(
+    		'required' => 'Necesitamos tu correo electrónico para enviarte las 
+    		instrucciones de recuperación de contraseña, por lo tanto el campo :attribute no
+    		puede estar vacío.',
+    		'email' => "Hemos notado que el formato de correo electrónico ingresado es <b>inválido</b> !!!.
+    		Verifica que tenga el siguiente formato:<br>tu-nombre-de-usuario@evergreenservice.net
+    		"
+    		)
+		),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -99,6 +118,10 @@ return array(
 	|
 	*/
 
-	'attributes' => array(),
+	'attributes' => array(
+		'nickname' => '<b>Usuario</b>',
+		'password' => '<b>Contraseña</b>',
+		'email'	=> '<b>Email</b>'
+		),
 
 );
