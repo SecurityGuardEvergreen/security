@@ -34,4 +34,19 @@ Route::get('forgot','RemindersController@getRemind');
 Route::post('forgot','RemindersController@postRemind');
 Route::get('password/reset/{token?}','RemindersController@getReset');
 Route::post('password/reset/t','RemindersController@postReset');
+Route::get('otrousr',function(){
+	$dt = new DateTime();
+	$today = $dt->format('Y-m-d H:i:s');
+
+	$user = new User;
+
+	$user->nickname = 'John';
+	$user->password = Hash::make('password');
+	$user->email = 'elvis.reyes@evergreenservice.net';
+	$user->save();
+	
+	$insertedId = $user->id;
+	return var_dump($insertedId);
+
+});
 // ---------------------------

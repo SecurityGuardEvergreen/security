@@ -18,7 +18,7 @@
 <div style="margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;border-radius:5px;overflow:hidden;width:500px;background-color:#fff">
   <div style="margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent">
       <a href="http://www.evergreenservice.net">
-      	<img src="https://photos-4.dropbox.com/t/2/AACD4jC0MopJtYlr5QhklDfI7hsxZuAaXp8mHuVRwssl0Q/12/445903612/jpeg/32x32/1/1437174000/0/2/header_email_generic.jpg/CPzlz9QBIAEgAiADIAQgBSAGIAcoBw/4JrTrLQkgi5QLZ3HMgAUzd7rjdEzG7ZfMK9Y89SJsbA?size=1024x768&size_mode=2"></a>
+      	<img src="https://lh4.googleusercontent.com/RwenoDlv7O2HP5v11UtzX2_STR1bEPevZM3e8h5VwFtbABQ0Jooqh0en4fx2Ss3BrACo8Hqt=w1326-h537"></a>
   </div>
 
   <div style="border:0;outline:0;font-size:100%;vertical-align:baseline;margin:0 auto;padding:20px;width:460px;background:#ffffff;padding-top:30px;padding-bottom:30px">

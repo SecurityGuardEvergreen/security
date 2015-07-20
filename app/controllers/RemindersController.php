@@ -34,8 +34,11 @@ class RemindersController extends Controller {
                 // Aquí se esta devolviendo a la vista todos los datos del formulario
                 ->withInput();
     }else
-    {
-    	switch ($response = Password::remind(Input::only('email')))
+    {	$credentials = array('email' => Input::only('email'));
+    	switch ($response = Password::remind($credentials,function($message){
+    		$message->setFrom(array('elvisreyes@rsmappdevelopers.com' => 'Security Guard'));
+			$message->subject('Reestablece la contraseña de tu cuenta - acción requerida ahora');
+    	}))
 		{
 			case Password::INVALID_USER:
 
