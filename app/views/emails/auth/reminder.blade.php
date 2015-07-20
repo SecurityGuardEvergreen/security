@@ -4,13 +4,7 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-	<!-- 	<h2>Password Reset</h2>
 
-		<div>
-			To reset your password, complete this form: {{ URL::to('password/reset', array($token)) }}.<br/>
-			This link will expire in {{ Config::get('auth.reminder.expire', 60) }} minutes.
-		</div>
- -->
 <table align="center" border="0" cellspacing="0" cellpadding="0" style="margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;border-collapse:collapse;border-spacing:0;width:100%;background:#e7e6e5;font-family:arial,sans-serif"><tbody><tr align="center" style="margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent">
 <td align="center" style="margin:0;padding:0;border:0;outline:0;background:transparent;font-size:100%;vertical-align:top">
         
@@ -18,7 +12,7 @@
 <div style="margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;border-radius:5px;overflow:hidden;width:500px;background-color:#fff">
   <div style="margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent">
       <a href="http://www.evergreenservice.net">
-      	<img src="https://lh4.googleusercontent.com/RwenoDlv7O2HP5v11UtzX2_STR1bEPevZM3e8h5VwFtbABQ0Jooqh0en4fx2Ss3BrACo8Hqt=w1326-h537"></a>
+      	<img src="https://github.com/SecurityGuardEvergreen/security/blob/master/public/assets/admin/images/email-header02.jpg?raw=true"></a>
   </div>
 
   <div style="border:0;outline:0;font-size:100%;vertical-align:baseline;margin:0 auto;padding:20px;width:460px;background:#ffffff;padding-top:30px;padding-bottom:30px">

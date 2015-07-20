@@ -41,16 +41,21 @@ Login -
 <ul class="sign-form">
 <li>
 	<p class="here">
-		@if(Session::get('msg'))
-			{{ Session::get('msg') }}
-			<p>Si desea ingresar nuevamente introduzca sus credenciales</p>
-		@elseif(Session::get('error_message'))
-		 <span style="color: #d9534f;">{{ Session::get('error_message') }}</span> 
-		 	Necesitamos nuevamente sus credenciales, por favor.
-		  
-		  @else
-		  Credenciales, por favor.
+		@if(Session::get('message_pass_cambio_true'))
+		<span style="color:#008B4C;">{{Session::get('message_pass_cambio_true')}}</span> <br>
+			Ya puede ingresar con su nueva contraseña y para eso necesitamos sus 
 		@endif
+
+			@if(Session::get('msg'))
+				{{ Session::get('msg') }}
+				<p>Si desea ingresar nuevamente introduzca sus credenciales</p>
+			@elseif(Session::get('error_message'))
+			 <span style="color: #d9534f;">{{ Session::get('error_message') }}</span> 
+			 	Necesitamos nuevamente sus credenciales, por favor.
+			  
+			  @else
+			  Credenciales, por favor.
+			@endif
 	</p>
 </li>
 <li class="sep">

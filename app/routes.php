@@ -35,8 +35,6 @@ Route::post('forgot','RemindersController@postRemind');
 Route::get('password/reset/{token?}','RemindersController@getReset');
 Route::post('password/reset/t','RemindersController@postReset');
 Route::get('otrousr',function(){
-	$dt = new DateTime();
-	$today = $dt->format('Y-m-d H:i:s');
 
 	$user = new User;
 
@@ -47,6 +45,13 @@ Route::get('otrousr',function(){
 	
 	$insertedId = $user->id;
 	return var_dump($insertedId);
+
+});
+Route::get('sesio',function(){
+
+	$data = Session::all();
+
+	return var_dump($data);
 
 });
 // ---------------------------

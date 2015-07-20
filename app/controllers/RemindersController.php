@@ -90,7 +90,7 @@ class RemindersController extends Controller {
 				return Redirect::back()->with('error', Lang::get($response));
 
 			case Password::PASSWORD_RESET:
-				return Redirect::to('login');
+				return Redirect::to('login')->with('message_pass_cambio_true','Contraseña cambiada exitosamente !!!');
 		}
 
 	}
