@@ -31,6 +31,12 @@ class UserLogin extends BaseController {
 			);
 
 		if (Auth::attempt($userdata)) {
+			// Actualizar si activo
+			$id = Auth::id();
+
+			$user = User::find($id );
+			$user->activo = 1;
+			$user->save();
 			return Redirect::to('admin');
 		}else{
 			return Redirect::back()
@@ -50,13 +56,7 @@ class UserLogin extends BaseController {
 	{	
 		if(Auth::check())
 		{	
-			// Actualizar si activo
-			$id = Auth::id();
-
-			$user = User::find($id );
-			$user->activo = 1;
-			$user->save();
-
+			
 			return Redirect::to('admin');
 		}
 		else

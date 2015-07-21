@@ -11,6 +11,29 @@
 |
 */
 
+Route::filter('roles', function($ruta,$peticion,$roles,$redirect)
+{
+  
+    $roles = explode("-", $roles);
+    if(!in_array(Auth::user()->type_user_id, $roles))
+    {
+    	return Redirect::to($redirect);
+    }
+        
+    	
+});
+
+/*
+|--------------------------------------------------------------------------
+| Application & Route Filters
+|--------------------------------------------------------------------------
+|
+| Below you will find the "before" and "after" events for the application
+| which may be used to do any work before or after a request into your
+| application. Here you may also register your custom route filters.
+|
+*/
+
 App::before(function($request)
 {
 	//
@@ -93,3 +116,5 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+

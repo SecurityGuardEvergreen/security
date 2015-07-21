@@ -16,11 +16,16 @@ class CreateAreasTable extends Migration {
 		Schema::create('areas', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name',45);
+			$table->string('name',45)->unique();
 			$table->string('telf',30);
 			$table->timestamp('created_at');
 			$table->timestamp('update_at');
 		});
+
+		// Schema::table('areas', function($table)
+		// {
+		//     $table->string('email');
+		// });
 	}
 
 	/**

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateZonasTable extends Migration {
+class CreaateScheduleTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,11 +13,10 @@ class CreateZonasTable extends Migration {
 	public function up()
 	{
 		//
-		Schema::create('zones', function(Blueprint $table)
-		{
-			$table-> increments('id');
-			$table-> string('name',45);
-			$table-> timestamps();
+		Schema::create('schedules',function($table){
+			$table -> increments('id');
+			$table -> string('description',45)->nullable();
+			$table -> timestamps();
 		});
 	}
 
@@ -29,7 +28,7 @@ class CreateZonasTable extends Migration {
 	public function down()
 	{
 		//
-		Schema::drop('zones');
+		Schema::drop('schedules');
 	}
 
 }

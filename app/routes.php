@@ -22,7 +22,21 @@ Route::get('login','UserLogin@login');
 
 // =========Admin System=========
 Route::group(array('before' => 'auth','prefix' => 'admin') ,function(){
-	Route::any('/','HomeController@dashboard');
+	
+	Route::any('/',array("before" => "roles:1-2-3,/",'uses' => 'HomeController@dashboard'));
+
+	// Route::get('new_post',array("before" => "roles:1-2-3,admin", function()
+	// {
+ 
+	// 	return "Como mínimo tu role debe ser editor, tu eres " . getRole(Auth::user()->type_user_id);
+	    
+	// }));
+
+	Route::get('sin_acceso',function(){
+		return "no tienes acceso =(";
+	});
+
+
 
 });
 // =========Admin System=========
@@ -55,3 +69,16 @@ Route::get('sesio',function(){
 
 });
 // ---------------------------
+
+//devuelve el nombre del rol del usuario según el número
+Route::get('update',function(){
+
+	DB::table('users')
+            ->where('id', 2)
+            ->update(array('type_user_id' => 2));
+
+	return "usuario actualizado :D";
+});
+ 
+
+	

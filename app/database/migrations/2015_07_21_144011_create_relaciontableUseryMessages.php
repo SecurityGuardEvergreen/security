@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateZonasTable extends Migration {
+class CreateRelaciontableUseryMessages extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,11 +13,9 @@ class CreateZonasTable extends Migration {
 	public function up()
 	{
 		//
-		Schema::create('zones', function(Blueprint $table)
-		{
-			$table-> increments('id');
-			$table-> string('name',45);
-			$table-> timestamps();
+		Schema::table('messages',function($table){
+			$table -> integer('user_id');
+			$table -> foreign('user_id') -> references('id') -> on ('users');
 		});
 	}
 
@@ -29,7 +27,6 @@ class CreateZonasTable extends Migration {
 	public function down()
 	{
 		//
-		Schema::drop('zones');
 	}
 
 }
