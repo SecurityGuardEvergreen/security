@@ -15,7 +15,7 @@ Route::filter('roles', function($ruta,$peticion,$roles,$redirect)
 {
   
     $roles = explode("-", $roles);
-    if(!in_array(Auth::user()->type_user_id, $roles))
+    if(!in_array(Auth::user()->typeuser_id, $roles))
     {
     	return Redirect::to($redirect);
     }

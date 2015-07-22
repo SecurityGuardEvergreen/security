@@ -73,12 +73,27 @@ Route::get('sesio',function(){
 //devuelve el nombre del rol del usuario según el número
 Route::get('update',function(){
 
-	DB::table('users')
+	$yes= DB::table('users')
             ->where('id', 2)
-            ->update(array('type_user_id' => 2));
-
-	return "usuario actualizado :D";
+            ->update(array('type_user_id' => 1));
+     // $yes = DB::update();
+	return "usuario actualizado :D es ".$yes;
 });
  
+ Route::get('ver',function(){
+
+ 	// $area = Area::find(1) -> zone() -> where('id', '=', '3')->first();
+ 	// $comments = Post::find(1)->comments;
+ 	$area = Area::find(1);
+
+    foreach ($area -> zone as $key => $value) {
+		# code...
+		$valor[] = $value;
+	}
+
+
+	return var_dump($valor);
+
+});
 
 	

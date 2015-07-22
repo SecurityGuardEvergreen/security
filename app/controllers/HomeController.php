@@ -41,9 +41,10 @@ class HomeController extends BaseController {
 	// -Dashboard-
 	public function dashboard()
 	{	
-		// $email = Auth::user()->remember_token;
-		// return "en el Dashborad Sr ".$email;
-		return View::make('admin.dashboard');
+		$data = new stdclass;
+		$data->areas = Area::all();
+
+		return View::make('admin.dashboard') -> with('data',$data);
 
 	}
 	// -----------

@@ -25,37 +25,29 @@
 					</footer>
 					<article class="nano">
 						<div class="nano-content">
-							<a class="row-area " href="#">
-							<div class="area-title active">									
-								<div class="alert"><span style="color:#E83E00 !important;"><i class="fa fa-exclamation-triangle fa-2x"></i></span></div>
-								<i class="fa fa-globe fa-5x nano-icon"></i>
-								<i id="arrow-right-view-area" class="fa fa-angle-right right-ico fa-5x  "></i>
-								
-								<h1 class="title">Santa Rosa</h1>
-								<p><i class="fa fa-clock-o"></i><b> Last view:</b> hace 11 hrs</p>
-							</div>
-							</a>
-							<a class="row-area" href="#">
-							<div class="area-title">									
-								<i class="fa fa-globe fa-5x nano-icon fa"></i>
-								<h1 class="title">Loma Linda</h1>
-								<p><i class="fa fa-clock-o"></i><b> Last view:</b> hace 11 hrs</p>
-							</div>
-							</a>
-							<a class="row-area" href="#">
-							<div class="area-title">									
-								<i class="fa fa-globe fa-5x nano-icon fa"></i>
-								<h1 class="title">Anaco</h1>
-								<p><i class="fa fa-clock-o"></i><b> Last view:</b> hace 11 hrs</p>
-							</div>
-							</a>
-							<a class="row-area" href="#">
-							<div class="area-title">									
-								<i class="fa fa-globe fa-5x nano-icon fa"></i>
-								<h1 class="title">Anaco</h1>
-								<p><i class="fa fa-clock-o"></i><b> Last view:</b> hace 11 hrs</p>
-							</div>
-							</a>
+							{{--*/ 
+
+								$var = array('0'=>'active'); 
+							/*--}}							
+							@foreach ($data ->areas as $key => $areas)
+
+							    <a class="row-area " href="#">
+							    	@if($key == 0)
+								<div class="area-title {{$var[$key]}}">	
+									@else
+								<div class="area-title ">	
+									@endif {{--*/ //Fin comprobación de active/*--}}			
+									<div class="alert"><span style="color:#E83E00 !important;"><i class="fa fa-exclamation-triangle fa-2x"></i></span></div>
+									<i class="fa fa-globe fa-5x nano-icon"></i>
+									<i id="arrow-right-view-area" class="fa fa-angle-right right-ico fa-5x  "></i>
+									
+									<h1 class="title">{{ $areas->name }}</h1>
+									<p><i class="fa fa-clock-o"></i><b> Last view:</b> hace 11 hrs</p>
+								</div>
+								</a>
+
+							@endforeach
+							
 							
 						</div>
 					</article>
