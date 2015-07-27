@@ -7,4 +7,5 @@ public function zone()
         return $this->hasMany('Zone');
     }
 
+
 }

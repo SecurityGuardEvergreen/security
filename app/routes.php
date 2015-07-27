@@ -97,3 +97,13 @@ Route::get('update',function(){
 });
 
 	
+	Route::get('crearg',function(){
+
+		$grupo = new Group;
+		$grupo->name="Vengala";
+		$grupo->zone_id=2; 
+		$grupo->save();
+		
+	
+	return "Listo";
+});

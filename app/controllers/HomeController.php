@@ -43,7 +43,17 @@ class HomeController extends BaseController {
 	{	
 		$data = new stdclass;
 		$data->areas = Area::all();
+		$data->primero = Area::first();
+		$id_primer_registro = $data->primero->id;
 
+		$data->primerof = DB::table('areas')
+		->join('users','areas.id','=','users.id')
+		->where('areas.id','=',$data->primero->user_id)->get();
+
+		$data->zona_actual = Area::find($id_primer_registro)->zone;
+		// $data->zona = Zone::find(2)->group;
+		// $manag = User::find($data->primero->user_id)->area;
+		  // var_dump($data->primerof[0]->name);
 		return View::make('admin.dashboard') -> with('data',$data);
 
 	}

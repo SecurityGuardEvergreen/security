@@ -31,12 +31,13 @@
 							/*--}}							
 							@foreach ($data ->areas as $key => $areas)
 
-							    <a class="row-area " href="#">
+							    <a class="row-area " href="admin/{{$areas->id}}">
 							    	@if($key == 0)
 								<div class="area-title {{$var[$key]}}">	
 									@else
 								<div class="area-title ">	
-									@endif {{--*/ //Fin comprobación de active/*--}}			
+									@endif 
+									{{--*/ //Fin comprobación de active /*--}}			
 									<div class="alert"><span style="color:#E83E00 !important;"><i class="fa fa-exclamation-triangle fa-2x"></i></span></div>
 									<i class="fa fa-globe fa-5x nano-icon"></i>
 									<i id="arrow-right-view-area" class="fa fa-angle-right right-ico fa-5x  "></i>
@@ -49,6 +50,8 @@
 							@endforeach
 							
 							
+							<br>
+
 						</div>
 					</article>
 				</view>
@@ -58,7 +61,7 @@
 				<div class="row">
 
 				<a id="arrow-top-left" href="#"><i  class="fa fa-angle-left top-ico fa-3x  "></i></a>
-					<h1 class="title-contenido"><i class="fa fa-cube fa-cube fa-2x"></i> &Aacute;REA [Santa Rosa]</h1>
+					<h1 class="title-contenido"><i class="fa fa-cube fa-cube fa-2x"></i> &Aacute;REA [{{$data->primero->name}}]</h1>
 				</div>
 				<div class="row" style="margin-left: 0px;padding-bottom: 15px;background-color: white;">
 					<div class="col-md-4">
@@ -66,9 +69,9 @@
 						<div class="col-md-10">
 						<h4 style="margin-top:0px;margin-bottom:0px; color:#000;border-bottom:1px solid #80848B;">AREA MANAGER</h4>
 						<p>NAME</p>
-						<b style="color:#000">SALAZAR DIEGO</b>
+						<b style="color:#000">{{strtoupper($data->primerof[0]->name)}}</b>
 						<p>EXT</p>
-						<b style="color:#000">291</b>
+						<b style="color:#000">{{$data->primerof[0]->ext}}</b>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -76,7 +79,7 @@
 						<div class="col-md-10">
 						<h4 style="margin-top:0px;margin-bottom:0px; color:#000;border-bottom:1px solid #80848B;">SUPERVISOR</h4>
 						<p>QUANTITY</p>
-						<b style="color:#000">2</b>
+						<b style="color:#000">0</b>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -84,7 +87,7 @@
 						<div class="col-md-10">
 						<h4 style="margin-top:0px;margin-bottom:0px; color:#000;border-bottom:1px solid #80848B;">ALARM</h4>
 						<p>QUANTITY</p>
-						<b style="color:#000">4</b>
+						<b style="color:#000">0</b>
 						</div>
 					</div>
 					</div>
@@ -103,11 +106,12 @@
 					  <br>
 					
 					<!-- Panel -->
-					
+					@foreach ($data->zona_actual as $key => $zona)
+							
 					<div class="box col-md-4">
 						<div class="box-header brown-background">						
 						  <div class="title">
-							<a href="./zones.html" style="font-size:0.8em"><i class="fa fa-home fa-lg"></i> Zone 1</a>
+							<a href="admin/zone/{{$zona->uri}}" style="font-size:0.8em"><i class="fa fa-home fa-lg"></i> {{$zona->name}}</a>
 						  </div>
 						  <div class="actions">
 							<a style="color: #f0ad4e;" href="#"><i class="fa fa-warning fa-2x"></i>
@@ -128,9 +132,11 @@
 						  </div>
 						</div>
 					  </div>
-					  
+					  @endforeach
 					  <!-- Panel -->
-					  <div class="box col-md-4">
+					  
+						
+					  <!-- <div class="box col-md-4">
 						<div class="box-header brown-background">						
 						  <div class="title">
 							<a  href="./zones.html" style="font-size:0.8em"><i class="fa fa-home fa-lg"></i> Zone 2</a>
@@ -153,59 +159,12 @@
 							  <div class="icon-center fa fa-users fa-3x align-right"></div>
 						  </div>
 						</div>
-					  </div>
+					  </div> -->
 					  
 					  <!-- Panel -->
-					  <div class="box col-md-4">
-						<div class="box-header brown-background">						
-						  <div class="title">
-							<a  href="./zones.html" style="font-size:0.8em"><i class="fa fa-home fa-lg"></i> Zone 3</a>
-						  </div>
-						  <div class="actions">
-							<a style="color: #D9534F;" href="#"><i class="fa fa-life-ring fa-2x"></i>
-							</a>
-						  </div>
-						</div>
-						<div class="box-content clearfix">
-						 <br>
-						  <div class="box-contentK box-statistic col-sm-6">
-								<h3 class="title text-grey">05</h3>
-								<small>STATIONS</small>
-							  <div class="icon-center fa fa-sitemap fa-3x align-right" ></div>
-						  </div>
-						  <div class="box-contentK box-statistic col-sm-6">
-								<h3 class="title text-grey">07</h3>
-							  <small>GUARDS</small>
-							  <div class="icon-center fa fa-users fa-3x align-right"></div>
-						  </div>
-						</div>
-					  </div>
 					  
 					  <!-- Panel -->
-					  <div class="box col-md-4">
-						<div class="box-header brown-background">						
-						  <div class="title">
-							<a  href="./zones.html" style="font-size:0.8em"><i class="fa fa-home fa-lg"></i> Zone 4</a>
-						  </div>
-						  <div class="actions">
-							<a style="color: #f0ad4e;" href="#"><i class="fa fa-warning fa-2x"></i>
-							</a>
-						  </div>
-						</div>
-						<div class="box-content clearfix">
-						 <br>
-						  <div class="box-contentK box-statistic col-sm-6">
-								<h3 class="title text-grey">05</h3>
-								<small>STATIONS</small>
-							  <div class="icon-center fa fa-sitemap fa-3x align-right" ></div>
-						  </div>
-						  <div class="box-contentK box-statistic col-sm-6">
-								<h3 class="title text-grey">07</h3>
-							  <small>GUARDS</small>
-							  <div class="icon-center fa fa-users fa-3x align-right"></div>
-						  </div>
-						</div>
-					  </div>
+					  
 					  <hr>
 					
 
