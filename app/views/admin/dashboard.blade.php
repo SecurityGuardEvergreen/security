@@ -31,7 +31,7 @@
 							/*--}}							
 							@foreach ($data ->areas as $key => $areas)
 
-							    <a class="row-area " href="admin/{{$areas->id}}">
+							    <a class="row-area " href="/admin/monitoring/{{$areas->id}}">
 							    	@if($key == 0)
 								<div class="area-title {{$var[$key]}}">	
 									@else
@@ -111,7 +111,7 @@
 					<div class="box col-md-4">
 						<div class="box-header brown-background">						
 						  <div class="title">
-							<a href="admin/zone/{{$zona->uri}}" style="font-size:0.8em"><i class="fa fa-home fa-lg"></i> {{$zona->name}}</a>
+							<a href="./zone/{{$zona->uri}}" style="font-size:0.8em"><i class="fa fa-home fa-lg"></i> {{$zona->name}}</a>
 						  </div>
 						  <div class="actions">
 							<a style="color: #f0ad4e;" href="#"><i class="fa fa-warning fa-2x"></i>
@@ -133,37 +133,9 @@
 						</div>
 					  </div>
 					  @endforeach
-					  <!-- Panel -->
-					  
+					  <!-- Panel -->	  
 						
-					  <!-- <div class="box col-md-4">
-						<div class="box-header brown-background">						
-						  <div class="title">
-							<a  href="./zones.html" style="font-size:0.8em"><i class="fa fa-home fa-lg"></i> Zone 2</a>
-						  </div>
-						  <div class="actions">
-							<a style="color: #5CB85C;" href="#"><i class="fa fa-check-circle fa-2x"></i>
-							</a>
-						  </div>
-						</div>
-						<div class="box-content clearfix">
-						 <br>
-						  <div class="box-contentK box-statistic col-sm-6">
-								<h3 class="title text-grey">05</h3>
-								<small>zones</small>
-							  <div class="icon-center fa fa-sitemap fa-3x align-right" ></div>
-						  </div>
-						  <div class="box-contentK box-statistic col-sm-6">
-								<h3 class="title text-grey">07</h3>
-							  <small>GUARDS</small>
-							  <div class="icon-center fa fa-users fa-3x align-right"></div>
-						  </div>
-						</div>
-					  </div> -->
 					  
-					  <!-- Panel -->
-					  
-					  <!-- Panel -->
 					  
 					  <hr>
 					

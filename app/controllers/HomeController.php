@@ -39,7 +39,7 @@ class HomeController extends BaseController {
 	}
 
 	// -Dashboard-
-	public function dashboard()
+	public function dashboard($id=null)
 	{	
 		$data = new stdclass;
 		$data->areas = Area::all();
@@ -54,9 +54,51 @@ class HomeController extends BaseController {
 		// $data->zona = Zone::find(2)->group;
 		// $manag = User::find($data->primero->user_id)->area;
 		  // var_dump($data->primerof[0]->name);
-		return View::make('admin.dashboard') -> with('data',$data);
+		Session::put('m_monitoring', 'active');
+		Session::put('m_system', '');
+		Session::put('m_reports', '');
+		Session::put('m_help', '');
+		
+		 return View::make('admin.dashboard') -> with('data',$data);
 
 	}
 	// -----------
 
+	// System
+	public function system($dato=null)
+	{
+		Session::put('m_monitoring', '');
+		Session::put('m_system', 'active');
+		Session::put('m_reports', '');
+		Session::put('m_help', '');
+		 //echo "string";
+		switch ($dato) {
+			case 'users':
+				# code...s
+			// echo "Hola ".$dato;
+			return View::make('admin.system');
+				break;
+			
+			default:
+				# code...
+			return View::make('admin.system');
+				break;
+		}
+
+// return View::make('admin.system');
+	 
+	}
+	// Fin System
+
+	// Datos de los usuarios
+	public function datausers(){
+		// $users = User::all();
+		$user = DB::table('users')
+		->join('types_users','users.typeuser_id','=','types_users.id')
+		->select('types_users.name as type','users.*')
+		->get();
+
+		return json_encode($user);
+	}
+	// =========Fin========
 }

@@ -23,7 +23,13 @@ Route::get('login','UserLogin@login');
 // =========Admin System=========
 Route::group(array('before' => 'auth','prefix' => 'admin') ,function(){
 	
-	Route::any('/',array("before" => "roles:1-2-3,/",'uses' => 'HomeController@dashboard'));
+	Route::any('/',array("before" => "roles:1-2-3,/",function(){
+		return Redirect::to('admin/monitoring');
+	}));
+	Route::any('monitoring/{id?}',array("before" => "roles:1-2-3,/",'uses' => 'HomeController@dashboard'));
+	Route::any('system/{dato?}',array("before" => "roles:1-2-3,/",'uses' => 'HomeController@system'));
+	Route::get('data_user',array('before'=>'roles:1-2-3,/','uses' =>'HomeController@datausers'));
+
 
 	// Route::get('new_post',array("before" => "roles:1-2-3,admin", function()
 	// {

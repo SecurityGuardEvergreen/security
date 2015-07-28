@@ -1,6 +1,6 @@
 $(function(){
 var data1 = [];
-for(i=1; i<15;i++){
+// for(i=1; i<15;i++){
 	data1.push(
     {
         "GUARD": "LUIS HERNANDEZ",
@@ -30,12 +30,12 @@ for(i=1; i<15;i++){
         "ALERT": "<span style='color:#149814' ><i class='fa fa-thumbs-o-up fa-lg'></i> </span>",
 		"VIEW": "<button type='button' class='btn btn-info btn-xs'><i class='fa fa-search '></i> </button>"
     });
-}
+// }
 
     
-	$('#table_user').bootstrapTable({
-        data: data1
-    });	
+	// $('#table_user').bootstrapTable({
+ //        data: data1
+ //    });	
 	
 
 });

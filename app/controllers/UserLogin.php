@@ -31,6 +31,11 @@ class UserLogin extends BaseController {
 			);
 
 		if (Auth::attempt($userdata)) {
+
+			Session::put('m_monitoring', 'active');
+			Session::put('m_system', 'active');
+			Session::put('m_reports', 'active');
+			Session::put('m_help', 'active');
 			// Actualizar si activo
 			$id = Auth::id();
 
