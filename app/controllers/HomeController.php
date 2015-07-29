@@ -71,17 +71,24 @@ class HomeController extends BaseController {
 		Session::put('m_system', 'active');
 		Session::put('m_reports', '');
 		Session::put('m_help', '');
+		$data = new stdclass;
+		$data->addUser =false;
 		 //echo "string";
 		switch ($dato) {
 			case 'users':
-				# code...s
-			// echo "Hola ".$dato;
-			return View::make('admin.system');
+		
+			return View::make('admin.system')->with('data',$data);
 				break;
-			
+			case 'add_user':
+			// Crear usuario
+			// return Redirect::back()->with('addUser',true);
+			$data->type_user = Typeuser::all();
+			$data->addUser =true;
+			return View::make('admin.system')->with('data',$data);
+				break;
 			default:
 				# code...
-			return View::make('admin.system');
+			return View::make('admin.system')->with('data',$data);
 				break;
 		}
 

@@ -113,3 +113,10 @@ Route::get('update',function(){
 	
 	return "Listo";
 });
+
+Route::get('cambio',function(){
+
+
+	return View::make('admin.systemc');
+
+});
