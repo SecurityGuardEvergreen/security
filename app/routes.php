@@ -123,21 +123,22 @@ Route::get('cambio',function(){
 
 Route::get('gestion',function(){
 
+	
 
 	return View::make('gestion.index');
 
 });
+// Gestion
+Route::get('estados', 'GestionController@estados');
+Route::post('municipios','GestionController@municipios');
+Route::post('parroquias','GestionController@parroquias');
+Route::post('ciudades','GestionController@ciudades');
 
-Route::get('staff',function(){
-
-
-	return View::make('empleados.index');
-
-});
+Route::get('staff','GestionController@index');
 
 Route::get('pruebac',function(){
 
-$data = Estado::all();
+$data = Parroquia::all();
 
 foreach ($data as $key => $value) {
 	# code...

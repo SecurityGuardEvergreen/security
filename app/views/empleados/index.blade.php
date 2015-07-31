@@ -83,7 +83,9 @@
                     {{ Form::open(array(
                                 'url'  => '/',
                                 'method' => 'get', 
-                                'class' => 'form-horizontal')) }}
+                                'class' => 'form-horizontal',
+                                'name'=>'form-update-data',
+                                'id'=>'form-update-data')) }}
 
                                     <div class="form-group">
                                         <label for="centro" class="col-sm-2 control-label">Centro de trabajo</label>
@@ -112,40 +114,50 @@
                                             'placeholder' => 'Ingrese su nombre')
                                             )}}
                                         </div> 
-                                        <label for="lastname" class="col-sm-2 control-label">Apellido</label>
+                                        <label for="secondname" class="col-sm-2 control-label">Segundo nombre</label>
                                         <div class="col-sm-5">
+                                            {{Form::text('secondname',Input::old('secondname'),
+                                            array('autofocus','class' => 'form-control','id' => 'secondname',
+                                            'placeholder' => 'Ingrese su segundo nombre')
+                                            )}}
+                                        </div>                                                                              
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="lastname" class="col-sm-1 control-label">Apellido</label>
+                                        <div class="col-sm-4">
                                             {{Form::text('lastname',Input::old('lastname'),
                                             array('autofocus','class' => 'form-control','id' => 'lastname',
                                             'placeholder' => 'Ingrese su apellido')
                                             )}}
-                                        </div>
-                                                                              
+                                        </div> 
+                                        <label for="lastname" class="col-sm-2 control-label">Segundo apellido</label>
+                                        <div class="col-sm-5">
+                                            {{Form::text('lastname2',Input::old('lastname2'),
+                                            array('autofocus','class' => 'form-control','id' => 'lastname2',
+                                            'placeholder' => 'Ingrese su segundo apellido')
+                                            )}}
+                                        </div>                                                                              
                                     </div>
+
                                     <div class="form-group">
                                         <label for="ced" class="col-sm-1 control-label">Cédula</label>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             {{Form::text('ced',Input::old('ced'),
                                             array('autofocus','class' => 'form-control','id' => 'ced',
                                             'placeholder' => 'Ingrese su cédula')
                                             )}}
                                         </div>
+                                        <label for="rif" class="col-sm-1 control-label">Rif</label>
+                                        <div class="col-sm-3">
+                                            {{Form::text('rif',Input::old('rif'),
+                                            array('autofocus','class' => 'form-control','id' => 'rif',
+                                            'placeholder' => 'Ingrese su rif')
+                                            )}}
+                                        </div>
 
-                                        <label for="ced" class="col-sm-1 control-label">Mano</label>
-                                        <div class="col-sm-4">
-                                            <label class="checkbox-inline">
-                                              <input type="checkbox" name="mano" id="manolef" > 
-                                              Mano Derecha
-                                            </label>
-                                            <label class="checkbox-inline">
-                                              <input type="checkbox" name="mano" id="manolef" > 
-                                              Mano Izquierda
-                                            </label>
-                                        </div>  
-
-                                    </div>
-                                    <div class="form-group">
                                         <label for="edo_civil" class="col-sm-1 control-label">Estado civil</label>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-3">
                                             <select class="form-control" id="edo_civil" name="edo_civil">
                                                 <option value="">-</option>
                                                 <option value="soltero">Soltero/a</option>
@@ -155,6 +167,22 @@
                                                 
                                             </select>
                                         </div> 
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="nacimiento" class="col-sm-1 control-label">Nacimiento</label>
+                                        <div class="col-sm-2">                                            
+                                            <div class='input-group date' id='nacimientocontrol'>
+                                                        {{Form::text('nacimiento',Input::old('nacimiento'),
+                                                        array('autofocus','class' => 'form-control','id' => 'nacimiento',
+                                                        'placeholder' => 'Fecha de nacimiento')
+                                                        )}}
+                                                        <span class="input-group-addon">
+                                                            <span class="glyphicon glyphicon-calendar"></span>
+                                                        </span>
+                                                    </div>
+                                        </div>  
+                                        
                                         <label for="sexo" class="col-sm-1 control-label">Sexo</label>
                                         <div class="col-sm-2">
                                             <select class="form-control" id="sexo" name="sexo">
@@ -164,9 +192,9 @@
                                                 
                                             </select>
                                         </div>
-
-                                        <label for="blood" class="col-sm-2 control-label">Tipo de sangre</label>
-                                        <div class="col-sm-4">
+                                         
+                                        <label for="blood" class="col-sm-1 control-label">Tipo de sangre</label>
+                                        <div class="col-sm-2">
                                             <select class="form-control" id="blood" name="blood">
                                                 <option value="">-</option>
                                                 <option value="a+">A+</option>
@@ -180,56 +208,28 @@
                                             </select>
                                         </div>                                           
                                         
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="rif" class="col-sm-1 control-label">Rif</label>
-                                        <div class="col-sm-3">
-                                            {{Form::text('rif',Input::old('rif'),
-                                            array('autofocus','class' => 'form-control','id' => 'rif',
-                                            'placeholder' => 'Ingrese su rif')
-                                            )}}
+                                        <label for="ced" class="col-sm-1 control-label">Lateralidad</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" id="edo_civil" name="edo_civil">
+                                                <option value="">-</option>
+                                                <option value="diestro">Diestro</option>
+                                                <option value="siniestro">Siniestro</option>
+                                                <option value="ambidiestro">Ambidiestro</option>
+                                                
+                                         </select> 
                                         </div>
-                                         <label for="edad" class="col-sm-1 control-label">Edad</label>
-                                        <div class="col-sm-3">
-                                            {{Form::text('edad',Input::old('edad'),
-                                            array('autofocus','class' => 'form-control','id' => 'edad',
-                                            'placeholder' => 'Ingrese su edad')
-                                            )}}
-                                        </div>  
-                                         <label for="nacimiento" class="col-sm-1 control-label">Nacimiento</label>
-                                        <div class="col-sm-3">                                            
-                                            <div class='input-group date' id='nacimientocontrol'>
-                                                        {{Form::text('nacimiento',Input::old('nacimiento'),
-                                                        array('autofocus','class' => 'form-control','id' => 'nacimiento',
-                                                        'placeholder' => 'Fecha de nacimiento')
-                                                        )}}
-                                                        <span class="input-group-addon">
-                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                        </span>
-                                                    </div>
-                                        </div>                                            
-                                      
                                     </div>
-                                    <div class="for-group">
-                                         <label for="habilidad" class="col-sm-2 control-label">Habilidades </label>
-                                        <div class=" col-sm-10">
-                                            {{Form::textarea('habilidad',Input::old('habilidad'),
-                                            array('autofocus','class' => 'form-control','id' => 'habilidad',
-                                            'placeholder' => 'Ingrese sus habilidades')
-                                            )}}
-                                            <br>
-                                        </div>  
-                                    </div>
+                                                                       
                                     
                                     <div class="form-group">
-                                        <label for="telf" class="col-sm-2 control-label">N° Teléfono Fijo</label>
+                                        <label for="telf" class="col-sm-1 control-label">N° Teléfono Fijo</label>
                                         <div class="col-sm-4">
                                             {{Form::text('telf',Input::old('telf'),
                                             array('autofocus','class' => 'form-control','id' => 'telf',
                                             'placeholder' => 'Ingrese su teléfono')
                                             )}}
                                         </div> 
-                                        <label for="telf_movil" class="col-sm-2 control-label">N° Teléfono Movil</label>
+                                        <label for="telf_movil" class=" col-sm-offset-1 col-sm-2 control-label">N° Teléfono Movil</label>
                                         <div class="col-sm-4">
                                             {{Form::text('telf_movil',Input::old('telf_movil'),
                                             array('autofocus','class' => 'form-control','id' => 'telf_movil',
@@ -239,6 +239,38 @@
                                         
                                     </div>
                                     <div class="form-group">
+                                        <label for="estado" class="col-sm-1 control-label">Estado</label>
+                                        <div class="col-sm-3">
+                                            <select class="form-control" id="estado" name="estado"></select> 
+                                        </div> 
+                                        <label for="municipio" class="col-sm-1 control-label">Municipio</label>
+                                        <div class="col-sm-3">
+                                            <select class="form-control" id="municipio" name="municipio">
+                                                <option value="">-Seleccione un municipio</option>
+                                               
+                                         </select> 
+                                        </div>
+                                        <label for="parroquia" class="col-sm-1 control-label">Parroquia</label>
+                                        <div class="col-sm-3">
+                                            <select class="form-control" id="parroquia" name="parroquia">
+                                                <option value="">-Seleccione parroquia</option>
+                                               
+                                         </select> 
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="ciudad" class="col-sm-1 control-label">Ciudad</label>
+                                        <div class="col-sm-5">
+                                            <select class="form-control" id="ciudad" name="ciudad">
+                                                <option value="">-Seleccione una ciudad</option>
+                                                
+                                         </select> 
+                                        </div> 
+                                        
+                                    </div>
+
+                                    <div class="form-group">
                                         <label for="address" class="col-sm-1 control-label">Dirección</label>
                                         <div class="col-sm-11">
                                             {{Form::text('address',Input::old('address'),
@@ -247,12 +279,25 @@
                                             )}}
                                         </div>  
                                     </div>
-
+                                    <div class="for-group">
+                                         <label for="discapacidad" class="col-sm-2 control-label">Discapacidad </label>
+                                        <div class=" col-sm-10">
+                                            {{Form::textarea('discapacidad',Input::old('discapacidad'),
+                                            array('autofocus','class' => 'form-control','id' => 'discapacidad',
+                                            'placeholder' => 'De poseer alguna discapacidad ingresela aquí')
+                                            )}}
+                                            <br>
+                                        </div>  
+                                    </div>
                                     
                                     
                                   <div class="form-group">
                                     <div class="col-sm-12 ">
-                                      <button type="submit" class="btn btn-success center-block">Actualizar datos</button>
+                                      <center>
+                                            <button type="submit" class="btn btn-success">Actualizar datos</button>
+                                            <button type="submit" class="btn btn-default "> <i class="fa fa-print"></i></button>
+                                      </center>
+                                   
                                     </div>
                                   </div>
                                 {{ Form::close() }}
@@ -319,11 +364,12 @@
     <script src="/assets/empleados/js/main.js"></script>
     <script src="/assets/empleados/js/moment-locales.js"></script>
     <script src="/assets/empleados/js/bootstrap-datetimepicker.js"></script>
+    <script src="/assets/empleados/js/select.js"></script>
 
     <script type="text/javascript">
             $(function () {
                 $('#nacimientocontrol').datetimepicker({
-                    locale: 'es',
+                    locale: 'en',
                      format: 'DD/MM/YYYY'
                 });
             });

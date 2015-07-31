@@ -19,7 +19,7 @@
 			<!-- Top Navigation -->
 			
 			<header>
-				<h1>Evergreen Services <span>La empresa lider en tecnología ambiental</span></h1>
+				<h1>Evergreen Service <span>La empresa lider en tecnología ambiental</span></h1>
 			</header>
 			<section class="color-7">
 				<nav class="cl-effect-1">
