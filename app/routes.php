@@ -120,3 +120,29 @@ Route::get('cambio',function(){
 	return View::make('admin.systemc');
 
 });
+
+Route::get('gestion',function(){
+
+
+	return View::make('gestion.index');
+
+});
+
+Route::get('staff',function(){
+
+
+	return View::make('empleados.index');
+
+});
+
+Route::get('pruebac',function(){
+
+$data = Estado::all();
+
+foreach ($data as $key => $value) {
+	# code...
+	var_dump($value->nombre);
+}
+	
+
+});
