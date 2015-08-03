@@ -50,26 +50,7 @@ jQuery(document).ready(function() {
 		});
 	});
 
-	 //Cargando la ciudad al cambiar la parroqui
-	$("#parroquia").change( function(event) {
-		console.log('si');
-		var str =  $('#form-update-data').serialize();
-		$.ajax({
-			url: 'ciudades',
-			type: 'POST',
-			data: str,
-		}).done(function ( parroquia ){
 
-
-			$('#ciudad').html('');
-			$('#ciudad').append($('<option></option>').text('Seleccione una ciudad').val(''));
-			$.each(ciudad, function(i) {
-				// console.log(ciudad[i]);
-				 $('#ciudad').append("<option value=\""+ciudad[i].id+"\">"+ciudad[i].nombre+"<\/option>");
-			});
-			// $('#estado').select2();
-		});
-	});
 var increment = 1;
 // Boton add parentesco
 $('#add_parentesco').click(function(e){
@@ -106,7 +87,53 @@ $('#add_parentesco').click(function(e){
     $('#n_familiar').val(increment);
 
 
-	console.log('boton');
+	// console.log('boton');
 });
+
+// ============Btn guardar empleado============
+$('#btn_update').click(function(e){
+e.preventDefault();
+// $("#form-update-data").validate();
+
+var mensaje ='';
+var alertTipo='';
+var ajaxIco = "<i class='fa fa-spinner fa-pulse fa-lg'></i> <p>Generando solicitud...</p>"
+$('#mensajeajax').append(ajaxIco);
+
+
+
+console.log('actualizando...');
+var str =  $('#form-update-data').serialize();
+
+// console.log(str);
+		$.ajax({
+			url: 'procesar',
+			type: 'POST',
+			data: str,
+		}).done(function ( response ){
+		$('#mensajeajax').html('');//Borrando el mensaje ajax
+		 console.log(response.update);
+		if(response.insert){
+			alertTipo= 'alert-success';
+			mensaje = response.mensaje;
+			// console.log('insert');
+		}
+		if(response.update){
+			alertTipo = 'alert-danger';
+			mensaje = response.mensaje;
+			// console.log('Update');
+		}
+		
+
+		var mensajerespuestaOk ="<div class='alert "+alertTipo+" alert-dismissible' role='alert'>";
+    		mensajerespuestaOk = mensajerespuestaOk + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+    		mensajerespuestaOk = mensajerespuestaOk + mensaje + "</div>";	
+    		// console.log(mensajerespuestaOk);
+		$('#mesajeresponse').append(mensajerespuestaOk);
+
+		});
+	// Fin ajax
+});
+// ============Btn guardar empleado============
 
 });

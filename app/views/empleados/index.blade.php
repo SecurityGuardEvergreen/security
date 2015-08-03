@@ -189,8 +189,8 @@
                         <label for="sexo" class="control-label">Sexo</label>
                         <select class="form-control" id="sexo" name="sexo" required>
                             <option value="">-</option>
-                            <option value="femenino">Femenino</option>
-                            <option value="masculino">Masculino</option>
+                            <option value="1">Femenino</option>
+                            <option value="2">Masculino</option>
 
                         </select>
                     </div>
@@ -211,8 +211,8 @@
                     </div>
 
                     <div class="col-sm-3">
-                        <label for="ced" class="control-label">Lateralidad</label>
-                        <select class="form-control" id="edo_civil" name="edo_civil" required>
+                        <label for="lateralidad" class="control-label">Lateralidad</label>
+                        <select class="form-control" id="lateralidad" name="lateralidad" required>
                             <option value="">-</option>
                             <option value="diestro">Diestro</option>
                             <option value="siniestro">Siniestro</option>
@@ -344,9 +344,13 @@
               <div class="form-group">
                 <div class="col-sm-12 ">
                   <center>
-                        <button type="submit" class="btn btn-success">Actualizar datos</button>
+                        <div id="mensajeajax"></div>
+                        <button type="submit" id="btn_update" class="btn btn-success">Actualizar datos</button>
                         <a  class="btn btn-default "> <i class="fa fa-print"></i></a>
                   </center>
+                    <br>
+                    <div id="mesajeresponse"></div>                   
+
 
                 </div>
               </div>
@@ -415,6 +419,7 @@
     <script src="/assets/empleados/js/moment-locales.js"></script>
     <script src="/assets/empleados/js/bootstrap-datetimepicker.js"></script>
     <script src="/assets/empleados/js/select.js"></script>
+
 
     <script type="text/javascript">
             $(function () {
