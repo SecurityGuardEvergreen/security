@@ -29,11 +29,11 @@
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade ybrowser</a> to improve your experience.</p>
     <![endif]-->
 
-    
+
 
 
     <!-- PORTFOLIO -->
-    
+
 
 
 
@@ -46,8 +46,8 @@
 
                 Necesitamos actualizar la información de nuestros empleados, Por favor actualice sus datos
             </h4>
-            
-                
+
+
 
 
         </div>
@@ -61,253 +61,303 @@
             <div class="row">
 
                 <!-- CONTACT FORM -->
-                <div class="col-md-10 col-md-offset-1 text-left wow fadeInLeft" data-wow-duration="1s">
-                   <!--  <form action="#" method="post" class="contact-form  wow fadeInLeft">
+<div class="col-md-10 col-md-offset-1 text-left wow fadeInLeft" data-wow-duration="1s">
+<!-- Form dos -->
+{{ Form::open(array(
+            'url'  => '/procesar',
+            'method' => 'post',
+            'class' => 'form-horizontal',
+            'name'=>'form-update-data',
+            'id'=>'form-update-data')) }}
 
-                        <div class="form-group">
-                            <input type="text" required class="form-control" placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" required class="form-control" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" required class="form-control" placeholder="Subject">
-                        </div>
-                        <div class="form-group">
-                            <textarea required class="form-control" rows="5" placeholder="Message"></textarea>
-                        </div>
-                        <button type="submit" class="pull-left send-button button">Actualizar datos</button>
-                    </form> -->
+                <div class="form-group">
+                    <label for="centro" class="col-sm-2 control-label">Centro de trabajo</label>
+                    <div class="col-sm-10">
 
-                    <!-- Form dos -->
-                    {{ Form::open(array(
-                                'url'  => '/',
-                                'method' => 'get', 
-                                'class' => 'form-horizontal',
-                                'name'=>'form-update-data',
-                                'id'=>'form-update-data')) }}
+                        <label class="radio-inline">
+                          <input type="radio" name="centro" id="centroOpcion1" value="1" required>
+                          OFICINA ANACO
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="centro" id="centroOpcion2" value="2" required>
+                          CIMD LOMA LINDA
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="centro" id="centroOpcion3" value="3" required>
+                          CIMD SANTA ROSA
+                        </label>
+                    </div>
+                </div>
 
-                                    <div class="form-group">
-                                        <label for="centro" class="col-sm-2 control-label">Centro de trabajo</label>
-                                        <div class="col-sm-10">                                           
-                                            
-                                            <label class="radio-inline">
-                                              <input type="radio" name="centro" id="centroOpcion1" value="1"> 
-                                              OFICINA ANACO
-                                            </label>
-                                            <label class="radio-inline">
-                                              <input type="radio" name="centro" id="centroOpcion2" value="2"> 
-                                              CIMD LOMA LINDA
-                                            </label>
-                                            <label class="radio-inline">
-                                              <input type="radio" name="centro" id="centroOpcion3" value="3"> 
-                                              CIMD SANTA ROSA
-                                            </label>
-                                        </div>                                         
-                                    </div>
+                <div class="form-group">
 
-                                    <div class="form-group">
-                                        <label for="name" class="col-sm-1 control-label">Nombre</label>
-                                        <div class="col-sm-4">
-                                            {{Form::text('name',Input::old('name'),
-                                            array('autofocus','class' => 'form-control','id' => 'name',
-                                            'placeholder' => 'Ingrese su nombre')
-                                            )}}
-                                        </div> 
-                                        <label for="secondname" class="col-sm-2 control-label">Segundo nombre</label>
-                                        <div class="col-sm-5">
-                                            {{Form::text('secondname',Input::old('secondname'),
-                                            array('autofocus','class' => 'form-control','id' => 'secondname',
-                                            'placeholder' => 'Ingrese su segundo nombre')
-                                            )}}
-                                        </div>                                                                              
-                                    </div>
+                    <div class="col-sm-6">
+                        <label for="name" class="control-label">Nombre</label>
+                        {{Form::text('name',Input::old('name'),
+                        array('autofocus','class' => 'form-control','id' => 'name',
+                        'placeholder' => 'Ingrese su nombre',
+                        'required'=>'required',
+                        'title'=>'Necesitamos su nombre')
+                        )}}
+                    </div>
 
-                                    <div class="form-group">
-                                        <label for="lastname" class="col-sm-1 control-label">Apellido</label>
-                                        <div class="col-sm-4">
-                                            {{Form::text('lastname',Input::old('lastname'),
-                                            array('autofocus','class' => 'form-control','id' => 'lastname',
-                                            'placeholder' => 'Ingrese su apellido')
-                                            )}}
-                                        </div> 
-                                        <label for="lastname" class="col-sm-2 control-label">Segundo apellido</label>
-                                        <div class="col-sm-5">
-                                            {{Form::text('lastname2',Input::old('lastname2'),
-                                            array('autofocus','class' => 'form-control','id' => 'lastname2',
-                                            'placeholder' => 'Ingrese su segundo apellido')
-                                            )}}
-                                        </div>                                                                              
-                                    </div>
+                    <div class="col-sm-6">
+                         <label for="secondname" class="control-label">Segundo nombre</label>
+                        {{Form::text('secondname',Input::old('secondname'),
+                        array('autofocus','class' => 'form-control','id' => 'secondname',
+                        'placeholder' => 'Ingrese su segundo nombre',
+                        'required'=>'required',
+                        'title'=>'Necesitamos su segundo nombre')
+                        )}}
+                    </div>
+                </div>
 
-                                    <div class="form-group">
-                                        <label for="ced" class="col-sm-1 control-label">Cédula</label>
-                                        <div class="col-sm-3">
-                                            {{Form::text('ced',Input::old('ced'),
-                                            array('autofocus','class' => 'form-control','id' => 'ced',
-                                            'placeholder' => 'Ingrese su cédula')
-                                            )}}
-                                        </div>
-                                        <label for="rif" class="col-sm-1 control-label">Rif</label>
-                                        <div class="col-sm-3">
-                                            {{Form::text('rif',Input::old('rif'),
-                                            array('autofocus','class' => 'form-control','id' => 'rif',
-                                            'placeholder' => 'Ingrese su rif')
-                                            )}}
-                                        </div>
+                <div class="form-group">
 
-                                        <label for="edo_civil" class="col-sm-1 control-label">Estado civil</label>
-                                        <div class="col-sm-3">
-                                            <select class="form-control" id="edo_civil" name="edo_civil">
-                                                <option value="">-</option>
-                                                <option value="soltero">Soltero/a</option>
-                                                <option value="casado">Casado/a</option>
-                                                <option value="divorciado">Divorciado/a</option>
-                                                <option value="viudo">Viudo/a</option>
-                                                
-                                            </select>
-                                        </div> 
-                                    </div>
-                                    <br>
-                                    <div class="form-group">
-                                        <label for="nacimiento" class="col-sm-1 control-label">Nacimiento</label>
-                                        <div class="col-sm-2">                                            
-                                            <div class='input-group date' id='nacimientocontrol'>
-                                                        {{Form::text('nacimiento',Input::old('nacimiento'),
-                                                        array('autofocus','class' => 'form-control','id' => 'nacimiento',
-                                                        'placeholder' => 'Fecha de nacimiento')
-                                                        )}}
-                                                        <span class="input-group-addon">
-                                                            <span class="glyphicon glyphicon-calendar"></span>
-                                                        </span>
-                                                    </div>
-                                        </div>  
-                                        
-                                        <label for="sexo" class="col-sm-1 control-label">Sexo</label>
-                                        <div class="col-sm-2">
-                                            <select class="form-control" id="sexo" name="sexo">
-                                                <option value="">-</option>
-                                                <option value="femenino">Femenino</option>
-                                                <option value="masculino">Masculino</option>
-                                                
-                                            </select>
-                                        </div>
-                                         
-                                        <label for="blood" class="col-sm-1 control-label">Tipo de sangre</label>
-                                        <div class="col-sm-2">
-                                            <select class="form-control" id="blood" name="blood">
-                                                <option value="">-</option>
-                                                <option value="a+">A+</option>
-                                                <option value="a-">A-</option>
-                                                <option value="b+">B+</option>
-                                                <option value="b-">B-</option>
-                                                <option value="ab+">AB+</option>
-                                                <option value="ab-">AB-</option>
-                                                <option value="o+">O+</option>
-                                                <option value="o-">O-</option>
-                                            </select>
-                                        </div>                                           
-                                        
-                                        <label for="ced" class="col-sm-1 control-label">Lateralidad</label>
-                                        <div class="col-sm-2">
-                                            <select class="form-control" id="edo_civil" name="edo_civil">
-                                                <option value="">-</option>
-                                                <option value="diestro">Diestro</option>
-                                                <option value="siniestro">Siniestro</option>
-                                                <option value="ambidiestro">Ambidiestro</option>
-                                                
-                                         </select> 
-                                        </div>
-                                    </div>
-                                                                       
-                                    
-                                    <div class="form-group">
-                                        <label for="telf" class="col-sm-1 control-label">N° Teléfono Fijo</label>
-                                        <div class="col-sm-4">
-                                            {{Form::text('telf',Input::old('telf'),
-                                            array('autofocus','class' => 'form-control','id' => 'telf',
-                                            'placeholder' => 'Ingrese su teléfono')
-                                            )}}
-                                        </div> 
-                                        <label for="telf_movil" class=" col-sm-offset-1 col-sm-2 control-label">N° Teléfono Movil</label>
-                                        <div class="col-sm-4">
-                                            {{Form::text('telf_movil',Input::old('telf_movil'),
-                                            array('autofocus','class' => 'form-control','id' => 'telf_movil',
-                                            'placeholder' => 'Ingrese su teléfono')
-                                            )}}
-                                        </div>                                         
-                                        
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="estado" class="col-sm-1 control-label">Estado</label>
-                                        <div class="col-sm-3">
-                                            <select class="form-control" id="estado" name="estado"></select> 
-                                        </div> 
-                                        <label for="municipio" class="col-sm-1 control-label">Municipio</label>
-                                        <div class="col-sm-3">
-                                            <select class="form-control" id="municipio" name="municipio">
-                                                <option value="">-Seleccione un municipio</option>
-                                               
-                                         </select> 
-                                        </div>
-                                        <label for="parroquia" class="col-sm-1 control-label">Parroquia</label>
-                                        <div class="col-sm-3">
-                                            <select class="form-control" id="parroquia" name="parroquia">
-                                                <option value="">-Seleccione parroquia</option>
-                                               
-                                         </select> 
-                                        </div>
-                                    </div>
+                    <div class="col-sm-6">
+                        <label for="lastname" class="control-label">Apellido</label>
+                        {{Form::text('lastname',Input::old('lastname'),
+                        array('autofocus','class' => 'form-control','id' => 'lastname',
+                        'placeholder' => 'Ingrese su apellido',
+                        'required'=>'required',
+                        'title'=>'Necesitamos su apellido')
+                        )}}
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="lastname" class="control-label">Segundo apellido</label>
+                        {{Form::text('lastname2',Input::old('lastname2'),
+                        array('autofocus','class' => 'form-control','id' => 'lastname2',
+                        'placeholder' => 'Ingrese su segundo apellido',
+                        'required'=>'required',
+                        'title'=>'Necesitamos su segundo apellido')
+                        )}}
+                    </div>
+                </div>
 
-                                    <div class="form-group">
-                                        <label for="ciudad" class="col-sm-1 control-label">Ciudad</label>
-                                        <div class="col-sm-5">
-                                            <select class="form-control" id="ciudad" name="ciudad">
-                                                <option value="">-Seleccione una ciudad</option>
-                                                
-                                         </select> 
-                                        </div> 
-                                        
-                                    </div>
+                <div class="form-group">
 
-                                    <div class="form-group">
-                                        <label for="address" class="col-sm-1 control-label">Dirección</label>
-                                        <div class="col-sm-11">
-                                            {{Form::text('address',Input::old('address'),
-                                            array('autofocus','class' => 'form-control','id' => 'address',
-                                            'placeholder' => 'Ingrese su dirección completa')
-                                            )}}
-                                        </div>  
-                                    </div>
-                                    <div class="for-group">
-                                         <label for="discapacidad" class="col-sm-2 control-label">Discapacidad </label>
-                                        <div class=" col-sm-10">
-                                            {{Form::textarea('discapacidad',Input::old('discapacidad'),
-                                            array('autofocus','class' => 'form-control','id' => 'discapacidad',
-                                            'placeholder' => 'De poseer alguna discapacidad ingresela aquí')
-                                            )}}
-                                            <br>
-                                        </div>  
-                                    </div>
-                                    
-                                    
-                                  <div class="form-group">
-                                    <div class="col-sm-12 ">
-                                      <center>
-                                            <button type="submit" class="btn btn-success">Actualizar datos</button>
-                                            <button type="submit" class="btn btn-default "> <i class="fa fa-print"></i></button>
-                                      </center>
-                                   
-                                    </div>
-                                  </div>
-                                {{ Form::close() }}
-                                <!-- /form user -->
-                    <!-- /form dos -->
+                    <div class="col-sm-4">
+                        <label for="ced" class="control-label">Cédula</label>
+                        {{Form::text('ced',Input::old('ced'),
+                        array('autofocus','class' => 'form-control','id' => 'ced',
+                        'placeholder' => 'Ingrese su cédula',
+                        'required'=>'required',
+                        'title'=>'Necesitamos la cédula')
+                        )}}
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label for="rif" class="control-label">Rif</label>
+                        {{Form::text('rif',Input::old('rif'),
+                        array('autofocus','class' => 'form-control','id' => 'rif',
+                        'placeholder' => 'Ingrese su rif',
+                        'required'=>'required',
+                        'title'=>'El RIF no puede estar vacío')
+                        )}}
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label for="edo_civil" class="control-label">Estado civil</label>
+                        <select class="form-control" id="edo_civil" name="edo_civil" required>
+                            <option value="">-</option>
+                            @foreach($data->marital as $situacion)
+                             <option value="{{$situacion->id}}">{{$situacion->nombre}}</option>
+                            @endforeach
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-sm-3">
+                        <label for="nacimiento" class=" control-label">Fecha de nacimiento</label>
+                        <div class='input-group date' id='nacimientocontrol'>
+                                    {{Form::text('nacimiento',Input::old('nacimiento'),
+                                    array('autofocus','class' => 'form-control','id' => 'nacimiento',
+                                    'placeholder' => 'Fecha de nacimiento',
+                                    'required'=>'required',
+                                    'title'=>'Necesitamos su fecha de nacimiento')
+                                    )}}
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="sexo" class="control-label">Sexo</label>
+                        <select class="form-control" id="sexo" name="sexo" required>
+                            <option value="">-</option>
+                            <option value="femenino">Femenino</option>
+                            <option value="masculino">Masculino</option>
+
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="blood" class="control-label">Tipo de sangre</label>
+                        <select class="form-control" id="blood" name="blood" required>
+                            <option value="">-</option>
+                            <option value="a+">A+</option>
+                            <option value="a-">A-</option>
+                            <option value="b+">B+</option>
+                            <option value="b-">B-</option>
+                            <option value="ab+">AB+</option>
+                            <option value="ab-">AB-</option>
+                            <option value="o+">O+</option>
+                            <option value="o-">O-</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <label for="ced" class="control-label">Lateralidad</label>
+                        <select class="form-control" id="edo_civil" name="edo_civil" required>
+                            <option value="">-</option>
+                            <option value="diestro">Diestro</option>
+                            <option value="siniestro">Siniestro</option>
+                            <option value="ambidiestro">Ambidiestro</option>
+
+                     </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+
+                    <div class="col-sm-4">
+                        <label for="telf" class="control-label">N° Teléfono Fijo</label>
+                        {{Form::text('telf',Input::old('telf'),
+                        array('autofocus','class' => 'form-control','id' => 'telf',
+                        'placeholder' => 'Ingrese su teléfono')
+                        )}}
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label for="telf_movil" class="control-label">N° Teléfono Movil</label>
+                        {{Form::text('telf_movil',Input::old('telf_movil'),
+                        array('autofocus','class' => 'form-control','id' => 'telf_movil',
+                        'placeholder' => 'Ingrese su teléfono',
+                        'required'=>'required',
+                        'title'=>'Necesitamos su número de telefono')
+                        )}}
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="cargo" class="control-label">Cargo en la empresa</label>
+                        <select name="cargo" id="cargo" class="form-control" required>
+                            <option value="">Seleccione el cargo</option>
+                            @foreach($data->cargo as $cargo)
+                             <option value="{{$cargo->id}}">{{$cargo->nombre}}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                 </div>
+                <div class="form-group">
+
+                    <div class="col-sm-4">
+                        <label for="estado" class="control-label">Estado</label>
+                        <select class="form-control" id="estado" name="estado" required></select>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label for="municipio" class="control-label">Municipio</label>
+                        <select class="form-control" id="municipio" name="municipio" required>
+                            <option value="">-Seleccione un municipio</option>
+
+                     </select>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label for="parroquia" class="control-label">Parroquia</label>
+                        <select class="form-control" id="parroquia" name="parroquia" required>
+                            <option value="">-Seleccione parroquia</option>
+
+                     </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="address" class="col-sm-1 control-label">Dirección</label>
+                    <div class="col-sm-11">
+                        {{Form::text('address',Input::old('address'),
+                        array('autofocus','class' => 'form-control','id' => 'address',
+                        'placeholder' => 'Ingrese su dirección completa')
+                        )}}
+                    </div>
+                </div>
+
+                <div class="for-group">
+
+                    <div class=" col-sm-12">
+                        <label for="discapacidad" class="control-label">Discapacidad </label>
+                        {{Form::textarea('discapacidad',Input::old('discapacidad'),
+                        array('autofocus','class' => 'form-control','id' => 'discapacidad',
+                        'placeholder' => 'De poseer alguna discapacidad ingresela aquí')
+                        )}}
+                        <br>
+                    </div>
+                </div>
+                <h3>Carga familiar</h3>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="fullname1" class="control-label">Nombre Completo</label>
+                        {{Form::text('fullname1',Input::old('fullname1'),
+                        array('autofocus','class' => 'form-control','id' => 'fullname1',
+                        'placeholder' => 'Nombre completo del familiar 1')
+                        )}}
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="parentesco1" class="control-label">Parentesco</label>
+                        {{Form::text('parentesco1',Input::old('parentesco1'),
+                        array('autofocus','class' => 'form-control','id' => 'parentesco1',
+                        'placeholder' => 'Ingrese el parentesco')
+                        )}}
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="edadp1" class="control-label">Edad</label>
+                        {{Form::text('edadp1',Input::old('edadp1'),
+                        array('autofocus','class' => 'form-control','id' => 'edadp1',
+                        'placeholder' => 'Ingrese la edad')
+                        )}}
+                    </div>
+
+                    <div class="col-sm-2">
+                        <label for="sexop1" class="control-label">Sexo</label>
+                        <select class="form-control" id="sexop1" name="sexop1" required>
+                            <option value="">-</option>
+                            <option value="1">Femenino</option>
+                            <option value="2">Masculino</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div id="parentescoAdd"></div>
+                <input type="hidden" id="n_familiar" name="n_familiar" value="1">
+
+
+                <a href="#" id="add_parentesco" class="btn btn-primary btn-xs">Otro familiar</a>
+
+
+              <div class="form-group">
+                <div class="col-sm-12 ">
+                  <center>
+                        <button type="submit" class="btn btn-success">Actualizar datos</button>
+                        <a  class="btn btn-default "> <i class="fa fa-print"></i></a>
+                  </center>
+
+                </div>
+              </div>
+            {{ Form::close() }}
+            <!-- /form user -->
+<!-- /form dos -->
+
+</div>
                 <!-- END CONTACT FORM -->
 
-               
+
 
             </div>
         </div>
@@ -353,7 +403,7 @@
     <!-- END FOOTER -->
 
 
-   
+
     <!-- js files -->
     <script src="/assets/empleados/js/vendor/jquery-1.10.2.min.js"></script>
     <script src="/assets/empleados/js/plugins.js"></script>

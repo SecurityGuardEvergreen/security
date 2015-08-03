@@ -22,7 +22,7 @@ Route::get('login','UserLogin@login');
 
 // =========Admin System=========
 Route::group(array('before' => 'auth','prefix' => 'admin') ,function(){
-	
+
 	Route::any('/',array("before" => "roles:1-2-3,/",function(){
 		return Redirect::to('admin/monitoring');
 	}));
@@ -33,9 +33,9 @@ Route::group(array('before' => 'auth','prefix' => 'admin') ,function(){
 
 	// Route::get('new_post',array("before" => "roles:1-2-3,admin", function()
 	// {
- 
+
 	// 	return "Como mínimo tu role debe ser editor, tu eres " . getRole(Auth::user()->type_user_id);
-	    
+
 	// }));
 
 	Route::get('sin_acceso',function(){
@@ -62,7 +62,7 @@ Route::get('otrousr',function(){
 	$user->password = Hash::make('password');
 	$user->email = 'elvis.reyes@evergreenservice.net';
 	$user->save();
-	
+
 	$insertedId = $user->id;
 	return var_dump($insertedId);
 
@@ -85,7 +85,7 @@ Route::get('update',function(){
      // $yes = DB::update();
 	return "usuario actualizado :D es ".$yes;
 });
- 
+
  Route::get('ver',function(){
 
  	// $area = Area::find(1) -> zone() -> where('id', '=', '3')->first();
@@ -102,15 +102,15 @@ Route::get('update',function(){
 
 });
 
-	
+
 	Route::get('crearg',function(){
 
 		$grupo = new Group;
 		$grupo->name="Vengala";
-		$grupo->zone_id=2; 
+		$grupo->zone_id=2;
 		$grupo->save();
-		
-	
+
+
 	return "Listo";
 });
 
@@ -123,7 +123,7 @@ Route::get('cambio',function(){
 
 Route::get('gestion',function(){
 
-	
+
 
 	return View::make('gestion.index');
 
@@ -135,6 +135,10 @@ Route::post('parroquias','GestionController@parroquias');
 Route::post('ciudades','GestionController@ciudades');
 
 Route::get('staff','GestionController@index');
+Route::post('procesar','GestionController@procesar');
+Route::get('ir',function(){
+	return View::make('empleados.dos');
+});
 
 Route::get('pruebac',function(){
 
@@ -144,6 +148,21 @@ foreach ($data as $key => $value) {
 	# code...
 	var_dump($value->nombre);
 }
-	
+
 
 });
+
+Route::get('pdf',function(){
+
+	$data = array();
+	$data['nombre'] = "Elvis";
+	$pdf = PDF::loadView('pdf.index',$data);
+	return $pdf->stream();
+// return $pdf->download('invoice.pdf');
+});
+
+// App::missing(function($exception)
+// {
+//     // return Response::view('errors.missing', array(), 404);
+//     return Redirect::to('/');
+// });

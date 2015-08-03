@@ -321,7 +321,7 @@ a:hover {
     padding: 20px 15px;
 }
 .form-control {
-    height: 45px;
+    /*height: 45px;*/
     font-size: 16px;
 }
 .send-button {
