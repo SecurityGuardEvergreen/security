@@ -230,7 +230,7 @@
 
                 <div class="form-group">
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <label for="telf" class="control-label">N° Teléfono Fijo</label>
                         {{Form::text('telf',Input::old('telf'),
                         array('autofocus','class' => 'form-control','id' => 'telf',
@@ -238,7 +238,7 @@
                         )}}
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <label for="telf_movil" class="control-label">N° Teléfono Movil</label>
                         {{Form::text('telf_movil',Input::old('telf_movil'),
                         array('autofocus','class' => 'form-control','id' => 'telf_movil',
@@ -247,7 +247,16 @@
                         'title'=>'Necesitamos su número de telefono')
                         )}}
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
+                        <label for="educacion" class="control-label">Nivel de educación</label>
+                        <select name="educacion" id="educacion" class="form-control" required>
+                            <option value="">Seleccione el nivel</option>
+                            @foreach($data->educacion as $educacion)
+                             <option value="{{$educacion->id}}">{{$educacion->nombre}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
                         <label for="cargo" class="control-label">Cargo en la empresa</label>
                         <select name="cargo" id="cargo" class="form-control" required>
                             <option value="">Seleccione el cargo</option>
@@ -288,7 +297,9 @@
                     <div class="col-sm-11">
                         {{Form::text('address',Input::old('address'),
                         array('autofocus','class' => 'form-control','id' => 'address',
-                        'placeholder' => 'Ingrese su dirección completa')
+                        'placeholder' => 'Ingrese su dirección completa',
+                        'required'=>'required',
+                        'title'=>'Necesitamos saber donde vive')
                         )}}
                     </div>
                 </div>
@@ -310,14 +321,24 @@
                         <br>
                     </div>
                 </div>
-                <h3>Carga familiar</h3>
+                <br>
+                <div class="for-group">
+                    <!-- <label for="" class="control-label"></label> -->
+                    <div id="question_check_carga" class="btn-group" data-toggle="buttons">
+                      <label id="checkcarga" class="btn btn-warning btn-xs ">
+                        <input  type="checkbox" autocomplete="off"> ¿Posee alguna carga familiar?
+                      </label>
+                    </div>
+                </div>
+         
+                <div id="carga_familiar" class="hide">
+                    <h3>Carga familiar</h3>
                 <div class="form-group">
                     <div class="col-sm-4">
                         <label for="fullname1" class="control-label">Nombre Completo</label>
                         {{Form::text('fullname1',Input::old('fullname1'),
                         array('autofocus','class' => 'form-control','id' => 'fullname1',
                         'placeholder' => 'Nombre completo del familiar 1',
-                        'required'=>'required',
                         'title'=>'Ingrese el nombre completo del familiar')
                         )}}
                     </div>
@@ -326,19 +347,13 @@
                         {{Form::text('parentesco1',Input::old('parentesco1'),
                         array('autofocus','class' => 'form-control','id' => 'parentesco1',
                         'placeholder' => 'Ingrese el parentesco',
-                        'required'=>'required',
                         'title'=>'¿Cuál es su parentesco?')
                         )}}
                     </div>
                     <div class="col-sm-3">
                       <label for="nacimientop1" class=" control-label">Fecha de nacimiento</label>
                         <div class='input-group date' id='nacimientocontrolp1' >
-                                    {{Form::text('nacimientop1',Input::old('nacimientop1'),
-                                    array('autofocus','class' => 'form-control','id' => 'nacimientop1',
-                                    'placeholder' => 'Fecha de nacimiento',
-                                    'required'=>'required',
-                                    'title'=>'Necesitamos saber cuando nació su familiar')
-                                    )}}
+                                    <input type="text" class='form-control' id='nacimientop1' name='nacimientop1' placeholder='Fecha de nacimiento' title='Necesitamos saber cuando nació su familiar' >
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -347,7 +362,7 @@
 
                     <div class="col-sm-2">
                         <label for="sexop1" class="control-label">Sexo</label>
-                        <select class="form-control" id="sexop1" name="sexop1" required>
+                        <select class="form-control" id="sexop1" name="sexop1" >
                             <option value="">-</option>
                             <option value="1">Femenino</option>
                             <option value="2">Masculino</option>
@@ -355,7 +370,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div id="parentescoAdd"></div>
                 <input type="hidden" id="n_familiar" name="n_familiar" value="1">
 
@@ -363,12 +377,38 @@
                 <a href="#" id="add_parentesco" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle fa-lg"></i></a>
 
 
+                </div>
+                <!-- /div carga_familiar -->
+                
+                <h3>PERSONA De CONTACTO EN CASO DE EMERGENCIA</h3>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="nombre_contacto" class="control-label">Nombre </label>
+                        {{Form::text('nombre_contacto',Input::old('nombre_contacto'),
+                        array('autofocus','class' => 'form-control','id' => 'nombre_contacto',
+                        'placeholder' => 'Nombre completo del conctacto',
+                        'title'=>'Es importante para nosotros tener el nombre del contacto en caso de emergencia.',
+                        'required'=>'required')
+                        )}}
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="telf_contacto" class="control-label">Teléfono</label>
+                        {{Form::text('telf_contacto',Input::old('telf_contacto'),
+                        array('autofocus','class' => 'form-control','id' => 'telf_contacto',
+                        'placeholder' => 'Número telefónico del contacto',
+                        'title'=>'Es sumamente importante que ingrese el número telefónico del contacto',
+                        'required'=> 'required')
+                        )}}
+                    </div>
+                    
+                </div>
+                
               <div class="form-group">
                 <div class="col-sm-12 ">
                   <center>
                         <div id="mensajeajax"></div>
                         <button type="submit" id="btn_update" class="btn btn-success">Actualizar datos</button>
-                        <a  class="btn btn-default "> <i class="fa fa-print"></i></a>
+                        <a id="btn_print" class="btn btn-default disabled"><i class="fa fa-print"></i> Imprimir</a>
                   </center>
                     <br>
                     <div id="mesajeresponse"></div>
@@ -446,14 +486,29 @@
 
 
     <script type="text/javascript">
+    var hoy = new Date();
+    var dd = hoy.getDate();
+    var mm = hoy.getMonth()+1; //hoy es 0!
+    var yyyy = hoy.getFullYear();
+    if (dd < 10) {
+        dd = "0" + dd;
+    }
+    if (mm < 10) {
+        mm = "0" + mm;
+    }
+    var dateToday= yyyy+"-"+ mm +"-"+dd;
+    
+        // console.log( dateToday );
             $(function () {
                 $('#nacimientocontrol').datetimepicker({
                     locale: 'en',
-                     format: 'YYYY-DD-MM'
+                    format: 'YYYY-DD-MM',
+                    maxDate: dateToday
                 });
                  $('#nacimientocontrolp1').datetimepicker({
                     locale: 'en',
-                     format: 'YYYY-DD-MM'
+                    format: 'YYYY-DD-MM',
+                    maxDate: dateToday
                 });
             });
     </script>

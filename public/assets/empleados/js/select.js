@@ -1,4 +1,11 @@
+var estado_update=false;  	//variable para conocer si se actualiza o se inserta un empleado
+	var tem_ced=''; 
+	var tem_rif='';
+	var id_update='';
+	var increment = 1;  
+
 jQuery(document).ready(function() {
+	
 	//Al iniciar mandamos consultar todos los paises que se mantienen en nuestra base de datos atravez de la ruta paises
 	$.getJSON('estados', function( estados ){
 		$('#estado').html('');
@@ -31,7 +38,7 @@ jQuery(document).ready(function() {
 
 	 //Cargando la parroquia al cambiar el municipio
 	$("#municipio").change( function(event) {
-		console.log('si');
+		// console.log('si');
 		var str =  $('#form-update-data').serialize();
 		$.ajax({
 			url: 'parroquias',
@@ -51,7 +58,7 @@ jQuery(document).ready(function() {
 	});
 
 
-var increment = 1;
+
 // Boton add parentesco
 $('#add_parentesco').click(function(e){
 	increment ++;
@@ -59,18 +66,18 @@ $('#add_parentesco').click(function(e){
 	var html = "<div class='form-group'>";
 	html = html + "<div class='col-sm-4'>";
 	html = html + "<label for=fullname"+increment+" class=control-label>Nombre Completo</label>";
-	html = html + "<input class='form-control' id='fullname"+increment+"' name='fullname"+increment+"' placeholder='Nombre completo del familiar "+increment+"' title='Ingrese el nombre completo del familiar' required>";
+	html = html + "<input class='form-control' type='text'  id='fullname"+increment+"' name='fullname"+increment+"' placeholder='Nombre completo del familiar "+increment+"' title='Ingrese el nombre completo del familiar' required>";
 	html = html + "</div>";
 	// Segundo div parentesco
 	html = html + "<div class='col-sm-3'>";
 	html = html + "<label for=parentesco"+increment+" class=control-label>Parentesco</label>";
-	html = html + "<input class='form-control' id='parentesco"+increment+"' name='parentesco"+increment+"' placeholder='Ingrese el parentesco' title='¿Cuál es su parentesco?' required>";
+	html = html + "<input class='form-control' type='text' id='parentesco"+increment+"' name='parentesco"+increment+"' placeholder='Ingrese el parentesco' title='¿Cuál es su parentesco?' required>";
 	html = html + "</div>";
 	// Tercer div edad
 	html = html + "<div class='col-sm-3'>";
 	html = html + "<label for='nacimientop"+increment+"' class='control-label'>Fecha de nacimiento</label>";
 	html = html + "<div class='input-group date' id='nacimientocontrolp"+increment+"' >"
-	html = html + "<input class='form-control' id='nacimientop"+increment+"' name='nacimientop"+increment+"' placeholder='Fecha de nacimiento' title='Necesitamos saber cuando nació su familiar' required>";
+	html = html + "<input class='form-control' type='text' id='nacimientop"+increment+"' name='nacimientop"+increment+"' placeholder='Fecha de nacimiento' title='Necesitamos saber cuando nació su familiar' required>";
 	html = html + "<span class='input-group-addon'>";
 	html = html + "<span class='glyphicon glyphicon-calendar'></span>";
 	html = html + "</span>";
@@ -90,16 +97,18 @@ $('#add_parentesco').click(function(e){
 
     $('#parentescoAdd').append(html);
     $('#n_familiar').val(increment);
-
+    
+  	// dateToday esta variable ya está declarada en el html
     // generando scrip para que funcione el calendario
     var script = 		"<script type='text/javascript'>";
     	script = script + "$(function () {";
     	script = script + "$('#nacimientocontrolp"+increment+"').datetimepicker({";
     	script = script + "locale: 'en',";
-    	script = script + "format: 'YYYY-DD-MM'";
+    	script = script + "format: 'YYYY-DD-MM',";
+    	script = script + "maxDate: '"+dateToday+"' ";
         script = script + "});});";
         script = script + "</script>";
-
+        
       $('#script').append(script);
 	// console.log('boton');
 });
@@ -136,14 +145,77 @@ $('#btn_update').click(function(){
 $("#question_check").click(function() {
 	// console.log('click check');
         if(!$("#checkdiscap").hasClass('active')) {
-            console.log("Está activado");
+            // console.log("Está activado");
             $('#div_discapacidad').removeClass('hide');
         } else {
-            console.log("No está activado");
+            // console.log("No está activado");
             $('#div_discapacidad').addClass('hide');
         }
     });
 // Fin detectando check discapacidad
+
+// Detectando el check carga familiar
+$("#question_check_carga").click(function() {
+	// console.log('click check');
+        if(!$("#checkcarga").hasClass('active')) {
+            // console.log("Está activado");
+            $('#carga_familiar').removeClass('hide');
+            // Activar que sean requeridos
+            $("#fullname1").attr('required','required');
+            $("#parentesco1").attr('required','required');
+            $("#nacimientop1").attr('required','required');
+            $("#sexop1").attr('required','required');
+           
+            console.log('full');
+        } else {
+            // console.log("No está activado");
+            $('#carga_familiar').addClass('hide');
+            $('#fullname1').val('');
+            $('#parentesco1').val('');
+            // Desactivar que sean requeridos
+            $("#fullname1").removeAttr('required');
+            $("#parentesco1").removeAttr('required');
+            $("#nacimientop1").removeAttr('required');
+            $("#sexop1").removeAttr('required');
+            
+        }
+    });
+// Fin detectando check carga familiar
+
+
+
+// Validar que no exista la ced de un empleado dependiendo de la varibale estado_update
+
+	// actualizar evaluacion
+	$('#ced').change(function(){
+
+		
+		if(estado_update==true){
+			if($(this).val() != tem_ced){ //evaluando si es igual a lo 	que ya habia insertado
+			console.log('NUpdate');
+			}
+		}
+		else //para la inserción
+		{	var ced_insert = $(this).val();
+			console.log(ced_insert);
+			$.ajax({
+			url: 'empleado_cd',
+			type: 'POST',
+			data: 'ced='+ced_insert,
+				}).done(function ( response ){
+				 console.log(response);
+				
+
+				});
+			// Fin ajax			
+
+		}
+		// console.log('Estado');
+		// console.log(estado_update);
+	});
+
+
+// Validar que no exista la ced de un empleado dependiendo de la varibale estado_update
 
 
 });//fin funcion main
@@ -157,11 +229,9 @@ var alertTipo='';
 var ajaxIco = "<i class='fa fa-spinner fa-pulse fa-lg'></i> <p>Generando solicitud...</p>"
 $('#mensajeajax').append(ajaxIco);
 
-
-
 // console.log('actualizando...');
 var str =  $('#form-update-data').serialize();
-
+console.log(estado_update);
 console.log(str);
 		$.ajax({
 			url: 'procesar',
@@ -170,15 +240,25 @@ console.log(str);
 		}).done(function ( response ){
 		$('#mensajeajax').html('');//Borrando el mensaje ajax
 		 // console.log(response.update);
+		 estado_update=true;
+		 id_update = response.insertedId;
+		 tem_ced = $('#ced').val();
+		 tem_rif = $('#rif').val();
+		 console.log(id_update);
+		 console.log(estado_update);
+		 console.log(tem_ced);
+		 console.log(tem_rif);
 		if(response.insert){
 			alertTipo= 'alert-success';
 			mensaje = response.mensaje;
-			// console.log('insert');
+			// Activar btn imprimir
+			$('#btn_print').removeClass('disabled');
 		}
 		if(response.update){
 			alertTipo = 'alert-danger';
 			mensaje = response.mensaje;
-			// console.log('Update');
+			// Activar btn imprimir
+			$('#btn_print').removeClass('disabled');
 		}
 
 

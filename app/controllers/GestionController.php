@@ -6,6 +6,7 @@ public function index(){
 	$data = new stdclass;
 	$data->estado = Estado::all();
   $data->cargo = Cargo::all();
+  $data->educacion = Educationlevel::orderBy('id', 'asc')->get();
   $data->marital = Maritalstatu::orderBy('nombre', 'asc')->get();
 
 
@@ -41,6 +42,11 @@ public function ciudades(){
   					->get();
 }
 
+public function empleado_cd(){
+
+  return Empleado::where('ci','=',Input::get('ced'))->get();
+}
+
 // ==========Procesar datos creados
 public function procesar(){
 
@@ -65,6 +71,7 @@ public function procesar(){
   $lateralidad = Input::get('lateralidad');
   $telf = Input::get('telf');
   $telf_movil = Input::get('telf_movil');
+  $educacion = Input::get('educacion');
   $cargo = Input::get('cargo');
   $estado = Input::get('estado');
   $municipio = Input::get('municipio');
@@ -72,14 +79,23 @@ public function procesar(){
   $address = Input::get('address');
   $discapacidad = Input::get('discapacidad');
   $n_familiar = Input::get('n_familiar');
+  $nombre_contacto =Input::get('nombre_contacto');
+  $telf_contacto =Input::get('telf_contacto');
+
 
 
 
   // Insertando el registro en la db
-  $cedula = Empleado::where('ci','=',$ced_empleado)->get(array('id'));
-  // var_dump(!$cedula->isEmpty());
-  if(!$cedula->isEmpty()){
+  // $cedula = Empleado::where('ci','=',$ced_empleado)->get(array('id'));
+  // $rift = Empleado::where('rif','=',$rif)->get(array('id'));
+  $empleadoExiste = Empleado::where('ci', '=', $ced_empleado)
+                            ->orWhere('rif','=', $rif)
+                            ->get();
+          // var_dump(!$cedula->isEmpty());
+  // var_dump(Input::all());
+  if(!$empleadoExiste->isEmpty()){
     // if para actualizar
+
     $respuesta['mensaje'] = '<strong>Ups!</strong> El evento no se ha progamado.';
     $respuesta['update'] =true;
 
@@ -99,17 +115,28 @@ public function procesar(){
     $empleado ->lateralidad = $lateralidad;
     $empleado ->telf_fijo = $telf;
     $empleado ->telf = $telf_movil;
+    $empleado ->educationlevel_id =$educacion;
     $empleado ->cargo_id = $cargo;
     $empleado ->estado_id = $estado;
     $empleado ->municipio_id = $municipio;
     $empleado ->parroquia_id = $parroquia;
     $empleado ->direccion = $address;
     $empleado ->discapacidad = $discapacidad;
+    $empleado ->nombre_contacto = $nombre_contacto;
+    $empleado ->telf_contacto = $telf_contacto;
 
     $empleado -> save();
     $insertedId = $empleado->id;
 
-    // Perarando el array de carga familiar
+    $respuesta['insertedId'] =$insertedId;
+
+
+    // evaluando si tiene por lo menos una carga familiar
+    $InputCarga = Input::get('fullname1');
+
+    if($InputCarga !='')//If Cuando no hay carga familiar
+    {
+      // Perarando el array de carga familiar
 for ($i=1; $i <= $n_familiar ; $i++) {
   # code...
   $carga['familiar'][] = array(
@@ -135,16 +162,25 @@ for ($i=1; $i <= $n_familiar ; $i++) {
 
     ];
 
-  }
+  }//for each
 
   $familiar -> insert($tmp);
   if($familiar){
     $respuesta['mensaje'] = '<strong>Perfecto!</strong> El registro se ha guardado exitosamente.';
     $respuesta['insert'] =true;
   }
+    }else{//If cuando hay carga familiar
+
+      $respuesta['mensaje'] = '<strong>Perfecto!</strong> El registro se ha guardado exitosamente sin carga familiar.';
+    $respuesta['insert'] =true;
+      
+      
+    }//else fin
+
+    
 
   }//fin if
-
+// var_dump($respuesta);
 
 return $respuesta;
 

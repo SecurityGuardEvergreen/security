@@ -133,23 +133,33 @@ Route::get('estados', 'GestionController@estados');
 Route::post('municipios','GestionController@municipios');
 Route::post('parroquias','GestionController@parroquias');
 Route::post('ciudades','GestionController@ciudades');
+Route::post('empleado_cd','GestionController@empleado_cd');
 
 Route::get('staff','GestionController@index');
 // Route::any('ingresado','GestionController@busca');
 Route::any('ingresado/{busca?}', array('as' => 'ingresado', 'uses' => 'GestionController@busca'));
-Route::any('procesar','GestionController@procesar');
+Route::post('procesar','GestionController@procesar');
 Route::get('ir',function(){
 	return View::make('empleados.dos');
 });
 
 Route::get('pruebac',function(){
 
-$data = Familiar::all();
+// $data = Familiar::all();
 
-foreach ($data as $key => $value) {
-	# code...
-	var_dump($value->nombre);
-}
+// foreach ($data as $key => $value) {
+// 	# code...
+// 	var_dump($value->nombre);
+// }
+
+	// $ced_empleado='18205603';
+	// $rif='18205603-7';
+	// $id_empleado = Empleado::where('ci', '=', $ced_empleado)
+ //                            	->where('rif','=', $rif)
+ //                            ->get();
+
+
+ //    var_dump($id_empleado->isEmpty());
 
 
 });
