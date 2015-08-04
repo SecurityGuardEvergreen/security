@@ -59,17 +59,22 @@ $('#add_parentesco').click(function(e){
 	var html = "<div class='form-group'>";
 	html = html + "<div class='col-sm-4'>";
 	html = html + "<label for=fullname"+increment+" class=control-label>Nombre Completo</label>";
-	html = html + "<input class='form-control' id='fullname"+increment+"' name='fullname"+increment+"' placeholder='Nombre completo del familiar "+increment+"' required>";
+	html = html + "<input class='form-control' id='fullname"+increment+"' name='fullname"+increment+"' placeholder='Nombre completo del familiar "+increment+"' title='Ingrese el nombre completo del familiar' required>";
 	html = html + "</div>";
 	// Segundo div parentesco
-	html = html + "<div class='col-sm-4'>";
+	html = html + "<div class='col-sm-3'>";
 	html = html + "<label for=parentesco"+increment+" class=control-label>Parentesco</label>";
-	html = html + "<input class='form-control' id='parentesco"+increment+"' name='parentesco"+increment+"' placeholder='Ingrese el parentesco' required>";
+	html = html + "<input class='form-control' id='parentesco"+increment+"' name='parentesco"+increment+"' placeholder='Ingrese el parentesco' title='¿Cuál es su parentesco?' required>";
 	html = html + "</div>";
 	// Tercer div edad
-	html = html + "<div class='col-sm-2'>";
-	html = html + "<label for=edadp"+increment+" class=control-label>Edad</label>";
-	html = html + "<input class='form-control' id='edadp"+increment+"' name='edadp"+increment+"' placeholder='Ingrese la edad' required>";
+	html = html + "<div class='col-sm-3'>";
+	html = html + "<label for='nacimientop"+increment+"' class='control-label'>Fecha de nacimiento</label>";
+	html = html + "<div class='input-group date' id='nacimientocontrolp"+increment+"' >"
+	html = html + "<input class='form-control' id='nacimientop"+increment+"' name='nacimientop"+increment+"' placeholder='Fecha de nacimiento' title='Necesitamos saber cuando nació su familiar' required>";
+	html = html + "<span class='input-group-addon'>";
+	html = html + "<span class='glyphicon glyphicon-calendar'></span>";
+	html = html + "</span>";
+	html = html + "</div>";
 	html = html + "</div>";
 	// cuarto div sexo
 	html = html + "<div class='col-sm-2'>";
@@ -80,21 +85,73 @@ $('#add_parentesco').click(function(e){
 	html = html + "<option value='2'>Masculino</option>";
 	html = html + "</select>";
 	html = html + "</div>";
-	//
+		//
 	html = html + "</div>";
 
     $('#parentescoAdd').append(html);
     $('#n_familiar').val(increment);
 
+    // generando scrip para que funcione el calendario
+    var script = 		"<script type='text/javascript'>";
+    	script = script + "$(function () {";
+    	script = script + "$('#nacimientocontrolp"+increment+"').datetimepicker({";
+    	script = script + "locale: 'en',";
+    	script = script + "format: 'YYYY-DD-MM'";
+        script = script + "});});";
+        script = script + "</script>";
 
+      $('#script').append(script);
 	// console.log('boton');
 });
 
-// ============Btn guardar empleado============
-$('#btn_update').click(function(e){
-e.preventDefault();
-// $("#form-update-data").validate();
 
+
+// Validando el formulario con jquery validator
+$('#btn_update').click(function(){
+	// console.log('validar');
+	$('#form-update-data').validate({
+		submitHandler: function() {
+    // do other things for a valid form
+		    // alert("perfecto!!!");
+		    btn_guardar();
+		  },
+	  	errorPlacement: function(error, element) {
+		    if (element.attr("name") == "nacimiento"  ) {
+		      error.insertAfter(".nacimientocontrol");
+		    }else if(element.attr("name") == "centro" ){
+		    error.insertAfter("#centro_radio");
+		    }else if(element.attr("name") == "nacimientop"+increment ){
+		    error.insertAfter("#nacimientocontrolp"+increment);
+		    }
+		     else {
+		      error.insertAfter(element);
+		    }
+	  	}
+	});
+
+});
+// Fin validando el formulario con jquery validator
+
+// Detectando el check discapacidad
+$("#question_check").click(function() {
+	// console.log('click check');
+        if(!$("#checkdiscap").hasClass('active')) {
+            console.log("Está activado");
+            $('#div_discapacidad').removeClass('hide');
+        } else {
+            console.log("No está activado");
+            $('#div_discapacidad').addClass('hide');
+        }
+    });
+// Fin detectando check discapacidad
+
+
+});//fin funcion main
+
+
+
+function btn_guardar(){
+	// ============Btn guardar empleado============
 var mensaje ='';
 var alertTipo='';
 var ajaxIco = "<i class='fa fa-spinner fa-pulse fa-lg'></i> <p>Generando solicitud...</p>"
@@ -102,17 +159,17 @@ $('#mensajeajax').append(ajaxIco);
 
 
 
-console.log('actualizando...');
+// console.log('actualizando...');
 var str =  $('#form-update-data').serialize();
 
-// console.log(str);
+console.log(str);
 		$.ajax({
 			url: 'procesar',
 			type: 'POST',
 			data: str,
 		}).done(function ( response ){
 		$('#mensajeajax').html('');//Borrando el mensaje ajax
-		 console.log(response.update);
+		 // console.log(response.update);
 		if(response.insert){
 			alertTipo= 'alert-success';
 			mensaje = response.mensaje;
@@ -123,17 +180,15 @@ var str =  $('#form-update-data').serialize();
 			mensaje = response.mensaje;
 			// console.log('Update');
 		}
-		
+
 
 		var mensajerespuestaOk ="<div class='alert "+alertTipo+" alert-dismissible' role='alert'>";
     		mensajerespuestaOk = mensajerespuestaOk + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
-    		mensajerespuestaOk = mensajerespuestaOk + mensaje + "</div>";	
+    		mensajerespuestaOk = mensajerespuestaOk + mensaje + "</div>";
     		// console.log(mensajerespuestaOk);
 		$('#mesajeresponse').append(mensajerespuestaOk);
 
 		});
 	// Fin ajax
-});
-// ============Btn guardar empleado============
 
-});
+}

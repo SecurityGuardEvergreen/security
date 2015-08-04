@@ -137,7 +137,7 @@ Route::post('ciudades','GestionController@ciudades');
 Route::get('staff','GestionController@index');
 // Route::any('ingresado','GestionController@busca');
 Route::any('ingresado/{busca?}', array('as' => 'ingresado', 'uses' => 'GestionController@busca'));
-Route::post('procesar','GestionController@procesar');
+Route::any('procesar','GestionController@procesar');
 Route::get('ir',function(){
 	return View::make('empleados.dos');
 });

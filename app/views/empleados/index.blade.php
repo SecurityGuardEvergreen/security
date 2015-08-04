@@ -21,23 +21,14 @@
     <link rel="stylesheet" href="/assets/empleados/css/main.css">
     <link rel="stylesheet" href="/assets/empleados/css/responsive.css">
     <link rel="stylesheet" href="/assets/empleados/css/bootstrap-datetimepicker.css">
-    <script src="/assets/empleados/js/vendor/modernizr-2.6.2.min.js"></script>
+    <link rel="stylesheet" href="/assets/empleados/css/validate.css">
+    <!-- // <script src="/assets/empleados/js/vendor/modernizr-2.6.2.min.js"></script> -->
 </head>
 
 <body id="top">
-    <!--[if lt IE 7]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade ybrowser</a> to improve your experience.</p>
-    <![endif]-->
 
 
 
-
-    <!-- PORTFOLIO -->
-
-
-
-
-    <!-- GET TRIAL -->
     <section id="get-trial" class="section text-center">
         <div class="container">
             <h2 style="color:#fff;" class="section-title">Importante !!!</h2>
@@ -71,21 +62,34 @@
             'id'=>'form-update-data')) }}
 
                 <div class="form-group">
-                    <label for="centro" class="col-sm-2 control-label">Centro de trabajo</label>
-                    <div class="col-sm-10">
+                    &nbsp;&nbsp;&nbsp;
+                    <label for="centro" class="control-label">Centro de trabajo</label>
+                    <div class="col-sm-12" id="centro_radio">
+                        <div class="btn-group" data-toggle="buttons">
+                          <label class="btn btn-info btn-sm ">
+                            <input type="radio" name="centro" id="centroOpcion1" value="1" autocomplete="off" title="Seleccione un centro de trabajo" required> OFICINA ANACO
+                          </label>
+                          <label class="btn btn-info btn-sm">
+                            <input type="radio" name="centro" id="centroOpcion2" value="2" autocomplete="off"title="Seleccione un centro de trabajo" required> CIMD LOMA LINDA
+                          </label>
+                          <label class="btn btn-info btn-sm">
+                            <input type="radio" name="centro" id="centroOpcion3" value="3" autocomplete="off"title="Seleccione un centro de trabajo" required>
+                          CIMD SANTA ROSA
+                          </label>
+                        </div>
 
-                        <label class="radio-inline">
-                          <input type="radio" name="centro" id="centroOpcion1" value="1" required>
+                        <!-- <label class="radio-inline">
+                          <input type="radio" name="centro" id="centroOpcion1" value="1" title="Seleccione un centro de trabajo" required>
                           OFICINA ANACO
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="centro" id="centroOpcion2" value="2" required>
+                          <input type="radio" name="centro" id="centroOpcion2" value="2" title="Seleccione un centro de trabajo" required>
                           CIMD LOMA LINDA
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="centro" id="centroOpcion3" value="3" required>
+                          <input type="radio" name="centro" id="centroOpcion3" value="3" title="Seleccione un centro de trabajo" required>
                           CIMD SANTA ROSA
-                        </label>
+                        </label> -->
                     </div>
                 </div>
 
@@ -172,17 +176,18 @@
 
                     <div class="col-sm-3">
                         <label for="nacimiento" class=" control-label">Fecha de nacimiento</label>
-                        <div class='input-group date' id='nacimientocontrol'>
+                        <div class='input-group date' id='nacimientocontrol' class="nacimientocontrol">
                                     {{Form::text('nacimiento',Input::old('nacimiento'),
                                     array('autofocus','class' => 'form-control','id' => 'nacimiento',
                                     'placeholder' => 'Fecha de nacimiento',
                                     'required'=>'required',
-                                    'title'=>'Necesitamos su fecha de nacimiento')
+                                    'title'=>'Necesitamos saber cuando nació')
                                     )}}
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
-                                </div>
+                        </div>
+
                     </div>
 
                     <div class="col-sm-3">
@@ -257,12 +262,12 @@
 
                     <div class="col-sm-4">
                         <label for="estado" class="control-label">Estado</label>
-                        <select class="form-control" id="estado" name="estado" required></select>
+                        <select class="form-control" id="estado" name="estado" title="Seleccione el estado donde vive" required></select>
                     </div>
 
                     <div class="col-sm-4">
                         <label for="municipio" class="control-label">Municipio</label>
-                        <select class="form-control" id="municipio" name="municipio" required>
+                        <select class="form-control" id="municipio" name="municipio" title="Seleccione el municipio donde vive"  required>
                             <option value="">-Seleccione un municipio</option>
 
                      </select>
@@ -270,7 +275,7 @@
 
                     <div class="col-sm-4">
                         <label for="parroquia" class="control-label">Parroquia</label>
-                        <select class="form-control" id="parroquia" name="parroquia" required>
+                        <select class="form-control" id="parroquia" name="parroquia" title="Seleccione la parroquia donde vive"  required>
                             <option value="">-Seleccione parroquia</option>
 
                      </select>
@@ -287,10 +292,16 @@
                         )}}
                     </div>
                 </div>
-
                 <div class="for-group">
-
-                    <div class=" col-sm-12">
+                    <!-- <label for="" class="control-label"></label> -->
+                    <div id="question_check" class="btn-group" data-toggle="buttons">
+                      <label id="checkdiscap" class="btn btn-warning btn-xs ">
+                        <input  type="checkbox" autocomplete="off"> ¿Posee alguna discapacidad?
+                      </label>
+                    </div>
+                </div>
+                <div class="for-group">
+                    <div id="div_discapacidad" class=" col-sm-12 hide">
                         <label for="discapacidad" class="control-label">Discapacidad </label>
                         {{Form::textarea('discapacidad',Input::old('discapacidad'),
                         array('autofocus','class' => 'form-control','id' => 'discapacidad',
@@ -305,22 +316,33 @@
                         <label for="fullname1" class="control-label">Nombre Completo</label>
                         {{Form::text('fullname1',Input::old('fullname1'),
                         array('autofocus','class' => 'form-control','id' => 'fullname1',
-                        'placeholder' => 'Nombre completo del familiar 1')
+                        'placeholder' => 'Nombre completo del familiar 1',
+                        'required'=>'required',
+                        'title'=>'Ingrese el nombre completo del familiar')
                         )}}
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <label for="parentesco1" class="control-label">Parentesco</label>
                         {{Form::text('parentesco1',Input::old('parentesco1'),
                         array('autofocus','class' => 'form-control','id' => 'parentesco1',
-                        'placeholder' => 'Ingrese el parentesco')
+                        'placeholder' => 'Ingrese el parentesco',
+                        'required'=>'required',
+                        'title'=>'¿Cuál es su parentesco?')
                         )}}
                     </div>
-                    <div class="col-sm-2">
-                        <label for="edadp1" class="control-label">Edad</label>
-                        {{Form::text('edadp1',Input::old('edadp1'),
-                        array('autofocus','class' => 'form-control','id' => 'edadp1',
-                        'placeholder' => 'Ingrese la edad')
-                        )}}
+                    <div class="col-sm-3">
+                      <label for="nacimientop1" class=" control-label">Fecha de nacimiento</label>
+                        <div class='input-group date' id='nacimientocontrolp1' >
+                                    {{Form::text('nacimientop1',Input::old('nacimientop1'),
+                                    array('autofocus','class' => 'form-control','id' => 'nacimientop1',
+                                    'placeholder' => 'Fecha de nacimiento',
+                                    'required'=>'required',
+                                    'title'=>'Necesitamos saber cuando nació su familiar')
+                                    )}}
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                        </div>
                     </div>
 
                     <div class="col-sm-2">
@@ -338,7 +360,7 @@
                 <input type="hidden" id="n_familiar" name="n_familiar" value="1">
 
 
-                <a href="#" id="add_parentesco" class="btn btn-primary btn-xs">Otro familiar</a>
+                <a href="#" id="add_parentesco" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle fa-lg"></i></a>
 
 
               <div class="form-group">
@@ -349,7 +371,7 @@
                         <a  class="btn btn-default "> <i class="fa fa-print"></i></a>
                   </center>
                     <br>
-                    <div id="mesajeresponse"></div>                   
+                    <div id="mesajeresponse"></div>
 
 
                 </div>
@@ -418,6 +440,8 @@
     <script src="/assets/empleados/js/main.js"></script>
     <script src="/assets/empleados/js/moment-locales.js"></script>
     <script src="/assets/empleados/js/bootstrap-datetimepicker.js"></script>
+    <script src="/assets/empleados/js/jquery.validate.js"></script>
+    <script src="/assets/empleados/js/localization/messages_es.js"></script>
     <script src="/assets/empleados/js/select.js"></script>
 
 
@@ -425,10 +449,15 @@
             $(function () {
                 $('#nacimientocontrol').datetimepicker({
                     locale: 'en',
-                     format: 'DD/MM/YYYY'
+                     format: 'YYYY-DD-MM'
+                });
+                 $('#nacimientocontrolp1').datetimepicker({
+                    locale: 'en',
+                     format: 'YYYY-DD-MM'
                 });
             });
-        </script>
+    </script>
+    <div id="script"></div>
 
 </body>
 </html>

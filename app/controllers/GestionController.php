@@ -72,7 +72,7 @@ public function procesar(){
   $address = Input::get('address');
   $discapacidad = Input::get('discapacidad');
   $n_familiar = Input::get('n_familiar');
-  
+
 
 
   // Insertando el registro en la db
@@ -115,7 +115,7 @@ for ($i=1; $i <= $n_familiar ; $i++) {
   $carga['familiar'][] = array(
     'nombre' => Input::get('fullname'.$i),
     'parentesco' => Input::get('parentesco'.$i),
-    'edad' => Input::get('edadp'.$i),
+    'nacimiento' => Input::get('nacimientop'.$i),
     'sexo' => Input::get('sexop'.$i)
     );
 
@@ -127,14 +127,14 @@ for ($i=1; $i <= $n_familiar ; $i++) {
                 //'order_id' => $order->id,
         'nombre' => $value['nombre'],
         'parentesco' => $value['parentesco'],
-        'edad' => $value['edad'],
+        'nacimiento' => $value['nacimiento'],
         'sexo_id' => $value['sexo'],
         'empleado_id' => $insertedId,
         'created_at'=>date('Y-m-d H:i:s'),
         'updated_at' =>date('Y-m-d H:i:s')
 
     ];
-    
+
   }
 
   $familiar -> insert($tmp);
@@ -142,7 +142,7 @@ for ($i=1; $i <= $n_familiar ; $i++) {
     $respuesta['mensaje'] = '<strong>Perfecto!</strong> El registro se ha guardado exitosamente.';
     $respuesta['insert'] =true;
   }
-  
+
   }//fin if
 
 
