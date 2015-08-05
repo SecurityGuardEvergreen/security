@@ -134,6 +134,7 @@ Route::post('municipios','GestionController@municipios');
 Route::post('parroquias','GestionController@parroquias');
 Route::post('ciudades','GestionController@ciudades');
 Route::post('empleado_cd','GestionController@empleado_cd');
+Route::post('empleado_rif','GestionController@empleado_rif');
 
 Route::get('staff','GestionController@index');
 // Route::any('ingresado','GestionController@busca');

@@ -43,8 +43,18 @@ public function ciudades(){
 }
 
 public function empleado_cd(){
+      $datos = Empleado::where('ci','=',Input::get('ced'))->get();
 
-  return Empleado::where('ci','=',Input::get('ced'))->get();
+  return Response::json([
+    "data" =>$datos
+    ]);
+}
+public function empleado_rif(){
+      $datos = Empleado::where('rif','=',Input::get('rif'))->get();
+
+  return Response::json([
+    "data" =>$datos
+    ]);
 }
 
 // ==========Procesar datos creados
@@ -81,23 +91,50 @@ public function procesar(){
   $n_familiar = Input::get('n_familiar');
   $nombre_contacto =Input::get('nombre_contacto');
   $telf_contacto =Input::get('telf_contacto');
-
+  $id_update = Input::get('id');
 
 
 
   // Insertando el registro en la db
   // $cedula = Empleado::where('ci','=',$ced_empleado)->get(array('id'));
   // $rift = Empleado::where('rif','=',$rif)->get(array('id'));
-  $empleadoExiste = Empleado::where('ci', '=', $ced_empleado)
-                            ->orWhere('rif','=', $rif)
-                            ->get();
+  // $empleadoExiste = Empleado::where('ci', '=', $ced_empleado)
+  //                           ->orWhere('rif','=', $rif)
+  //                           ->get();
           // var_dump(!$cedula->isEmpty());
   // var_dump(Input::all());
-  if(!$empleadoExiste->isEmpty()){
+  if($id_update!=''){
     // if para actualizar
 
-    $respuesta['mensaje'] = '<strong>Ups!</strong> El evento no se ha progamado.';
+    Empleado::where('id',$id_update)
+                  ->update(array(
+                    "centro_id"=>$centro,
+                    "nombre" =>$nombre,
+                    "segundo_nombre" =>$secondname,
+                    "apellido" =>$lastname,
+                    "segundo_apellido" =>$lastname2,
+                    "ci" =>$ced_empleado,
+                    "rif" =>$rif,
+                    "maritalstatus_id" =>$edo_civil,
+                    "fecha_nacimiento" =>$nacimiento,
+                    "sexo_id" =>$sexo,
+                    "sangre_tipo" =>$blood,
+                    "lateralidad" =>$lateralidad,
+                    "telf_fijo" =>$telf,
+                    "telf" =>$telf_movil,
+                    "educationlevel_id" =>$educacion,
+                    "cargo_id" =>$cargo,
+                    "estado_id" =>$estado,
+                    "municipio_id" =>$municipio,
+                    "parroquia_id" =>$parroquia,
+                    "direccion" =>$address,
+                    "discapacidad" =>$discapacidad,
+                    "nombre_contacto" =>$nombre_contacto,
+                    "telf_contacto" =>$telf_contacto
+                    ));
+    $respuesta['mensaje'] = '<strong>Ups!</strong> El evento se está Programando .';
     $respuesta['update'] =true;
+
 
   }else{
     // Insertando registros
@@ -173,11 +210,11 @@ for ($i=1; $i <= $n_familiar ; $i++) {
 
       $respuesta['mensaje'] = '<strong>Perfecto!</strong> El registro se ha guardado exitosamente sin carga familiar.';
     $respuesta['insert'] =true;
-      
-      
+
+
     }//else fin
 
-    
+
 
   }//fin if
 // var_dump($respuesta);

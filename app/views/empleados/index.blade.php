@@ -330,7 +330,7 @@
                       </label>
                     </div>
                 </div>
-         
+
                 <div id="carga_familiar" class="hide">
                     <h3>Carga familiar</h3>
                 <div class="form-group">
@@ -379,7 +379,7 @@
 
                 </div>
                 <!-- /div carga_familiar -->
-                
+
                 <h3>PERSONA De CONTACTO EN CASO DE EMERGENCIA</h3>
                 <div class="form-group">
                     <div class="col-sm-4">
@@ -400,9 +400,9 @@
                         'required'=> 'required')
                         )}}
                     </div>
-                    
+
                 </div>
-                
+
               <div class="form-group">
                 <div class="col-sm-12 ">
                   <center>
@@ -497,7 +497,8 @@
         mm = "0" + mm;
     }
     var dateToday= yyyy+"-"+ mm +"-"+dd;
-    
+
+    console.log(CalculateDateDiff(new Date(1986,02,13), new Date(yyyy,mm,dd)));
         // console.log( dateToday );
             $(function () {
                 $('#nacimientocontrol').datetimepicker({

@@ -1,11 +1,13 @@
-var estado_update=false;  	//variable para conocer si se actualiza o se inserta un empleado
-	var tem_ced=''; 
+	var estado_update=false;
+	var error_ced=false;
+	var error_rif=false; 	//variable para conocer si se actualiza o se inserta un empleado
+	var tem_ced='';
 	var tem_rif='';
 	var id_update='';
-	var increment = 1;  
+	var increment = 1;
 
 jQuery(document).ready(function() {
-	
+
 	//Al iniciar mandamos consultar todos los paises que se mantienen en nuestra base de datos atravez de la ruta paises
 	$.getJSON('estados', function( estados ){
 		$('#estado').html('');
@@ -97,7 +99,7 @@ $('#add_parentesco').click(function(e){
 
     $('#parentescoAdd').append(html);
     $('#n_familiar').val(increment);
-    
+
   	// dateToday esta variable ya está declarada en el html
     // generando scrip para que funcione el calendario
     var script = 		"<script type='text/javascript'>";
@@ -108,7 +110,7 @@ $('#add_parentesco').click(function(e){
     	script = script + "maxDate: '"+dateToday+"' ";
         script = script + "});});";
         script = script + "</script>";
-        
+
       $('#script').append(script);
 	// console.log('boton');
 });
@@ -122,7 +124,11 @@ $('#btn_update').click(function(){
 		submitHandler: function() {
     // do other things for a valid form
 		    // alert("perfecto!!!");
-		    btn_guardar();
+		    if(error_ced ==false && error_rif ==false){
+		    	console.log('No hay error');
+		    	btn_guardar();
+		    }
+
 		  },
 	  	errorPlacement: function(error, element) {
 		    if (element.attr("name") == "nacimiento"  ) {
@@ -165,7 +171,7 @@ $("#question_check_carga").click(function() {
             $("#parentesco1").attr('required','required');
             $("#nacimientop1").attr('required','required');
             $("#sexop1").attr('required','required');
-           
+
             console.log('full');
         } else {
             // console.log("No está activado");
@@ -177,7 +183,7 @@ $("#question_check_carga").click(function() {
             $("#parentesco1").removeAttr('required');
             $("#nacimientop1").removeAttr('required');
             $("#sexop1").removeAttr('required');
-            
+
         }
     });
 // Fin detectando check carga familiar
@@ -186,33 +192,95 @@ $("#question_check_carga").click(function() {
 
 // Validar que no exista la ced de un empleado dependiendo de la varibale estado_update
 
-	// actualizar evaluacion
+	// Validando cedula
 	$('#ced').change(function(){
+		error_ced = false;
 
-		
 		if(estado_update==true){
+			$('#existe').remove();
 			if($(this).val() != tem_ced){ //evaluando si es igual a lo 	que ya habia insertado
-			console.log('NUpdate');
-			}
-		}
-		else //para la inserción
-		{	var ced_insert = $(this).val();
-			console.log(ced_insert);
+			var ced_insert = $(this).val();
 			$.ajax({
 			url: 'empleado_cd',
 			type: 'POST',
 			data: 'ced='+ced_insert,
 				}).done(function ( response ){
-				 console.log(response);
-				
+				 if(response.data.length!=0){
+				 	var error="<span id='existe' style='float:left;margin-top:5px' class='label label-danger'>Ésta cédula ya existe en el sistema y no se puede actualizar desde este módulo</span>";
+				 	$(error).insertAfter('#ced');
+				 	error_ced = true;
+				 }
 
 				});
-			// Fin ajax			
+			// Fin ajax
+
+			}
+		}
+		else //para la inserción
+		{	var ced_insert = $(this).val();
+			$.ajax({
+			url: 'empleado_cd',
+			type: 'POST',
+			data: 'ced='+ced_insert,
+				}).done(function ( response ){
+				 if(response.data.length!=0){
+				 	var error="<span id='existe' style='float:left;margin-top:5px' class='label label-danger'>Ésta cédula ya existe en el sistema</span>";
+				 	$(error).insertAfter('#ced');
+				 	error_ced = true;
+				 }else{
+				 	$('#existe').remove();
+				 }
+
+
+				});
+			// Fin ajax
 
 		}
-		// console.log('Estado');
-		// console.log(estado_update);
-	});
+	}); // Fin Validando cedula
+
+// Validando rif
+	$('#rif').change(function(){
+		error_rif =false;
+		if(estado_update==true){
+			$('#existerif').remove();
+			if($(this).val() != tem_rif){ //evaluando si es igual a lo 	que ya habia insertado
+			var rif_insert = $(this).val();
+			$.ajax({
+			url: 'empleado_rif',
+			type: 'POST',
+			data: 'rif='+rif_insert,
+				}).done(function ( response ){
+				 if(response.data.length!=0){
+				 	var error="<span id='existerif' style='float:left;margin-top:5px' class='label label-danger'>Ést RIF ya existe en el sistema y no se puede actualizar desde este módulo</span>";
+				 	$(error).insertAfter('#rif');
+				 	error_rif =true;
+				 }
+
+				});
+			// Fin ajax
+
+			}
+		}
+		else //para la inserción
+		{	var rif_insert = $(this).val();
+			$.ajax({
+			url: 'empleado_rif',
+			type: 'POST',
+			data: 'rif='+rif_insert,
+				}).done(function ( response ){
+				 if(response.data.length!=0){
+				 	var error="<span id='existerif' style='float:left;margin-top:5px' class='label label-danger'>Éste RIF ya existe en el sistema</span>";
+				 	$(error).insertAfter('#rif');
+				 	error_rif =true;
+				 }else{
+				 	$('#existerif').remove();
+				 }
+
+				});
+			// Fin ajax
+
+		}
+	}); // Fin Validando rif
 
 
 // Validar que no exista la ced de un empleado dependiendo de la varibale estado_update
@@ -236,12 +304,16 @@ console.log(str);
 		$.ajax({
 			url: 'procesar',
 			type: 'POST',
-			data: str,
+			data: str+"&id="+id_update,
 		}).done(function ( response ){
 		$('#mensajeajax').html('');//Borrando el mensaje ajax
 		 // console.log(response.update);
 		 estado_update=true;
-		 id_update = response.insertedId;
+
+		 if(id_update==''){
+		 	id_update = response.insertedId;
+		 }
+
 		 tem_ced = $('#ced').val();
 		 tem_rif = $('#rif').val();
 		 console.log(id_update);
@@ -271,4 +343,24 @@ console.log(str);
 		});
 	// Fin ajax
 
+}
+
+// Calcular fecha
+function CalculateDateDiff(dateFrom, dateTo) {
+    var difference = (dateTo - dateFrom);
+
+    var years = Math.floor(difference / (1000 * 60 * 60 * 24 * 365));
+    difference -= years * (1000 * 60 * 60 * 24 * 365);
+    var months = Math.floor(difference / (1000 * 60 * 60 * 24 * 30.4375));
+
+    var dif = '';
+    if (years > 0)
+        dif = years + ' años ';
+
+    if (months > 0) {
+        if (years > 0) dif += ' y ';
+        dif += months + ' meses';
+    }
+
+    return dif;
 }
