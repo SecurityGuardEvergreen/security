@@ -65,7 +65,7 @@
                     &nbsp;&nbsp;&nbsp;
                     <label for="centro" class="control-label">Centro de trabajo</label>
                     <div class="col-sm-12" id="centro_radio">
-                        <div class="btn-group" data-toggle="buttons">
+                        <div id="radios_centro" class="btn-group" data-toggle="buttons">
                           <label class="btn btn-info btn-sm ">
                             <input type="radio" name="centro" id="centroOpcion1" value="1" autocomplete="off" title="Seleccione un centro de trabajo" required> OFICINA ANACO
                           </label>
@@ -407,8 +407,13 @@
                 <div class="col-sm-12 ">
                   <center>
                         <div id="mensajeajax"></div>
-                        <button type="submit" id="btn_update" class="btn btn-success">Actualizar datos</button>
-                        <a id="btn_print" class="btn btn-default disabled"><i class="fa fa-print"></i> Imprimir</a>
+                        
+                        <!-- <div class="btn-group" role="group" aria-label="..."> -->
+                            <button type="reset" id="btn_reset" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo registro</button>
+                            <button  type="submit" id="btn_update" class="btn btn-success"><i class="fa fa-floppy-o"></i> Agregar registro</button>
+                            <a id="btn_print" class="btn btn-success disabled"><i class="fa fa-print"></i> Imprimir</a>
+
+                        <!-- </div> -->
                   </center>
                     <br>
                     <div id="mesajeresponse"></div>
@@ -419,6 +424,10 @@
             {{ Form::close() }}
             <!-- /form user -->
 <!-- /form dos -->
+<!-- div print -->
+<div id="print_f"></div>
+<!-- /div print -->
+
 
 </div>
                 <!-- END CONTACT FORM -->

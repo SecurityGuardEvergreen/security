@@ -125,7 +125,7 @@ $('#btn_update').click(function(){
     // do other things for a valid form
 		    // alert("perfecto!!!");
 		    if(error_ced ==false && error_rif ==false){
-		    	console.log('No hay error');
+		    	// console.log('No hay error');
 		    	btn_guardar();
 		    }
 
@@ -217,7 +217,9 @@ $("#question_check_carga").click(function() {
 			}
 		}
 		else //para la inserción
-		{	var ced_insert = $(this).val();
+		{	
+			$('#existe').remove();
+			var ced_insert = $(this).val();
 			$.ajax({
 			url: 'empleado_cd',
 			type: 'POST',
@@ -227,8 +229,6 @@ $("#question_check_carga").click(function() {
 				 	var error="<span id='existe' style='float:left;margin-top:5px' class='label label-danger'>Ésta cédula ya existe en el sistema</span>";
 				 	$(error).insertAfter('#ced');
 				 	error_ced = true;
-				 }else{
-				 	$('#existe').remove();
 				 }
 
 
@@ -262,7 +262,9 @@ $("#question_check_carga").click(function() {
 			}
 		}
 		else //para la inserción
-		{	var rif_insert = $(this).val();
+		{	
+			$('#existerif').remove();
+			var rif_insert = $(this).val();
 			$.ajax({
 			url: 'empleado_rif',
 			type: 'POST',
@@ -272,8 +274,6 @@ $("#question_check_carga").click(function() {
 				 	var error="<span id='existerif' style='float:left;margin-top:5px' class='label label-danger'>Éste RIF ya existe en el sistema</span>";
 				 	$(error).insertAfter('#rif');
 				 	error_rif =true;
-				 }else{
-				 	$('#existerif').remove();
 				 }
 
 				});
@@ -283,12 +283,51 @@ $("#question_check_carga").click(function() {
 	}); // Fin Validando rif
 
 
+
 // Validar que no exista la ced de un empleado dependiendo de la varibale estado_update
+
+// bton reset
+$('#btn_reset').click(function(){
+	// Resetando las valiables js creadas
+	 estado_update=false;
+	 error_ced=false;
+	 error_rif=false; 
+	 tem_ced='';
+	 tem_rif='';
+	 id_update='';
+	 increment = 1;
+	 
+	 $('#parentescoAdd').empty();   // Borrando cargas familiaresd extras	 
+	 $('#btn_update').text('Agregar registro');   // Colocando el texto inicial al botón add
+	 $('#btn_print').addClass('disabled'); // Bloqueando btn imprimir
+	 // Borrando cualquier mensaje de ced y rif quedados en el dom
+	 $('#existerif').remove();
+	 $('#existe').remove();
+	 // Desactivando todos los radios del centro seleccionado
+	 $('#radios_centro > label').removeClass('active');
+	 // Bloquear carga familiar
+	 $("#carga_familiar").find(":input").prop("disabled",false);
+	 $("#carga_familiar").find("a").removeClass("disabled");
+	 // console.log('bloqueado');
+});
+// Fin btn reset
+
+
+// btn Imprimir
+$('#btn_print').click(function(){
+	$('#print_f').append('<form id="gen_pdf" action="pdf" method="post"></form>');
+	$('#gen_pdf').append('<input type="hidden" id="id_registro" name="id_registro" value="'+id_update+'">');
+	$("#gen_pdf").submit();
+});
+// fin btn Imprimir
 
 
 });//fin funcion main
 
 
+// ============================================================================
+// ============================== Funciones ===================================
+// ============================================================================
 
 function btn_guardar(){
 	// ============Btn guardar empleado============
@@ -296,6 +335,8 @@ var mensaje ='';
 var alertTipo='';
 var ajaxIco = "<i class='fa fa-spinner fa-pulse fa-lg'></i> <p>Generando solicitud...</p>"
 $('#mensajeajax').append(ajaxIco);
+
+
 
 // console.log('actualizando...');
 var str =  $('#form-update-data').serialize();
@@ -327,7 +368,7 @@ console.log(str);
 			$('#btn_print').removeClass('disabled');
 		}
 		if(response.update){
-			alertTipo = 'alert-danger';
+			alertTipo = 'alert-info';
 			mensaje = response.mensaje;
 			// Activar btn imprimir
 			$('#btn_print').removeClass('disabled');
@@ -339,6 +380,13 @@ console.log(str);
     		mensajerespuestaOk = mensajerespuestaOk + mensaje + "</div>";
     		// console.log(mensajerespuestaOk);
 		$('#mesajeresponse').append(mensajerespuestaOk);
+
+		// Cambiando el text del boton update
+		$('#btn_update').text('Actualizar registro');
+		
+		// Bloqueando carga familiar
+		$("#carga_familiar").find(":input").prop("disabled",true);
+	 	$("#carga_familiar").find("a").addClass("disabled");
 
 		});
 	// Fin ajax
@@ -364,3 +412,5 @@ function CalculateDateDiff(dateFrom, dateTo) {
 
     return dif;
 }
+
+// 

@@ -73,6 +73,23 @@ class UserLogin extends BaseController {
 		
 	}
 	// Fin Login
+	// --Funcion verificar display login--
+	public function logingestion()
+	{	
+		if(Auth::check())
+		{	
+			
+			return Redirect::to('jornada');
+		}
+		else
+		{
+			return View::make('login.index');
+		}
+
+
+		
+	}
+	// Fin Login
 
 	public function logout()
 	{		

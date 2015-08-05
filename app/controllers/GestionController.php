@@ -57,6 +57,21 @@ public function empleado_rif(){
     ]);
 }
 
+public function pdf(){
+  $id = Input::get('id_registro');
+  $empleado = Empleado::where('id','=',$id)->first();
+  // echo "el registro es";
+  // echo $id."<br>";
+  // print_r($empleado);
+  // echo "<br>";
+  // var_dump($empleado->nombre);
+
+  $data = array();
+  $data['empleado'] = $empleado;
+  $pdf = PDF::loadView('pdf.index',$data);
+  return $pdf->stream();
+return $pdf->download('invoice.pdf');
+}
 // ==========Procesar datos creados
 public function procesar(){
 
@@ -132,7 +147,7 @@ public function procesar(){
                     "nombre_contacto" =>$nombre_contacto,
                     "telf_contacto" =>$telf_contacto
                     ));
-    $respuesta['mensaje'] = '<strong>Ups!</strong> El evento se está Programando .';
+    $respuesta['mensaje'] = '<strong>Excelente!</strong> Los cambios se han guardado exitosamente .';
     $respuesta['update'] =true;
 
 
@@ -202,6 +217,7 @@ for ($i=1; $i <= $n_familiar ; $i++) {
   }//for each
 
   $familiar -> insert($tmp);
+
   if($familiar){
     $respuesta['mensaje'] = '<strong>Perfecto!</strong> El registro se ha guardado exitosamente.';
     $respuesta['insert'] =true;

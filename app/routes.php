@@ -31,6 +31,8 @@ Route::group(array('before' => 'auth','prefix' => 'admin') ,function(){
 	Route::get('data_user',array('before'=>'roles:1-2-3,/','uses' =>'HomeController@datausers'));
 
 
+
+
 	// Route::get('new_post',array("before" => "roles:1-2-3,admin", function()
 	// {
 
@@ -46,6 +48,40 @@ Route::group(array('before' => 'auth','prefix' => 'admin') ,function(){
 
 });
 // =========Admin System=========
+
+
+// =========GESTION=========
+Route::group(array('before' => 'auth','prefix' => 'jornada') ,function(){
+
+	Route::any('/',array("before" => "roles:4,/",function(){
+		return Redirect::to('jornada/staff');
+	}));
+
+	Route::any('gestion/',array("before" => "roles:4,/",'uses' => 'HomeController@dashboard'));
+	Route::get('staff','GestionController@index');
+	Route::get('estados', 'GestionController@estados');
+	Route::post('municipios','GestionController@municipios');
+	Route::post('parroquias','GestionController@parroquias');
+	Route::post('ciudades','GestionController@ciudades');
+	Route::post('empleado_cd','GestionController@empleado_cd');
+	Route::post('empleado_rif','GestionController@empleado_rif');
+	Route::post('procesar','GestionController@procesar');
+	Route::post('pdf','GestionController@pdf');
+
+	Route::get('gestion',function(){
+	return View::make('gestion.index');
+	});
+	// Route::any('system/{dato?}',array("before" => "roles:1-2-3,/",'uses' => 'HomeController@system'));
+	// Route::get('data_user',array('before'=>'roles:1-2-3,/','uses' =>'HomeController@datausers'));
+
+	Route::get('sin_acceso',function(){
+		return "no tienes acceso =(";
+	});
+
+
+
+});
+// ========= FIN GESTION=========
 
 // Rutas referente al logueo y pass
 Route::post('login','UserLogin@user');
@@ -86,33 +122,7 @@ Route::get('update',function(){
 	return "usuario actualizado :D es ".$yes;
 });
 
- Route::get('ver',function(){
 
- 	// $area = Area::find(1) -> zone() -> where('id', '=', '3')->first();
- 	// $comments = Post::find(1)->comments;
- 	$area = Area::find(1);
-
-    foreach ($area -> zone as $key => $value) {
-		# code...
-		$valor[] = $value;
-	}
-
-
-	return var_dump($valor);
-
-});
-
-
-	Route::get('crearg',function(){
-
-		$grupo = new Group;
-		$grupo->name="Vengala";
-		$grupo->zone_id=2;
-		$grupo->save();
-
-
-	return "Listo";
-});
 
 Route::get('cambio',function(){
 
@@ -120,26 +130,23 @@ Route::get('cambio',function(){
 	return View::make('admin.systemc');
 
 });
-
-Route::get('gestion',function(){
-
-
-
-	return View::make('gestion.index');
-
-});
 // Gestion
-Route::get('estados', 'GestionController@estados');
-Route::post('municipios','GestionController@municipios');
-Route::post('parroquias','GestionController@parroquias');
-Route::post('ciudades','GestionController@ciudades');
-Route::post('empleado_cd','GestionController@empleado_cd');
-Route::post('empleado_rif','GestionController@empleado_rif');
+Route::get('gestion',function(){
+	return View::make('gestion.index');
+});
 
-Route::get('staff','GestionController@index');
+// Route::get('estados', 'GestionController@estados');
+// Route::post('municipios','GestionController@municipios');
+// Route::post('parroquias','GestionController@parroquias');
+// Route::post('ciudades','GestionController@ciudades');
+// Route::post('empleado_cd','GestionController@empleado_cd');
+// Route::post('empleado_rif','GestionController@empleado_rif');
+// Route::post('pdf','GestionController@pdf');
+
+// Route::get('staff','GestionController@index');
 // Route::any('ingresado','GestionController@busca');
 Route::any('ingresado/{busca?}', array('as' => 'ingresado', 'uses' => 'GestionController@busca'));
-Route::post('procesar','GestionController@procesar');
+// Route::post('procesar','GestionController@procesar');
 Route::get('ir',function(){
 	return View::make('empleados.dos');
 });
@@ -165,15 +172,25 @@ Route::get('pruebac',function(){
 
 });
 
-Route::get('pdf',function(){
+Route::any('pdf2',function(){
+	// $data = array();
+ //  // $data['empleado'] = array('nombre'=>'holas');
+  // $pdf = PDF::loadView('pdf.index');
+  // return $pdf->stream();
 
-	$data = array();
-	$data['nombre'] = "Elvis";
-	$pdf = PDF::loadView('pdf.index',$data);
-	return $pdf->stream();
+	return View::make('pdf.index');
 // return $pdf->download('invoice.pdf');
 });
 
+Route::any('pdf3',function(){
+	// $data = array();
+ //  // $data['empleado'] = array('nombre'=>'holas');
+  $pdf = PDF::loadView('pdf.index');
+  return $pdf->stream();
+
+	// return View::make('pdf.index');
+// return $pdf->download('invoice.pdf');
+});
 // App::missing(function($exception)
 // {
 //     // return Response::view('errors.missing', array(), 404);
