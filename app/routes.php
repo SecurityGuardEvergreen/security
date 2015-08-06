@@ -16,8 +16,7 @@ Route::get('/', function()
 	return View::make('movil.index');
 });
 
-// Pagina principal donde está la autenticación
-Route::get('login','UserLogin@login');
+
 
 
 // =========Admin System=========
@@ -83,6 +82,9 @@ Route::group(array('before' => 'auth','prefix' => 'jornada') ,function(){
 });
 // ========= FIN GESTION=========
 
+// Pagina principal donde está la autenticación
+Route::get('login','UserLogin@login');
+
 // Rutas referente al logueo y pass
 Route::post('login','UserLogin@user');
 Route::get('logout', 'UserLogin@logout');
@@ -90,19 +92,17 @@ Route::get('forgot','RemindersController@getRemind');
 Route::post('forgot','RemindersController@postRemind');
 Route::get('password/reset/{token?}','RemindersController@getReset');
 Route::post('password/reset/t','RemindersController@postReset');
-Route::get('otrousr',function(){
 
-	$user = new User;
 
-	$user->nickname = 'John';
-	$user->password = Hash::make('password');
-	$user->email = 'elvis.reyes@evergreenservice.net';
-	$user->save();
+Route::get('ingresar','UserIngresar@login');
+// login
+Route::post('ingresar','UserIngresar@user');
+Route::get('salir', 'UserIngresar@logout');
 
-	$insertedId = $user->id;
-	return var_dump($insertedId);
 
-});
+
+
+
 Route::get('sesio',function(){
 
 	$data = Session::all();

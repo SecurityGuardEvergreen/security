@@ -407,7 +407,7 @@
                 <div class="col-sm-12 ">
                   <center>
                         <div id="mensajeajax"></div>
-                        
+
                         <!-- <div class="btn-group" role="group" aria-label="..."> -->
                             <button type="reset" id="btn_reset" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo registro</button>
                             <button  type="submit" id="btn_update" class="btn btn-success"><i class="fa fa-floppy-o"></i> Agregar registro</button>
@@ -456,6 +456,10 @@
                             </li>
                             <li><a href="#">Intranet</a>
                             </li>
+                            @if(Auth::check())
+                                <li><a href="/salir">Salir</a></li>
+                            @endif
+
                         </ul>
                     </div>
                 </div>

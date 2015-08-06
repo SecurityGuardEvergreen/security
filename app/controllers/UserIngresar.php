@@ -1,6 +1,6 @@
 <?php
 
-class UserLogin extends BaseController {
+class UserIngresar extends BaseController {
 
 
 	public function user()
@@ -32,17 +32,14 @@ class UserLogin extends BaseController {
 
 		if (Auth::attempt($userdata)) {
 
-			Session::put('m_monitoring', 'active');
-			Session::put('m_system', 'active');
-			Session::put('m_reports', 'active');
-			Session::put('m_help', 'active');
+
 			// Actualizar si activo
 			$id = Auth::id();
 
 			$user = User::find($id );
 			$user->activo = 1;
 			$user->save();
-			return Redirect::to('admin');
+			return Redirect::to('jornada');
 		}else{
 			return Redirect::back()
 			->with('error_message','Los datos suministrados son incorrectos !!!');
@@ -62,11 +59,11 @@ class UserLogin extends BaseController {
 		if(Auth::check())
 		{
 
-			return Redirect::to('admin');
+			return Redirect::to('jornada');
 		}
 		else
 		{
-			return View::make('login.index');
+			return View::make('login.ingresar');
 		}
 
 
@@ -83,7 +80,7 @@ class UserLogin extends BaseController {
 		}
 		else
 		{
-			return View::make('login.index');
+			return View::make('login.ingresar');
 		}
 
 
@@ -99,17 +96,11 @@ class UserLogin extends BaseController {
 			$user->save();
 
 			Auth::logout();
-		return Redirect::to('login')->with('msg','Gracias Por visitarnos');
+		return Redirect::to('gestion');
 	}
 	// fin logout
 
-	// Forgot vista
-	public function forgotView()
-	{
-		return View::make('login.forgot');
-		// return View::make('emails.auth.reminder');
-	}
-	// fin Forgot vista
+
 
 
 }

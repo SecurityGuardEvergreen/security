@@ -4,12 +4,12 @@
 	<meta charset="UTF-8">
 	<title>pdf</title>
 	<style>
-/*body{
+body{
       font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
-}*/
+}
 
 
 	.negro{
@@ -90,8 +90,8 @@ float:left;
   <thead>
     <tr>
       <td><img src="assets/empleados/img/evergreen_logo_pdf.png" width='130'></td>
-      <td  style="padding: 0 20px;">     
-        <h3>Sistema de Gestión Integral Formatos</h3> 
+      <td  style="padding: 0 20px;">
+        <h3>Sistema de Gestión Integral Formatos</h3>
       </td>
       <td>
         Documento No.:
@@ -111,12 +111,12 @@ float:left;
         <span class="b">Reemplaza a:</span> Oct.08, Rev. 0.
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span class="b">Fecha de aprobación:</span>   Octubre 2014
-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <span class="b">Rev. No.:</span>  1
          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <span class="b">REQUISICIÓN. N°:</span>     
+        <span class="b">REQUISICIÓN. N°:</span>
      </td>
-      
+
     </tr>
   </tbody>
 </table>
@@ -133,7 +133,7 @@ float:left;
 
 <div class="main">
 
-  
+
  <!--  <div class="alert alert-success" role="alert">Dios es bueno</div> -->
 
 </div>

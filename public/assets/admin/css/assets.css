@@ -2671,6 +2671,16 @@ select.form-control {
     padding: 0 20px;
     overflow: hidden;
 }
+#prey-login .brand-update {
+    width: auto;
+    background:  #00B92C url(../images/update.jpg);
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-blend-mode: darken;
+    position: relative;
+    padding: 0 20px;
+    overflow: hidden;
+}
 #prey-login .brand-login .i {
     -webkit-transform: rotate(-180deg);
     -ms-transform: rotate(-180deg);
@@ -2763,7 +2773,7 @@ select.form-control {
 }#prey-login .btn-link {
     margin: 10px 0;
     font-weight: bold;
-    text-align: left;    
+    text-align: left;
     text-decoration: none;
 }
 #prey-login .btn-link:focus {
