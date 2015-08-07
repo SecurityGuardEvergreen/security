@@ -62,10 +62,11 @@
             'id'=>'form-update-data')) }}
 
                 <div class="form-group">
-                    &nbsp;&nbsp;&nbsp;
+                    <!-- &nbsp;&nbsp;&nbsp; -->
                     <label for="centro" class="control-label">Centro de trabajo</label>
                     <div class="col-sm-12" id="centro_radio">
-                        <div id="radios_centro" class="btn-group" data-toggle="buttons">
+
+                        <div id="radios_centro" class="btn-group col-sm-6" data-toggle="buttons">
                           <label class="btn btn-info btn-sm ">
                             <input type="radio" name="centro" id="centroOpcion1" value="1" autocomplete="off" title="Seleccione un centro de trabajo" required> OFICINA ANACO
                           </label>
@@ -76,8 +77,13 @@
                             <input type="radio" name="centro" id="centroOpcion3" value="3" autocomplete="off"title="Seleccione un centro de trabajo" required>
                           CIMD SANTA ROSA
                           </label>
-                        </div>
-
+                          <label class="btn btn-info btn-sm">
+                            <input type="radio" name="centro" id="centroOpcion3" value="3" autocomplete="off"title="Seleccione un centro de trabajo" required>
+                          Otro
+                          </label>
+                        </div>                      
+    
+                        
                         <!-- <label class="radio-inline">
                           <input type="radio" name="centro" id="centroOpcion1" value="1" title="Seleccione un centro de trabajo" required>
                           OFICINA ANACO
@@ -90,6 +96,15 @@
                           <input type="radio" name="centro" id="centroOpcion3" value="3" title="Seleccione un centro de trabajo" required>
                           CIMD SANTA ROSA
                         </label> -->
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="otro_centro" class="control-label">Nombre del centro</label>
+                        {{Form::text('otro_centro',Input::old('otro_centro'),
+                        array('autofocus','class' => 'form-control','id' => 'otro_centro',
+                        'placeholder' => 'Ingrese el nombre del otro centro',
+                        'required'=>'required',
+                        'title'=>'Necesitamos el nombre del otro centro')
+                        )}}
                     </div>
                 </div>
 
