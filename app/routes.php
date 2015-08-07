@@ -191,8 +191,15 @@ Route::any('pdf3',function(){
 	// return View::make('pdf.index');
 // return $pdf->download('invoice.pdf');
 });
+
+
+Route::get('print',function(){
+	return View::make('pdf.print');
+});
 // App::missing(function($exception)
 // {
 //     // return Response::view('errors.missing', array(), 404);
 //     return Redirect::to('/');
 // });
+
+
