@@ -6,6 +6,8 @@ public function index(){
 	$data = new stdclass;
 	$data->estado = Estado::all();
   $data->cargo = Cargo::all();
+  $data->preficed = Preficed::all();
+  $data->rif= Rif::all();
   $data->educacion = Educationlevel::orderBy('id', 'asc')->get();
   $data->marital = Maritalstatu::orderBy('nombre', 'asc')->get();
 
@@ -43,14 +45,17 @@ public function ciudades(){
 }
 
 public function empleado_cd(){
-      $datos = Empleado::where('ci','=',Input::get('ced'))->get();
+      $datos = Empleado::where('ci','=',Input::get('ced'))
+              ->where('preficed_id','=',Input::get('tipo'))->get();
 
   return Response::json([
     "data" =>$datos
     ]);
 }
 public function empleado_rif(){
-      $datos = Empleado::where('rif','=',Input::get('rif'))->get();
+
+      $datos = Empleado::where('rif','=',Input::get('rif'))
+            ->where('prefirif_id','=',Input::get('tipo'))->get();
 
   return Response::json([
     "data" =>$datos
@@ -87,7 +92,9 @@ public function procesar(){
   $secondname = Input::get('secondname');
   $lastname = Input::get('lastname');
   $lastname2 = Input::get('lastname2');
+  $tipo_ced = Input::get('tipo_ced');
   $ced_empleado = Input::get('ced');
+  $tipo_rif = Input::get('tipo_rif');
   $rif = Input::get('rif');
   $edo_civil = Input::get('edo_civil');
   $nacimiento = Input::get('nacimiento');
@@ -123,12 +130,14 @@ public function procesar(){
 
     Empleado::where('id',$id_update)
                   ->update(array(
-                    "centro_id"=>$centro,
+                    "centro"=>$centro,
                     "nombre" =>$nombre,
                     "segundo_nombre" =>$secondname,
                     "apellido" =>$lastname,
                     "segundo_apellido" =>$lastname2,
+                    "preficed_id" =>$tipo_ced,
                     "ci" =>$ced_empleado,
+                    "prefirif_id" => $tipo_rif,
                     "rif" =>$rif,
                     "maritalstatus_id" =>$edo_civil,
                     "fecha_nacimiento" =>$nacimiento,
@@ -153,12 +162,14 @@ public function procesar(){
 
   }else{
     // Insertando registros
-    $empleado ->centro_id = $centro;
+    $empleado ->centro = $centro;
     $empleado ->nombre = $nombre;
     $empleado ->segundo_nombre = $secondname;
     $empleado ->apellido = $lastname;
     $empleado ->segundo_apellido = $lastname2;
+    $empleado ->preficed_id = $tipo_ced;
     $empleado ->ci = $ced_empleado;
+    $empleado ->prefirif_id = $tipo_rif;
     $empleado ->rif = $rif;
     $empleado ->maritalstatus_id = $edo_civil;
     $empleado ->fecha_nacimiento = $nacimiento;

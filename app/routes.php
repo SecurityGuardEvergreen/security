@@ -153,7 +153,8 @@ Route::get('ir',function(){
 
 Route::get('pruebac',function(){
 
-// $data = Familiar::all();
+ // $data = Preficed::all();
+ // var_dump($data);
 
 // foreach ($data as $key => $value) {
 // 	# code...

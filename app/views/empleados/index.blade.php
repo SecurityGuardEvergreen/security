@@ -68,44 +68,33 @@
 
                         <div id="radios_centro" class="btn-group col-sm-6" data-toggle="buttons">
                           <label class="btn btn-info btn-sm ">
-                            <input type="radio" name="centro" id="centroOpcion1" value="1" autocomplete="off" title="Seleccione un centro de trabajo" required> OFICINA ANACO
+                            <input type="radio" name="centro" id="centroOpcion1" value="OFICINA ANACO" autocomplete="off" title="Seleccione un centro de trabajo" required> OFICINA ANACO
                           </label>
                           <label class="btn btn-info btn-sm">
-                            <input type="radio" name="centro" id="centroOpcion2" value="2" autocomplete="off"title="Seleccione un centro de trabajo" required> CIMD LOMA LINDA
+                            <input type="radio" name="centro" id="centroOpcion2" value="CIMD LOMA LINDA" autocomplete="off"title="Seleccione un centro de trabajo" required> CIMD LOMA LINDA
                           </label>
                           <label class="btn btn-info btn-sm">
-                            <input type="radio" name="centro" id="centroOpcion3" value="3" autocomplete="off"title="Seleccione un centro de trabajo" required>
+                            <input type="radio" name="centro" id="centroOpcion3" value="CIMD SANTA ROSA" autocomplete="off"title="Seleccione un centro de trabajo" required>
                           CIMD SANTA ROSA
                           </label>
                           <label class="btn btn-info btn-sm">
-                            <input type="radio" name="centro" id="centroOpcion3" value="3" autocomplete="off"title="Seleccione un centro de trabajo" required>
+                            <input type="radio" name="centro" id="centroOpcion4" value="4" autocomplete="off"title="Seleccione un centro de trabajo" required>
                           Otro
                           </label>
                         </div>                      
     
-                        
-                        <!-- <label class="radio-inline">
-                          <input type="radio" name="centro" id="centroOpcion1" value="1" title="Seleccione un centro de trabajo" required>
-                          OFICINA ANACO
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="centro" id="centroOpcion2" value="2" title="Seleccione un centro de trabajo" required>
-                          CIMD LOMA LINDA
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="centro" id="centroOpcion3" value="3" title="Seleccione un centro de trabajo" required>
-                          CIMD SANTA ROSA
-                        </label> -->
+                     
                     </div>
-                    <div class="col-sm-6">
-                        <label for="otro_centro" class="control-label">Nombre del centro</label>
-                        {{Form::text('otro_centro',Input::old('otro_centro'),
-                        array('autofocus','class' => 'form-control','id' => 'otro_centro',
-                        'placeholder' => 'Ingrese el nombre del otro centro',
-                        'required'=>'required',
-                        'title'=>'Necesitamos el nombre del otro centro')
-                        )}}
-                    </div>
+                    
+                    <div id="nombre_otro_centro" class="col-sm-6 hide">
+                          <label for="input_nombre" class="control-label">Nombre del centro</label>
+                          {{Form::text('input_nombre',Input::old('input_nombre'),
+                          array('autofocus','class' => 'form-control','id' => 'input_otro_centro',
+                          'placeholder' => 'Ingrese el nombre del otro centro',
+                          'required'=>'required',
+                          'title'=>'Necesitamos el nombre del otro centro')
+                          )}}
+                      </div>
                 </div>
 
                 <div class="form-group">
@@ -125,7 +114,6 @@
                         {{Form::text('secondname',Input::old('secondname'),
                         array('autofocus','class' => 'form-control','id' => 'secondname',
                         'placeholder' => 'Ingrese su segundo nombre',
-                        'required'=>'required',
                         'title'=>'Necesitamos su segundo nombre')
                         )}}
                     </div>
@@ -147,31 +135,46 @@
                         {{Form::text('lastname2',Input::old('lastname2'),
                         array('autofocus','class' => 'form-control','id' => 'lastname2',
                         'placeholder' => 'Ingrese su segundo apellido',
-                        'required'=>'required',
                         'title'=>'Necesitamos su segundo apellido')
                         )}}
                     </div>
                 </div>
 
                 <div class="form-group">
-
-                    <div class="col-sm-4">
-                        <label for="ced" class="control-label">Cédula</label>
-                        {{Form::text('ced',Input::old('ced'),
-                        array('autofocus','class' => 'form-control','id' => 'ced',
-                        'placeholder' => 'Ingrese su cédula',
-                        'required'=>'required',
-                        'title'=>'Necesitamos la cédula')
-                        )}}
+                    <div class="col-sm-1">
+                        <label for="tipo_ced" class="control-label">Tipo</label>
+                        <select style="padding-left:2px;" name="tipo_ced" id="tipo_ced" class="form-control" required title="tipo de ced requerido">
+                            <option value="">-</option>
+                            @foreach($data->preficed as $prefi)
+                             <option value="{{$prefi->id}}">{{strtoupper($prefi->sigla)}}-</option>
+                            @endforeach
+                        </select>
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
+                        <label for="ced" class="control-label">Cédula</label>
+                        {{Form::text('ced',Input::old('ced'),
+                        array('autofocus',
+                        'class' => 'form-control',
+                        'id' => 'ced',
+                        'placeholder' => 'Ingrese su cédula')
+                        )}}
+                    </div>
+                    
+                    <div class="col-sm-1">
+                        <label for="tipo_rif" class="control-label">Tipo</label>
+                        <select style="padding-left:2px;" name="tipo_rif" id="tipo_rif" class="form-control" title="tipo de rif requerido">
+                            <option value="">-</option>
+                            @foreach($data->rif as $rif)
+                             <option value="{{$rif->id}}">{{strtoupper($rif->sigla)}}-</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
                         <label for="rif" class="control-label">Rif</label>
                         {{Form::text('rif',Input::old('rif'),
                         array('autofocus','class' => 'form-control','id' => 'rif',
-                        'placeholder' => 'Ingrese su rif',
-                        'required'=>'required',
-                        'title'=>'El RIF no puede estar vacío')
+                        'placeholder' => 'Ingrese su rif')
                         )}}
                     </div>
 
@@ -217,7 +220,7 @@
 
                     <div class="col-sm-3">
                         <label for="blood" class="control-label">Tipo de sangre</label>
-                        <select class="form-control" id="blood" name="blood" required>
+                        <select class="form-control" id="blood" name="blood" >
                             <option value="">-</option>
                             <option value="a+">A+</option>
                             <option value="a-">A-</option>
@@ -258,7 +261,6 @@
                         {{Form::text('telf_movil',Input::old('telf_movil'),
                         array('autofocus','class' => 'form-control','id' => 'telf_movil',
                         'placeholder' => 'Ingrese su teléfono',
-                        'required'=>'required',
                         'title'=>'Necesitamos su número de telefono')
                         )}}
                     </div>
@@ -319,16 +321,19 @@
                     </div>
                 </div>
                 <div class="for-group">
-                    <!-- <label for="" class="control-label"></label> -->
+                    <label for="" class="control-label">¿Posee alguna discapacidad?</label>
                     <div id="question_check" class="btn-group" data-toggle="buttons">
                       <label id="checkdiscap" class="btn btn-warning btn-xs ">
-                        <input  type="checkbox" autocomplete="off"> ¿Posee alguna discapacidad?
+                        <input  name="discap" type="radio" value="1" autocomplete="off"> si
+                      </label>
+                      <label  class="btn btn-danger btn-xs active">
+                        <input  name="discap" type="radio" value="2" autocomplete="off"> no
                       </label>
                     </div>
                 </div>
                 <div class="for-group">
                     <div id="div_discapacidad" class=" col-sm-12 hide">
-                        <label for="discapacidad" class="control-label">Discapacidad </label>
+                        <label for="discapacidad" class="control-label">Ingrese la discapacidad </label>
                         {{Form::textarea('discapacidad',Input::old('discapacidad'),
                         array('autofocus','class' => 'form-control','id' => 'discapacidad',
                         'placeholder' => 'De poseer alguna discapacidad ingresela aquí')
@@ -338,10 +343,13 @@
                 </div>
                 <br>
                 <div class="for-group">
-                    <!-- <label for="" class="control-label"></label> -->
+                    <label for="" class="control-label">¿Posee alguna carga familiar?</label>
                     <div id="question_check_carga" class="btn-group" data-toggle="buttons">
                       <label id="checkcarga" class="btn btn-warning btn-xs ">
-                        <input  type="checkbox" autocomplete="off"> ¿Posee alguna carga familiar?
+                        <input  type="radio" name="family" value="1" autocomplete="off"> si
+                      </label>
+                      <label class="btn btn-danger btn-xs active">
+                        <input  type="radio" name="family" value="2" autocomplete="off"> no
                       </label>
                     </div>
                 </div>
@@ -437,6 +445,7 @@
                 </div>
               </div>
             {{ Form::close() }}
+
             <!-- /form user -->
 <!-- /form dos -->
 <!-- div print -->
@@ -500,6 +509,9 @@
 
     <!-- js files -->
     <script src="/assets/empleados/js/vendor/jquery-1.10.2.min.js"></script>
+    <!-- // <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
+<!-- <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script> -->
+<!-- <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script> -->
     <script src="/assets/empleados/js/plugins.js"></script>
     <script src="/assets/empleados/js/bootstrap.min.js"></script>
     <script src="/assets/empleados/js/wow.min.js"></script>
@@ -539,8 +551,13 @@
                     format: 'YYYY-DD-MM',
                     maxDate: dateToday
                 });
+
+
             });
+
+
     </script>
+
     <div id="script"></div>
 
 </body>

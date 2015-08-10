@@ -8,6 +8,23 @@
 
 jQuery(document).ready(function() {
 
+
+// ================GRAN ATRACO=================
+jQuery('form').find('input[type=text], input[type=radio], input[type=checkbox], select, textarea').each(function(){
+		  jQuery(this).change(function(){
+				jQuery(this).val($.trim($(this).val()));
+				
+				 	if (jQuery(this).val().match(/([\<])([^\>]{1,})*([\>])/i) == null) 
+				 	{}
+					else 
+					{						   
+						jQuery(this).val('');
+					}
+		  });
+	});	
+// ================GRAN ATRACO=================
+
+
 	//Al iniciar mandamos consultar todos los paises que se mantienen en nuestra base de datos atravez de la ruta paises
 	$.getJSON('estados', function( estados ){
 		$('#estado').html('');
@@ -115,12 +132,34 @@ $('#add_parentesco').click(function(e){
 	// console.log('boton');
 });
 
+// =============Metodos reglas de validacion==============
+  jQuery.validator.addMethod("noSpace", function(value, element) { 
+  return value.indexOf(" ") < 0 && value != ""; 
+}, "No space please and don't leave it empty");
+
+// =============Metodos reglas de validacion==============
 
 
 // Validando el formulario con jquery validator
 $('#btn_update').click(function(){
 	// console.log('validar');
 	$('#form-update-data').validate({
+		 rules: {
+		    ced: {
+		      required: true,
+		      number: true,
+		      min:0,
+		      minlength:5,
+		      maxlength:15
+		      // noSpace:true		      
+		    },
+		    rif:{
+		    	number:true,
+		    	min:0,
+		    	minlength:5,
+		    	maxlength:15
+		    }
+		  },
 		submitHandler: function() {
     // do other things for a valid form
 		    // alert("perfecto!!!");
@@ -147,10 +186,38 @@ $('#btn_update').click(function(){
 });
 // Fin validando el formulario con jquery validator
 
+// Detectando el check centro de trabajo
+// $('#radios_centro').click(function(){
+
+// 	console.log($('#centroOpcion4').hasClass('active'));
+// });
+$('input[name="centro"]').change(function(){ 
+// 
+var valor = $('input[name="centro"]:checked').val();
+if(valor==4){
+
+	$('#nombre_otro_centro').removeClass('hide');
+}else{
+	$('#input_otro_centro').val('');
+	$('#centroOpcion4').val('4');//retornando a su valor original
+	$('#nombre_otro_centro').addClass('hide');
+}
+
+});
+
+
+//fin detectanto el check centro de trabajo
+// Asignado el valor al nuevo centro
+$('#input_otro_centro').change(function(){
+	$('#centroOpcion4').val($(this).val());
+
+});
+// Fin asig valor al nuevo centro
+
 // Detectando el check discapacidad
-$("#question_check").click(function() {
-	// console.log('click check');
-        if(!$("#checkdiscap").hasClass('active')) {
+$("input[name='discap']").change(function() {
+
+        if($("input[name='discap']:checked").val()==1) {
             // console.log("Está activado");
             $('#div_discapacidad').removeClass('hide');
         } else {
@@ -161,9 +228,9 @@ $("#question_check").click(function() {
 // Fin detectando check discapacidad
 
 // Detectando el check carga familiar
-$("#question_check_carga").click(function() {
-	// console.log('click check');
-        if(!$("#checkcarga").hasClass('active')) {
+$("input[name='family']").change(function() {
+	// console.log($("input[name='family']:checked").val());
+        if($("input[name='family']:checked").val()==1) {
             // console.log("Está activado");
             $('#carga_familiar').removeClass('hide');
             // Activar que sean requeridos
@@ -172,7 +239,7 @@ $("#question_check_carga").click(function() {
             $("#nacimientop1").attr('required','required');
             $("#sexop1").attr('required','required');
 
-            console.log('full');
+            // console.log('full');
         } else {
             // console.log("No está activado");
             $('#carga_familiar').addClass('hide');
@@ -194,93 +261,24 @@ $("#question_check_carga").click(function() {
 
 	// Validando cedula
 	$('#ced').change(function(){
-		error_ced = false;
+		validarced();
+		var str =  $('#form-update-data').serialize();
+console.log(str);
+	}); 
+	$('#tipo_ced').change(function(){
+		validarced();
+	});
 
-		if(estado_update==true){
-			$('#existe').remove();
-			if($(this).val() != tem_ced){ //evaluando si es igual a lo 	que ya habia insertado
-			var ced_insert = $(this).val();
-			$.ajax({
-			url: 'empleado_cd',
-			type: 'POST',
-			data: 'ced='+ced_insert,
-				}).done(function ( response ){
-				 if(response.data.length!=0){
-				 	var error="<span id='existe' style='float:left;margin-top:5px' class='label label-danger'>Ésta cédula ya existe en el sistema y no se puede actualizar desde este módulo</span>";
-				 	$(error).insertAfter('#ced');
-				 	error_ced = true;
-				 }
-
-				});
-			// Fin ajax
-
-			}
-		}
-		else //para la inserción
-		{	
-			$('#existe').remove();
-			var ced_insert = $(this).val();
-			$.ajax({
-			url: 'empleado_cd',
-			type: 'POST',
-			data: 'ced='+ced_insert,
-				}).done(function ( response ){
-				 if(response.data.length!=0){
-				 	var error="<span id='existe' style='float:left;margin-top:5px' class='label label-danger'>Ésta cédula ya existe en el sistema</span>";
-				 	$(error).insertAfter('#ced');
-				 	error_ced = true;
-				 }
-
-
-				});
-			// Fin ajax
-
-		}
-	}); // Fin Validando cedula
+	// Fin Validando cedula
 
 // Validando rif
 	$('#rif').change(function(){
-		error_rif =false;
-		if(estado_update==true){
-			$('#existerif').remove();
-			if($(this).val() != tem_rif){ //evaluando si es igual a lo 	que ya habia insertado
-			var rif_insert = $(this).val();
-			$.ajax({
-			url: 'empleado_rif',
-			type: 'POST',
-			data: 'rif='+rif_insert,
-				}).done(function ( response ){
-				 if(response.data.length!=0){
-				 	var error="<span id='existerif' style='float:left;margin-top:5px' class='label label-danger'>Ést RIF ya existe en el sistema y no se puede actualizar desde este módulo</span>";
-				 	$(error).insertAfter('#rif');
-				 	error_rif =true;
-				 }
-
-				});
-			// Fin ajax
-
-			}
-		}
-		else //para la inserción
-		{	
-			$('#existerif').remove();
-			var rif_insert = $(this).val();
-			$.ajax({
-			url: 'empleado_rif',
-			type: 'POST',
-			data: 'rif='+rif_insert,
-				}).done(function ( response ){
-				 if(response.data.length!=0){
-				 	var error="<span id='existerif' style='float:left;margin-top:5px' class='label label-danger'>Éste RIF ya existe en el sistema</span>";
-				 	$(error).insertAfter('#rif');
-				 	error_rif =true;
-				 }
-
-				});
-			// Fin ajax
-
-		}
-	}); // Fin Validando rif
+		validarrif();
+	}); 
+	$('#tipo_rif').change(function(){
+		validarrif();
+	});
+	// Fin Validando rif
 
 
 
@@ -414,3 +412,98 @@ function CalculateDateDiff(dateFrom, dateTo) {
 }
 
 // 
+function validarced(){
+	error_ced = false;
+
+		if(estado_update==true){
+			$('#existe').remove();
+			if($('#ced').val() != tem_ced){ //evaluando si es igual a lo 	que ya habia insertado
+			var ced_insert = $('#ced').val();
+			var tipo = $('#tipo_ced').val();
+
+			$.ajax({
+			url: 'empleado_cd',
+			type: 'POST',
+			data: 'ced='+ced_insert+'&tipo='+tipo,
+				}).done(function ( response ){
+				 if(response.data.length!=0){
+				 	var error="<span id='existe' style='float:left;margin-top:5px' class='label label-danger'>Ésta cédula ya existe en el sistema y no se puede actualizar desde este módulo</span>";
+				 	$(error).insertAfter('#ced');
+				 	error_ced = true;
+				 }
+
+				});
+			// Fin ajax
+
+			}
+		}
+		else //para la inserción
+		{	
+			$('#existe').remove();
+			var ced_insert = $('#ced').val();
+			var tipo = $('#tipo_ced').val();
+
+			$.ajax({
+			url: 'empleado_cd',
+			type: 'POST',
+			data:  'ced='+ced_insert+'&tipo='+tipo,
+				}).done(function ( response ){
+				 if(response.data.length!=0){
+				 	var error="<span id='existe' style='float:left;margin-top:5px' class='label label-danger'>Ésta cédula ya existe en el sistema</span>";
+				 	$(error).insertAfter('#ced');
+				 	error_ced = true;
+				 }
+
+
+				});
+			// Fin ajax
+
+		}
+}
+// Fin validar ced
+function validarrif(){
+
+		error_rif =false;
+		if(estado_update==true){
+			$('#existerif').remove();
+			if($('#rif').val() != tem_rif){ //evaluando si es igual a lo 	que ya habia insertado
+			var rif_insert = $('#rif').val();
+			var tipo = $('#tipo_rif').val();
+			$.ajax({
+			url: 'empleado_rif',
+			type: 'POST',
+			data: 'rif='+rif_insert+'&tipo='+tipo,
+				}).done(function ( response ){
+				 if(response.data.length!=0){
+				 	var error="<span id='existerif' style='float:left;margin-top:5px' class='label label-danger'>Ést RIF ya existe en el sistema y no se puede actualizar desde este módulo</span>";
+				 	$(error).insertAfter('#rif');
+				 	error_rif =true;
+				 }
+
+				});
+			// Fin ajax
+
+			}
+		}
+		else //para la inserción
+		{	
+			$('#existerif').remove();
+			var rif_insert = $('#rif').val();
+			var tipo = $('#tipo_rif').val();
+			$.ajax({
+			url: 'empleado_rif',
+			type: 'POST',
+			data: 'rif='+rif_insert+'&tipo='+tipo,
+				}).done(function ( response ){
+				 if(response.data.length!=0){
+				 	var error="<span id='existerif' style='float:left;margin-top:5px' class='label label-danger'>Éste RIF ya existe en el sistema</span>";
+				 	$(error).insertAfter('#rif');
+				 	error_rif =true;
+				 }
+
+				});
+			// Fin ajax
+
+		}
+}
+
