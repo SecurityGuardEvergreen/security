@@ -7,7 +7,7 @@
 	var increment = 1;
 
 jQuery(document).ready(function() {
-
+resetn_nfamiliar();
 
 // ================GRAN ATRACO=================
 jQuery('form').find('input[type=text], input[type=radio], input[type=checkbox], select, textarea').each(function(){
@@ -76,71 +76,135 @@ jQuery('form').find('input[type=text], input[type=radio], input[type=checkbox], 
 		});
 	});
 
+// =============== btn remove parentesco ===============
+$('#parentescoAdd').on("click","#rmfa",function(e){
+	e.preventDefault();
+	// $(id).remove();
+	if(increment>1){
+		var id = '#'+$(this).parent().parent().attr("id");
+		$(id).remove();
+		// increment--;
+		var n = parseInt($('#n_familiar').val());
+		$('#n_familiar').val(n-1);
 
+		// console.log($('div.cuenta').size());
+
+		update_familiar();
+	}
+});
+// =============== btn remove parentesco ===============
 
 // Boton add parentesco
 $('#add_parentesco').click(function(e){
 	increment ++;
 	e.preventDefault();
-	var html = "<div class='form-group' id='family"+increment+"'>";
-	html = html + "<div class='col-sm-4'>";
-	html = html + "<label for=fullname"+increment+" class=control-label>Nombre Completo</label>";
-	html = html + "<input class='form-control' type='text'  id='fullname"+increment+"' name='fullname"+increment+"' placeholder='Nombre completo del familiar "+increment+"' title='Ingrese el nombre completo del familiar' required>";
-	html = html + "</div>";
-	// Segundo div parentesco
-	html = html + "<div class='col-sm-3'>";
-	html = html + "<label for=parentesco"+increment+" class=control-label>Parentesco</label>";
-	html = html + "<input class='form-control' type='text' id='parentesco"+increment+"' name='parentesco"+increment+"' placeholder='Ingrese el parentesco' title='¿Cuál es su parentesco?' required>";
-	html = html + "</div>";
-	// Tercer div edad
-	html = html + "<div class='col-sm-3'>";
-	html = html + "<label for='nacimientop"+increment+"' class='control-label'>Fecha de nacimiento</label>";
-	html = html + "<div class='input-group date' id='nacimientocontrolp"+increment+"' >"
-	html = html + "<input class='form-control' type='text' id='nacimientop"+increment+"' name='nacimientop"+increment+"' placeholder='Fecha de nacimiento' title='Necesitamos saber cuando nació su familiar' required>";
-	html = html + "<span class='input-group-addon'>";
-	html = html + "<span class='glyphicon glyphicon-calendar'></span>";
-	html = html + "</span>";
-	html = html + "</div>";
-	html = html + "</div>";
-	// cuarto div sexo
-	html = html + "<div class='col-sm-2'>";
-	html = html + "<label for=sexop"+increment+" class=control-label>Sexo</label>";
-	html = html + "<select class='form-control' id='sexop"+increment+"' name='sexop"+increment+"' required>";
-	html = html + "<option value=''>-</option>";
-	html = html + "<option value='1'>Femenino</option>";
-	html = html + "<option value='2'>Masculino</option>";
-	html = html + "</select>";
-	html = html + "</div>";
-		//
-	html = html + "</div>";
+	
+	var html = '<div id="groupfamily'+increment+'" class="form-group cuenta"><hr><div class="btn_familiar"><a href="javascript:;" id="rmfa" class="btn btn-danger">';
+		html = html + '<i class="fa fa-trash-o"></i></a></div><div class="col-sm-12">';
+        html = html + '<center><span id="label_family'+increment+'" class="label label-primary label_family">Familiar # </span></center>';
+        html = html + '</div>';
+        html = html + '<div class="col-sm-4"><label id="nombre_family'+increment+'" for="fullname'+increment+'" class="control-label">Nombres </label>';
+        html = html + '<input type="text" class="form-control fullname" name="fullname'+increment+'" id="fullname'+increment+'" placeholder="Nombres del familiar " title="Ingrese el nombre del familiar" required>';
+        html = html + '</div>';
+        // apellido
+        html = html + '<div class="col-sm-4">';
+        html = html + '<label for="apellidofamiliar'+increment+'" class="control-label">Apellidos</label>';
+        html = html + '<input type="text" class="form-control apellidofamiliar" name="apellidofamiliar'+increment+'" id="apellidofamiliar'+increment+'" placeholder="Apellido del familiar '+increment+'" title="Ingrese el apellido del familiar" required>';
+        html = html + '</div>';
+        // cedula
+        html = html + '<div class="col-sm-3">';
+        html = html + '<label for="ced_familiar'+increment+'" class="control-label">cédula</label>';
+        html = html + '<input type="text" class="form-control ced_familiar" name="ced_familiar'+increment+'" id="ced_familiar'+increment+'" placeholder="ingrese la cédula del familiar" title="Ingrese la cédula del familiar" required>';
+        html = html + '</div>';
+        // parentesco
+
+        html = html + '<div class="col-sm-3">';
+        html = html + '<label for="parentesco'+increment+'" class="control-label">Parentesco</label>';
+        html = html + '<input type="text" class="form-control parentesco" name="parentesco'+increment+'" id="parentesco'+increment+'" placeholder="Ingrese el parentesco" title="¿Cuál es su parentesco?" required>';
+        html = html + '</div> ';
+        // sexo
+        html = html + '<div class="col-sm-3">';
+        html = html + ' <label for="sexop'+increment+'" class="control-label">Sexo</label>';
+        html = html + '<select class="form-control sexop" id="sexop'+increment+'" name="sexop'+increment+'" >';
+        html = html + '<option value="">-</option>';
+        html = html + '<option value="1">Femenino</option>';
+        html = html + '<option value="2">Masculino</option>';
+        html = html + '</select>';
+        html = html + '</div>';
+        // fecha de nacimiento
+        html = html + '<div class="col-sm-3">';
+        html = html + '<label for="nacimientop'+increment+'" class=" control-label">Fecha de nacimiento</label>';
+        html = html + '<div class="input-group date" id="nacimientocontrolp'+increment+'" >';
+        html = html + '<input type="text" class="form-control nacimientop" id="nacimientop'+increment+'" name="nacimientop'+increment+'" placeholder="Fecha de nacimiento" title="Necesitamos saber cuando nació su familiar" >';
+        html = html + '<span class="input-group-addon">';
+        html = html + '<span class="glyphicon glyphicon-calendar"></span>';
+        html = html + '</span>';
+        html = html + '</div></div> ';
+        // edad
+        html = html + '<div class="col-sm-2">';
+        html = html + '<label class="control-label">Edad</label>';
+        html = html + '<br><br>';
+        html = html + '<span id="edadempleadofamilia'+increment+'" class="label label-success edadempleadofamilia">25 años</span>';
+        html = html + '</div>';
+        // 
+        html = html + '</div>';
+        // scrip
+        html = html + '<div id="script'+increment+'">';
+        html = html + '<script type="text/javascript">';
+        html = html + '$(function () {';
+        // datatimepicker
+        html = html + '$("#nacimientocontrolp'+increment+'").datetimepicker({';
+        html = html + 'locale: "en",';
+        html = html + 'format: "YYYY-DD-MM",';
+        html = html + 'maxDate: dateToday';
+        html = html + '});';
+
+        // html = html + '';
+        // html = html + '';
+        // html = html + '';
+        // html = html + '';
+        // html = html + '';
+        // html = html + '';
+        // html = html + '';
+        // html = html + '';
+        html = html + '});';
+
+        html = html + '</script>';
+        html = html + '<div>';
+
 
     $('#parentescoAdd').append(html);
-    $('#n_familiar').val(increment);
+    var n = parseInt($('#n_familiar').val());
+    	n= n+1;
+    $('#n_familiar').val(n);
+    update_familiar();
+    
+
+    // ==============scripts fecha==============
+     var script = "<script type='text/javascript'>";
+    	script = script + "$(function () {";
+    	script = script + "";
+    	script = script + "";
+    	script = script + "";
+    	script = script + "";
+        script = script + "});";
+        script = script + "</script>";
+        $("#nacimientocontrolp1").datetimepicker({
+                    locale: "en",
+                    format: "YYYY-DD-MM",
+                    maxDate: dateToday
+                });
+    
+	// =========================fin======================
 
   	// dateToday esta variable ya está declarada en el html
-    // generando scrip para que funcione el calendario
-    var script = 		"<script type='text/javascript'>";
-    	script = script + "$(function () {";
-    	script = script + "$('#nacimientocontrolp"+increment+"').datetimepicker({";
-    	script = script + "locale: 'en',";
-    	script = script + "format: 'YYYY-DD-MM',";
-    	script = script + "maxDate: '"+dateToday+"' ";
-        script = script + "});});";
-        script = script + "</script>";
+    // generando scrip para que funcione el calendario   
 
       $('#script').append(script);
 	// console.log('boton');
 });
 // =======================Fin add btn parentesco========================
-// ============== btn rm parentesco ==============
-$('#rm_parentesco').click(function(){
-	if(increment>1){
-		var id = "#family"+increment;
-		$(id).remove();
-		increment--;
-	}
 
-});
 
 // =============Metodos reglas de validacion==============
   jQuery.validator.addMethod("noSpace", function(value, element) {
@@ -527,3 +591,89 @@ function validarrif(){
 		}
 }
 
+// resetenado el valor de n_familiar
+function resetn_nfamiliar(){
+	$('#n_familiar').val(1);
+}
+//========= Fin resetenado el valor de n_familiar=============
+
+function update_familiar(){
+
+$('div.cuenta').each(function(index){
+	var mas = index +2;
+	var id_temp = $(this).attr('id');
+	$('#'+id_temp).attr('id','groupfamily'+mas);
+
+});
+
+// Label familiar
+$('#parentescoAdd span.label_family').each(function(index){
+	var mas = index +2;
+	var id_temp = $(this).attr('id');
+	$('#'+id_temp).attr('id','label_family'+mas);
+	$('#label_family'+mas).attr('name','label_family'+mas);
+	$('#label_family'+mas).text('Familiar # '+mas);
+	
+});
+
+// Nombre
+$('#parentescoAdd input.fullname').each(function(index){
+	var mas = index +2;
+	var id_temp = $(this).attr('id');
+	$('#'+id_temp).attr('id','fullname'+mas);
+	$('#fullname'+mas).attr('name','fullname'+mas);
+	$('#fullname'+mas).attr('placeholder','Nombres del familiar '+mas);
+	
+});
+
+// Apellido
+$('#parentescoAdd input.apellidofamiliar').each(function(index){
+	var mas = index +2;
+	var id_temp = $(this).attr('id');
+	$('#'+id_temp).attr('id','apellidofamiliar'+mas);
+	$('#apellidofamiliar'+mas).attr('name','apellidofamiliar'+mas);
+	$('#apellidofamiliar'+mas).attr('placeholder','Apellidos del familiar up '+mas);
+	
+});
+
+// Cedula
+$('#parentescoAdd input.ced_familiar').each(function(index){
+	var mas = index +2;
+	var id_temp = $(this).attr('id');
+	$('#'+id_temp).attr('id','ced_familiar'+mas);
+	$('#ced_familiar'+mas).attr('name','ced_familiar'+mas);
+	$('#ced_familiar'+mas).attr('placeholder','Ingrese la cédula up '+mas);
+	
+});
+
+// parentesco
+$('#parentescoAdd input.parentesco').each(function(index){
+	var mas = index +2;
+	var id_temp = $(this).attr('id');
+	$('#'+id_temp).attr('id','parentesco'+mas);
+	$('#parentesco'+mas).attr('name','parentesco'+mas);
+	$('#parentesco'+mas).attr('placeholder','Ingrese el parentesco up '+mas);
+	
+});
+
+// sexo sexop
+$('#parentescoAdd select.sexop').each(function(index){
+	var mas = index +2;
+	var id_temp = $(this).attr('id');
+	$('#'+id_temp).attr('id','sexop'+mas);
+	$('#sexop'+mas).attr('name','sexop'+mas);
+	$('#sexop'+mas).attr('placeholder','Ingrese el parentesco up '+mas);
+	
+});
+
+// Naciemiento 
+$('#parentescoAdd input.nacimientop').each(function(index){
+	var mas = index +2;
+	var id_temp = $(this).attr('id');
+	$('#'+id_temp).attr('id','nacimientop'+mas);
+	$('#nacimientop'+mas).attr('name','nacimientop'+mas);
+	$('#nacimientop'+mas).attr('placeholder','Fecha de naciemiento up '+mas);
+	
+});
+
+}

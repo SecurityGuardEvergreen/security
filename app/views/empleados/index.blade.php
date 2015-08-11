@@ -204,8 +204,12 @@
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
+
                         </div>
 
+                        <div style="margin-top:5px;">
+                            <span id="erroredadempleado" class="label label-danger hide"></span>
+                        </div>
                     </div>
                     <div class="col-sm-1">
                         <label for="" class="control-label">Edad</label>
@@ -359,16 +363,40 @@
                     </div>
                 </div>
 
-                <div id="carga_familiar" class="hide">
+                <div id="carga_familiar" class="hideDE">
+                   
                     <h3>Carga familiar</h3>
                 <div class="form-group">
+                     
+                     <div class="col-sm-12">
+                         <center><span class="label label-primary">Familiar # 1</span></center>
+                     </div>
+
                     <div class="col-sm-4">
-                        <label for="fullname1" class="control-label">Nombre Completo</label>
+                        <label for="fullname1" class="control-label">Nombres </label>
                         {{Form::text('fullname1',Input::old('fullname1'),
                         array('autofocus','class' => 'form-control','id' => 'fullname1',
-                        'placeholder' => 'Nombre completo del familiar 1',
+                        'placeholder' => 'Nombres del familiar 1',
+                        'title'=>'Ingrese el nombre del familiar')
+                        )}}
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="apellidofamiliar1" class="control-label">Apellidos</label>
+                        {{Form::text('apellidofamiliar1',Input::old('apellidofamiliar1'),
+                        array('autofocus','class' => 'form-control','id' => 'apellidofamiliar1',
+                        'placeholder' => 'Apellido del familiar 1',
+                        'title'=>'Ingrese el apellido del familiar')
+                        )}}
+
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="ced_familiar1" class="control-label">cédula</label>
+                        {{Form::text('ced_familiar1',Input::old('ced_familiar1'),
+                        array('autofocus','class' => 'form-control','id' => 'ced_familiar1',
+                        'placeholder' => 'Cédula del familiar 1',
                         'title'=>'Ingrese el nombre completo del familiar')
                         )}}
+                        <!-- <input type="text" class="form-control" name="ced_familiar1" id="ced_familiar1" placeholder="ingrese la cédula" required> -->
                     </div>
                     <div class="col-sm-3">
                         <label for="parentesco1" class="control-label">Parentesco</label>
@@ -377,18 +405,8 @@
                         'placeholder' => 'Ingrese el parentesco',
                         'title'=>'¿Cuál es su parentesco?')
                         )}}
-                    </div>
+                    </div> 
                     <div class="col-sm-3">
-                      <label for="nacimientop1" class=" control-label">Fecha de nacimiento</label>
-                        <div class='input-group date' id='nacimientocontrolp1' >
-                                    <input type="text" class='form-control' id='nacimientop1' name='nacimientop1' placeholder='Fecha de nacimiento' title='Necesitamos saber cuando nació su familiar' >
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-2">
                         <label for="sexop1" class="control-label">Sexo</label>
                         <select class="form-control" id="sexop1" name="sexop1" >
                             <option value="">-</option>
@@ -397,14 +415,29 @@
 
                         </select>
                     </div>
+                    <div class="col-sm-3">
+                      <label for="nacimientop1" class=" control-label">Fecha de nacimiento</label>
+                        <div class='input-group date' id='nacimientocontrolp1' >
+                            <input type="text" class='form-control' id='nacimientop1' name='nacimientop1' placeholder='Fecha de nacimiento' title='Necesitamos saber cuando nació su familiar' >
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="control-label">Edad</label>
+                        <br><br>
+                        <span id="edadempleadofamilia1" class="label label-success hide"></span>
+                    </div>
                 </div>
+                
+
                 <div id="parentescoAdd"></div>
                 <input type="hidden" id="n_familiar" name="n_familiar" value="1">
 
 
                 <a href="javascript:;" id="add_parentesco" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle fa-lg"></i></a>
-                <a href="javascript:;" id="rm_parentesco" class="btn btn-danger btn-sm"><i class="fa fa-minus fa-lg"></i></a>
-
+                
 
                 </div>
                 <!-- /div carga_familiar -->
@@ -528,7 +561,7 @@
     <script src="/assets/empleados/js/bootstrap-datetimepicker.js"></script>
     <script src="/assets/empleados/js/jquery.validate.js"></script>
     <script src="/assets/empleados/js/localization/messages_es.js"></script>
-    <script src="/assets/empleados/js/select.js"></script>
+   
 
 
     <script type="text/javascript">
@@ -544,16 +577,7 @@
     }
     var dateToday= yyyy +"-"+ mm +"-"+dd;
     // dateToday.setFullYear(new Date().getFullYear()-18);
-     var hoy = new Date();
-         hoy.setFullYear = new Date().getFullYear() - 18;
 
-         var oneDay = 24*60*60*1000;    // hours*minutes*seconds*milliseconds
-var firstDate = new Date(2008,01,12);
-var secondDate = new Date(2015,08,11);
-
-var diffDays = Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay));
-
-         console.log( diffDays );
             $(function () {
                 $('#nacimientocontrol').datetimepicker({
                     locale: 'en',
@@ -561,40 +585,37 @@ var diffDays = Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay));
                     // maxDate: dateToday
                     maxDate:hoy
                 }).on("dp.change", function(e) {
+
                     var fecha = $('#nacimientocontrol').data('date');
+                    $('#edadempleado').addClass('hide');
+                    $('#erroredadempleado').addClass('hide');
+                    if(fecha!=''){
+
                     var año = fecha.substring(0, 4);
                     var mes = fecha.substring(5, 7);
                     var dia = fecha.substring(8, 10);
-                    var año = CalculateDateDiff(new Date(año,mes,dia), new Date(yyyy,mm,dd));
+                    var año = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));
 
 
                     if(año>17){
                       // console.log(año);
                       $('#edadempleado').removeClass('hide');
-                      $('#edadempleado').removeClass('label-danger');
-                      $('#edadempleado').addClass('label-success');
+                      $('#erroredadempleado').addClass('hide');
                       $('#edadempleado').text(año+' años');
 
                   } else if(año==1){
-                    $('#edadempleado').removeClass('hide');
-                    $('#edadempleado').addClass('label-danger');
-                    $('#edadempleado').removeClass('label-success');
-                    $('#edadempleado').text(año+' año no es una edad para trabajar');
+                    $('#erroredadempleado').removeClass('hide');
+                    $('#erroredadempleado').text(año+' año no es una edad para trabajar');
                   }else if(año>1){
-                    $('#edadempleado').removeClass('hide');
-                    $('#edadempleado').addClass('label-danger');
-                    $('#edadempleado').removeClass('label-success');
-                    $('#edadempleado').text(año+' años no es una edad para trabajar');
+                    $('#erroredadempleado').removeClass('hide');
+                    $('#erroredadempleado').text(año+' años no es una edad para trabajar');
                     console.log(año+" años no es una edad para trabajar");
                   }else if(año<1){
-                    $('#edadempleado').removeClass('hide');
-                    $('#edadempleado').addClass('label-danger');
-                    $('#edadempleado').removeClass('label-success');
-                    $('#edadempleado').text('un bebé no puede trabajar');
+                    $('#erroredadempleado').removeClass('hide');
+                    $('#erroredadempleado').text('un bebé no puede trabajar');
                     console.log(año+" un bebé no puede trabajar");
                   }
-
-                    // console.log(dia);
+              }//end if
 
                 });
 
@@ -602,13 +623,50 @@ var diffDays = Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay));
                     locale: 'en',
                     format: 'YYYY-DD-MM',
                     maxDate: dateToday
+                }).on("dp.change", function(e) {
+
+                    var fecha1 = $('#nacimientocontrolp1').data('date');
+                    $('#edadempleadofamilia1').addClass('hide');
+                    if(fecha1!=''){
+
+                     var año = fecha1.substring(0, 4);
+                     var mes = fecha1.substring(5, 7);
+                     var dia = fecha1.substring(8, 10);
+                     
+                     var año = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));
+
+
+                    if(año>17){
+                      // console.log(año);
+                      $('#edadempleadofamilia1').removeClass('hide');
+                      $('#edadempleadofamilia1').addClass('label-success');                      
+                      $('#edadempleadofamilia1').removeClass('label-danger');
+                      $('#edadempleadofamilia1').text(año+' años');
+
+
+                  } else if(año==1){
+                    $('#edadempleadofamilia1').removeClass('hide');
+                    $('#edadempleadofamilia1').removeClass('label-success');
+                    $('#edadempleadofamilia1').addClass('label-danger');
+                    $('#edadempleadofamilia1').text(año+' año no es una edad para trabajar');
+                  }else if(año>1){
+                    $('#edadempleadofamilia1').removeClass('hide');
+                    $('#edadempleadofamilia1').removeClass('label-success');
+                    $('#edadempleadofamilia1').addClass('label-danger');
+                    $('#edadempleadofamilia1').text(año+' años no es una edad para trabajar');
+                    console.log(año+" años no es una edad para trabajar");
+                  }else if(año<1){
+                    $('#edadempleadofamilia1').removeClass('hide');
+                    $('#edadempleadofamilia1').addClass('label-danger');
+                    $('#edadempleadofamilia1').text('un bebé no puede trabajar');
+                    console.log(año+" un bebé no puede trabajar");
+                  }
+
+              }//end primer if
+
                 });
 
             });
-// detectando la edad
-$('#nacimiento').change(function(){
-    console.log('cabio');
-});
 
 
 
@@ -616,6 +674,7 @@ $('#nacimiento').change(function(){
     </script>
 
     <div id="script"></div>
+     <script src="/assets/empleados/js/select.js"></script>
 
 </body>
 </html>

@@ -372,3 +372,8 @@ footer {
     color: #34495E;
     font-size: 14px;
 }
+.btn_familiar{
+    position: absolute;
+    right: 0px;
+    margin-top: 70px;
+}
