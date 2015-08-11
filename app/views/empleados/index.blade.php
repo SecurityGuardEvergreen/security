@@ -81,11 +81,11 @@
                             <input type="radio" name="centro" id="centroOpcion4" value="4" autocomplete="off"title="Seleccione un centro de trabajo" required>
                           Otro
                           </label>
-                        </div>                      
-    
-                     
+                        </div>
+
+
                     </div>
-                    
+
                     <div id="nombre_otro_centro" class="col-sm-6 hide">
                           <label for="input_nombre" class="control-label">Nombre del centro</label>
                           {{Form::text('input_nombre',Input::old('input_nombre'),
@@ -141,8 +141,8 @@
                 </div>
 
                 <div class="form-group">
-                    <div class="col-sm-1">
-                        <label for="tipo_ced" class="control-label">Tipo</label>
+                    <div class="col-sm-1" style="padding-right: 0px;">
+                        <label for="tipo_ced" class="control-label">Cédula</label>
                         <select style="padding-left:2px;" name="tipo_ced" id="tipo_ced" class="form-control" required title="tipo de ced requerido">
                             <option value="">-</option>
                             @foreach($data->preficed as $prefi)
@@ -151,8 +151,8 @@
                         </select>
                     </div>
 
-                    <div class="col-sm-3">
-                        <label for="ced" class="control-label">Cédula</label>
+                    <div class="col-sm-3" style="padding-left: 0px;">
+                        <label for="ced" class="control-label">.</label>
                         {{Form::text('ced',Input::old('ced'),
                         array('autofocus',
                         'class' => 'form-control',
@@ -160,9 +160,9 @@
                         'placeholder' => 'Ingrese su cédula')
                         )}}
                     </div>
-                    
-                    <div class="col-sm-1">
-                        <label for="tipo_rif" class="control-label">Tipo</label>
+
+                    <div class="col-sm-1" style="padding-right: 0px;">
+                        <label for="tipo_rif" class="control-label">Rif</label>
                         <select style="padding-left:2px;" name="tipo_rif" id="tipo_rif" class="form-control" title="tipo de rif requerido">
                             <option value="">-</option>
                             @foreach($data->rif as $rif)
@@ -170,8 +170,8 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-sm-3">
-                        <label for="rif" class="control-label">Rif</label>
+                    <div class="col-sm-3" style="padding-left: 0px;">
+                        <label for="rif" class="control-label">.</label>
                         {{Form::text('rif',Input::old('rif'),
                         array('autofocus','class' => 'form-control','id' => 'rif',
                         'placeholder' => 'Ingrese su rif')
@@ -207,8 +207,13 @@
                         </div>
 
                     </div>
-
-                    <div class="col-sm-3">
+                    <div class="col-sm-1">
+                        <label for="" class="control-label">Edad</label>
+                        <!-- <input type="text" class="form-control"> -->
+                        <br><br>
+                        <span id="edadempleado" class="label label-success hide">25 años</span>
+                    </div>
+                    <div class="col-sm-2">
                         <label for="sexo" class="control-label">Sexo</label>
                         <select class="form-control" id="sexo" name="sexo" required>
                             <option value="">-</option>
@@ -397,7 +402,8 @@
                 <input type="hidden" id="n_familiar" name="n_familiar" value="1">
 
 
-                <a href="#" id="add_parentesco" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle fa-lg"></i></a>
+                <a href="javascript:;" id="add_parentesco" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle fa-lg"></i></a>
+                <a href="javascript:;" id="rm_parentesco" class="btn btn-danger btn-sm"><i class="fa fa-minus fa-lg"></i></a>
 
 
                 </div>
@@ -536,24 +542,75 @@
     if (mm < 10) {
         mm = "0" + mm;
     }
-    var dateToday= yyyy+"-"+ mm +"-"+dd;
+    var dateToday= yyyy +"-"+ mm +"-"+dd;
+    // dateToday.setFullYear(new Date().getFullYear()-18);
+     var hoy = new Date();
+         hoy.setFullYear = new Date().getFullYear() - 18;
 
-    console.log(CalculateDateDiff(new Date(1986,02,13), new Date(yyyy,mm,dd)));
-        // console.log( dateToday );
+         var oneDay = 24*60*60*1000;    // hours*minutes*seconds*milliseconds
+var firstDate = new Date(2008,01,12);
+var secondDate = new Date(2015,08,11);
+
+var diffDays = Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay));
+
+         console.log( diffDays );
             $(function () {
                 $('#nacimientocontrol').datetimepicker({
                     locale: 'en',
                     format: 'YYYY-DD-MM',
-                    maxDate: dateToday
+                    // maxDate: dateToday
+                    maxDate:hoy
+                }).on("dp.change", function(e) {
+                    var fecha = $('#nacimientocontrol').data('date');
+                    var año = fecha.substring(0, 4);
+                    var mes = fecha.substring(5, 7);
+                    var dia = fecha.substring(8, 10);
+                    var año = CalculateDateDiff(new Date(año,mes,dia), new Date(yyyy,mm,dd));
+
+
+                    if(año>17){
+                      // console.log(año);
+                      $('#edadempleado').removeClass('hide');
+                      $('#edadempleado').removeClass('label-danger');
+                      $('#edadempleado').addClass('label-success');
+                      $('#edadempleado').text(año+' años');
+
+                  } else if(año==1){
+                    $('#edadempleado').removeClass('hide');
+                    $('#edadempleado').addClass('label-danger');
+                    $('#edadempleado').removeClass('label-success');
+                    $('#edadempleado').text(año+' año no es una edad para trabajar');
+                  }else if(año>1){
+                    $('#edadempleado').removeClass('hide');
+                    $('#edadempleado').addClass('label-danger');
+                    $('#edadempleado').removeClass('label-success');
+                    $('#edadempleado').text(año+' años no es una edad para trabajar');
+                    console.log(año+" años no es una edad para trabajar");
+                  }else if(año<1){
+                    $('#edadempleado').removeClass('hide');
+                    $('#edadempleado').addClass('label-danger');
+                    $('#edadempleado').removeClass('label-success');
+                    $('#edadempleado').text('un bebé no puede trabajar');
+                    console.log(año+" un bebé no puede trabajar");
+                  }
+
+                    // console.log(dia);
+
                 });
+
                  $('#nacimientocontrolp1').datetimepicker({
                     locale: 'en',
                     format: 'YYYY-DD-MM',
                     maxDate: dateToday
                 });
 
-
             });
+// detectando la edad
+$('#nacimiento').change(function(){
+    console.log('cabio');
+});
+
+
 
 
     </script>

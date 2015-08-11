@@ -13,15 +13,15 @@ jQuery(document).ready(function() {
 jQuery('form').find('input[type=text], input[type=radio], input[type=checkbox], select, textarea').each(function(){
 		  jQuery(this).change(function(){
 				jQuery(this).val($.trim($(this).val()));
-				
-				 	if (jQuery(this).val().match(/([\<])([^\>]{1,})*([\>])/i) == null) 
+
+				 	if (jQuery(this).val().match(/([\<])([^\>]{1,})*([\>])/i) == null)
 				 	{}
-					else 
-					{						   
+					else
+					{
 						jQuery(this).val('');
 					}
 		  });
-	});	
+	});
 // ================GRAN ATRACO=================
 
 
@@ -82,7 +82,7 @@ jQuery('form').find('input[type=text], input[type=radio], input[type=checkbox], 
 $('#add_parentesco').click(function(e){
 	increment ++;
 	e.preventDefault();
-	var html = "<div class='form-group'>";
+	var html = "<div class='form-group' id='family"+increment+"'>";
 	html = html + "<div class='col-sm-4'>";
 	html = html + "<label for=fullname"+increment+" class=control-label>Nombre Completo</label>";
 	html = html + "<input class='form-control' type='text'  id='fullname"+increment+"' name='fullname"+increment+"' placeholder='Nombre completo del familiar "+increment+"' title='Ingrese el nombre completo del familiar' required>";
@@ -131,10 +131,20 @@ $('#add_parentesco').click(function(e){
       $('#script').append(script);
 	// console.log('boton');
 });
+// =======================Fin add btn parentesco========================
+// ============== btn rm parentesco ==============
+$('#rm_parentesco').click(function(){
+	if(increment>1){
+		var id = "#family"+increment;
+		$(id).remove();
+		increment--;
+	}
+
+});
 
 // =============Metodos reglas de validacion==============
-  jQuery.validator.addMethod("noSpace", function(value, element) { 
-  return value.indexOf(" ") < 0 && value != ""; 
+  jQuery.validator.addMethod("noSpace", function(value, element) {
+  return value.indexOf(" ") < 0 && value != "";
 }, "No space please and don't leave it empty");
 
 // =============Metodos reglas de validacion==============
@@ -151,7 +161,7 @@ $('#btn_update').click(function(){
 		      min:0,
 		      minlength:5,
 		      maxlength:15
-		      // noSpace:true		      
+		      // noSpace:true
 		    },
 		    rif:{
 		    	number:true,
@@ -191,8 +201,8 @@ $('#btn_update').click(function(){
 
 // 	console.log($('#centroOpcion4').hasClass('active'));
 // });
-$('input[name="centro"]').change(function(){ 
-// 
+$('input[name="centro"]').change(function(){
+//
 var valor = $('input[name="centro"]:checked').val();
 if(valor==4){
 
@@ -223,6 +233,7 @@ $("input[name='discap']").change(function() {
         } else {
             // console.log("No está activado");
             $('#div_discapacidad').addClass('hide');
+            $('#discapacidad').val('');
         }
     });
 // Fin detectando check discapacidad
@@ -264,7 +275,7 @@ $("input[name='family']").change(function() {
 		validarced();
 		var str =  $('#form-update-data').serialize();
 console.log(str);
-	}); 
+	});
 	$('#tipo_ced').change(function(){
 		validarced();
 	});
@@ -274,7 +285,7 @@ console.log(str);
 // Validando rif
 	$('#rif').change(function(){
 		validarrif();
-	}); 
+	});
 	$('#tipo_rif').change(function(){
 		validarrif();
 	});
@@ -289,13 +300,13 @@ $('#btn_reset').click(function(){
 	// Resetando las valiables js creadas
 	 estado_update=false;
 	 error_ced=false;
-	 error_rif=false; 
+	 error_rif=false;
 	 tem_ced='';
 	 tem_rif='';
 	 id_update='';
 	 increment = 1;
-	 
-	 $('#parentescoAdd').empty();   // Borrando cargas familiaresd extras	 
+
+	 $('#parentescoAdd').empty();   // Borrando cargas familiaresd extras
 	 $('#btn_update').text('Agregar registro');   // Colocando el texto inicial al botón add
 	 $('#btn_print').addClass('disabled'); // Bloqueando btn imprimir
 	 // Borrando cualquier mensaje de ced y rif quedados en el dom
@@ -381,7 +392,7 @@ console.log(str);
 
 		// Cambiando el text del boton update
 		$('#btn_update').text('Actualizar registro');
-		
+
 		// Bloqueando carga familiar
 		$("#carga_familiar").find(":input").prop("disabled",true);
 	 	$("#carga_familiar").find("a").addClass("disabled");
@@ -398,20 +409,29 @@ function CalculateDateDiff(dateFrom, dateTo) {
     var years = Math.floor(difference / (1000 * 60 * 60 * 24 * 365));
     difference -= years * (1000 * 60 * 60 * 24 * 365);
     var months = Math.floor(difference / (1000 * 60 * 60 * 24 * 30.4375));
+    difference -= months *(1000 * 60 * 60 * 24 * 30.4375);
+ //    var days = Math.floor(difference / (24*60*60*1000));
 
+ //    var oneDay = 24*60*60*1000;
+    // var firstDate = new Date(dateFrom);
+	// var secondDate = new Date(dateTo);
+
+	// var diffDays = 	Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+	// console.log(dateFrom);
     var dif = '';
     if (years > 0)
-        dif = years + ' años ';
+        // dif = years + ' años ';
+    dif = years;
 
-    if (months > 0) {
-        if (years > 0) dif += ' y ';
-        dif += months + ' meses';
-    }
+    // if (months > 0) {
+    //     if (years > 0) dif += ' y ';
+    //     dif += months + ' meses';
+    // }
 
     return dif;
 }
 
-// 
+//
 function validarced(){
 	error_ced = false;
 
@@ -438,7 +458,7 @@ function validarced(){
 			}
 		}
 		else //para la inserción
-		{	
+		{
 			$('#existe').remove();
 			var ced_insert = $('#ced').val();
 			var tipo = $('#tipo_ced').val();
@@ -486,7 +506,7 @@ function validarrif(){
 			}
 		}
 		else //para la inserción
-		{	
+		{
 			$('#existerif').remove();
 			var rif_insert = $('#rif').val();
 			var tipo = $('#tipo_rif').val();
