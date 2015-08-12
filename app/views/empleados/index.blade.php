@@ -363,7 +363,7 @@
                     </div>
                 </div>
 
-                <div id="carga_familiar" class="hideEE">
+                <div id="carga_familiar" class="hide">
 
                     <h3>Carga familiar</h3>
                 <div class="form-group">
@@ -562,10 +562,41 @@
     <script src="/assets/empleados/js/bootstrap-datetimepicker.js"></script>
     <script src="/assets/empleados/js/jquery.validate.js"></script>
     <script src="/assets/empleados/js/localization/messages_es.js"></script>
-
+    <script src="/assets/empleados/js/select.js"></script>
 
 
     <script type="text/javascript">
+// include jQuery first.
+jQuery.namespace = function() {
+    var a=arguments, o=null, i, j, d;
+    for (i=0; i<a.length; i=i+1) {
+        d=a[i].split(".");
+        o=window;
+        for (j=0; j<d.length; j=j+1) {
+            o[d[j]]=o[d[j]] || {};
+            o=o[d[j]];
+        }
+    }
+    return o;
+};
+
+// definition
+// jQuery.namespace( 'Elvis.debug' )
+// ;
+// Elvis.debug.test1 = function()
+// {   var namespace ="NOOOO";
+//     console.log( 'test1 function' +namespace);
+// };
+// Elvis.debug.test2 = function()
+// {
+//     console.log( 'test2 function' );
+// };
+// // usage
+// Elvis.debug.test1();
+// // Elvis.debug = null;
+// Elvis.debug.test2();
+// console.log(namespace);
+
     var hoy = new Date();
     var dd = hoy.getDate();
     var mm = hoy.getMonth()+1; //hoy es 0!
@@ -586,8 +617,8 @@
                     // maxDate: dateToday
                     maxDate:hoy
                 }).on("dp.change", function(e) {
-
-                    var fecha = $('#nacimientocontrol').data('date');
+                    var fecha = "";
+                    fecha = $('#nacimientocontrol').data('date');
                     $('#edadempleado').addClass('hide');
                     $('#erroredadempleado').addClass('hide');
                     if(fecha!=''){
@@ -626,14 +657,14 @@
                     format: 'YYYY-DD-MM',
                     maxDate: dateToday
                 }).on("dp.change", function(e) {
-
-                    var fecha1 = $('#nacimientocontrolp1').data('date');
+                    var fecha ="";
+                    fecha = $('#nacimientocontrolp1').data('date');
                     $('#edadempleadofamilia1').addClass('hide');
-                    if(fecha1!=''){
+                    if(fecha!=''){
 
-                     var año = fecha1.substring(0, 4);
-                     var mes = fecha1.substring(5, 7);
-                     var dia = fecha1.substring(8, 10);
+                     var año = fecha.substring(0, 4);
+                     var mes = fecha.substring(5, 7);
+                     var dia = fecha.substring(8, 10);
 
                      var años = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));
 
@@ -674,9 +705,9 @@
 
 
     </script>
-
-    <div id="script"></div>
-     <script src="/assets/empleados/js/select.js"></script>
+<!-- 
+    <div id="script"></div> -->
+     
 
 </body>
 </html>

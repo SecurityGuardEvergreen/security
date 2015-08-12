@@ -82,7 +82,10 @@ $('#parentescoAdd').on("click","#rmfa",function(e){
 	// $(id).remove();
 	if(increment>1){
 		var id = '#'+$(this).parent().parent().attr("id");
-		$(id).next().remove();//borrando en script
+
+		$(id).next().detach();//borrando en script
+		// delete fecha+increment;
+
 		$(id).remove();//borrando en div entero del familiar
 
 
@@ -160,8 +163,39 @@ $('#add_parentesco').click(function(e){
         html = html + 'locale: "en",';
         html = html + 'format: "YYYY-DD-MM",';
         html = html + 'maxDate: dateToday';
-        html = html + '});';
+        html = html + '})';
 
+		html = html + '.on("dp.change", function(e) {';
+		// html = html + 'var fecha'+increment+'="";';
+        html = html + 'fecha'+increment+' = $("#nacimientocontrolp'+increment+'").data("date");';
+        html = html + '$("#edadempleadofamilia'+increment+'").addClass("hide");';
+        html = html + 'if(fecha'+increment+'!=""){';
+        html = html + ' año = fecha'+increment+'.substring(0, 4);';
+        html = html + ' mes = fecha'+increment+'.substring(5, 7);';
+        html = html + ' dia = fecha'+increment+'.substring(8, 10);';
+        html = html + ' años = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));';
+        html = html + 'if(años>17){';
+        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
+        html = html + '$("#edadempleadofamilia'+increment+'").addClass("label-success");';
+        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("label-danger");';
+        html = html + '$("#edadempleadofamilia'+increment+'").text(años+" años");';
+        html = html + '} else if(años==1){';
+        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
+        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("label-success");';
+        html = html + '$("#edadempleadofamilia'+increment+'").addClass("label-danger");';
+        html = html + '$("#edadempleadofamilia'+increment+'").text(años+" año no es una edad para trabajar");';
+        html = html + '}else if(años>1){';
+        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
+        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("label-success");';
+        html = html + '$("#edadempleadofamilia'+increment+'").addClass("label-danger");';
+        html = html + '$("#edadempleadofamilia'+increment+'").text(años+" años no es una edad para trabajar");';
+        html = html + '}else if(años<1){';
+        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
+        html = html + '$("#edadempleadofamilia'+increment+'").addClass("label-danger");';
+        html = html + '$("#edadempleadofamilia'+increment+'").text("un bebé no puede trabajar");';
+        html = html + '}';
+        html = html + '}';
+        html = html + '});';
         // html = html + '';
         // html = html + '';
         // html = html + '';
@@ -169,6 +203,7 @@ $('#add_parentesco').click(function(e){
         // html = html + '';
         // html = html + '';
         // html = html + '';
+
         // html = html + '';
         html = html + '});';
 
@@ -712,32 +747,33 @@ $('#parentescoAdd div.scriptf').each(function(index){
         script = script + 'maxDate: dateToday';
         script = script + '})';
         script = script + '.on("dp.change", function(e) {';
-        script = script + 'var fecha'+mas+' = $("#nacimientocontrolp'+mas+'").data("date");';
+        // script = script + 'var fecha'+mas+'="";';
+        script = script + 'fecha'+mas+' = $("#nacimientocontrolp'+mas+'").data("date");';
         script = script + '$("#edadempleadofamilia'+mas+'").addClass("hide");';
         script = script + 'if(fecha'+mas+'!=""){';
-        script = script + 'var año = fecha'+mas+'.substring(0, 4);';
-        script = script + 'var mes = fecha'+mas+'.substring(5, 7);';
-        script = script + 'var dia = fecha'+mas+'.substring(8, 10);';
-        script = script + 'var años = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));';
+        script = script + ' año = fecha'+mas+'.substring(0, 4);';
+        script = script + ' mes = fecha'+mas+'.substring(5, 7);';
+        script = script + ' dia = fecha'+mas+'.substring(8, 10);';
+        script = script + ' años = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));';
         script = script + 'if(años>17){';
-        script = script + "$('#edadempleadofamilia"+mas+"').removeClass('hide');";
-        script = script + "$('#edadempleadofamilia"+mas+"').addClass('label-success');";
-        script = script + "$('#edadempleadofamilia"+mas+"').removeClass('label-danger');";
-        script = script + "$('#edadempleadofamilia"+mas+"').text(años+' años');";
-        script = script + "} else if(años==1){";
-        script = script + "$('#edadempleadofamilia"+mas+"').removeClass('hide');";
-        script = script + "$('#edadempleadofamilia"+mas+"').removeClass('label-success');";
-        script = script + "$('#edadempleadofamilia"+mas+"').addClass('label-danger');";
-        script = script + "$('#edadempleadofamilia"+mas+"').text(años+' año no es una edad para trabajar');";
-        script = script + "}else if(años>1){";
-        script = script + "$('#edadempleadofamilia"+mas+"').removeClass('hide');";
-        script = script + "$('#edadempleadofamilia"+mas+"').removeClass('label-success');";
-        script = script + "$('#edadempleadofamilia"+mas+"').addClass('label-danger');";
-        script = script + "$('#edadempleadofamilia"+mas+"').text(años+' años no es una edad para trabajar');";
-        script = script + "}else if(años<1){";
-        script = script + "$('#edadempleadofamilia"+mas+"').removeClass('hide');";
-        script = script + "$('#edadempleadofamilia"+mas+"').addClass('label-danger');";
-        script = script + "$('#edadempleadofamilia"+mas+"').text('un bebé no puede trabajar');";
+        script = script + '$("#edadempleadofamilia'+mas+'").removeClass("hide");';
+        script = script + '$("#edadempleadofamilia'+mas+'").addClass("label-success");';
+        script = script + '$("#edadempleadofamilia'+mas+'").removeClass("label-danger");';
+        script = script + '$("#edadempleadofamilia'+mas+'").text(años+" años");';
+        script = script + '} else if(años==1){';
+        script = script + '$("#edadempleadofamilia'+mas+'").removeClass("hide");';
+        script = script + '$("#edadempleadofamilia'+mas+'").removeClass("label-success");';
+        script = script + '$("#edadempleadofamilia'+mas+'").addClass("label-danger");';
+        script = script + '$("#edadempleadofamilia'+mas+'").text(años+" año no es una edad para trabajar");';
+        script = script + '}else if(años>1){';
+        script = script + '$("#edadempleadofamilia'+mas+'").removeClass("hide");';
+        script = script + '$("#edadempleadofamilia'+mas+'").removeClass("label-success");';
+        script = script + '$("#edadempleadofamilia'+mas+'").addClass("label-danger");';
+        script = script + '$("#edadempleadofamilia'+mas+'").text(años+" años no es una edad para trabajar");';
+        script = script + '}else if(años<1){';
+        script = script + '$("#edadempleadofamilia'+mas+'").removeClass("hide");';
+        script = script + '$("#edadempleadofamilia'+mas+'").addClass("label-danger");';
+        script = script + '$("#edadempleadofamilia'+mas+'").text("un bebé no puede trabajar");';
         script = script + '}';
         script = script + '}';
         script = script + '});';

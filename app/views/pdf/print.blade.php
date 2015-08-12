@@ -4,10 +4,12 @@
 	<meta charset="UTF-8">
 	<title>Actualización de empleados</title>
 
+<!-- <link rel="stylesheet" href="/assets/empleados/css/print.css" type="text/css" media="print" /> -->
+  <link rel="stylesheet" href="/assets/empleados/css/bootstrap.css">
+  <!-- <link rel="stylesheet" href="/assets/empleados/css/font-awesome.min.css"> -->
+  
 
-  <link rel="stylesheet" href="/assets/empleados/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/assets/empleados/css/font-awesome.min.css">
-  <style>
+<style>
   /*@media print {*/
     .td_h{
       width:220px;
@@ -24,18 +26,48 @@
       font-family:"Arial",sans-serif;
       font-size: 9pt;
     }
+    #footer p{
+      font-family:"Arial",sans-serif;
+      font-size: 8pt;
+      margin:0px !important;
+      
+    }
     h5{
       text-transform:uppercase;
     }
 /*}*/
 
-.head td {
-  /*background-color: red;*/
-  padding: 0px !important;
+.firma{
+  margin-top: 50px;
+  border-top: solid 1px #000;
+  width:300px;
+  padding-top: 10px;
+  text-transform: capitalize;
 }
+
+#footer,#main{
+  display:none;
+}
+.ovalo{
+width: 70px;
+height: 100px;
+border: solid 1px #000;
+-moz-border-radius: 30px / 35px;
+-webkit-border-radius: 30px / 35px;
+border-radius: 30px / 35px;
+display:inline-block;
+margin-right: 10px;
+float: none
+}
+.center{
+  margin-top: 10px;
+  text-align:center;
+}
+/*.head td {
+  background-color: red;
+  padding: 0px !important;
+}*/
   </style>
-
-
   <!-- =============== -->
   
 </head>
@@ -181,6 +213,14 @@
       <td>bla</td>
       <td>bla</td>
     </tr>
+    <tr>
+      <td>bla</td>
+      <td>bla</td>
+      <td>bla</td>
+      <td>bla</td>
+      <td>bla</td>
+    </tr>
+
   </tbody>
 </table>
 <!-- Fin carga familiar -->
@@ -200,12 +240,30 @@
 
 </div>
 
+<center>
+<div class="firma">
+  elvis reyes
+</div>
+</center>
+<!-- <div class="center">
+<div class="ovalo"></div>
+<div class="ovalo"></div>
+</div> -->
+
+
+<div id="footer" >
+
+  <hr>  
+  <center><p>Av José Antonio Anzoátegui, Km 97
+Anaco, Estado Anzoátegui - Venezuela</p>
+  <p>Telf.(0282) 400.7000; 424.58.59 -Fax(0282) 424.11.89 
+    www.evergreenservice.net e-mail:info@evergreenservice.net</p>
+</center>
+</div>
+
 </div>
 <!-- fin main -->
 <input class="btn btn-primary" type="button" id="print" value="Imprimir">
-
-
-
 
 
 
@@ -232,9 +290,9 @@ $("#main").print({
   //Use Global styles
   globalStyles : true,
   //Add link with attrbute media=print
-  mediaPrint : true,
+  mediaPrint : false,
   //Custom stylesheet
-   // stylesheet : "/assets/empleados/css/bootstrap.min.css",
+  stylesheet : "assets/empleados/css/print.css",
   //Print in a hidden iframe
   iframe : true,
   //Don't print this
