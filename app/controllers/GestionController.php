@@ -3,8 +3,8 @@
 class GestionController extends BaseController {
 
 public function index(){
-	$data = new stdclass;
-	$data->estado = Estado::all();
+  $data = new stdclass;
+  $data->estado = Estado::all();
   $data->cargo = Cargo::all();
   $data->preficed = Preficed::all();
   $data->rif= Rif::all();
@@ -13,7 +13,7 @@ public function index(){
 
 
 
-	 return View::make('empleados.index')->with('data',$data);
+   return View::make('empleados.index')->with('data',$data);
 
 }
 
@@ -34,14 +34,14 @@ public function municipios(){
 public function parroquias(){
 
   return Parroquia::where('municipio_id','=', Input::get('municipio'))
-  					->get();
+            ->get();
 }
 
 // Controlando la carga de las ciudades
 public function ciudades(){
 
   return Ciudad::where('municipio_id','=', Input::get('municipio'))
-  					->get();
+            ->get();
 }
 
 public function empleado_cd(){
@@ -204,9 +204,12 @@ for ($i=1; $i <= $n_familiar ; $i++) {
   # code...
   $carga['familiar'][] = array(
     'nombre' => Input::get('fullname'.$i),
+    'apellido' => Input::get('apellidofamiliar'.$i),
+    'ced' => Input::get('ced_familiar'.$i),
     'parentesco' => Input::get('parentesco'.$i),
     'nacimiento' => Input::get('nacimientop'.$i),
     'sexo' => Input::get('sexop'.$i)
+
     );
 
   }
@@ -216,6 +219,8 @@ for ($i=1; $i <= $n_familiar ; $i++) {
      $tmp[] = [
                 //'order_id' => $order->id,
         'nombre' => $value['nombre'],
+        'apellido' => $value['apellido'],
+        'ced' => $value['ced'],
         'parentesco' => $value['parentesco'],
         'nacimiento' => $value['nacimiento'],
         'sexo_id' => $value['sexo'],
@@ -250,7 +255,9 @@ return $respuesta;
 
 }
 
+public function procesar33(){
+  return "jesus";
+}
 
 
-
-	}
+  }

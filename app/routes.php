@@ -65,6 +65,7 @@ Route::group(array('before' => 'auth','prefix' => 'jornada') ,function(){
 	Route::post('empleado_cd','GestionController@empleado_cd');
 	Route::post('empleado_rif','GestionController@empleado_rif');
 	Route::post('procesar','GestionController@procesar');
+	Route::post('procesar2','GestionController@procesar2');
 	Route::post('pdf','GestionController@pdf');
 
 	Route::get('gestion',function(){

@@ -363,11 +363,11 @@
                     </div>
                 </div>
 
-                <div id="carga_familiar" class="hideDE">
-                   
+                <div id="carga_familiar" class="hideEE">
+
                     <h3>Carga familiar</h3>
                 <div class="form-group">
-                     
+
                      <div class="col-sm-12">
                          <center><span class="label label-primary">Familiar # 1</span></center>
                      </div>
@@ -405,7 +405,7 @@
                         'placeholder' => 'Ingrese el parentesco',
                         'title'=>'¿Cuál es su parentesco?')
                         )}}
-                    </div> 
+                    </div>
                     <div class="col-sm-3">
                         <label for="sexop1" class="control-label">Sexo</label>
                         <select class="form-control" id="sexop1" name="sexop1" >
@@ -430,14 +430,14 @@
                         <span id="edadempleadofamilia1" class="label label-success hide"></span>
                     </div>
                 </div>
-                
+
 
                 <div id="parentescoAdd"></div>
                 <input type="hidden" id="n_familiar" name="n_familiar" value="1">
 
 
                 <a href="javascript:;" id="add_parentesco" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle fa-lg"></i></a>
-                
+
 
                 </div>
                 <!-- /div carga_familiar -->
@@ -547,7 +547,8 @@
 
 
     <!-- js files -->
-    <script src="/assets/empleados/js/vendor/jquery-1.10.2.min.js"></script>
+    <!-- // <script src="/assets/empleados/js/vendor/jquery-1.10.2.min.js"></script> -->
+    <script src="/assets/empleados/js/vendor/jquery-1.11.1.js"></script>
     <!-- // <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
 <!-- <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script> -->
 <!-- <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script> -->
@@ -561,7 +562,7 @@
     <script src="/assets/empleados/js/bootstrap-datetimepicker.js"></script>
     <script src="/assets/empleados/js/jquery.validate.js"></script>
     <script src="/assets/empleados/js/localization/messages_es.js"></script>
-   
+
 
 
     <script type="text/javascript">
@@ -594,26 +595,27 @@
                     var año = fecha.substring(0, 4);
                     var mes = fecha.substring(5, 7);
                     var dia = fecha.substring(8, 10);
-                    var año = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));
+                    var años = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));
 
 
-                    if(año>17){
+                    if(años>17){
                       // console.log(año);
+
                       $('#edadempleado').removeClass('hide');
                       $('#erroredadempleado').addClass('hide');
-                      $('#edadempleado').text(año+' años');
+                      $('#edadempleado').text(años+' años');
 
-                  } else if(año==1){
+                  } else if(años==1){
                     $('#erroredadempleado').removeClass('hide');
-                    $('#erroredadempleado').text(año+' año no es una edad para trabajar');
-                  }else if(año>1){
+                    $('#erroredadempleado').text(años+' año no es una edad para trabajar');
+                  }else if(años>1){
                     $('#erroredadempleado').removeClass('hide');
-                    $('#erroredadempleado').text(año+' años no es una edad para trabajar');
-                    console.log(año+" años no es una edad para trabajar");
-                  }else if(año<1){
+                    $('#erroredadempleado').text(años+' años no es una edad para trabajar');
+                    console.log(años+" años no es una edad para trabajar");
+                  }else if(años<1){
                     $('#erroredadempleado').removeClass('hide');
                     $('#erroredadempleado').text('un bebé no puede trabajar');
-                    console.log(año+" un bebé no puede trabajar");
+                    console.log(años+" un bebé no puede trabajar");
                   }
               }//end if
 
@@ -632,34 +634,34 @@
                      var año = fecha1.substring(0, 4);
                      var mes = fecha1.substring(5, 7);
                      var dia = fecha1.substring(8, 10);
-                     
-                     var año = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));
+
+                     var años = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));
 
 
-                    if(año>17){
+                    if(años>17){
                       // console.log(año);
                       $('#edadempleadofamilia1').removeClass('hide');
-                      $('#edadempleadofamilia1').addClass('label-success');                      
+                      $('#edadempleadofamilia1').addClass('label-success');
                       $('#edadempleadofamilia1').removeClass('label-danger');
-                      $('#edadempleadofamilia1').text(año+' años');
+                      $('#edadempleadofamilia1').text(años+' años');
 
 
-                  } else if(año==1){
+                  } else if(años==1){
                     $('#edadempleadofamilia1').removeClass('hide');
                     $('#edadempleadofamilia1').removeClass('label-success');
                     $('#edadempleadofamilia1').addClass('label-danger');
-                    $('#edadempleadofamilia1').text(año+' año no es una edad para trabajar');
-                  }else if(año>1){
+                    $('#edadempleadofamilia1').text(años+' año no es una edad para trabajar');
+                  }else if(años>1){
                     $('#edadempleadofamilia1').removeClass('hide');
                     $('#edadempleadofamilia1').removeClass('label-success');
                     $('#edadempleadofamilia1').addClass('label-danger');
-                    $('#edadempleadofamilia1').text(año+' años no es una edad para trabajar');
-                    console.log(año+" años no es una edad para trabajar");
-                  }else if(año<1){
+                    $('#edadempleadofamilia1').text(años+' años no es una edad para trabajar');
+                    console.log(años+" años no es una edad para trabajar");
+                  }else if(años<1){
                     $('#edadempleadofamilia1').removeClass('hide');
                     $('#edadempleadofamilia1').addClass('label-danger');
                     $('#edadempleadofamilia1').text('un bebé no puede trabajar');
-                    console.log(año+" un bebé no puede trabajar");
+                    console.log(años+" un bebé no puede trabajar");
                   }
 
               }//end primer if

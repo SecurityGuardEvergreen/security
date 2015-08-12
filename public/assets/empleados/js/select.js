@@ -82,7 +82,10 @@ $('#parentescoAdd').on("click","#rmfa",function(e){
 	// $(id).remove();
 	if(increment>1){
 		var id = '#'+$(this).parent().parent().attr("id");
-		$(id).remove();
+		$(id).next().remove();//borrando en script
+		$(id).remove();//borrando en div entero del familiar
+
+
 		// increment--;
 		var n = parseInt($('#n_familiar').val());
 		$('#n_familiar').val(n-1);
@@ -98,7 +101,7 @@ $('#parentescoAdd').on("click","#rmfa",function(e){
 $('#add_parentesco').click(function(e){
 	increment ++;
 	e.preventDefault();
-	
+
 	var html = '<div id="groupfamily'+increment+'" class="form-group cuenta"><hr><div class="btn_familiar"><a href="javascript:;" id="rmfa" class="btn btn-danger">';
 		html = html + '<i class="fa fa-trash-o"></i></a></div><div class="col-sm-12">';
         html = html + '<center><span id="label_family'+increment+'" class="label label-primary label_family">Familiar # </span></center>';
@@ -134,7 +137,7 @@ $('#add_parentesco').click(function(e){
         // fecha de nacimiento
         html = html + '<div class="col-sm-3">';
         html = html + '<label for="nacimientop'+increment+'" class=" control-label">Fecha de nacimiento</label>';
-        html = html + '<div class="input-group date" id="nacimientocontrolp'+increment+'" >';
+        html = html + '<div class="input-group date nacimientocontrolp" id="nacimientocontrolp'+increment+'" >';
         html = html + '<input type="text" class="form-control nacimientop" id="nacimientop'+increment+'" name="nacimientop'+increment+'" placeholder="Fecha de nacimiento" title="Necesitamos saber cuando nació su familiar" >';
         html = html + '<span class="input-group-addon">';
         html = html + '<span class="glyphicon glyphicon-calendar"></span>';
@@ -144,12 +147,12 @@ $('#add_parentesco').click(function(e){
         html = html + '<div class="col-sm-2">';
         html = html + '<label class="control-label">Edad</label>';
         html = html + '<br><br>';
-        html = html + '<span id="edadempleadofamilia'+increment+'" class="label label-success edadempleadofamilia">25 años</span>';
+        html = html + '<span id="edadempleadofamilia'+increment+'" class="label label-success edadempleadofamilia"></span>';
         html = html + '</div>';
-        // 
+        //
         html = html + '</div>';
         // scrip
-        html = html + '<div id="script'+increment+'">';
+        html = html + '<div id="script'+increment+'" class="scriptf">';
         html = html + '<script type="text/javascript">';
         html = html + '$(function () {';
         // datatimepicker
@@ -178,7 +181,7 @@ $('#add_parentesco').click(function(e){
     	n= n+1;
     $('#n_familiar').val(n);
     update_familiar();
-    
+
 
     // ==============scripts fecha==============
      var script = "<script type='text/javascript'>";
@@ -194,11 +197,11 @@ $('#add_parentesco').click(function(e){
                     format: "YYYY-DD-MM",
                     maxDate: dateToday
                 });
-    
+
 	// =========================fin======================
 
   	// dateToday esta variable ya está declarada en el html
-    // generando scrip para que funcione el calendario   
+    // generando scrip para que funcione el calendario
 
       $('#script').append(script);
 	// console.log('boton');
@@ -613,7 +616,7 @@ $('#parentescoAdd span.label_family').each(function(index){
 	$('#'+id_temp).attr('id','label_family'+mas);
 	$('#label_family'+mas).attr('name','label_family'+mas);
 	$('#label_family'+mas).text('Familiar # '+mas);
-	
+
 });
 
 // Nombre
@@ -623,7 +626,7 @@ $('#parentescoAdd input.fullname').each(function(index){
 	$('#'+id_temp).attr('id','fullname'+mas);
 	$('#fullname'+mas).attr('name','fullname'+mas);
 	$('#fullname'+mas).attr('placeholder','Nombres del familiar '+mas);
-	
+
 });
 
 // Apellido
@@ -633,7 +636,7 @@ $('#parentescoAdd input.apellidofamiliar').each(function(index){
 	$('#'+id_temp).attr('id','apellidofamiliar'+mas);
 	$('#apellidofamiliar'+mas).attr('name','apellidofamiliar'+mas);
 	$('#apellidofamiliar'+mas).attr('placeholder','Apellidos del familiar up '+mas);
-	
+
 });
 
 // Cedula
@@ -643,7 +646,7 @@ $('#parentescoAdd input.ced_familiar').each(function(index){
 	$('#'+id_temp).attr('id','ced_familiar'+mas);
 	$('#ced_familiar'+mas).attr('name','ced_familiar'+mas);
 	$('#ced_familiar'+mas).attr('placeholder','Ingrese la cédula up '+mas);
-	
+
 });
 
 // parentesco
@@ -653,7 +656,7 @@ $('#parentescoAdd input.parentesco').each(function(index){
 	$('#'+id_temp).attr('id','parentesco'+mas);
 	$('#parentesco'+mas).attr('name','parentesco'+mas);
 	$('#parentesco'+mas).attr('placeholder','Ingrese el parentesco up '+mas);
-	
+
 });
 
 // sexo sexop
@@ -663,17 +666,91 @@ $('#parentescoAdd select.sexop').each(function(index){
 	$('#'+id_temp).attr('id','sexop'+mas);
 	$('#sexop'+mas).attr('name','sexop'+mas);
 	$('#sexop'+mas).attr('placeholder','Ingrese el parentesco up '+mas);
-	
+
 });
 
-// Naciemiento 
+// div nacimiento nacimientocontrolp
+$('#parentescoAdd div.nacimientocontrolp').each(function(index){
+	var mas = index +2;
+	var id_temp = $(this).attr('id');
+	$('#'+id_temp).attr('id','nacimientocontrolp'+mas);
+	$('#nacimientocontrolp'+mas).attr('name','nacimientocontrolp'+mas);
+
+});
+// Naciemiento
 $('#parentescoAdd input.nacimientop').each(function(index){
 	var mas = index +2;
 	var id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','nacimientop'+mas);
 	$('#nacimientop'+mas).attr('name','nacimientop'+mas);
 	$('#nacimientop'+mas).attr('placeholder','Fecha de naciemiento up '+mas);
-	
+
 });
 
+// label edad
+$('#parentescoAdd span.edadempleadofamilia').each(function(index){
+	var mas = index +2;
+	var id_temp = $(this).attr('id');
+	$('#'+id_temp).attr('id','edadempleadofamilia'+mas);
+
+
+});
+
+// Generando el script
+$('#parentescoAdd div.scriptf').each(function(index){
+	var mas = index +2;
+	var id_temp = $(this).attr('id');
+	$('#'+id_temp).empty();
+	$('#'+id_temp).attr('id','script'+mas);
+	var script ='';
+	    script = script + '<script type="text/javascript">';
+        script = script + '$(function () {';
+        // datatimepicker
+        script = script + '$("#nacimientocontrolp'+mas+'").datetimepicker({';
+        script = script + 'locale: "en",';
+        script = script + 'format: "YYYY-DD-MM",';
+        script = script + 'maxDate: dateToday';
+        script = script + '})';
+        script = script + '.on("dp.change", function(e) {';
+        script = script + 'var fecha'+mas+' = $("#nacimientocontrolp'+mas+'").data("date");';
+        script = script + '$("#edadempleadofamilia'+mas+'").addClass("hide");';
+        script = script + 'if(fecha'+mas+'!=""){';
+        script = script + 'var año = fecha'+mas+'.substring(0, 4);';
+        script = script + 'var mes = fecha'+mas+'.substring(5, 7);';
+        script = script + 'var dia = fecha'+mas+'.substring(8, 10);';
+        script = script + 'var años = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));';
+        script = script + 'if(años>17){';
+        script = script + "$('#edadempleadofamilia"+mas+"').removeClass('hide');";
+        script = script + "$('#edadempleadofamilia"+mas+"').addClass('label-success');";
+        script = script + "$('#edadempleadofamilia"+mas+"').removeClass('label-danger');";
+        script = script + "$('#edadempleadofamilia"+mas+"').text(años+' años');";
+        script = script + "} else if(años==1){";
+        script = script + "$('#edadempleadofamilia"+mas+"').removeClass('hide');";
+        script = script + "$('#edadempleadofamilia"+mas+"').removeClass('label-success');";
+        script = script + "$('#edadempleadofamilia"+mas+"').addClass('label-danger');";
+        script = script + "$('#edadempleadofamilia"+mas+"').text(años+' año no es una edad para trabajar');";
+        script = script + "}else if(años>1){";
+        script = script + "$('#edadempleadofamilia"+mas+"').removeClass('hide');";
+        script = script + "$('#edadempleadofamilia"+mas+"').removeClass('label-success');";
+        script = script + "$('#edadempleadofamilia"+mas+"').addClass('label-danger');";
+        script = script + "$('#edadempleadofamilia"+mas+"').text(años+' años no es una edad para trabajar');";
+        script = script + "}else if(años<1){";
+        script = script + "$('#edadempleadofamilia"+mas+"').removeClass('hide');";
+        script = script + "$('#edadempleadofamilia"+mas+"').addClass('label-danger');";
+        script = script + "$('#edadempleadofamilia"+mas+"').text('un bebé no puede trabajar');";
+        script = script + '}';
+        script = script + '}';
+        script = script + '});';
+
+        script = script + '});';
+
+        script = script + '</script>';
+
+	$('#script'+mas).append(script);
+	// $('#nacimientop'+mas).attr('placeholder','Fecha de naciemiento up '+mas);
+
+});
+
+
 }
+
