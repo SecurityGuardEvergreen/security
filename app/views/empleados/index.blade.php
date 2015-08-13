@@ -50,7 +50,7 @@
         <div class="container">
             <h2 class="section-title">Actualizaci&oacute;n de datos</h2>
             <div class="row">
-
+<input class="btn btn-primary" type="button" id="print" value="Imprimir">
                 <!-- CONTACT FORM -->
 <div class="col-md-10 col-md-offset-1 text-left wow fadeInLeft" data-wow-duration="1s">
 <!-- Form dos -->
@@ -66,7 +66,7 @@
                     <label for="centro" class="control-label">Centro de trabajo</label>
                     <div class="col-sm-12" id="centro_radio">
 
-                        <div id="radios_centro" class="btn-group col-sm-6" data-toggle="buttons">
+                        <div id="radios_centro" class="btn-group col-sm-12" data-toggle="buttons">
                           <label class="btn btn-info btn-sm ">
                             <input type="radio" name="centro" id="centroOpcion1" value="OFICINA ANACO" autocomplete="off" title="Seleccione un centro de trabajo" required> OFICINA ANACO
                           </label>
@@ -76,6 +76,10 @@
                           <label class="btn btn-info btn-sm">
                             <input type="radio" name="centro" id="centroOpcion3" value="CIMD SANTA ROSA" autocomplete="off"title="Seleccione un centro de trabajo" required>
                           CIMD SANTA ROSA
+                          </label>
+                          <label class="btn btn-info btn-sm">
+                            <input type="radio" name="centro" id="centroOpcion5" value="OP SANTA ROSA" autocomplete="off"title="Seleccione un centro de trabajo" required>
+                          OP SANTA ROSA
                           </label>
                           <label class="btn btn-info btn-sm">
                             <input type="radio" name="centro" id="centroOpcion4" value="4" autocomplete="off"title="Seleccione un centro de trabajo" required>
@@ -162,7 +166,7 @@
                     </div>
 
                     <div class="col-sm-1" style="padding-right: 0px;">
-                        <label for="tipo_rif" class="control-label">Rif</label>
+                        <label for="tipo_rif" class="control-label">RIF</label>
                         <select style="padding-left:2px;" name="tipo_rif" id="tipo_rif" class="form-control" title="tipo de rif requerido">
                             <option value="">-</option>
                             @foreach($data->rif as $rif)
@@ -545,13 +549,8 @@
     <!-- END FOOTER -->
 
 
-
     <!-- js files -->
-    <!-- // <script src="/assets/empleados/js/vendor/jquery-1.10.2.min.js"></script> -->
     <script src="/assets/empleados/js/vendor/jquery-1.11.1.js"></script>
-    <!-- // <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> -->
-<!-- <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script> -->
-<!-- <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script> -->
     <script src="/assets/empleados/js/plugins.js"></script>
     <script src="/assets/empleados/js/bootstrap.min.js"></script>
     <script src="/assets/empleados/js/wow.min.js"></script>
@@ -563,6 +562,7 @@
     <script src="/assets/empleados/js/jquery.validate.js"></script>
     <script src="/assets/empleados/js/localization/messages_es.js"></script>
     <script src="/assets/empleados/js/select.js"></script>
+    
 
 
     <script type="text/javascript">
@@ -612,24 +612,24 @@ jQuery.namespace = function() {
 
             $(function () {
                 $('#nacimientocontrol').datetimepicker({
-                    locale: 'en',
-                    format: 'YYYY-DD-MM',
+                    locale: 'es',
+                    format: 'DD-MM-YYYY',
                     // maxDate: dateToday
                     maxDate:hoy
                 }).on("dp.change", function(e) {
-                    var fecha = "";
+                    
                     fecha = $('#nacimientocontrol').data('date');
                     $('#edadempleado').addClass('hide');
                     $('#erroredadempleado').addClass('hide');
                     if(fecha!=''){
 
-                    var año = fecha.substring(0, 4);
-                    var mes = fecha.substring(5, 7);
-                    var dia = fecha.substring(8, 10);
-                    var años = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));
+                     año = fecha.substring(6, 10);
+                     mes = fecha.substring(3, 5);
+                     dia = fecha.substring(0, 2);
+                     años = calcular_edad(dia+'/'+mes+'/'+año);
+                                        
 
-
-                    if(años>17){
+                    if(años>=15){
                       // console.log(año);
 
                       $('#edadempleado').removeClass('hide');
@@ -646,30 +646,29 @@ jQuery.namespace = function() {
                   }else if(años<1){
                     $('#erroredadempleado').removeClass('hide');
                     $('#erroredadempleado').text('un bebé no puede trabajar');
-                    console.log(años+" un bebé no puede trabajar");
+                    // console.log(años+" un bebé no puede trabajar");
                   }
               }//end if
 
                 });
 
                  $('#nacimientocontrolp1').datetimepicker({
-                    locale: 'en',
-                    format: 'YYYY-DD-MM',
+                    locale: 'es',
+                    format: 'DD-MM-YYYY',
                     maxDate: dateToday
                 }).on("dp.change", function(e) {
-                    var fecha ="";
+                    
                     fecha = $('#nacimientocontrolp1').data('date');
                     $('#edadempleadofamilia1').addClass('hide');
                     if(fecha!=''){
 
-                     var año = fecha.substring(0, 4);
-                     var mes = fecha.substring(5, 7);
-                     var dia = fecha.substring(8, 10);
+                     año = fecha.substring(6, 10);
+                     mes = fecha.substring(3, 5);
+                     dia = fecha.substring(0, 2);
+                     años = calcular_edad(dia+'/'+mes+'/'+año);
 
-                     var años = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));
 
-
-                    if(años>17){
+                    if(años>=15){
                       // console.log(año);
                       $('#edadempleadofamilia1').removeClass('hide');
                       $('#edadempleadofamilia1').addClass('label-success');
@@ -692,7 +691,7 @@ jQuery.namespace = function() {
                     $('#edadempleadofamilia1').removeClass('hide');
                     $('#edadempleadofamilia1').addClass('label-danger');
                     $('#edadempleadofamilia1').text('un bebé no puede trabajar');
-                    console.log(años+" un bebé no puede trabajar");
+                    // console.log(años+" un bebé no puede trabajar");
                   }
 
               }//end primer if
@@ -705,9 +704,198 @@ jQuery.namespace = function() {
 
 
     </script>
-<!-- 
-    <div id="script"></div> -->
-     
+
+<!-- ===============Links para imrpimir============== -->
+<link rel="stylesheet" href="/assets/empleados/css/customp.css">
+<script src="/assets/empleados/js/jquery.print.js"></script>
+<script src="/assets/empleados/js/imp.js"></script>
+<!-- ===============Fin links para imrpimir========== -->
+
+<!-- =================== -->
+<!-- ==== Imprimir ===== -->
+<!-- =================== -->
+<div id="imprime">
+
+  <table >
+    <tbody>
+      <tr class="head">
+        <td style="width:190px;" rowspan="2"><img src="/assets/empleados/img/evergreen_logo_pdf.png" width="150"></td>
+        <td style="width:500px;text-align:center;" rowspan="2"><h3>Sistema de Gestión Integral Formatos </h3> </td>
+        <td style="width:190px;border-bottom-style:none;" width="200px">Documento No.:</td>
+      </tr>
+      <tr class="head">
+        <td style="text-align:right;border-top-style:none;"><b>EGS-AD-PR-02-F</b></td>
+      </tr>
+      <tr>
+        <td colspan="3" style="text-align:center;">Actualización de datos de los empleados</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+<div id="printe" style="clear:both;" >
+
+
+  <h5>datos laborales</h5>
+  <table>
+    <tbody>
+      <tr>
+        <td class="td_h" style="width:293.33px;">Centro de trabajo</td>
+        <td class="td_h" style="width:293.33px;">nivel de educacion</td>
+        <td class="td_h" style="width:293.33px;">cargo</td>
+      </tr>
+      <tr>
+        <td id="print_centro"></td>
+        <td id="print_nivel_edu"></td>
+        <td id="print_cargo"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- fin datos de la empresa -->
+  <h5>Datos personales</h5>
+
+  <table>
+    <tbody>
+      <tr>
+        <td class="td_h" colspan="2">nombre</td>
+        <td class="td_h" colspan="2">Segundo Nombre</td>
+      </tr>
+      <tr>
+        <td colspan="2" id="print_nombre"></td>
+        <td colspan="2" id="print_segundonombre"></td>
+      </tr>
+      <tr>
+        <td class="td_h" colspan="2">apellido</td>
+        <td class="td_h" colspan="2">segundo apellido</td>
+      </tr>
+      <tr>
+        <td colspan="2" id="print_apellido"></td>
+        <td colspan="2" id="print_segundoapellido"></td>
+      </tr>
+      
+      <tr>
+        <td class="td_h">cédula</td>
+        <td class="td_h">rif</td>
+        <td class="td_h">estado civil</td>
+        <td class="td_h">sexo</td>
+      </tr>
+      <tr>
+        <td id="print_ced"></td>
+        <td id="print_rif"></td>
+        <td id="print_estatocivil"></td>
+        <td id="print_sexo"></td>
+      </tr>
+      <tr>
+        <td class="td_h">fecha de nacimiento</td>
+        <td class="td_h">edad</td>
+        <td class="td_h">tipo de sangre</td>
+        <td class="td_h">lateralidad</td>
+      </tr>
+      <tr>
+        <td id="print_nacimiento"></td>
+        <td id="print_edad"></td>
+        <td id="print_tiposangre"></td>
+        <td id="print_lateralidad"></td>
+      </tr>
+      <tr>
+        <td class="td_h" colspan="4">discapacidad</td>
+      </tr>
+      <tr>
+        <td id="print_discapacidad" colspan="4"></td>
+      </tr>
+    </tbody>
+
+  </table>
+  <!-- fin datos personales -->
+<h5>DIRECCIÓN ACTUAL DE RESIDENCIA</h5>
+<table>
+  <tbody>
+  <tr>
+    <td class="td_h" style="width:293.33px">estado</td>
+    <td class="td_h" style="width:293.33px">municipio</td>
+    <td class="td_h" style="width:293.33px">párroquia</td>
+  </tr>
+  <tr>
+    <td id="print_estado"></td>
+    <td id="print_municipio"></td>
+    <td id="print_parroquia"></td>
+  </tr>
+  <tr>
+    <td class="td_h" colspan="3">direccion</td>
+  </tr>
+  <tr>
+    <td id="print_direccion" colspan="3"></td>
+  </tr>
+</tbody>
+</table>
+<!-- fin datos de residencia -->
+<h5>Carga Familiar</h5>
+<table>
+  <tbody id="tb_familiar">
+    <tr>
+      <td class="td_h" style="width:176px;">nombre completo</td>
+      <td class="td_h" style="width:176px;">cédula</td>
+      <td class="td_h" style="width:176px;">parentesco</td>
+      <td class="td_h" style="width:176px;">fecha de nacimiento</td>
+      <td class="td_h" style="width:88px;">edad</td>
+      <td class="td_h" style="width:88px;">sexo</td>
+    </tr>
+    <tr>
+      <td id="print_parent_nombre1"></td>
+      <td id="print_parent_cedula1"></td>
+      <td id="print_parent_parentesco1"></td>
+      <td id="print_parent_nacimiento1"></td>
+      <td id="print_parent_edad1"></td>
+      <td id="print_parent_sexo1"></td>
+    </tr>
+
+
+  </tbody>
+</table>
+<!-- Fin carga familiar -->
+<h5>persona de contacto en casdo de emergencia</h5>
+<table>
+  <tbody>
+     <tr>
+      <td class="td_h" style="width:440px;">nombre completo</td>
+      <td class="td_h" style="width:440px;">teléfono</td>
+     </tr>
+     <tr>
+       <td>el nomnbre</td>
+       <td>el telf</td>
+     </tr>
+  </tbody>
+</table>
+
+</div>
+
+<br>
+
+<div class="firma_left">
+  <p style="margin:0px !important;">elvis reyes</p>
+  <span class="calificativo">empleado</span>
+</div>
+<!-- <div class="firma_right">
+  <p style="margin:0px !important;">Guzmán desc</p>
+  <span class="calificativo">supervisor</span>
+</div> -->
+
+<div class="clearfix"></div>
+
+
+<div id="footer" >
+
+  <hr>  
+  <center><p>Av José Antonio Anzoátegui, Km 97
+Anaco, Estado Anzoátegui - Venezuela</p>
+  <p>Telf.(0282) 400.7000; 424.58.59 -Fax(0282) 424.11.89 
+    www.evergreenservice.net e-mail:info@evergreenservice.net</p>
+</center>
+</div>
+
+</div>
 
 </body>
 </html>

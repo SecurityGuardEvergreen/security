@@ -6,73 +6,12 @@
 
 <!-- <link rel="stylesheet" href="/assets/empleados/css/print.css" type="text/css" media="print" /> -->
   <link rel="stylesheet" href="/assets/empleados/css/bootstrap.css">
-  <!-- <link rel="stylesheet" href="/assets/empleados/css/font-awesome.min.css"> -->
-  
+  <link rel="stylesheet" href="/assets/empleados/css/customp.css">
 
-<style>
-  /*@media print {*/
-    .td_h{
-      width:220px;
-      /*border:solid  1.0pt;*/
-      mso-border-alt:solid  .2pt;
-      background:#D9D9D9;
-      text-transform:uppercase;
-    }
-    td{
-      /*width:220px;*/
-      border:solid  1.0pt;
-      mso-border-alt:solid  .2pt;
-      padding:0cm 5.4pt 0cm 5.4pt;
-      font-family:"Arial",sans-serif;
-      font-size: 9pt;
-    }
-    #footer p{
-      font-family:"Arial",sans-serif;
-      font-size: 8pt;
-      margin:0px !important;
-      
-    }
-    h5{
-      text-transform:uppercase;
-    }
-/*}*/
-
-.firma{
-  margin-top: 50px;
-  border-top: solid 1px #000;
-  width:300px;
-  padding-top: 10px;
-  text-transform: capitalize;
-}
-
-#footer,#main{
-  display:none;
-}
-.ovalo{
-width: 70px;
-height: 100px;
-border: solid 1px #000;
--moz-border-radius: 30px / 35px;
--webkit-border-radius: 30px / 35px;
-border-radius: 30px / 35px;
-display:inline-block;
-margin-right: 10px;
-float: none
-}
-.center{
-  margin-top: 10px;
-  text-align:center;
-}
-/*.head td {
-  background-color: red;
-  padding: 0px !important;
-}*/
-  </style>
-  <!-- =============== -->
   
 </head>
 <body>
-<div id="main">
+<div id="imprime">
 
   <table >
     <tbody>
@@ -240,15 +179,18 @@ float: none
 
 </div>
 
-<center>
-<div class="firma">
-  elvis reyes
+<br>
+
+<div class="firma_left">
+  <p style="margin:0px !important;">elvis reyes</p>
+  <span class="calificativo">empleado</span>
 </div>
-</center>
-<!-- <div class="center">
-<div class="ovalo"></div>
-<div class="ovalo"></div>
-</div> -->
+<div class="firma_right">
+  <p style="margin:0px !important;">Guzmán desc</p>
+  <span class="calificativo">supervisor</span>
+</div>
+
+<div class="clearfix"></div>
 
 
 <div id="footer" >
@@ -263,7 +205,7 @@ Anaco, Estado Anzoátegui - Venezuela</p>
 
 </div>
 <!-- fin main -->
-<input class="btn btn-primary" type="button" id="print" value="Imprimir">
+<input class="btn btn-primary" type="button" id="btn_print" value="Imprimir">
 
 
 
@@ -273,39 +215,7 @@ Anaco, Estado Anzoátegui - Venezuela</p>
 
 <script src="/assets/empleados/js/vendor/jquery-1.10.2.min.js"></script>
 <script src="/assets/empleados/js/jquery.print.js"></script>
-
- <script type='text/javascript'>
-
-$(function() {
+<script src="/assets/empleados/js/imp.js"></script>
 
 
-$('#print').click(function(){
-
-  var nombre ="Elvis";
-// var data = 'Hello '+nombre+'!!!<br/><img src="assets/empleados/img/evergreen_logo_pdf.png" width="200">';
-
-
-
-$("#main").print({
-  //Use Global styles
-  globalStyles : true,
-  //Add link with attrbute media=print
-  mediaPrint : false,
-  //Custom stylesheet
-  stylesheet : "assets/empleados/css/print.css",
-  //Print in a hidden iframe
-  iframe : true,
-  //Don't print this
-  noPrintSelector : ".avoid-this",
-  //Add this at top
-  // prepend : data,
-  //Add this on bottom
-  append : "<br/>Buh Bye!"
-});
-
-});
-
-
-});
-</script>
 </html>

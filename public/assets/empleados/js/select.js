@@ -81,10 +81,13 @@ $('#parentescoAdd').on("click","#rmfa",function(e){
 	e.preventDefault();
 	// $(id).remove();
 	if(increment>1){
-		var id = '#'+$(this).parent().parent().attr("id");
-
+		 id = '#'+$(this).parent().parent().attr("id");
+		 trid = id.substring(12);
+		 trid = '#tr'+trid;
+		 // console.log(trid);
 		$(id).next().detach();//borrando en script
 		// delete fecha+increment;
+		$(trid).remove();
 
 		$(id).remove();//borrando en div entero del familiar
 
@@ -97,11 +100,13 @@ $('#parentescoAdd').on("click","#rmfa",function(e){
 
 		update_familiar();
 	}
+
 });
 // =============== btn remove parentesco ===============
 
 // Boton add parentesco
 $('#add_parentesco').click(function(e){
+
 	increment ++;
 	e.preventDefault();
 
@@ -160,8 +165,8 @@ $('#add_parentesco').click(function(e){
         html = html + '$(function () {';
         // datatimepicker
         html = html + '$("#nacimientocontrolp'+increment+'").datetimepicker({';
-        html = html + 'locale: "en",';
-        html = html + 'format: "YYYY-DD-MM",';
+        html = html + 'locale: "es",';
+        html = html + 'format: "DD-MM-YYYY",';
         html = html + 'maxDate: dateToday';
         html = html + '})';
 
@@ -170,11 +175,11 @@ $('#add_parentesco').click(function(e){
         html = html + 'fecha'+increment+' = $("#nacimientocontrolp'+increment+'").data("date");';
         html = html + '$("#edadempleadofamilia'+increment+'").addClass("hide");';
         html = html + 'if(fecha'+increment+'!=""){';
-        html = html + ' año = fecha'+increment+'.substring(0, 4);';
-        html = html + ' mes = fecha'+increment+'.substring(5, 7);';
-        html = html + ' dia = fecha'+increment+'.substring(8, 10);';
-        html = html + ' años = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));';
-        html = html + 'if(años>17){';
+        html = html + ' año = fecha'+increment+'.substring(6, 10);';
+        html = html + ' mes = fecha'+increment+'.substring(3, 5);';
+        html = html + ' dia = fecha'+increment+'.substring(0, 2);';
+        html = html + ' años = calcular_edad(dia+"/"+mes+"/"+año);';
+        html = html + 'if(años>=15){';
         html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
         html = html + '$("#edadempleadofamilia'+increment+'").addClass("label-success");';
         html = html + '$("#edadempleadofamilia'+increment+'").removeClass("label-danger");';
@@ -196,19 +201,24 @@ $('#add_parentesco').click(function(e){
         html = html + '}';
         html = html + '}';
         html = html + '});';
-        // html = html + '';
-        // html = html + '';
-        // html = html + '';
-        // html = html + '';
-        // html = html + '';
-        // html = html + '';
-        // html = html + '';
-
+      
         // html = html + '';
         html = html + '});';
 
         html = html + '</script>';
         html = html + '<div>';
+
+        // ========Generando tabla familiar =====
+        	fami = '<tr class="tr" id="tr'+increment+'">'
+			fami = fami + '<td class="print_parent_nombre" id="print_parent_nombre'+increment+'">psd</td>';
+			fami = fami + '<td class="print_parent_cedula" id="print_parent_cedula'+increment+'">psd</td>';
+			fami = fami + '<td class="print_parent_parentesco" id="print_parent_parentesco'+increment+'"></td>';
+			fami = fami + '<td class="print_parent_nacimiento" id="print_parent_nacimiento'+increment+'"></td>';
+			fami = fami + '<td class="print_parent_edad" id="print_parent_edad'+increment+'"></td>';
+			fami = fami + '<td class="print_parent_sexo" id="print_parent_sexo'+increment+'"></td>';
+			fami = fami + '</tr>';
+
+			$('#tb_familiar').append(fami);
 
 
     $('#parentescoAdd').append(html);
@@ -229,7 +239,7 @@ $('#add_parentesco').click(function(e){
         script = script + "</script>";
         $("#nacimientocontrolp1").datetimepicker({
                     locale: "en",
-                    format: "YYYY-DD-MM",
+                    format: "DD-MM-YYYY",
                     maxDate: dateToday
                 });
 
@@ -306,6 +316,7 @@ $('#btn_update').click(function(){
 $('input[name="centro"]').change(function(){
 //
 var valor = $('input[name="centro"]:checked').val();
+// console.log(valor);
 if(valor==4){
 
 	$('#nombre_otro_centro').removeClass('hide');
@@ -345,6 +356,7 @@ $("input[name='family']").change(function() {
 	// console.log($("input[name='family']:checked").val());
         if($("input[name='family']:checked").val()==1) {
             // console.log("Está activado");
+            $("#n_familiar").val('1');
             $('#carga_familiar').removeClass('hide');
             // Activar que sean requeridos
             $("#fullname1").attr('required','required');
@@ -358,11 +370,12 @@ $("input[name='family']").change(function() {
             $('#carga_familiar').addClass('hide');
             $('#fullname1').val('');
             $('#parentesco1').val('');
-            // Desactivar que sean requeridos
             $("#fullname1").removeAttr('required');
             $("#parentesco1").removeAttr('required');
             $("#nacimientop1").removeAttr('required');
             $("#sexop1").removeAttr('required');
+            $("#edadempleadofamilia1").addClass('hide');
+            $("#n_familiar").val('0');
 
         }
     });
@@ -376,7 +389,7 @@ $("input[name='family']").change(function() {
 	$('#ced').change(function(){
 		validarced();
 		var str =  $('#form-update-data').serialize();
-console.log(str);
+// console.log(str);
 	});
 	$('#tipo_ced').change(function(){
 		validarced();
@@ -393,6 +406,7 @@ console.log(str);
 	});
 	// Fin Validando rif
 
+// test add nuevo familiar
 
 
 // Validar que no exista la ced de un empleado dependiendo de la varibale estado_update
@@ -532,7 +546,38 @@ function CalculateDateDiff(dateFrom, dateTo) {
 
     return dif;
 }
+// 
 
+// Otro edad
+/*----------Funcion para obtener la edad------------*/
+function calcular_edad(fecha) {
+var fechaActual = new Date()
+var diaActual = fechaActual.getDate();
+var mmActual = fechaActual.getMonth() + 1;
+var yyyyActual = fechaActual.getFullYear();
+FechaNac = fecha.split("/");
+var diaCumple = FechaNac[0];
+var mmCumple = FechaNac[1];
+var yyyyCumple = FechaNac[2];
+//retiramos el primer cero de la izquierda
+if (mmCumple.substr(0,1) == 0) {
+mmCumple= mmCumple.substring(1, 2);
+}
+//retiramos el primer cero de la izquierda
+if (diaCumple.substr(0, 1) == 0) {
+diaCumple = diaCumple.substring(1, 2);
+}
+var edad = yyyyActual - yyyyCumple;
+
+//validamos si el mes de cumpleaños es menor al actual
+//o si el mes de cumpleaños es igual al actual
+//y el dia actual es menor al del nacimiento
+//De ser asi, se resta un año
+if ((mmActual < mmCumple) || (mmActual == mmCumple && diaActual < diaCumple)) {
+edad--;
+}
+return edad;
+}
 //
 function validarced(){
 	error_ced = false;
@@ -638,16 +683,16 @@ function resetn_nfamiliar(){
 function update_familiar(){
 
 $('div.cuenta').each(function(index){
-	var mas = index +2;
-	var id_temp = $(this).attr('id');
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','groupfamily'+mas);
 
 });
 
 // Label familiar
 $('#parentescoAdd span.label_family').each(function(index){
-	var mas = index +2;
-	var id_temp = $(this).attr('id');
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','label_family'+mas);
 	$('#label_family'+mas).attr('name','label_family'+mas);
 	$('#label_family'+mas).text('Familiar # '+mas);
@@ -656,8 +701,8 @@ $('#parentescoAdd span.label_family').each(function(index){
 
 // Nombre
 $('#parentescoAdd input.fullname').each(function(index){
-	var mas = index +2;
-	var id_temp = $(this).attr('id');
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','fullname'+mas);
 	$('#fullname'+mas).attr('name','fullname'+mas);
 	$('#fullname'+mas).attr('placeholder','Nombres del familiar '+mas);
@@ -666,8 +711,8 @@ $('#parentescoAdd input.fullname').each(function(index){
 
 // Apellido
 $('#parentescoAdd input.apellidofamiliar').each(function(index){
-	var mas = index +2;
-	var id_temp = $(this).attr('id');
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','apellidofamiliar'+mas);
 	$('#apellidofamiliar'+mas).attr('name','apellidofamiliar'+mas);
 	$('#apellidofamiliar'+mas).attr('placeholder','Apellidos del familiar up '+mas);
@@ -676,8 +721,8 @@ $('#parentescoAdd input.apellidofamiliar').each(function(index){
 
 // Cedula
 $('#parentescoAdd input.ced_familiar').each(function(index){
-	var mas = index +2;
-	var id_temp = $(this).attr('id');
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','ced_familiar'+mas);
 	$('#ced_familiar'+mas).attr('name','ced_familiar'+mas);
 	$('#ced_familiar'+mas).attr('placeholder','Ingrese la cédula up '+mas);
@@ -686,8 +731,8 @@ $('#parentescoAdd input.ced_familiar').each(function(index){
 
 // parentesco
 $('#parentescoAdd input.parentesco').each(function(index){
-	var mas = index +2;
-	var id_temp = $(this).attr('id');
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','parentesco'+mas);
 	$('#parentesco'+mas).attr('name','parentesco'+mas);
 	$('#parentesco'+mas).attr('placeholder','Ingrese el parentesco up '+mas);
@@ -696,8 +741,8 @@ $('#parentescoAdd input.parentesco').each(function(index){
 
 // sexo sexop
 $('#parentescoAdd select.sexop').each(function(index){
-	var mas = index +2;
-	var id_temp = $(this).attr('id');
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','sexop'+mas);
 	$('#sexop'+mas).attr('name','sexop'+mas);
 	$('#sexop'+mas).attr('placeholder','Ingrese el parentesco up '+mas);
@@ -706,16 +751,16 @@ $('#parentescoAdd select.sexop').each(function(index){
 
 // div nacimiento nacimientocontrolp
 $('#parentescoAdd div.nacimientocontrolp').each(function(index){
-	var mas = index +2;
-	var id_temp = $(this).attr('id');
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','nacimientocontrolp'+mas);
 	$('#nacimientocontrolp'+mas).attr('name','nacimientocontrolp'+mas);
 
 });
 // Naciemiento
 $('#parentescoAdd input.nacimientop').each(function(index){
-	var mas = index +2;
-	var id_temp = $(this).attr('id');
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','nacimientop'+mas);
 	$('#nacimientop'+mas).attr('name','nacimientop'+mas);
 	$('#nacimientop'+mas).attr('placeholder','Fecha de naciemiento up '+mas);
@@ -724,38 +769,84 @@ $('#parentescoAdd input.nacimientop').each(function(index){
 
 // label edad
 $('#parentescoAdd span.edadempleadofamilia').each(function(index){
-	var mas = index +2;
-	var id_temp = $(this).attr('id');
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','edadempleadofamilia'+mas);
 
 
 });
 
+//======Re-asignando imrpimir===== 
+$('#tb_familiar tr.tr').each(function(index){
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
+	 $('#'+id_temp).attr('id','tr'+mas);
+});
+
+// nombre
+$('#tb_familiar td.print_parent_nombre').each(function(index){
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
+	 $('#'+id_temp).attr('id','print_parent_nombre'+mas);
+});
+// cedula
+$('#tb_familiar td.print_parent_cedula').each(function(index){
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
+	 $('#'+id_temp).attr('id','print_parent_cedula'+mas);
+});
+// parentesco
+$('#tb_familiar td.print_parent_parentesco').each(function(index){
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
+	 $('#'+id_temp).attr('id','print_parent_parentesco'+mas);
+});
+// nacimiento
+$('#tb_familiar td.print_parent_nacimiento').each(function(index){
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
+	 $('#'+id_temp).attr('id','print_parent_nacimiento'+mas);
+});
+// edad
+$('#tb_familiar td.print_parent_edad').each(function(index){
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
+	 $('#'+id_temp).attr('id','print_parent_edad'+mas);
+});
+// sexo
+$('#tb_familiar td.print_parent_sexo').each(function(index){
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
+	 $('#'+id_temp).attr('id','print_parent_sexo'+mas);
+});
+
+
+
 // Generando el script
 $('#parentescoAdd div.scriptf').each(function(index){
-	var mas = index +2;
-	var id_temp = $(this).attr('id');
+	 mas = index +2;
+	 id_temp = $(this).attr('id');
 	$('#'+id_temp).empty();
 	$('#'+id_temp).attr('id','script'+mas);
-	var script ='';
+	 script ='';
 	    script = script + '<script type="text/javascript">';
         script = script + '$(function () {';
         // datatimepicker
         script = script + '$("#nacimientocontrolp'+mas+'").datetimepicker({';
-        script = script + 'locale: "en",';
-        script = script + 'format: "YYYY-DD-MM",';
+        script = script + 'locale: "es",';
+        script = script + 'format: "DD-MM-YYYY",';
         script = script + 'maxDate: dateToday';
         script = script + '})';
         script = script + '.on("dp.change", function(e) {';
         // script = script + 'var fecha'+mas+'="";';
         script = script + 'fecha'+mas+' = $("#nacimientocontrolp'+mas+'").data("date");';
         script = script + '$("#edadempleadofamilia'+mas+'").addClass("hide");';
-        script = script + 'if(fecha'+mas+'!=""){';
-        script = script + ' año = fecha'+mas+'.substring(0, 4);';
-        script = script + ' mes = fecha'+mas+'.substring(5, 7);';
-        script = script + ' dia = fecha'+mas+'.substring(8, 10);';
-        script = script + ' años = CalculateDateDiff(new Date(año,dia,mes), new Date(yyyy,dd,mm));';
-        script = script + 'if(años>17){';
+        script = script + 'if(fecha'+mas+'!=""){';        
+        script = script + ' año = fecha'+mas+'.substring(6, 10);';
+        script = script + ' mes = fecha'+mas+'.substring(3, 5);';
+        script = script + ' dia = fecha'+mas+'.substring(0, 2);';
+        script = script + ' años = calcular_edad(dia+"/"+mes+"/"+año);';
+        script = script + 'if(años>=15){';
         script = script + '$("#edadempleadofamilia'+mas+'").removeClass("hide");';
         script = script + '$("#edadempleadofamilia'+mas+'").addClass("label-success");';
         script = script + '$("#edadempleadofamilia'+mas+'").removeClass("label-danger");';
