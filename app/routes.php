@@ -68,9 +68,14 @@ Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 	Route::post('procesar2','GestionController@procesar2');
 	Route::post('pdf','GestionController@pdf');
 
+	Route::any('registros',array("before" => "roles:4-5,/",'uses' => 'GestionController@registros'));
+
 	Route::get('gestion',function(){
 	return View::make('gestion.index');
 	});
+
+	Route::get('data_empleados',array('before'=>'roles:4-5,/','uses' =>'GestionController@data_empleados'));
+
 	// Route::any('system/{dato?}',array("before" => "roles:1-2-3,/",'uses' => 'HomeController@system'));
 	// Route::get('data_user',array('before'=>'roles:1-2-3,/','uses' =>'HomeController@datausers'));
 

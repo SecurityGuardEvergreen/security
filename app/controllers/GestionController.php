@@ -10,12 +10,19 @@ public function index(){
   $data->rif= Rif::all();
   $data->educacion = Educationlevel::orderBy('id', 'asc')->get();
   $data->marital = Maritalstatu::orderBy('nombre', 'asc')->get();
-
+  $data->title = "Jornada de Actualización";
 
 
    return View::make('empleados.index')->with('data',$data);
 
 }
+
+public function registros(){
+  $data = new stdclass;
+  $data->title = "Registros";
+  return View::make('empleados.resgistros')->with('data',$data);
+}
+
 
 // Sacando estados
 public function estados(){
@@ -116,7 +123,7 @@ public function procesar(){
   $rela_contacto = Input::get('rela_contacto');
   $id_update = Input::get('id');
 
-
+  $user_id_log = Auth::id();
 
 
   // Insertando el registro en la db
@@ -157,7 +164,8 @@ public function procesar(){
                     "discapacidad" =>$discapacidad,
                     "nombre_contacto" =>$nombre_contacto,
                     "rela_contacto" =>$rela_contacto,
-                    "telf_contacto" =>$telf_contacto
+                    "telf_contacto" =>$telf_contacto,
+                    "user_id_update" =>$user_id_log
                     ));
     $respuesta['mensaje'] = '<strong>Excelente!</strong> Los cambios se han guardado exitosamente .';
     $respuesta['update'] =true;
@@ -191,6 +199,8 @@ public function procesar(){
     $empleado ->rela_contacto = $rela_contacto;
     $empleado ->nombre_contacto = $nombre_contacto;
     $empleado ->telf_contacto = $telf_contacto;
+    $empleado ->user_id = $user_id_log;
+    $empleado ->user_id_update = $user_id_log;
 
     $empleado -> save();
     $insertedId = $empleado->id;
@@ -259,9 +269,26 @@ return $respuesta;
 
 }
 
-public function procesar33(){
-  return "jesus";
+// ===================
+// =====REGISTROS=====
+
+
+public function data_empleados(){
+  // $user = User::join('types_users','users.typeuser_id','=','types_users.id')
+  //   ->select('types_users.name as type','users.*')
+  //   ->get();
+  $user = Empleado::join('preficeds','empleados.preficed_id','=','preficeds.id')
+        ->join('rifs','empleados.prefirif_id','=','rifs.id')
+        ->join('cargos','empleados.cargo_id','=','cargos.id')
+        ->join('estados','empleados.estado_id','=','estados.id')
+        ->join('municipios','empleados.municipio_id','=','municipios.id')
+        ->join('parroquias','empleados.parroquia_id','=','parroquias.id')
+        ->select('preficeds.sigla as sigla_ced','estados.nombre as estado',
+          'municipios.nombre as municipio','parroquias.nombre as parroquia',
+          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*')->get();
+
+    return json_encode($user);
 }
 
 
-  }
+  } // Fin function

@@ -6,7 +6,7 @@
 	var tem_rif='';
 	var id_update='';
 	var increment = 1;
-
+	var validator;
 jQuery(document).ready(function() {
 resetn_nfamiliar();
 
@@ -126,7 +126,7 @@ $('#add_parentesco').click(function(e){
         // cedula
         html = html + '<div class="col-sm-3">';
         html = html + '<label for="ced_familiar'+increment+'" class="control-label">cédula</label>';
-        html = html + '<input type="text" class="form-control ced_familiar" name="ced_familiar'+increment+'" id="ced_familiar'+increment+'" placeholder="ingrese la cédula del familiar" title="Ingrese la cédula del familiar" required>';
+        html = html + '<input type="text" class="form-control ced_familiar" name="ced_familiar'+increment+'" id="ced_familiar'+increment+'" placeholder="ingrese la cédula del familiar" title="Ingrese la cédula del familiar" >';
         html = html + '</div>';
         // parentesco
 
@@ -257,7 +257,7 @@ $('#add_parentesco').click(function(e){
 // Validando el formulario con jquery validator
 $('#btn_update').click(function(){
 	// console.log('validar');
-	$('#form-update-data').validate({
+validator = $('#form-update-data').validate({
 		 rules: {
 		    ced: {
 		      required: true,
@@ -414,6 +414,7 @@ $('#btn_reset').click(function(){
 	 tem_rif='';
 	 id_update='';
 	 increment = 1;
+	 validator.resetForm();
 
 	 $('#parentescoAdd').empty();   // Borrando cargas familiaresd extras
 	 $('#btn_update').text('Agregar registro');   // Colocando el texto inicial al botón add

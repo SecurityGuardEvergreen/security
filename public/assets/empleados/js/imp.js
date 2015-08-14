@@ -37,6 +37,7 @@ print_parent_sexo1 = $('#sexop1 option:selected').text();
 print_contac_nombre = $('#nombre_contacto').val();
 print_contac_relacion = $('#rela_contacto').val();
 print_contac_telf = $('#telf_contacto').val();
+print_empleado_firma = print_nombre +' '+ print_apellido;
 
 $('#print_centro').text(print_centro);
 $('#print_nivel_edu').text(print_nivel_edu);
@@ -67,6 +68,7 @@ $('#print_parent_sexo1').text(print_parent_sexo1);
 $('#print_contac_nombre').text(print_contac_nombre);
 $('#print_contac_relacion').text(print_contac_relacion);
 $('#print_contac_telf').text(print_contac_telf);
+$('#print_empleado_firma').text(print_empleado_firma);
 // =============Fina asignando valores de los inputs=========
 
 // realizando la carga dinámica de los familiares

@@ -1,33 +1,9 @@
+@extends('empleados.base')
 
-<html lang="es"  class="no-js">
-<head>
-    <meta charset="utf-8">
-    <title>Jornada de Actualización | Evergreen Services</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Google fonts - which you want to use - (rest you can just remove) -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
-
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-    <link rel="stylesheet" href="/assets/empleados/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/empleados/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/empleados/css/animate.css">
-    <link rel="stylesheet" href="/assets/empleados/css/prettyPhoto.css">
-    <link rel="stylesheet" href="/assets/empleados/css/owl.carousel.css">
-    <link rel="stylesheet" href="/assets/empleados/css/main.css">
-    <link rel="stylesheet" href="/assets/empleados/css/responsive.css">
+@section('content')  
     <link rel="stylesheet" href="/assets/empleados/css/bootstrap-datetimepicker.css">
     <link rel="stylesheet" href="/assets/empleados/css/validate.css">
-    <!-- // <script src="/assets/empleados/js/vendor/modernizr-2.6.2.min.js"></script> -->
-</head>
-
-<body id="top">
-
-
 
     <section id="get-trial" class="section text-center">
         <div class="container">
@@ -50,6 +26,8 @@
         <div class="container">
             <h2 class="section-title">Actualizaci&oacute;n de datos</h2>
             <div class="row">
+
+        <a href="registros" class="btn btn-success" id="registros" name="registros">Ver registros</a>
 <!-- <input class="btn btn-primary" type="button" id="print" value="Imprimir"> -->
                 <!-- CONTACT FORM -->
 <div class="col-md-10 col-md-offset-1 text-left wow fadeInLeft" data-wow-duration="1s">
@@ -515,62 +493,21 @@
     </section>
     <!-- END CONTACT US -->
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <div class="row">
-
-                <!-- FOOTER MENU -->
-                <div class="col-md-6">
-                    <div class="footer-menu">
-                        <ul class="list-inline">
-                            <li><a href="/gestion">Inicio</a>
-                            </li>
-                            <li><a href="#">Web Site</a>
-                            </li>
-                            <li><a href="#">Security Guard</a>
-                            </li>
-                            <li><a href="#">Intranet</a>
-                            </li>
-                            @if(Auth::check())
-                                <li><a href="/salir">Salir</a></li>
-                            @endif
-
-                        </ul>
-                    </div>
-                </div>
-                <!-- END FOOTER MENU -->
-
-                <!-- FOOTER CONTENT -->
-                <div class="col-md-6">
-                    <div class="footer-content text-right">
-                        <p>&copy; 2015 Todos los derechos reservados, <a href="#">Evergreen Service c.a</a>
-                        </p>
-                    </div>
-                </div>
-                <!-- END FOOTER CONTENT -->
-
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- ./container -->
-    </footer>
-    <!-- END FOOTER -->
-
 
     <!-- js files -->
     <script src="/assets/empleados/js/vendor/jquery-1.11.1.js"></script>
-    <script src="/assets/empleados/js/plugins.js"></script>
-    <script src="/assets/empleados/js/bootstrap.min.js"></script>
-    <script src="/assets/empleados/js/wow.min.js"></script>
-    <script src="/assets/empleados/js/prettyPhoto.js"></script>
-    <script src="/assets/empleados/js/owl.carousel.min.js"></script>
+<script src="/assets/empleados/js/plugins.js"></script>
+<script src="/assets/empleados/js/bootstrap.min.js"></script>
+<script src="/assets/empleados/js/wow.min.js"></script>
+<script src="/assets/empleados/js/prettyPhoto.js"></script>
+<script src="/assets/empleados/js/owl.carousel.min.js"></script>
     <script src="/assets/empleados/js/main.js"></script>
     <script src="/assets/empleados/js/moment-locales.js"></script>
     <script src="/assets/empleados/js/bootstrap-datetimepicker.js"></script>
     <script src="/assets/empleados/js/jquery.validate.js"></script>
     <script src="/assets/empleados/js/localization/messages_es.js"></script>
     <script src="/assets/empleados/js/select.js"></script>
+
 
 
 
@@ -877,7 +814,7 @@ jQuery.namespace = function() {
 <br>
 
 <div class="firma_left">
-  <p style="margin:0px !important;">elvis reyes</p>
+  <p id="print_empleado_firma" style="margin:0px !important;"></p>
   <span class="calificativo">empleado</span>
 </div>
 <!-- <div class="firma_right">
@@ -900,5 +837,4 @@ Anaco, Estado Anzoátegui - Venezuela</p>
 
 </div>
 
-</body>
-</html>
+@stop
