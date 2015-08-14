@@ -1,6 +1,7 @@
 	var estado_update=false;
 	var error_ced=false;
-	var error_rif=false; 	//variable para conocer si se actualiza o se inserta un empleado
+	var error_rif=false;  //variable para conocer si se actualiza o se inserta un empleado
+	var error_edad=false;
 	var tem_ced='';
 	var tem_rif='';
 	var id_update='';
@@ -179,29 +180,20 @@ $('#add_parentesco').click(function(e){
         html = html + ' mes = fecha'+increment+'.substring(3, 5);';
         html = html + ' dia = fecha'+increment+'.substring(0, 2);';
         html = html + ' años = calcular_edad(dia+"/"+mes+"/"+año);';
-        html = html + 'if(años>=15){';
+        html = html + 'if(años>1){';
         html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
-        html = html + '$("#edadempleadofamilia'+increment+'").addClass("label-success");';
-        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("label-danger");';
         html = html + '$("#edadempleadofamilia'+increment+'").text(años+" años");';
-        html = html + '} else if(años==1){';
-        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
-        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("label-success");';
-        html = html + '$("#edadempleadofamilia'+increment+'").addClass("label-danger");';
-        html = html + '$("#edadempleadofamilia'+increment+'").text(años+" año no es una edad para trabajar");';
-        html = html + '}else if(años>1){';
-        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
-        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("label-success");';
-        html = html + '$("#edadempleadofamilia'+increment+'").addClass("label-danger");';
-        html = html + '$("#edadempleadofamilia'+increment+'").text(años+" años no es una edad para trabajar");';
         html = html + '}else if(años<1){';
         html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
-        html = html + '$("#edadempleadofamilia'+increment+'").addClass("label-danger");';
-        html = html + '$("#edadempleadofamilia'+increment+'").text("un bebé no puede trabajar");';
+        html = html + '$("#edadempleadofamilia'+increment+'").text("Bebé sin el año cumplido");';
+        html = html + '}';
+        html = html + 'else if(años==1){';
+        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
+        html = html + '$("#edadempleadofamilia'+increment+'").text(años+" año");';
         html = html + '}';
         html = html + '}';
         html = html + '});';
-      
+
         // html = html + '';
         html = html + '});';
 
@@ -285,7 +277,7 @@ $('#btn_update').click(function(){
 		submitHandler: function() {
     // do other things for a valid form
 		    // alert("perfecto!!!");
-		    if(error_ced ==false && error_rif ==false){
+		    if(error_ced ==false && error_rif ==false && error_edad==false){
 		    	// console.log('No hay error');
 		    	btn_guardar();
 		    }
@@ -417,6 +409,7 @@ $('#btn_reset').click(function(){
 	 estado_update=false;
 	 error_ced=false;
 	 error_rif=false;
+	 error_edad=false;
 	 tem_ced='';
 	 tem_rif='';
 	 id_update='';
@@ -424,7 +417,7 @@ $('#btn_reset').click(function(){
 
 	 $('#parentescoAdd').empty();   // Borrando cargas familiaresd extras
 	 $('#btn_update').text('Agregar registro');   // Colocando el texto inicial al botón add
-	 $('#btn_print').addClass('disabled'); // Bloqueando btn imprimir
+	 $('#btn_print_f').addClass('disabled'); // Bloqueando btn imprimir
 	 // Borrando cualquier mensaje de ced y rif quedados en el dom
 	 $('#existerif').remove();
 	 $('#existe').remove();
@@ -434,17 +427,20 @@ $('#btn_reset').click(function(){
 	 $("#carga_familiar").find(":input").prop("disabled",false);
 	 $("#carga_familiar").find("a").removeClass("disabled");
 	 // console.log('bloqueado');
+	 $('#edadempleadofamilia1').text('');
+	 $('#erroredadempleado').text('');
+	 $('#edadempleado').text('');
 });
 // Fin btn reset
 
 
-// btn Imprimir
-$('#btn_print').click(function(){
-	$('#print_f').append('<form id="gen_pdf" action="pdf" method="post"></form>');
-	$('#gen_pdf').append('<input type="hidden" id="id_registro" name="id_registro" value="'+id_update+'">');
-	$("#gen_pdf").submit();
-});
-// fin btn Imprimir
+// // btn Imprimir
+// $('#btn_print').click(function(){
+// 	$('#print_f').append('<form id="gen_pdf" action="pdf" method="post"></form>');
+// 	$('#gen_pdf').append('<input type="hidden" id="id_registro" name="id_registro" value="'+id_update+'">');
+// 	$("#gen_pdf").submit();
+// });
+// // fin btn Imprimir
 
 
 });//fin funcion main
@@ -490,13 +486,13 @@ console.log(str);
 			alertTipo= 'alert-success';
 			mensaje = response.mensaje;
 			// Activar btn imprimir
-			$('#btn_print').removeClass('disabled');
+			$('#btn_print_f').removeClass('disabled');
 		}
 		if(response.update){
 			alertTipo = 'alert-info';
 			mensaje = response.mensaje;
 			// Activar btn imprimir
-			$('#btn_print').removeClass('disabled');
+			$('#btn_print_f').removeClass('disabled');
 		}
 
 
@@ -546,7 +542,7 @@ function CalculateDateDiff(dateFrom, dateTo) {
 
     return dif;
 }
-// 
+//
 
 // Otro edad
 /*----------Funcion para obtener la edad------------*/
@@ -776,7 +772,7 @@ $('#parentescoAdd span.edadempleadofamilia').each(function(index){
 
 });
 
-//======Re-asignando imrpimir===== 
+//======Re-asignando imrpimir=====
 $('#tb_familiar tr.tr').each(function(index){
 	 mas = index +2;
 	 id_temp = $(this).attr('id');
@@ -841,30 +837,21 @@ $('#parentescoAdd div.scriptf').each(function(index){
         // script = script + 'var fecha'+mas+'="";';
         script = script + 'fecha'+mas+' = $("#nacimientocontrolp'+mas+'").data("date");';
         script = script + '$("#edadempleadofamilia'+mas+'").addClass("hide");';
-        script = script + 'if(fecha'+mas+'!=""){';        
+        script = script + 'if(fecha'+mas+'!=""){';
         script = script + ' año = fecha'+mas+'.substring(6, 10);';
         script = script + ' mes = fecha'+mas+'.substring(3, 5);';
         script = script + ' dia = fecha'+mas+'.substring(0, 2);';
         script = script + ' años = calcular_edad(dia+"/"+mes+"/"+año);';
-        script = script + 'if(años>=15){';
+        script = script + 'if(años>1){';
         script = script + '$("#edadempleadofamilia'+mas+'").removeClass("hide");';
-        script = script + '$("#edadempleadofamilia'+mas+'").addClass("label-success");';
-        script = script + '$("#edadempleadofamilia'+mas+'").removeClass("label-danger");';
         script = script + '$("#edadempleadofamilia'+mas+'").text(años+" años");';
-        script = script + '} else if(años==1){';
-        script = script + '$("#edadempleadofamilia'+mas+'").removeClass("hide");';
-        script = script + '$("#edadempleadofamilia'+mas+'").removeClass("label-success");';
-        script = script + '$("#edadempleadofamilia'+mas+'").addClass("label-danger");';
-        script = script + '$("#edadempleadofamilia'+mas+'").text(años+" año no es una edad para trabajar");';
-        script = script + '}else if(años>1){';
-        script = script + '$("#edadempleadofamilia'+mas+'").removeClass("hide");';
-        script = script + '$("#edadempleadofamilia'+mas+'").removeClass("label-success");';
-        script = script + '$("#edadempleadofamilia'+mas+'").addClass("label-danger");';
-        script = script + '$("#edadempleadofamilia'+mas+'").text(años+" años no es una edad para trabajar");';
         script = script + '}else if(años<1){';
         script = script + '$("#edadempleadofamilia'+mas+'").removeClass("hide");';
-        script = script + '$("#edadempleadofamilia'+mas+'").addClass("label-danger");';
-        script = script + '$("#edadempleadofamilia'+mas+'").text("un bebé no puede trabajar");';
+        script = script + '$("#edadempleadofamilia'+mas+'").text("Bebé sin el año cumplido");';
+        script = script + '}';
+        script = script + 'else if(años==1){';
+        script = script + '$("#edadempleadofamilia'+mas+'").removeClass("hide");';
+        script = script + '$("#edadempleadofamilia'+mas+'").text(años+" año");';
         script = script + '}';
         script = script + '}';
         script = script + '});';

@@ -113,7 +113,9 @@ public function procesar(){
   $n_familiar = Input::get('n_familiar');
   $nombre_contacto =Input::get('nombre_contacto');
   $telf_contacto =Input::get('telf_contacto');
+  $rela_contacto = Input::get('rela_contacto');
   $id_update = Input::get('id');
+
 
 
 
@@ -154,6 +156,7 @@ public function procesar(){
                     "direccion" =>$address,
                     "discapacidad" =>$discapacidad,
                     "nombre_contacto" =>$nombre_contacto,
+                    "rela_contacto" =>$rela_contacto,
                     "telf_contacto" =>$telf_contacto
                     ));
     $respuesta['mensaje'] = '<strong>Excelente!</strong> Los cambios se han guardado exitosamente .';
@@ -185,6 +188,7 @@ public function procesar(){
     $empleado ->parroquia_id = $parroquia;
     $empleado ->direccion = $address;
     $empleado ->discapacidad = $discapacidad;
+    $empleado ->rela_contacto = $rela_contacto;
     $empleado ->nombre_contacto = $nombre_contacto;
     $empleado ->telf_contacto = $telf_contacto;
 

@@ -13,14 +13,14 @@
 
 Route::filter('roles', function($ruta,$peticion,$roles,$redirect)
 {
-  
+
     $roles = explode("-", $roles);
     if(!in_array(Auth::user()->typeuser_id, $roles))
     {
     	return Redirect::to($redirect);
     }
-        
-    	
+
+
 });
 
 /*
@@ -67,6 +67,22 @@ Route::filter('auth', function()
 		else
 		{
 			return Redirect::guest('login');
+		}
+		// return Redirect::guest('/')->with('msg','Debes autenticarte');
+	}
+});
+
+Route::filter('gestionAuth', function()
+{
+	if (Auth::guest())
+	{
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		else
+		{
+			return Redirect::guest('ingresar');
 		}
 		// return Redirect::guest('/')->with('msg','Debes autenticarte');
 	}

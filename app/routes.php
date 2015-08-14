@@ -50,7 +50,7 @@ Route::group(array('before' => 'auth','prefix' => 'admin') ,function(){
 
 
 // =========GESTION=========
-Route::group(array('before' => 'auth','prefix' => 'jornada') ,function(){
+Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 
 	Route::any('/',array("before" => "roles:4,/",function(){
 		return Redirect::to('jornada/staff');

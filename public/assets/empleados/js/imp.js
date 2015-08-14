@@ -1,7 +1,7 @@
 $(function() {
 
 
-$('#print').click(function(){
+$('#btn_print_f').click(function(){
 
   console.log('imp.js');
 // var data = 'Hello '+nombre+'!!!<br/><img src="assets/empleados/img/evergreen_logo_pdf.png" width="200">';
@@ -34,7 +34,9 @@ print_parent_parentesco1 = $('#parentesco1').val();
 print_parent_nacimiento1 = $('#nacimientop1').val();
 print_parent_edad1 = $('#edadempleadofamilia1').text();
 print_parent_sexo1 = $('#sexop1 option:selected').text();
-
+print_contac_nombre = $('#nombre_contacto').val();
+print_contac_relacion = $('#rela_contacto').val();
+print_contac_telf = $('#telf_contacto').val();
 
 $('#print_centro').text(print_centro);
 $('#print_nivel_edu').text(print_nivel_edu);
@@ -62,7 +64,9 @@ $('#print_parent_parentesco1').text(print_parent_parentesco1);
 $('#print_parent_nacimiento1').text(print_parent_nacimiento1);
 $('#print_parent_edad1').text(print_parent_edad1);
 $('#print_parent_sexo1').text(print_parent_sexo1);
-
+$('#print_contac_nombre').text(print_contac_nombre);
+$('#print_contac_relacion').text(print_contac_relacion);
+$('#print_contac_telf').text(print_contac_telf);
 // =============Fina asignando valores de los inputs=========
 
 // realizando la carga dinámica de los familiares

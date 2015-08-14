@@ -50,7 +50,7 @@
         <div class="container">
             <h2 class="section-title">Actualizaci&oacute;n de datos</h2>
             <div class="row">
-<input class="btn btn-primary" type="button" id="print" value="Imprimir">
+<!-- <input class="btn btn-primary" type="button" id="print" value="Imprimir"> -->
                 <!-- CONTACT FORM -->
 <div class="col-md-10 col-md-offset-1 text-left wow fadeInLeft" data-wow-duration="1s">
 <!-- Form dos -->
@@ -458,6 +458,15 @@
                         )}}
                     </div>
                     <div class="col-sm-4">
+                        <label for="rela_contacto" class="control-label">Relación</label>
+                        {{Form::text('rela_contacto',Input::old('rela_contacto'),
+                        array('autofocus','class' => 'form-control','id' => 'rela_contacto',
+                        'placeholder' => '¿Cuál es su relación? Ejm (Vecino)',
+                        'title'=>'Es sumamente importante que ingrese su relación con el contacto',
+                        'required'=> 'required')
+                        )}}
+                    </div>
+                    <div class="col-sm-4">
                         <label for="telf_contacto" class="control-label">Teléfono</label>
                         {{Form::text('telf_contacto',Input::old('telf_contacto'),
                         array('autofocus','class' => 'form-control','id' => 'telf_contacto',
@@ -477,7 +486,7 @@
                         <!-- <div class="btn-group" role="group" aria-label="..."> -->
                             <button type="reset" id="btn_reset" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo registro</button>
                             <button  type="submit" id="btn_update" class="btn btn-success"><i class="fa fa-floppy-o"></i> Agregar registro</button>
-                            <a id="btn_print" class="btn btn-success disabled"><i class="fa fa-print"></i> Imprimir</a>
+                            <a id="btn_print_f" class="btn btn-success disabled"><i class="fa fa-print"></i> Imprimir</a>
 
                         <!-- </div> -->
                   </center>
@@ -562,7 +571,7 @@
     <script src="/assets/empleados/js/jquery.validate.js"></script>
     <script src="/assets/empleados/js/localization/messages_es.js"></script>
     <script src="/assets/empleados/js/select.js"></script>
-    
+
 
 
     <script type="text/javascript">
@@ -596,7 +605,7 @@ jQuery.namespace = function() {
 // // Elvis.debug = null;
 // Elvis.debug.test2();
 // console.log(namespace);
-
+    // var error_edad=false;
     var hoy = new Date();
     var dd = hoy.getDate();
     var mm = hoy.getMonth()+1; //hoy es 0!
@@ -617,7 +626,7 @@ jQuery.namespace = function() {
                     // maxDate: dateToday
                     maxDate:hoy
                 }).on("dp.change", function(e) {
-                    
+
                     fecha = $('#nacimientocontrol').data('date');
                     $('#edadempleado').addClass('hide');
                     $('#erroredadempleado').addClass('hide');
@@ -627,23 +636,26 @@ jQuery.namespace = function() {
                      mes = fecha.substring(3, 5);
                      dia = fecha.substring(0, 2);
                      años = calcular_edad(dia+'/'+mes+'/'+año);
-                                        
+
 
                     if(años>=15){
                       // console.log(año);
-
+                      error_edad=false;
                       $('#edadempleado').removeClass('hide');
                       $('#erroredadempleado').addClass('hide');
                       $('#edadempleado').text(años+' años');
 
                   } else if(años==1){
+                    error_edad=true;
                     $('#erroredadempleado').removeClass('hide');
                     $('#erroredadempleado').text(años+' año no es una edad para trabajar');
                   }else if(años>1){
+                    error_edad=true;
                     $('#erroredadempleado').removeClass('hide');
                     $('#erroredadempleado').text(años+' años no es una edad para trabajar');
                     console.log(años+" años no es una edad para trabajar");
                   }else if(años<1){
+                    error_edad=true;
                     $('#erroredadempleado').removeClass('hide');
                     $('#erroredadempleado').text('un bebé no puede trabajar');
                     // console.log(años+" un bebé no puede trabajar");
@@ -657,7 +669,7 @@ jQuery.namespace = function() {
                     format: 'DD-MM-YYYY',
                     maxDate: dateToday
                 }).on("dp.change", function(e) {
-                    
+
                     fecha = $('#nacimientocontrolp1').data('date');
                     $('#edadempleadofamilia1').addClass('hide');
                     if(fecha!=''){
@@ -668,29 +680,18 @@ jQuery.namespace = function() {
                      años = calcular_edad(dia+'/'+mes+'/'+año);
 
 
-                    if(años>=15){
+                    if(años>1){
                       // console.log(año);
                       $('#edadempleadofamilia1').removeClass('hide');
-                      $('#edadempleadofamilia1').addClass('label-success');
-                      $('#edadempleadofamilia1').removeClass('label-danger');
                       $('#edadempleadofamilia1').text(años+' años');
 
-
-                  } else if(años==1){
-                    $('#edadempleadofamilia1').removeClass('hide');
-                    $('#edadempleadofamilia1').removeClass('label-success');
-                    $('#edadempleadofamilia1').addClass('label-danger');
-                    $('#edadempleadofamilia1').text(años+' año no es una edad para trabajar');
-                  }else if(años>1){
-                    $('#edadempleadofamilia1').removeClass('hide');
-                    $('#edadempleadofamilia1').removeClass('label-success');
-                    $('#edadempleadofamilia1').addClass('label-danger');
-                    $('#edadempleadofamilia1').text(años+' años no es una edad para trabajar');
-                    console.log(años+" años no es una edad para trabajar");
                   }else if(años<1){
-                    $('#edadempleadofamilia1').removeClass('hide');
-                    $('#edadempleadofamilia1').addClass('label-danger');
-                    $('#edadempleadofamilia1').text('un bebé no puede trabajar');
+                   $('#edadempleadofamilia1').removeClass('hide');
+                   $('#edadempleadofamilia1').text('Bebé sin el año cumplido');
+                    // console.log(años+" un bebé no puede trabajar");
+                  }else if(años==1){
+                   $('#edadempleadofamilia1').removeClass('hide');
+                   $('#edadempleadofamilia1').text(años+' año');
                     // console.log(años+" un bebé no puede trabajar");
                   }
 
@@ -774,7 +775,7 @@ jQuery.namespace = function() {
         <td colspan="2" id="print_apellido"></td>
         <td colspan="2" id="print_segundoapellido"></td>
       </tr>
-      
+
       <tr>
         <td class="td_h">cédula</td>
         <td class="td_h">rif</td>
@@ -859,12 +860,14 @@ jQuery.namespace = function() {
 <table>
   <tbody>
      <tr>
-      <td class="td_h" style="width:440px;">nombre completo</td>
-      <td class="td_h" style="width:440px;">teléfono</td>
+      <td class="td_h" style="width:293px;">nombre completo</td>
+      <td class="td_h" style="width:293px;">Relación</td>
+      <td class="td_h" style="width:293px;">teléfono</td>
      </tr>
      <tr>
-       <td>el nomnbre</td>
-       <td>el telf</td>
+       <td id="print_contac_nombre"></td>
+       <td id="print_contac_relacion"></td>
+       <td id="print_contac_telf"></td>
      </tr>
   </tbody>
 </table>
@@ -887,10 +890,10 @@ jQuery.namespace = function() {
 
 <div id="footer" >
 
-  <hr>  
+  <hr>
   <center><p>Av José Antonio Anzoátegui, Km 97
 Anaco, Estado Anzoátegui - Venezuela</p>
-  <p>Telf.(0282) 400.7000; 424.58.59 -Fax(0282) 424.11.89 
+  <p>Telf.(0282) 400.7000; 424.58.59 -Fax(0282) 424.11.89
     www.evergreenservice.net e-mail:info@evergreenservice.net</p>
 </center>
 </div>
