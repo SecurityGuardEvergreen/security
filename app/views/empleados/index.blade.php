@@ -526,21 +526,7 @@ jQuery.namespace = function() {
     return o;
 };
 
-// definition
-// jQuery.namespace( 'Elvis.debug' )
-// ;
-// Elvis.debug.test1 = function()
-// {   var namespace ="NOOOO";
-//     console.log( 'test1 function' +namespace);
-// };
-// Elvis.debug.test2 = function()
-// {
-//     console.log( 'test2 function' );
-// };
-// // usage
-// Elvis.debug.test1();
-// // Elvis.debug = null;
-// Elvis.debug.test2();
+
 // console.log(namespace);
     // var error_edad=false;
     var hoy = new Date();

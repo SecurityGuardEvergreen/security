@@ -145,26 +145,26 @@
 						<div class="col-md-12">
 							<div class="table-responsive hide">
 								<!-- Tabla prueba -->
-					<table id="table"  data-search="true"
-						data-show-refresh="true"
-						data-show-columns="true"
-						data-query-params="queryParams"
-						data-pagination="true"
-						data-classes="table table-hover">
-						 <thead>
-						<tr>			
-							<th data-field="ZONE" data-sortable="true">ZONE</th>
-							<th data-field="STATIONS" data-sortable="true">STATIONS</th>
-							<th data-field="GUARDS" data-sortable="true">GUARDS</th>
-							<th class="col-xs-1" data-field="ALERT" data-sortable="true">ALERT</th>
-							<th data-field="VIEW" data-sortable="true">VIEW</th>
-						</tr>
-						</thead>
-					</table>
+								<table id="table"  data-search="true"
+									data-show-refresh="true"
+									data-show-columns="true"
+									data-query-params="queryParams"
+									data-pagination="true"
+									data-classes="table table-hover">
+									 <thead>
+									<tr>			
+										<th data-field="ZONE" data-sortable="true">ZONE</th>
+										<th data-field="STATIONS" data-sortable="true">STATIONS</th>
+										<th data-field="GUARDS" data-sortable="true">GUARDS</th>
+										<th class="col-xs-1" data-field="ALERT" data-sortable="true">ALERT</th>
+										<th data-field="VIEW" data-sortable="true">VIEW</th>
+									</tr>
+									</thead>
+								</table>
 
 					<!-- Fin tabla prueba -->
 					  
-					</div>
+							</div>
 						</div>
 					</div>
 					

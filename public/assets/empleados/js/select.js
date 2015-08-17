@@ -27,7 +27,7 @@ jQuery('form').find('input[type=text], input[type=radio], input[type=checkbox], 
 
 
 	//Al iniciar mandamos consultar todos los paises que se mantienen en nuestra base de datos atravez de la ruta paises
-	$.getJSON('estados', function( estados ){
+	$.getJSON('/jornada/estados', function( estados ){
 		$('#estado').html('');
 		$('#estado').append($('<option></option>').text('Seleccione un estado....').val(''));
 		$.each(estados, function(i) {
@@ -40,7 +40,7 @@ jQuery('form').find('input[type=text], input[type=radio], input[type=checkbox], 
     //Cargando el municipio al cambiar el estado
 	$("#estado").change( function(event) {
 		$.ajax({
-			url: 'municipios',
+			url: '/jornada/municipios',
 			type: 'POST',
 			data: 'estado=' + $("#estado option:selected").val(),
 		}).done(function ( municipio ){
@@ -61,7 +61,7 @@ jQuery('form').find('input[type=text], input[type=radio], input[type=checkbox], 
 		// console.log('si');
 		var str =  $('#form-update-data').serialize();
 		$.ajax({
-			url: 'parroquias',
+			url: '/jornada/parroquias',
 			type: 'POST',
 			data: str,
 		}).done(function ( parroquia ){

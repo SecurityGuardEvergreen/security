@@ -24,10 +24,10 @@
     <!-- CONTACT US -->
     <section id="contact" class="section text-center">
         <div class="container">
-            <h2 class="section-title">Actualizaci&oacute;n de datos</h2>
+            <h2 class="section-title">Edici&oacute;n de datos</h2>
             <div class="row">
 
-        <a href="registros" class="btn btn-success" id="registros" name="registros">Ver registros</a>
+        <a href="../registros" class="btn btn-success" id="registros" name="registros">Ver registros</a>
 <!-- <input class="btn btn-primary" type="button" id="print" value="Imprimir"> -->
                 <!-- CONTACT FORM -->
 <div class="col-md-10 col-md-offset-1 text-left wow fadeInLeft" data-wow-duration="1s">
@@ -41,7 +41,7 @@
 
                 <div class="form-group">
                     <!-- &nbsp;&nbsp;&nbsp; -->
-                    <label for="centro" class="control-label">Centro de trabajo</label>
+                    <label for="centro" class="control-label">Centro de trabajo </label>
                     <div class="col-sm-12" id="centro_radio">
 
                         <div id="radios_centro" class="btn-group col-sm-12" data-toggle="buttons">
@@ -64,8 +64,8 @@
                           Otro
                           </label>
                         </div>
-
-
+    
+                    <input type="hidden" name="centro_edit" id="centro_edit" value="{{$data->data_user->centro}}">
                     </div>
 
                     <div id="nombre_otro_centro" class="col-sm-6 hide">
@@ -82,8 +82,8 @@
                 <div class="form-group">
 
                     <div class="col-sm-6">
-                        <label for="name" class="control-label">Nombre</label>
-                        {{Form::text('name',Input::old('name'),
+                        <label for="name" class="control-label">Nombre </label>
+                        {{Form::text('name',Input::old('name',$data->data_user->nombre),
                         array('autofocus','class' => 'form-control','id' => 'name',
                         'placeholder' => 'Ingrese su nombre',
                         'required'=>'required',
@@ -93,7 +93,7 @@
 
                     <div class="col-sm-6">
                          <label for="secondname" class="control-label">Segundo nombre</label>
-                        {{Form::text('secondname',Input::old('secondname'),
+                        {{Form::text('secondname',Input::old('secondname',$data->data_user->segundo_nombre),
                         array('autofocus','class' => 'form-control','id' => 'secondname',
                         'placeholder' => 'Ingrese su segundo nombre',
                         'title'=>'Necesitamos su segundo nombre')
@@ -105,7 +105,7 @@
 
                     <div class="col-sm-6">
                         <label for="lastname" class="control-label">Apellido</label>
-                        {{Form::text('lastname',Input::old('lastname'),
+                        {{Form::text('lastname',Input::old('lastname',$data->data_user->apellido),
                         array('autofocus','class' => 'form-control','id' => 'lastname',
                         'placeholder' => 'Ingrese su apellido',
                         'required'=>'required',
@@ -114,7 +114,7 @@
                     </div>
                     <div class="col-sm-6">
                         <label for="lastname" class="control-label">Segundo apellido</label>
-                        {{Form::text('lastname2',Input::old('lastname2'),
+                        {{Form::text('lastname2',Input::old('lastname2',$data->data_user->segundo_apellido),
                         array('autofocus','class' => 'form-control','id' => 'lastname2',
                         'placeholder' => 'Ingrese su segundo apellido',
                         'title'=>'Necesitamos su segundo apellido')
@@ -131,11 +131,12 @@
                              <option value="{{$prefi->id}}">{{strtoupper($prefi->sigla)}}-</option>
                             @endforeach
                         </select>
+                        <input type="hidden" name="cedprefi_edit" id="cedprefi_edit" value="{{$data->data_user->preficed_id}}">
                     </div>
 
                     <div class="col-sm-3" style="padding-left: 0px;">
-                        <label for="ced" class="control-label">.</label>
-                        {{Form::text('ced',Input::old('ced'),
+                        <label for="ced" class="control-label" style="color:#fff;">.</label>
+                        {{Form::text('ced',Input::old('ced',$data->data_user->ci),
                         array('autofocus',
                         'class' => 'form-control',
                         'id' => 'ced',
@@ -151,10 +152,11 @@
                              <option value="{{$rif->id}}">{{strtoupper($rif->sigla)}}-</option>
                             @endforeach
                         </select>
+                        <input type="hidden" name="rifprefi_edit" id="rifprefi_edit" value="{{$data->data_user->prefirif_id}}">
                     </div>
                     <div class="col-sm-3" style="padding-left: 0px;">
-                        <label for="rif" class="control-label">.</label>
-                        {{Form::text('rif',Input::old('rif'),
+                        <label for="rif" class="control-label" style="color:#fff;">.</label>
+                        {{Form::text('rif',Input::old('rif',$data->data_user->rif),
                         array('autofocus','class' => 'form-control','id' => 'rif',
                         'placeholder' => 'Ingrese su rif')
                         )}}
@@ -167,6 +169,7 @@
                             @foreach($data->marital as $situacion)
                              <option value="{{$situacion->id}}">{{$situacion->nombre}}</option>
                             @endforeach
+                            <input type="hidden" name="edo_civil_edit" id="edo_civil_edit" value="{{$data->data_user->maritalstatus_id}}">
 
                         </select>
                     </div>
@@ -177,7 +180,7 @@
                     <div class="col-sm-3">
                         <label for="nacimiento" class=" control-label">Fecha de nacimiento</label>
                         <div class='input-group date' id='nacimientocontrol' class="nacimientocontrol">
-                                    {{Form::text('nacimiento',Input::old('nacimiento'),
+                                    {{Form::text('nacimiento',Input::old('nacimiento',$data->data_user->fecha_nacimiento),
                                     array('autofocus','class' => 'form-control','id' => 'nacimiento',
                                     'placeholder' => 'Fecha de nacimiento',
                                     'required'=>'required',
@@ -207,6 +210,7 @@
                             <option value="2">Masculino</option>
 
                         </select>
+                        <input type="hidden" name="sexo_edit" id="sexo_edit" value="{{$data->data_user->sexo_id}}">
                     </div>
 
                     <div class="col-sm-3">
@@ -222,6 +226,7 @@
                             <option value="o+">O+</option>
                             <option value="o-">O-</option>
                         </select>
+                        <input type="hidden" name="sangre_edit" id="sangre_edit" value="{{$data->data_user->sangre_tipo}}">
                     </div>
 
                     <div class="col-sm-3">
@@ -233,6 +238,7 @@
                             <option value="ambidiestro">Ambidiestro</option>
 
                      </select>
+                     <input type="hidden" name="lateralidad_edit" id="lateralidad_edit" value="{{$data->data_user->lateralidad}}">
                     </div>
                 </div>
 
@@ -241,7 +247,7 @@
 
                     <div class="col-sm-3">
                         <label for="telf" class="control-label">N° Teléfono Fijo</label>
-                        {{Form::text('telf',Input::old('telf'),
+                        {{Form::text('telf',Input::old('telf',$data->data_user->telf_fijo),
                         array('autofocus','class' => 'form-control','id' => 'telf',
                         'placeholder' => 'Ingrese su teléfono')
                         )}}
@@ -249,7 +255,7 @@
 
                     <div class="col-sm-3">
                         <label for="telf_movil" class="control-label">N° Teléfono Movil</label>
-                        {{Form::text('telf_movil',Input::old('telf_movil'),
+                        {{Form::text('telf_movil',Input::old('telf_movil',$data->data_user->telf),
                         array('autofocus','class' => 'form-control','id' => 'telf_movil',
                         'placeholder' => 'Ingrese su teléfono',
                         'title'=>'Necesitamos su número de telefono')
@@ -263,6 +269,7 @@
                              <option value="{{$educacion->id}}">{{$educacion->nombre}}</option>
                             @endforeach
                         </select>
+                        <input type="hidden" name="niveledu_edit" id="niveledu_edit" value="{{$data->data_user->educationlevel_id}}">
                     </div>
                     <div class="col-sm-3">
                         <label for="cargo" class="control-label">Cargo en la empresa</label>
@@ -272,6 +279,7 @@
                              <option value="{{$cargo->id}}">{{$cargo->nombre}}</option>
                             @endforeach
                         </select>
+                        <input type="hidden" name="cargo_edit" id="cargo_edit" value="{{$data->data_user->cargo_id}}">
                     </div>
 
                 </div>
@@ -280,6 +288,7 @@
                     <div class="col-sm-4">
                         <label for="estado" class="control-label">Estado</label>
                         <select class="form-control" id="estado" name="estado" title="Seleccione el estado donde vive" required></select>
+                        <input type="hidden" name="estado_edit" id="estado_edit" value="{{$data->data_user->estado_id}}">
                     </div>
 
                     <div class="col-sm-4">
@@ -288,6 +297,7 @@
                             <option value="">-Seleccione un municipio</option>
 
                      </select>
+                     <input type="hidden" name="municipio_edit" id="municipio_edit" value="{{$data->data_user->municipio_id}}">
                     </div>
 
                     <div class="col-sm-4">
@@ -296,6 +306,7 @@
                             <option value="">-Seleccione parroquia</option>
 
                      </select>
+                     <input type="hidden" name="parroquia_edit" id="parroquia_edit" value="{{$data->data_user->parroquia_id}}">
                     </div>
                 </div>
 
@@ -303,7 +314,7 @@
                 <div class="form-group">
                     <label for="address" class="col-sm-1 control-label">Dirección</label>
                     <div class="col-sm-11">
-                        {{Form::text('address',Input::old('address'),
+                        {{Form::text('address',Input::old('address',$data->data_user->direccion),
                         array('autofocus','class' => 'form-control','id' => 'address',
                         'placeholder' => 'Ingrese su dirección completa',
                         'required'=>'required',
@@ -325,12 +336,13 @@
                 <div class="for-group">
                     <div id="div_discapacidad" class=" col-sm-12 hide">
                         <label for="discapacidad" class="control-label">Ingrese la discapacidad </label>
-                        {{Form::textarea('discapacidad',Input::old('discapacidad'),
+                        {{Form::textarea('discapacidad',Input::old('discapacidad',$data->data_user->discapacidad),
                         array('autofocus','class' => 'form-control','id' => 'discapacidad',
                         'placeholder' => 'De poseer alguna discapacidad ingresela aquí')
                         )}}
                         <br>
                     </div>
+                    <input type="hidden" name="discapacidad_edit" id="discapacidad_edit" value="{{$data->data_user->discapacidad}}">
                 </div>
                 <br>
                 <div class="for-group">
@@ -344,91 +356,159 @@
                       </label>
                     </div>
                 </div>
-
+                <input type="hidden" name="carga_edit" id="carga_edit" value="{{$data->cargaf}}">
+                           
                 <div id="carga_familiar" class="hide">
-
+                
                     <h3>Carga familiar</h3>
-                <div class="form-group">
+    <!-- ===========Carga Familiar=========== -->
+    @if($data->cargaf != 0)
 
-                     <div class="col-sm-12">
-                         <center><span class="label label-primary">Familiar # 1</span></center>
-                     </div>
+    @else  
+    
+<div class="form-group">
+       
+     <div class="col-sm-12">
+         <center><span class="label label-primary">Familiar # 1</span></center>
+     </div>
 
-                    <div class="col-sm-4">
-                        <label for="fullname1" class="control-label">Nombres </label>
-                        {{Form::text('fullname1',Input::old('fullname1'),
-                        array('autofocus','class' => 'form-control','id' => 'fullname1',
-                        'placeholder' => 'Nombres del familiar 1',
-                        'title'=>'Ingrese el nombre del familiar')
-                        )}}
-                    </div>
-                    <div class="col-sm-4">
-                        <label for="apellidofamiliar1" class="control-label">Apellidos</label>
-                        {{Form::text('apellidofamiliar1',Input::old('apellidofamiliar1'),
-                        array('autofocus','class' => 'form-control','id' => 'apellidofamiliar1',
-                        'placeholder' => 'Apellido del familiar 1',
-                        'title'=>'Ingrese el apellido del familiar')
-                        )}}
+    <div class="col-sm-4">
+        <label for="fullname1" class="control-label">Nombres </label>
+        {{Form::text('fullname1',Input::old('fullname1'),
+        array('autofocus','class' => 'form-control','id' => 'fullname1',
+        'placeholder' => 'Nombres del familiar 1',
+        'title'=>'Ingrese el nombre del familiar')
+        )}}
+    </div>
+    <div class="col-sm-4">
+        <label for="apellidofamiliar1" class="control-label">Apellidos</label>
+        {{Form::text('apellidofamiliar1',Input::old('apellidofamiliar1'),
+        array('autofocus','class' => 'form-control','id' => 'apellidofamiliar1',
+        'placeholder' => 'Apellido del familiar 1',
+        'title'=>'Ingrese el apellido del familiar')
+        )}}
 
-                    </div>
-                    <div class="col-sm-3">
-                        <label for="ced_familiar1" class="control-label">cédula</label>
-                        {{Form::text('ced_familiar1',Input::old('ced_familiar1'),
-                        array('autofocus','class' => 'form-control','id' => 'ced_familiar1',
-                        'placeholder' => 'Cédula del familiar 1',
-                        'title'=>'Ingrese el nombre completo del familiar')
-                        )}}
-                        <!-- <input type="text" class="form-control" name="ced_familiar1" id="ced_familiar1" placeholder="ingrese la cédula" required> -->
-                    </div>
-                    <div class="col-sm-3">
-                        <label for="parentesco1" class="control-label">Parentesco</label>
-                        {{Form::text('parentesco1',Input::old('parentesco1'),
-                        array('autofocus','class' => 'form-control','id' => 'parentesco1',
-                        'placeholder' => 'Ingrese el parentesco',
-                        'title'=>'¿Cuál es su parentesco?')
-                        )}}
-                    </div>
-                    <div class="col-sm-3">
-                        <label for="sexop1" class="control-label">Sexo</label>
-                        <select class="form-control" id="sexop1" name="sexop1" >
-                            <option value="">-</option>
-                            <option value="1">Femenino</option>
-                            <option value="2">Masculino</option>
+    </div>
+    <div class="col-sm-3">
+        <label for="ced_familiar1" class="control-label">cédula</label>
+        {{Form::text('ced_familiar1',Input::old('ced_familiar1'),
+        array('autofocus','class' => 'form-control','id' => 'ced_familiar1',
+        'placeholder' => 'Cédula del familiar 1',
+        'title'=>'Ingrese el nombre completo del familiar')
+        )}}
+        <!-- <input type="text" class="form-control" name="ced_familiar1" id="ced_familiar1" placeholder="ingrese la cédula" required> -->
+    </div>
+    <div class="col-sm-3">
+        <label for="parentesco1" class="control-label">Parentesco</label>
+        {{Form::text('parentesco1',Input::old('parentesco1'),
+        array('autofocus','class' => 'form-control','id' => 'parentesco1',
+        'placeholder' => 'Ingrese el parentesco',
+        'title'=>'¿Cuál es su parentesco?')
+        )}}
+    </div>
+    <div class="col-sm-3">
+        <label for="sexop1" class="control-label">Sexo</label>
+        <select class="form-control" id="sexop1" name="sexop1" >
+            <option value="">-</option>
+            <option value="1">Femenino</option>
+            <option value="2">Masculino</option>
 
-                        </select>
-                    </div>
-                    <div class="col-sm-3">
-                      <label for="nacimientop1" class=" control-label">Fecha de nacimiento</label>
-                        <div class='input-group date' id='nacimientocontrolp1' >
-                            <input type="text" class='form-control' id='nacimientop1' name='nacimientop1' placeholder='Fecha de nacimiento' title='Necesitamos saber cuando nació su familiar' >
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <label class="control-label">Edad</label>
-                        <br><br>
-                        <span id="edadempleadofamilia1" class="label label-success hide"></span>
-                    </div>
+        </select>
+    </div>
+    <div class="col-sm-3">
+      <label for="nacimientop1" class=" control-label">Fecha de nacimiento</label>
+        <div class='input-group date' id='nacimientocontrolp1' >
+            <input type="text" class='form-control' id='nacimientop1' name='nacimientop1' placeholder='Fecha de nacimiento' title='Necesitamos saber cuando nació su familiar' >
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <label class="control-label">Edad</label>
+        <br><br>
+        <span id="edadempleadofamilia1" class="label label-success hide"></span>
+    </div>
+</div>
+@endif
+<div id="parentescoAdd">
+@if($data->cargaf != 0)
+    <input type="hidden" id="cant_family" name="cant_family" value="{{count($data->data_familiar)}}">
+        @foreach($data->data_familiar as $key => $familia)
+            <div id="groupfamily{{$key+1}}"  class="form-group">
+                <hr>
+            <input type="hidden" id="edit_id_familiar{{$key+1}}" name="edit_id_familiar{{$key+1}}" value="{{$familia->id}}">
+            <div class="btn_familiar">
+                <a href="javascript:;" id="rmfa" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+            </div>
+             <div class="col-sm-12">
+                 <center><span class="label label-primary">Familiar # {{$key+1}}</span></center>
+             </div>
+
+            <div class="col-sm-4">
+                <label for="fullname{{$key+1}}" class="control-label">Nombres </label>
+                <input type="text" name="fullname{{$key+1}}" id="fullname{{$key+1}}" value="{{$familia->nombre}}" placeholder="Nombres del familiar {{$key+1}}" title="Ingrese el nombre del familiar" class="form-control">
+                
+            </div>
+            <div class="col-sm-4">
+                <label for="apellidofamiliar{{$key+1}}" class="control-label">Apellidos</label>
+                <input type="text" name="apellidofamiliar{{$key+1}}" id="apellidofamiliar{{$key+1}}" value="{{$familia->apellido}}" placeholder="Apellidos del familiar {{$key+1}}" title="Ingrese el apellido del familiar" class="form-control">
+            </div>
+            <div class="col-sm-3">
+                <label for="ced_familiar{{$key+1}}" class="control-label">cédula</label>
+                <input type="text" name="ced_familiar{{$key+1}}" id="ced_familiar{{$key+1}}" value="{{$familia->ced}}" placeholder="Cédula del familiar {{$key+1}}" title="Ingrese la cédula del familiar" class="form-control">
+            </div>
+
+            <div class="col-sm-3">
+                <label for="parentesco{{$key+1}}" class="control-label">Parentesco</label>
+                <input type="text" name="parentesco{{$key+1}}" id="parentesco{{$key+1}}" value="{{$familia->parentesco}}" placeholder="Parentesco del familiar {{$key+1}}" title="¿Cuál es su parentesco?" class="form-control">                
+            </div>
+            <div class="col-sm-3">
+                <label for="sexop{{$key+1}}" class="control-label">Sexo</label>
+                <select class="form-control" id="sexop{{$key+1}}" name="sexop{{$key+1}}" >
+                    <option value="">-</option>
+                    <option value="1">Femenino</option>
+                    <option value="2">Masculino</option>
+                </select>
+                <input type="hidden" id="edit_sexop{{$key+1}}" name="edit_sexop{{$key+1}}" value="{{$familia->sexo_id}}">
+            </div>
+            <div class="col-sm-3">
+              <label for="nacimientop{{$key+1}}" class=" control-label">Fecha de nacimiento</label>
+                <div class='input-group date' id='nacimientocontrolp{{$key+1}}' >
+                    <input type="text" class='form-control' id='nacimientop{{$key+1}}' name='nacimientop{{$key+1}}' value="{{$familia->nacimiento}}" placeholder='Fecha de nacimiento' title='Necesitamos saber cuando nació su familiar' >
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
                 </div>
+                
+            </div>
+            <div id="script{{$key+1}}" class="scriptf"></div>
+            <div class="col-sm-2">
+                <label class="control-label">Edad</label>
+                <br><br>
+                <span id="edadempleadofamilia{{$key+1}}" class="label label-success hide"></span>
+            </div>
+
+        </div>
+        
+        @endforeach
+@endif 
+</div>
+<!-- /parentescoAdd -->
+<input type="hidden" id="n_familiar" name="n_familiar" value="1">
 
 
-                <div id="parentescoAdd"></div>
-                <input type="hidden" id="n_familiar" name="n_familiar" value="1">
+<a href="javascript:;" id="add_parentesco" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle fa-lg"></i></a>
 
 
-                <a href="javascript:;" id="add_parentesco" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle fa-lg"></i></a>
-
-
-                </div>
-                <!-- /div carga_familiar -->
+</div>
+<!-- /div carga_familiar -->
 
                 <h3>PERSONA De CONTACTO EN CASO DE EMERGENCIA</h3>
                 <div class="form-group">
                     <div class="col-sm-4">
                         <label for="nombre_contacto" class="control-label">Nombre </label>
-                        {{Form::text('nombre_contacto',Input::old('nombre_contacto'),
+                        {{Form::text('nombre_contacto',Input::old('nombre_contacto',$data->data_user->nombre_contacto),
                         array('autofocus','class' => 'form-control','id' => 'nombre_contacto',
                         'placeholder' => 'Nombre completo del conctacto',
                         'title'=>'Es importante para nosotros tener el nombre del contacto en caso de emergencia.',
@@ -437,7 +517,7 @@
                     </div>
                     <div class="col-sm-4">
                         <label for="rela_contacto" class="control-label">Relación</label>
-                        {{Form::text('rela_contacto',Input::old('rela_contacto'),
+                        {{Form::text('rela_contacto',Input::old('rela_contacto',$data->data_user->rela_contacto),
                         array('autofocus','class' => 'form-control','id' => 'rela_contacto',
                         'placeholder' => '¿Cuál es su relación? Ejm (Vecino)',
                         'title'=>'Es sumamente importante que ingrese su relación con el contacto',
@@ -446,7 +526,7 @@
                     </div>
                     <div class="col-sm-4">
                         <label for="telf_contacto" class="control-label">Teléfono</label>
-                        {{Form::text('telf_contacto',Input::old('telf_contacto'),
+                        {{Form::text('telf_contacto',Input::old('telf_contacto',$data->data_user->telf_contacto),
                         array('autofocus','class' => 'form-control','id' => 'telf_contacto',
                         'placeholder' => 'Número telefónico del contacto',
                         'title'=>'Es sumamente importante que ingrese el número telefónico del contacto',
@@ -462,9 +542,9 @@
                         <div id="mensajeajax"></div>
 
                         <!-- <div class="btn-group" role="group" aria-label="..."> -->
-                            <button type="reset" id="btn_reset" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo registro</button>
+                            <a href="/jornada/staff" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo registro</a>
                             <button  type="submit" id="btn_update" class="btn btn-success"><i class="fa fa-floppy-o"></i> Agregar registro</button>
-                            <a id="btn_print_f" class="btn btn-success disabled"><i class="fa fa-print"></i> Imprimir</a>
+                            <a id="btn_print_f" class="btn btn-success "><i class="fa fa-print"></i> Imprimir</a>
 
                         <!-- </div> -->
                   </center>
@@ -501,12 +581,13 @@
 <script src="/assets/empleados/js/wow.min.js"></script>
 <script src="/assets/empleados/js/prettyPhoto.js"></script>
 <script src="/assets/empleados/js/owl.carousel.min.js"></script>
-    <script src="/assets/empleados/js/main.js"></script>
-    <script src="/assets/empleados/js/moment-locales.js"></script>
-    <script src="/assets/empleados/js/bootstrap-datetimepicker.js"></script>
-    <script src="/assets/empleados/js/jquery.validate.js"></script>
-    <script src="/assets/empleados/js/localization/messages_es.js"></script>
-    <script src="/assets/empleados/js/select.js"></script>
+<script src="/assets/empleados/js/main.js"></script>
+<script src="/assets/empleados/js/moment-locales.js"></script>
+<script src="/assets/empleados/js/bootstrap-datetimepicker.js"></script>
+<script src="/assets/empleados/js/jquery.validate.js"></script>
+<script src="/assets/empleados/js/localization/messages_es.js"></script>
+<script src="/assets/empleados/js/select.js"></script>
+<script src="/assets/empleados/js/edit.js"></script>
 
 
 

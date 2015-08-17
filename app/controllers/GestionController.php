@@ -293,6 +293,14 @@ public function data_empleados(){
 // editando el registro
 
 public function edit($ced){
+$data = new stdclass;
+$data->cargo = Cargo::all();
+$data->preficed = Preficed::all();
+$data->rif= Rif::all();
+$data->educacion = Educationlevel::orderBy('id', 'asc')->get();
+$data->marital = Maritalstatu::orderBy('nombre', 'asc')->get();
+$data->title = "Edición del usuartio";
+
 $tipo = substr($ced,0,1);
 $ced = substr($ced, 2,strlen($ced));
 $prefi = Preficed::where('sigla','=',$tipo)->first();
@@ -300,26 +308,40 @@ $prefi = Preficed::where('sigla','=',$tipo)->first();
 $data_user = Empleado::join('preficeds','empleados.preficed_id','=','preficeds.id')
         ->join('rifs','empleados.prefirif_id','=','rifs.id')
         ->join('cargos','empleados.cargo_id','=','cargos.id')
-        ->join('estados','empleados.estado_id','=','estados.id')
-        ->join('municipios','empleados.municipio_id','=','municipios.id')
-        ->join('parroquias','empleados.parroquia_id','=','parroquias.id')
-        ->select('estados.nombre as estado',
-          'municipios.nombre as municipio','parroquias.nombre as parroquia',
-          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*')
+        ->select('cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*')
         ->where('preficed_id','=',$prefi->id)
         ->where('ci','=',$ced)->first();
 $data_familiar = Familiar::where('empleado_id','=',$data_user->id)->get() ;
 
 
-echo $data_user->municipio;
-echo '<br>';
 if($data_familiar->isEmpty()){
-  echo "si <br>";
+  $data->cargaf = 0;
 }else{
-  echo "no <br>";
+  $data->cargaf = 1;
+  $data->data_familiar = $data_familiar;
 }
-var_dump($data_familiar);
+
+$data->data_user = $data_user;
+
+
+// print_r($data_user->estado_id);echo '<br>';
+// print_r($data_user->municipio_id);echo '<br>';
+// print_r($data_user->parroquia_id);
+// $estado = Estado::all();
+// $municipio = Municipio::where('estado_id','=',$data_user->estado_id)->get();
+// $parroquia = Parroquia::where('municipio_id','=',$data_user->municipio_id)->get();
+// echo '<br>Estados';
+
+// // var_dump($data_user);
+
+// echo '<br>';
+// echo '<br>';
+
+// var_dump($data_familiar);
   // return $ced.' '.$tipo;
+
+return View::make('empleados.edit')->with('data',$data);
+
 }
 
   } // Fin function

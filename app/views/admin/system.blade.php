@@ -190,31 +190,31 @@
                             </center>
                             <!-- /Boton add user -->
                                        <!-- Tabla -->
-                                       <div class="table-responsive ">
-                        <!-- Fin tabla prueba -->
-                        <table data-toggle="table"
-                            data-url="/admin/data_user"
-                            data-search="true"
-                            data-show-refresh="true"
-                            data-show-columns="true"
-                            data-query-params="queryParams"
-                            data-pagination="true"
-                            data-classes="table table-hover"
-                               >
-                            <thead>
-                            <tr>            
-                                        <th data-field="name" data-sortable="true">NOMBRE</th>
-                                        <th data-field="nickname" data-sortable="true">NICKNAME</th>
-                                        <th data-field="telf" data-sortable="true">TELÉFONO PERSONAL</th>
-                                        <th data-field="ext" data-sortable="true">Ext</th>
-                                        <th class="col-xs-1" data-field="email" data-sortable="true">EMAIL</th>
-                                        <th data-field="address" data-sortable="true">DIRECCIÓN</th>
-                                        <th data-field="type" data-sortable="true">TIPO DE USUARIO</th>
-                                    </tr>
-                            </thead>
-                        </table>
+        <div class="table-responsive ">
+        <!-- Fin tabla prueba -->
+        <table data-toggle="table"
+            data-url="/admin/data_user"
+            data-search="true"
+            data-show-refresh="true"
+            data-show-columns="true"
+            data-query-params="queryParams"
+            data-pagination="true"
+            data-classes="table table-hover"
+               >
+            <thead>
+            <tr>            
+                <th data-field="name" data-sortable="true">NOMBRE</th>
+                <th data-field="nickname" data-sortable="true">NICKNAME</th>
+                <th data-field="telf" data-sortable="true">TELÉFONO PERSONAL</th>
+                <th data-field="ext" data-sortable="true">Ext</th>
+                <th class="col-xs-1" data-field="email" data-sortable="true">EMAIL</th>
+                <th data-field="address" data-sortable="true">DIRECCIÓN</th>
+                <th data-field="type" data-sortable="true">TIPO DE USUARIO</th>
+            </tr>
+            </thead>
+        </table>
 
-                        </div>
+        </div>
                                        <!-- /Tabla -->
                          @endif
                          <!-- End if addUser -->
