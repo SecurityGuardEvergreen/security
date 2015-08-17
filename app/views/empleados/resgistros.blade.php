@@ -24,6 +24,9 @@
         '</a>'
     ].join('');
 }
+function nameFormatter(value) {
+    return '<a href="edit/' + value + '">' + value + '</a>';
+}
 
 	window.actionEvents = {
     'click .edit': function (e, value, row, index) {
@@ -46,6 +49,9 @@
 <style type="text/css">
 	.ced{
 		width: 0.3%;
+	}
+	.upper{
+		text-transform: capitalize;
 	}
 </style>
 <section id="get-trial" class="section text-center">
@@ -76,11 +82,10 @@
 			    data-classes="table table-hover"
 			       >
 			    <thead>
-			    <tr>            
+			    <tr>
 		            <th data-field="nombre" data-sortable="true">Nombre</th>
 		            <th data-field="apellido" data-sortable="true">Apellido</th>
-		            <th class="ced" data-field="sigla_ced" data-sortable="true">Tipo</th>
-		            <th data-field="ci" data-sortable="true">Cédula</th>
+		            <th class="upper" data-field="full_ced" data-sortable="true" data-formatter="nameFormatter">Cédula</th>
 		            <th data-field="cargo" data-sortable="true">Cargo</th>
 		            <th data-field="centro" data-sortable="true">Centro de trabajo</th>
 		            <th data-field="estado" data-sortable="true">Estado</th>

@@ -283,12 +283,43 @@ public function data_empleados(){
         ->join('estados','empleados.estado_id','=','estados.id')
         ->join('municipios','empleados.municipio_id','=','municipios.id')
         ->join('parroquias','empleados.parroquia_id','=','parroquias.id')
-        ->select('preficeds.sigla as sigla_ced','estados.nombre as estado',
+        ->select('estados.nombre as estado',
           'municipios.nombre as municipio','parroquias.nombre as parroquia',
-          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*')->get();
+          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*',DB::raw('CONCAT(preficeds.sigla, "-", ci) as full_ced'))->get();
 
     return json_encode($user);
 }
 
+// editando el registro
+
+public function edit($ced){
+$tipo = substr($ced,0,1);
+$ced = substr($ced, 2,strlen($ced));
+$prefi = Preficed::where('sigla','=',$tipo)->first();
+
+$data_user = Empleado::join('preficeds','empleados.preficed_id','=','preficeds.id')
+        ->join('rifs','empleados.prefirif_id','=','rifs.id')
+        ->join('cargos','empleados.cargo_id','=','cargos.id')
+        ->join('estados','empleados.estado_id','=','estados.id')
+        ->join('municipios','empleados.municipio_id','=','municipios.id')
+        ->join('parroquias','empleados.parroquia_id','=','parroquias.id')
+        ->select('estados.nombre as estado',
+          'municipios.nombre as municipio','parroquias.nombre as parroquia',
+          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*')
+        ->where('preficed_id','=',$prefi->id)
+        ->where('ci','=',$ced)->first();
+$data_familiar = Familiar::where('empleado_id','=',$data_user->id)->get() ;
+
+
+echo $data_user->municipio;
+echo '<br>';
+if($data_familiar->isEmpty()){
+  echo "si <br>";
+}else{
+  echo "no <br>";
+}
+var_dump($data_familiar);
+  // return $ced.' '.$tipo;
+}
 
   } // Fin function

@@ -1,8 +1,8 @@
 
 
 #footer,#imprime {
-display: block !important; 
-} 
+display: block !important;
+}
 
 .td_h{
 width:220px;
@@ -74,7 +74,7 @@ body, #imprimir, #footer {
   padding-top: 10px;
   text-transform: capitalize;
   text-align: center;
-  
+
   /*margin-left: 20px;*/
 }
 
@@ -89,7 +89,7 @@ body, #imprimir, #footer {
   padding-top: 10px;
   text-transform: capitalize;
   text-align: center;
-  
+
 }
 
 .clearfix:after {
@@ -106,4 +106,10 @@ body, #imprimir, #footer {
 }
 
 /*============Magia==========*/
+
+@page {
+  /*size: 5.5in 8.5in;*/
+  /*margin: 20pt 30pt 0pt;*/
+  margin-bottom: 10pt;
+}
 

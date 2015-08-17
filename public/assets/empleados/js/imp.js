@@ -96,7 +96,7 @@ $("#imprime").print({
   //Use Global styles
   globalStyles : true,
   //Add link with attrbute media=print
-  mediaPrint : false,
+  mediaPrint : true,
   //Custom stylesheet
   stylesheet : "/assets/empleados/css/print.css",
   //Print in a hidden iframe

@@ -68,7 +68,9 @@ Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 	Route::post('procesar2','GestionController@procesar2');
 	Route::post('pdf','GestionController@pdf');
 
+
 	Route::any('registros',array("before" => "roles:4-5,/",'uses' => 'GestionController@registros'));
+	Route::any('edit/{ced?}',array("before" => "roles:4-5,/",'uses' => 'GestionController@edit'));
 
 	Route::get('gestion',function(){
 	return View::make('gestion.index');
