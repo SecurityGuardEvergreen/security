@@ -73,6 +73,7 @@ $('#print_empleado_firma').text(print_empleado_firma);
 
 // realizando la carga dinámica de los familiares
 n_n = $("#n_familiar").val();
+
 if(n_n>1){
   for (var i = 2; i <= n_n; i++) {
     print_parent_nombre = $('#fullname'+i).val()+' '+$('#apellidofamiliar'+i).val();
@@ -88,6 +89,7 @@ if(n_n>1){
     $('#print_parent_nacimiento'+i).text(print_parent_nacimiento);
     $('#print_parent_edad'+i).text(print_parent_edad);
     $('#print_parent_sexo'+i).text(print_parent_sexo);
+    
   };
 }
 

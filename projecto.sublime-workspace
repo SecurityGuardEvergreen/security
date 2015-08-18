@@ -736,8 +736,8 @@
 						"selection":
 						[
 							[
-								23331,
-								23331
+								23390,
+								23390
 							]
 						],
 						"settings":
@@ -845,6 +845,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 86.0,
+	"side_bar_width": 109.0,
 	"status_bar_visible": true
 }

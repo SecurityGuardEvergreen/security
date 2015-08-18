@@ -33,12 +33,12 @@
 <div class="col-md-10 col-md-offset-1 text-left wow fadeInLeft" data-wow-duration="1s">
 <!-- Form dos -->
 {{ Form::open(array(
-            'url'  => '/procesar',
+            'url'  => 'jornada/save',
             'method' => 'post',
             'class' => 'form-horizontal',
             'name'=>'form-update-data',
             'id'=>'form-update-data')) }}
-
+            
                 <div class="form-group">
                     <!-- &nbsp;&nbsp;&nbsp; -->
                     <label for="centro" class="control-label">Centro de trabajo </label>
@@ -82,6 +82,7 @@
                 <div class="form-group">
 
                     <div class="col-sm-6">
+
                         <label for="name" class="control-label">Nombre </label>
                         {{Form::text('name',Input::old('name',$data->data_user->nombre),
                         array('autofocus','class' => 'form-control','id' => 'name',
@@ -90,6 +91,7 @@
                         'title'=>'Necesitamos su nombre')
                         )}}
                     </div>
+                    <input type="hidden" id="id_update_empleado" name="id_update_empleado" value="{{$data->data_user->id}}">
 
                     <div class="col-sm-6">
                          <label for="secondname" class="control-label">Segundo nombre</label>
@@ -363,7 +365,7 @@
                     <h3>Carga familiar</h3>
     <!-- ===========Carga Familiar=========== -->
     @if($data->cargaf != 0)
-
+    
     @else  
     
 <div class="form-group">
@@ -435,33 +437,34 @@
 @if($data->cargaf != 0)
     <input type="hidden" id="cant_family" name="cant_family" value="{{count($data->data_familiar)}}">
         @foreach($data->data_familiar as $key => $familia)
-            <div id="groupfamily{{$key+1}}"  class="form-group">
+            <div id="groupfamilyEdit{{$key+1}}"  class="form-group cuenta ">
                 <hr>
             <input type="hidden" id="edit_id_familiar{{$key+1}}" name="edit_id_familiar{{$key+1}}" value="{{$familia->id}}">
             <div class="btn_familiar">
-                <a href="javascript:;" id="rmfa" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                <a href="javascript:;" id="rmfaedit" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
             </div>
              <div class="col-sm-12">
-                 <center><span class="label label-primary">Familiar # {{$key+1}}</span></center>
+                 <center><span class="label label-warning label_family">Familiar existente # {{$key+1}}</span></center>
              </div>
 
             <div class="col-sm-4">
-                <label for="fullname{{$key+1}}" class="control-label">Nombres </label>
-                <input type="text" name="fullname{{$key+1}}" id="fullname{{$key+1}}" value="{{$familia->nombre}}" placeholder="Nombres del familiar {{$key+1}}" title="Ingrese el nombre del familiar" class="form-control">
+
+                <label for="fullnameEdit{{$key+1}}" class="control-label">Nombres </label>
+                <input type="text" name="fullnameEdit{{$key+1}}" id="fullnameEdit{{$key+1}}" value="{{$familia->nombre}}" placeholder="Nombres del familiar {{$key+1}}" title="Ingrese el nombre del familiar" class="form-control">
                 
             </div>
             <div class="col-sm-4">
-                <label for="apellidofamiliar{{$key+1}}" class="control-label">Apellidos</label>
-                <input type="text" name="apellidofamiliar{{$key+1}}" id="apellidofamiliar{{$key+1}}" value="{{$familia->apellido}}" placeholder="Apellidos del familiar {{$key+1}}" title="Ingrese el apellido del familiar" class="form-control">
+                <label for="apellidofamiliarEdit{{$key+1}}" class="control-label">Apellidos</label>
+                <input type="text" name="apellidofamiliarEdit{{$key+1}}" id="apellidofamiliarEdit{{$key+1}}" value="{{$familia->apellido}}" placeholder="Apellidos del familiar {{$key+1}}" title="Ingrese el apellido del familiar" class="form-control">
             </div>
             <div class="col-sm-3">
-                <label for="ced_familiar{{$key+1}}" class="control-label">cédula</label>
-                <input type="text" name="ced_familiar{{$key+1}}" id="ced_familiar{{$key+1}}" value="{{$familia->ced}}" placeholder="Cédula del familiar {{$key+1}}" title="Ingrese la cédula del familiar" class="form-control">
+                <label for="ced_familiarEdit{{$key+1}}" class="control-label">cédula</label>
+                <input type="text" name="ced_familiarEdit{{$key+1}}" id="ced_familiarEdit{{$key+1}}" value="{{$familia->ced}}" placeholder="Cédula del familiar {{$key+1}}" title="Ingrese la cédula del familiar" class="form-control">
             </div>
 
             <div class="col-sm-3">
-                <label for="parentesco{{$key+1}}" class="control-label">Parentesco</label>
-                <input type="text" name="parentesco{{$key+1}}" id="parentesco{{$key+1}}" value="{{$familia->parentesco}}" placeholder="Parentesco del familiar {{$key+1}}" title="¿Cuál es su parentesco?" class="form-control">                
+                <label for="parentescoEdit{{$key+1}}" class="control-label">Parentesco</label>
+                <input type="text" name="parentescoEdit{{$key+1}}" id="parentescoEdit{{$key+1}}" value="{{$familia->parentesco}}" placeholder="Parentesco del familiar {{$key+1}}" title="¿Cuál es su parentesco?" class="form-control">                
             </div>
             <div class="col-sm-3">
                 <label for="sexop{{$key+1}}" class="control-label">Sexo</label>
@@ -473,9 +476,9 @@
                 <input type="hidden" id="edit_sexop{{$key+1}}" name="edit_sexop{{$key+1}}" value="{{$familia->sexo_id}}">
             </div>
             <div class="col-sm-3">
-              <label for="nacimientop{{$key+1}}" class=" control-label">Fecha de nacimiento</label>
+              <label for="nacimientopEdit{{$key+1}}" class=" control-label">Fecha de nacimiento</label>
                 <div class='input-group date' id='nacimientocontrolp{{$key+1}}' >
-                    <input type="text" class='form-control' id='nacimientop{{$key+1}}' name='nacimientop{{$key+1}}' value="{{$familia->nacimiento}}" placeholder='Fecha de nacimiento' title='Necesitamos saber cuando nació su familiar' >
+                    <input type="text" class='form-control' id='nacimientopEdit{{$key+1}}' name='nacimientopEdit{{$key+1}}' value="{{$familia->nacimiento}}" placeholder='Fecha de nacimiento' title='Necesitamos saber cuando nació su familiar' >
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -543,7 +546,7 @@
 
                         <!-- <div class="btn-group" role="group" aria-label="..."> -->
                             <a href="/jornada/staff" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo registro</a>
-                            <button  type="submit" id="btn_update" class="btn btn-success"><i class="fa fa-floppy-o"></i> Agregar registro</button>
+                            <button  type="submit" id="btn_save" class="btn btn-success"><i class="fa fa-floppy-o"></i> Guardar cambios</button>
                             <a id="btn_print_f" class="btn btn-success "><i class="fa fa-print"></i> Imprimir</a>
 
                         <!-- </div> -->
@@ -554,6 +557,7 @@
 
                 </div>
               </div>
+              <input type="hidden" id="dele" name="dele">
             {{ Form::close() }}
 
             <!-- /form user -->
@@ -746,7 +750,7 @@ jQuery.namespace = function() {
         <td style="text-align:right;border-top-style:none;"><b>EGS-AD-PR-02-F</b></td>
       </tr>
       <tr>
-        <td colspan="3" style="text-align:center;">Actualización de datos de los empleados</td>
+        <td colspan="3" style="text-align:center;"><h4>Actualización de datos de los empleados</h4></td>
       </tr>
     </tbody>
   </table>
@@ -778,7 +782,7 @@ jQuery.namespace = function() {
   <table>
     <tbody>
       <tr>
-        <td class="td_h" colspan="2">nombre</td>
+        <td class="td_h" colspan="2">Primer nombre</td>
         <td class="td_h" colspan="2">Segundo Nombre</td>
       </tr>
       <tr>
@@ -786,7 +790,7 @@ jQuery.namespace = function() {
         <td colspan="2" id="print_segundonombre"></td>
       </tr>
       <tr>
-        <td class="td_h" colspan="2">apellido</td>
+        <td class="td_h" colspan="2">Primer apellido</td>
         <td class="td_h" colspan="2">segundo apellido</td>
       </tr>
       <tr>
@@ -861,20 +865,25 @@ jQuery.namespace = function() {
       <td class="td_h" style="width:88px;">edad</td>
       <td class="td_h" style="width:88px;">sexo</td>
     </tr>
-    <tr>
-      <td id="print_parent_nombre1"></td>
-      <td id="print_parent_cedula1"></td>
-      <td id="print_parent_parentesco1"></td>
-      <td id="print_parent_nacimiento1"></td>
-      <td id="print_parent_edad1"></td>
-      <td id="print_parent_sexo1"></td>
+    
+    @if($data->cargaf != 0)
+    @foreach($data->data_familiar as $key => $familia)
+    <tr id="print_{{$key+1}}">
+      <td id="print_parent_nombreEdit{{$key+1}}">{{$familia->nombre}}</td>
+      <td id="print_parent_cedulaEdit{{$key+1}}">{{$familia->ced}}</td>
+      <td id="print_parent_parentescoEdit{{$key+1}}">{{$familia->parentesco}}</td>
+      <td id="print_parent_nacimientoEdit{{$key+1}}">{{$familia->nacimiento}}</td>
+      <td id="print_parent_edadEdit{{$key+1}}"></td>
+      <td id="print_parent_sexoEdit{{$key+1}}"></td>
     </tr>
+    @endforeach
+    @endif
 
 
   </tbody>
 </table>
 <!-- Fin carga familiar -->
-<h5>persona de contacto en casdo de emergencia</h5>
+<h5>persona de contacto en caso de emergencia</h5>
 <table>
   <tbody>
      <tr>

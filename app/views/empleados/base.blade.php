@@ -2,7 +2,7 @@
 <html lang="es"  class="no-js">
 <head>
     <meta charset="utf-8">
-    <title>{{$data->title}} | Evergreen Services</title>
+    <title>{{$data->title}} | Evergreen Service C.A</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

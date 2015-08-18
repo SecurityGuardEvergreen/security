@@ -87,9 +87,9 @@ return $pdf->download('invoice.pdf');
 // ==========Procesar datos creados
 public function procesar(){
 
-  $respuesta = array('respuesta' => '',
-          'insert'=>false,
-          'update'=>false );
+$respuesta = array('respuesta' => '',
+        'insert'=>false,
+        'update'=>false );
   // Capturando cantidad de familires
   $empleado = new Empleado;
   $familiar = new Familiar;
@@ -324,24 +324,143 @@ if($data_familiar->isEmpty()){
 $data->data_user = $data_user;
 
 
-// print_r($data_user->estado_id);echo '<br>';
-// print_r($data_user->municipio_id);echo '<br>';
-// print_r($data_user->parroquia_id);
-// $estado = Estado::all();
-// $municipio = Municipio::where('estado_id','=',$data_user->estado_id)->get();
-// $parroquia = Parroquia::where('municipio_id','=',$data_user->municipio_id)->get();
-// echo '<br>Estados';
-
-// // var_dump($data_user);
-
-// echo '<br>';
-// echo '<br>';
-
-// var_dump($data_familiar);
-  // return $ced.' '.$tipo;
-
 return View::make('empleados.edit')->with('data',$data);
 
 }
+
+// Función para guardar los registros editados
+public function save(){
+$respuesta = array();
+// Capturando cantidad de familires
+  $empleado = new Empleado;
+  $familiar = new Familiar;
+  // Datos del empleado
+  $centro = Input::get('centro');
+  $nombre = Input::get('name');
+  $secondname = Input::get('secondname');
+  $lastname = Input::get('lastname');
+  $lastname2 = Input::get('lastname2');
+  $tipo_ced = Input::get('tipo_ced');
+  $ced_empleado = Input::get('ced');
+  $tipo_rif = Input::get('tipo_rif');
+  $rif = Input::get('rif');
+  $edo_civil = Input::get('edo_civil');
+  $nacimiento = Input::get('nacimiento');
+  $sexo = Input::get('sexo');
+  $blood = Input::get('blood');
+  $lateralidad = Input::get('lateralidad');
+  $telf = Input::get('telf');
+  $telf_movil = Input::get('telf_movil');
+  $educacion = Input::get('educacion');
+  $cargo = Input::get('cargo');
+  $estado = Input::get('estado');
+  $municipio = Input::get('municipio');
+  $parroquia = Input::get('parroquia');
+  $address = Input::get('address');
+  $discapacidad = Input::get('discapacidad');
+  $n_familiar = Input::get('n_familiar');
+  $nombre_contacto =Input::get('nombre_contacto');
+  $telf_contacto =Input::get('telf_contacto');
+  $rela_contacto = Input::get('rela_contacto');
+  $id_update = Input::get('id_update_empleado');
+
+  $user_id_log = Auth::id();
+
+// Fin captura de datos
+
+// Actualizando datos del empleado
+
+$up_empleado_base = Empleado::where('id',$id_update)
+->update(array(
+  "centro"=>$centro,
+  "nombre" =>$nombre,
+  "segundo_nombre" =>$secondname,
+  "apellido" =>$lastname,
+  "segundo_apellido" =>$lastname2,
+  "preficed_id" =>$tipo_ced,
+  "ci" =>$ced_empleado,
+  "prefirif_id" => $tipo_rif,
+  "rif" =>$rif,
+  "maritalstatus_id" =>$edo_civil,
+  "fecha_nacimiento" =>$nacimiento,
+  "sexo_id" =>$sexo,
+  "sangre_tipo" =>$blood,
+  "lateralidad" =>$lateralidad,
+  "telf_fijo" =>$telf,
+  "telf" =>$telf_movil,
+  "educationlevel_id" =>$educacion,
+  "cargo_id" =>$cargo,
+  "estado_id" =>$estado,
+  "municipio_id" =>$municipio,
+  "parroquia_id" =>$parroquia,
+  "direccion" =>$address,
+  "discapacidad" =>$discapacidad,
+  "nombre_contacto" =>$nombre_contacto,
+  "rela_contacto" =>$rela_contacto,
+  "telf_contacto" =>$telf_contacto,
+  "user_id_update" =>$user_id_log
+  ));
+
+// Actualizando datos del empleado
+
+// Actualizado correctamente
+$respuesta['Update_empleado'] = $up_empleado_base;
+$respuesta['Mensaje'] = "<strong>Excelente!</strong> Los cambios fueron realizados exitosamente !!!";
+
+
+
+$familia_update = Input::get('cant_family');
+$n_familiar = Input::get('n_familiar');
+
+$familyInsert = $n_familiar - $familia_update;
+
+
+// Actualización dinámica del familiar 
+for ($i=1; $i <= $familia_update; $i++) { 
+  # code...
+
+$update_fa1 =   Familiar::where('id',Input::get('edit_id_familiar'.$i))
+    ->update(array(      
+      "nombre" =>Input::get('fullnameEdit'.$i),
+      "apellido" =>Input::get('apellidofamiliarEdit'.$i),
+      "ced" =>Input::get('ced_familiarEdit'.$i),
+      "parentesco" =>Input::get('parentescoEdit'.$i),
+      "nacimiento" =>Input::get('nacimientopEdit'.$i),
+      "sexo_id" =>Input::get('sexop'.$i)
+      ));
+
+} // fin for
+$respuesta['update_fa_dinamic'] = $update_fa1;
+// Actualización dinámica del familiar 
+
+
+// Inserción dinámica de los familiares
+
+for ($i=1; $i <= $familyInsert ; $i++) { 
+  # code...
+  $familiar ->nombre= Input::get('fullname'.$i);
+  $familiar ->apellido= Input::get('apellidofamiliar'.$i);
+  $familiar ->ced= Input::get('ced_familiar'.$i);
+  $familiar ->parentesco= Input::get('parentesco'.$i);
+  $familiar ->nacimiento= Input::get('nacimientop'.$i);
+  $familiar ->sexo_id= Input::get('sexop'.$i);
+  $familiar ->empleado_id= $id_update;
+  $familiar->save();
+}
+// Inserción dinámica de los familiares 
+
+
+
+// Eliminando Registros
+$dele = Input::get('dele');
+$ids = explode(',',$dele);
+$respu = Familiar::destroy($ids);
+
+//  Eliminando Registros
+$respuesta['borrado_family_dinamic'] = $respu;
+
+return $respuesta;
+
+} // fin function save
 
   } // Fin function

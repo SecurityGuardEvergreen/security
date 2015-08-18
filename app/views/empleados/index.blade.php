@@ -464,7 +464,7 @@
                         <!-- <div class="btn-group" role="group" aria-label="..."> -->
                             <button type="reset" id="btn_reset" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo registro</button>
                             <button  type="submit" id="btn_update" class="btn btn-success"><i class="fa fa-floppy-o"></i> Agregar registro</button>
-                            <a id="btn_print_f" class="btn btn-success "><i class="fa fa-print"></i> Imprimir</a>
+                            <a id="btn_print_f" class="btn btn-success disabled"><i class="fa fa-print"></i> Imprimir</a>
 
                         <!-- </div> -->
                   </center>
@@ -683,7 +683,7 @@ jQuery.namespace = function() {
   <table>
     <tbody>
       <tr>
-        <td class="td_h" colspan="2">nombre</td>
+        <td class="td_h" colspan="2">Primer nombre</td>
         <td class="td_h" colspan="2">Segundo Nombre</td>
       </tr>
       <tr>
@@ -691,7 +691,7 @@ jQuery.namespace = function() {
         <td colspan="2" id="print_segundonombre"></td>
       </tr>
       <tr>
-        <td class="td_h" colspan="2">apellido</td>
+        <td class="td_h" colspan="2">Primer apellido</td>
         <td class="td_h" colspan="2">segundo apellido</td>
       </tr>
       <tr>
@@ -779,7 +779,7 @@ jQuery.namespace = function() {
   </tbody>
 </table>
 <!-- Fin carga familiar -->
-<h5>persona de contacto en casdo de emergencia</h5>
+<h5>persona de contacto en casPrimer o de emergencia</h5>
 <table>
   <tbody>
      <tr>

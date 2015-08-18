@@ -3,8 +3,10 @@ $(function(){
 	radio= $("input[name=centro]");
 	radio_edit = $('#centro_edit').val();
 	centro=false;
+
 	for (var i = 0; i < radio.length; i++) {
 		if(radio[i].defaultValue==radio_edit){
+
 			$('#'+radio[i].id).parent().addClass('active');
 			centro = true;
 			radio[i].defaultChecked = true;
@@ -12,11 +14,12 @@ $(function(){
 	}
 	// Caso de que no se consiga el centro
 	if(centro==false){
+		$('#centroOpcion4').attr('checked','checked');
 		$('#centroOpcion4').parent().addClass('active');
 		$('#nombre_otro_centro').removeClass('hide');
 		$('#input_otro_centro').val(radio_edit);
-		$('#centroOpcion4').val(radio_edit);		
-
+		$('#centroOpcion4').val(radio_edit);
+		
 	}
 
 	// ============== Fin asignando el centro ================
@@ -159,6 +162,8 @@ if($('#carga_edit').val()!= 0){
 
 // =============Determinando sexo family dinamic ==============
 tam_family=$('#cant_family').val();
+$('#n_familiar').val(tam_family);
+// console.log($('#n_familiar').val());
 if(tam_family>0){
 	
 	for (var i = 1; i <= tam_family; i++) {
@@ -177,7 +182,7 @@ generarscript();
 if(tam_family>0){
 	for (var i = 1; i <= tam_family; i++) {
 		
-    fecha = $('#nacimientop'+i).val();
+    fecha = $('#nacimientopEdit'+i).val();
 	año = fecha.substring(6, 10);
 	mes = fecha.substring(3, 5);
 	dia = fecha.substring(0, 2);
@@ -191,18 +196,77 @@ if(tam_family>0){
 
 // ================= Fin determinando la edad dinámica de los familiares ==========
 
-// ==================Botn borrar ====================
+// ==================Botn borrar el familiar  ====================
 var id_eliminar = [];
-$('#parentescoAdd').on("click","#rmfa",function(){
+$('#parentescoAdd').on("click","#rmfaedit",function(){
+
+	n_borrar = $(this).parent().parent().attr('id');
+	n_borrar = n_borrar.substring(11,12);	
 	id_eliminar.push($(this).parent().prev().val()); // capturando el id del familiar a eliminar 
-	console.log(id_eliminar);
+	responsemsg = confirm("\u00bfEst\u00e1  seguro de borrar el registro? ");
+	if(responsemsg){
+		console.log(id_eliminar);
+		$('#dele').val(id_eliminar);
 	// Borrando del dom
-	remover_id = $(this).parent().parent().attr('id'); 
-	$('#'+remover_id).remove();
+		remover_id = $(this).parent().parent().attr('id'); 
+		$('#'+remover_id).remove();
+		$('#print_'+n_borrar).remove();
+	}
+	
 
 
 });
 // ==================Botn borrar ====================
+
+
+// Validando el formulario con jquery validator
+$('#btn_save').click(function(){
+	// console.log('validar');
+validator = $('#form-update-data').validate({
+		 rules: {
+		    ced: {
+		      required: true,
+		      number: true,
+		      min:0,
+		      minlength:5,
+		      maxlength:15
+		      // noSpace:true
+		    },
+		    rif:{
+		    	number:true,
+		    	min:0,
+		    	minlength:5,
+		    	maxlength:15
+		    }
+		  },
+		submitHandler: function() {
+    // do other things for a valid form
+		    // alert("perfecto!!!");
+		    if(error_ced ==false && error_rif ==false && error_edad==false){
+		    	// console.log('No hay error');
+		    	
+		    	btn_guardar_cambios();
+		    }
+
+		  },
+	  	errorPlacement: function(error, element) {
+		    if (element.attr("name") == "nacimiento"  ) {
+		      error.insertAfter(".nacimientocontrol");
+		    }else if(element.attr("name") == "centro" ){
+		    error.insertAfter("#centro_radio");
+		    }else if(element.attr("name") == "nacimientop"+increment ){
+		    error.insertAfter("#nacimientocontrolp"+increment);
+		    }
+		     else {
+		      error.insertAfter(element);
+		    }
+	  	}
+	});
+
+});
+// Fin validando el formulario con jquery validator
+
+
 
 });//fin main function 
 
@@ -257,3 +321,54 @@ $('#parentescoAdd div.scriptf').each(function(index){
 });
 }
 // ============Function Generar script==============
+
+// ============Btn guardar cambios empleado============
+function btn_guardar_cambios(){
+
+var mensaje ='';
+var alertTipo='';
+var ajaxIco = "<i class='fa fa-spinner fa-pulse fa-lg'></i> <p>Generando solicitud...</p>"
+$('#mensajeajax').append(ajaxIco);
+
+
+
+// console.log('actualizando...');
+var str =  $('#form-update-data').serialize();
+
+console.log(str);
+		$.ajax({
+			url: '/jornada/save',
+			type: 'POST',
+			data: str,
+		}).done(function ( response ){
+			console.log(response.Mensaje);
+		$('#mensajeajax').html('');//Borrando el mensaje ajax
+		
+		
+		if(response.Update_empleado){
+			alertTipo= 'alert-success';
+			mensaje = response.Mensaje;
+			
+		}
+		
+
+
+		mensajerespuestaOk ="<div class='alert "+alertTipo+" alert-dismissible' role='alert'>";
+    		mensajerespuestaOk = mensajerespuestaOk + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+    		mensajerespuestaOk = mensajerespuestaOk + mensaje + "</div>";
+    		// console.log(mensajerespuestaOk);
+		$('#mesajeresponse').append(mensajerespuestaOk);
+
+		
+		setTimeout(
+			function(){
+				location.reload();
+			},100
+			);
+
+
+		});
+	// Fin ajax
+
+}
+// ============ FIN Btn guardar cambios empleado============

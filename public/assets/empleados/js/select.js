@@ -107,8 +107,11 @@ $('#parentescoAdd').on("click","#rmfa",function(e){
 
 // Boton add parentesco
 $('#add_parentesco').click(function(e){
-
-	increment ++;
+	 increment = parseInt($('#n_familiar').val());
+     increment ++;
+     // console.log(increment);
+    $('#n_familiar').val(increment);
+	// increment ++;
 	e.preventDefault();
 
 	var html = '<div id="groupfamily'+increment+'" class="form-group cuenta"><hr><div class="btn_familiar"><a href="javascript:;" id="rmfa" class="btn btn-danger">';
@@ -214,9 +217,8 @@ $('#add_parentesco').click(function(e){
 
 
     $('#parentescoAdd').append(html);
-    var n = parseInt($('#n_familiar').val());
-    	n= n+1;
-    $('#n_familiar').val(n);
+    
+
     update_familiar();
 
 
@@ -688,7 +690,13 @@ $('div.cuenta').each(function(index){
 
 // Label familiar
 $('#parentescoAdd span.label_family').each(function(index){
-	 mas = index +2;
+	 
+	 if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
+
 	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','label_family'+mas);
 	$('#label_family'+mas).attr('name','label_family'+mas);
@@ -698,8 +706,13 @@ $('#parentescoAdd span.label_family').each(function(index){
 
 // Nombre
 $('#parentescoAdd input.fullname').each(function(index){
-	 mas = index +2;
-	 id_temp = $(this).attr('id');
+
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
+	id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','fullname'+mas);
 	$('#fullname'+mas).attr('name','fullname'+mas);
 	$('#fullname'+mas).attr('placeholder','Nombres del familiar '+mas);
@@ -708,7 +721,11 @@ $('#parentescoAdd input.fullname').each(function(index){
 
 // Apellido
 $('#parentescoAdd input.apellidofamiliar').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','apellidofamiliar'+mas);
 	$('#apellidofamiliar'+mas).attr('name','apellidofamiliar'+mas);
@@ -718,7 +735,11 @@ $('#parentescoAdd input.apellidofamiliar').each(function(index){
 
 // Cedula
 $('#parentescoAdd input.ced_familiar').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','ced_familiar'+mas);
 	$('#ced_familiar'+mas).attr('name','ced_familiar'+mas);
@@ -728,7 +749,11 @@ $('#parentescoAdd input.ced_familiar').each(function(index){
 
 // parentesco
 $('#parentescoAdd input.parentesco').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','parentesco'+mas);
 	$('#parentesco'+mas).attr('name','parentesco'+mas);
@@ -738,17 +763,27 @@ $('#parentescoAdd input.parentesco').each(function(index){
 
 // sexo sexop
 $('#parentescoAdd select.sexop').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
-	$('#'+id_temp).attr('id','sexop'+mas);
-	$('#sexop'+mas).attr('name','sexop'+mas);
-	$('#sexop'+mas).attr('placeholder','Ingrese el parentesco up '+mas);
 
+	$('#'+id_temp).attr('name','sexop'+mas);
+	$('#'+id_temp).attr('id','sexop'+mas);
+	$('#sexop'+mas).attr('placeholder','Ingrese el parentesco up '+mas);
+	console.log($('#sexop'+mas).attr('id'));
+	console.log($('#sexop'+mas).attr('name'));
 });
 
 // div nacimiento nacimientocontrolp
 $('#parentescoAdd div.nacimientocontrolp').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','nacimientocontrolp'+mas);
 	$('#nacimientocontrolp'+mas).attr('name','nacimientocontrolp'+mas);
@@ -756,7 +791,11 @@ $('#parentescoAdd div.nacimientocontrolp').each(function(index){
 });
 // Naciemiento
 $('#parentescoAdd input.nacimientop').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','nacimientop'+mas);
 	$('#nacimientop'+mas).attr('name','nacimientop'+mas);
@@ -766,7 +805,11 @@ $('#parentescoAdd input.nacimientop').each(function(index){
 
 // label edad
 $('#parentescoAdd span.edadempleadofamilia').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
 	$('#'+id_temp).attr('id','edadempleadofamilia'+mas);
 
@@ -775,44 +818,72 @@ $('#parentescoAdd span.edadempleadofamilia').each(function(index){
 
 //======Re-asignando imrpimir=====
 $('#tb_familiar tr.tr').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
 	 $('#'+id_temp).attr('id','tr'+mas);
 });
 
 // nombre
 $('#tb_familiar td.print_parent_nombre').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
 	 $('#'+id_temp).attr('id','print_parent_nombre'+mas);
 });
 // cedula
 $('#tb_familiar td.print_parent_cedula').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
 	 $('#'+id_temp).attr('id','print_parent_cedula'+mas);
 });
 // parentesco
 $('#tb_familiar td.print_parent_parentesco').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
 	 $('#'+id_temp).attr('id','print_parent_parentesco'+mas);
 });
 // nacimiento
 $('#tb_familiar td.print_parent_nacimiento').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
 	 $('#'+id_temp).attr('id','print_parent_nacimiento'+mas);
 });
 // edad
 $('#tb_familiar td.print_parent_edad').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
 	 $('#'+id_temp).attr('id','print_parent_edad'+mas);
 });
 // sexo
 $('#tb_familiar td.print_parent_sexo').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
 	 $('#'+id_temp).attr('id','print_parent_sexo'+mas);
 });
@@ -821,7 +892,11 @@ $('#tb_familiar td.print_parent_sexo').each(function(index){
 
 // Generando el script
 $('#parentescoAdd div.scriptf').each(function(index){
-	 mas = index +2;
+	if($('#cant_family').length>0){
+	 	mas = 1 + index;
+	 }else{
+	 	mas = index +2;
+	 }
 	 id_temp = $(this).attr('id');
 	$('#'+id_temp).empty();
 	$('#'+id_temp).attr('id','script'+mas);
