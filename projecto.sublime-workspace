@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"fa",
+				"Familiar"
+			],
+			[
+				"va",
+				"var_dump"
+			],
+			[
+				"cant",
+				"cant_family"
+			],
+			[
+				"de",
+				"defaultChecked"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"cap",
+				"capsula"
+			],
+			[
+				"to",
+				"top"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
 				"re",
 				"remover_id"
 			],
@@ -18,10 +50,6 @@
 			[
 				"co",
 				"console"
-			],
-			[
-				"va",
-				"val"
 			],
 			[
 				"cetro",
@@ -132,10 +160,6 @@
 				"background-color"
 			],
 			[
-				"de",
-				"debug"
-			],
-			[
 				"label",
 				"label-danger"
 			],
@@ -224,10 +248,6 @@
 				"removeClass"
 			],
 			[
-				"fa",
-				"false"
-			],
-			[
 				"v",
 				"value"
 			],
@@ -243,7 +263,7 @@
 			"file": "app/routes.php",
 			"settings":
 			{
-				"buffer_size": 5915,
+				"buffer_size": 6006,
 				"line_ending": "Windows"
 			}
 		},
@@ -251,7 +271,7 @@
 			"file": "app/controllers/GestionController.php",
 			"settings":
 			{
-				"buffer_size": 10786,
+				"buffer_size": 14278,
 				"line_ending": "Windows"
 			}
 		},
@@ -275,7 +295,7 @@
 			"file": "/C/nginx/logs/error.log",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 4244,
 				"line_ending": "Windows"
 			}
 		},
@@ -283,7 +303,7 @@
 			"file": "app/views/empleados/index.blade.php",
 			"settings":
 			{
-				"buffer_size": 35416,
+				"buffer_size": 35444,
 				"line_ending": "Windows"
 			}
 		},
@@ -291,7 +311,7 @@
 			"file": "app/views/empleados/base.blade.php",
 			"settings":
 			{
-				"buffer_size": 2399,
+				"buffer_size": 2402,
 				"line_ending": "Windows"
 			}
 		},
@@ -299,7 +319,15 @@
 			"file": "public/assets/empleados/js/select.js",
 			"settings":
 			{
-				"buffer_size": 29067,
+				"buffer_size": 30352,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/assets/empleados/js/imp.js",
+			"settings":
+			{
+				"buffer_size": 4709,
 				"line_ending": "Windows"
 			}
 		},
@@ -307,7 +335,7 @@
 			"file": "app/views/empleados/edit.blade.php",
 			"settings":
 			{
-				"buffer_size": 40897,
+				"buffer_size": 41519,
 				"line_ending": "Windows"
 			}
 		},
@@ -315,7 +343,15 @@
 			"file": "public/assets/empleados/js/edit.js",
 			"settings":
 			{
-				"buffer_size": 8836,
+				"buffer_size": 11665,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/assets/empleados/css/print.css",
+			"settings":
+			{
+				"buffer_size": 1852,
 				"line_ending": "Windows"
 			}
 		}
@@ -344,6 +380,8 @@
 	},
 	"file_history":
 	[
+		"/C/nginx/html/security_laravel_4/public/assets/movil/js/main.js",
+		"/C/nginx/html/security_laravel_4/public/assets/empleados/css/print.css",
 		"/C/nginx/html/security_laravel_4/public/assets/empleados/js/imp.js",
 		"/C/Users/elvis.reyes/Downloads/bootstrap-table-examples-master/bootstrap-table-examples-master/welcome.html",
 		"/C/nginx/html/security_laravel_4/public/assets/empleados/js/edit.js",
@@ -358,7 +396,6 @@
 		"/C/Users/elvis.reyes/Downloads/in.php",
 		"/C/Users/elvis.reyes/Downloads/contro.php",
 		"/C/nginx/html/security_laravel_4/public/assets/empleados/css/main.css",
-		"/C/nginx/html/security_laravel_4/public/assets/empleados/css/print.css",
 		"/C/nginx/html/security_laravel_4/public/assets/empleados/js/moment-locales.js",
 		"/C/nginx/html/security_laravel_4/public/assets/empleados/js/localization/messages_es.js",
 		"/C/nginx/html/security_laravel_4/app/views/pdf/print.blade.php",
@@ -440,6 +477,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"test",
+			"sexop",
+			"Nombre",
+			"data_user->id",
+			"cant_family",
+			"increment",
+			"add_parent",
+			"n_familiar",
+			"imprime",
+			"groupfamily",
+			"n_familiar",
 			"rmfa",
 			"ced",
 			"validator",
@@ -506,15 +554,15 @@
 					"file": "app/routes.php",
 					"settings":
 					{
-						"buffer_size": 5915,
+						"buffer_size": 6006,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1674,
-								1674
+								2445,
+								2445
 							]
 						],
 						"settings":
@@ -523,7 +571,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 899.0,
+						"translation.y": 1061.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -533,15 +581,15 @@
 					"file": "app/controllers/GestionController.php",
 					"settings":
 					{
-						"buffer_size": 10786,
+						"buffer_size": 14278,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10230,
-								10230
+								12729,
+								12729
 							]
 						],
 						"settings":
@@ -550,8 +598,8 @@
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 5595.0,
+						"translation.x": 173.0,
+						"translation.y": 7021.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -586,7 +634,7 @@
 			]
 		},
 		{
-			"selected": 5,
+			"selected": 7,
 			"sheets":
 			[
 				{
@@ -620,7 +668,7 @@
 					"file": "/C/nginx/logs/error.log",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 4244,
 						"regions":
 						{
 						},
@@ -646,15 +694,23 @@
 					"file": "app/views/empleados/index.blade.php",
 					"settings":
 					{
-						"buffer_size": 35416,
+						"buffer_size": 35444,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								18215,
-								18215
+								31698,
+								31698
+							],
+							[
+								31960,
+								31960
+							],
+							[
+								34433,
+								34433
 							]
 						],
 						"settings":
@@ -664,7 +720,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6045.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -674,15 +730,15 @@
 					"file": "app/views/empleados/base.blade.php",
 					"settings":
 					{
-						"buffer_size": 2399,
+						"buffer_size": 2402,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2368,
-								2368
+								118,
+								118
 							]
 						],
 						"settings":
@@ -692,7 +748,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 889.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -702,15 +758,15 @@
 					"file": "public/assets/empleados/js/select.js",
 					"settings":
 					{
-						"buffer_size": 29067,
+						"buffer_size": 30352,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3219,
-								3190
+								12090,
+								10924
 							]
 						],
 						"settings":
@@ -719,25 +775,53 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 12765.0,
+						"translation.y": 4482.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 8,
-					"file": "app/views/empleados/edit.blade.php",
+					"file": "public/assets/empleados/js/imp.js",
 					"settings":
 					{
-						"buffer_size": 40897,
+						"buffer_size": 4709,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								23390,
-								23390
+								251,
+								263
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "app/views/empleados/edit.blade.php",
+					"settings":
+					{
+						"buffer_size": 41519,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								29805,
+								29813
 							]
 						],
 						"settings":
@@ -746,26 +830,26 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 7662.0,
+						"translation.x": 95.0,
+						"translation.y": 9669.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 10,
 					"file": "public/assets/empleados/js/edit.js",
 					"settings":
 					{
-						"buffer_size": 8836,
+						"buffer_size": 11665,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6457,
-								6457
+								11565,
+								11565
 							]
 						],
 						"settings":
@@ -774,7 +858,35 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3327.0,
+						"translation.y": 6228.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "public/assets/empleados/css/print.css",
+					"settings":
+					{
+						"buffer_size": 1852,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								50,
+								50
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -810,7 +922,7 @@
 		"cols":
 		[
 			0.0,
-			0.0392464678179,
+			0.0433651344319,
 			1.0
 		],
 		"rows":
@@ -845,6 +957,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 109.0,
+	"side_bar_width": 50.0,
 	"status_bar_visible": true
 }
