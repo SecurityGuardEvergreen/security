@@ -16,10 +16,11 @@ Login -
 <div class="form-login">
 <div class="brand-update">
 
-<!-- End Google Tag Manager
-<figure class="logo-wrap">
+
+<!-- <figure class="logo-wrap">
 <div class="logo logo-w"></div>
 </figure> -->
+
 <figure class="logo-wrapp">
 <div class="logoP logo-wP"></div>
 </figure>

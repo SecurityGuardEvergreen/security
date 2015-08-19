@@ -299,7 +299,7 @@ $data->preficed = Preficed::all();
 $data->rif= Rif::all();
 $data->educacion = Educationlevel::orderBy('id', 'asc')->get();
 $data->marital = Maritalstatu::orderBy('nombre', 'asc')->get();
-$data->title = "Edición del usuartio";
+$data->title = "Edición del usuario";
 
 $tipo = substr($ced,0,1);
 $ced = substr($ced, 2,strlen($ced));
@@ -311,6 +311,7 @@ $data_user = Empleado::join('preficeds','empleados.preficed_id','=','preficeds.i
         ->select('cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*')
         ->where('preficed_id','=',$prefi->id)
         ->where('ci','=',$ced)->first();
+
 $data_familiar = Familiar::where('empleado_id','=',$data_user->id)->get() ;
 
 
@@ -430,7 +431,10 @@ $update_fa1 =   Familiar::where('id',Input::get('edit_id_familiar'.$i))
       ));
 
 } // fin for
-$respuesta['update_fa_dinamic'] = $update_fa1;
+if(!empty($update_fa1) ){
+  $respuesta['update_fa_dinamic'] = $update_fa1;
+}
+
 // Actualización dinámica del familiar 
 
 

@@ -134,7 +134,7 @@
                     </div>
 
                     <div class="col-sm-3" style="padding-left: 0px;">
-                        <label for="ced" class="control-label">.</label>
+                        <label for="ced" class="control-label" style="color:#fff;">.</label>
                         {{Form::text('ced',Input::old('ced'),
                         array('autofocus',
                         'class' => 'form-control',
@@ -146,17 +146,19 @@
                     <div class="col-sm-1" style="padding-right: 0px;">
                         <label for="tipo_rif" class="control-label">RIF</label>
                         <select style="padding-left:2px;" name="tipo_rif" id="tipo_rif" class="form-control" title="tipo de rif requerido">
-                            <option value="">-</option>
+                            
                             @foreach($data->rif as $rif)
                              <option value="{{$rif->id}}">{{strtoupper($rif->sigla)}}-</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-sm-3" style="padding-left: 0px;">
-                        <label for="rif" class="control-label">.</label>
+                        <label for="rif" class="control-label" style="color:#fff;">.</label>
                         {{Form::text('rif',Input::old('rif'),
                         array('autofocus','class' => 'form-control','id' => 'rif',
-                        'placeholder' => 'Ingrese su rif')
+                        'placeholder' => 'Ingrese su rif',
+                        'disabled'=>'disabled',
+                        'required' =>'required')
                         )}}
                     </div>
 
@@ -327,7 +329,8 @@
                         <label for="discapacidad" class="control-label">Ingrese la discapacidad </label>
                         {{Form::textarea('discapacidad',Input::old('discapacidad'),
                         array('autofocus','class' => 'form-control','id' => 'discapacidad',
-                        'placeholder' => 'De poseer alguna discapacidad ingresela aquí')
+                        'placeholder' => 'De poseer alguna discapacidad ingresela aquí',
+                        'required' =>'required')
                         )}}
                         <br>
                     </div>
@@ -348,6 +351,7 @@
                 <div id="carga_familiar" class="hide">
 
                     <h3>Carga familiar</h3>
+
                 <div class="form-group">
 
                      <div class="col-sm-12">
@@ -420,8 +424,9 @@
 
                 <a href="javascript:;" id="add_parentesco" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle fa-lg"></i></a>
 
-
+                
                 </div>
+                <div id="mensaje_max_family" class="form-group hide"></div>
                 <!-- /div carga_familiar -->
 
                 <h3>PERSONA De CONTACTO EN CASO DE EMERGENCIA</h3>

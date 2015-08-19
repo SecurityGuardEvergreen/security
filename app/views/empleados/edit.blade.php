@@ -149,7 +149,7 @@
                     <div class="col-sm-1" style="padding-right: 0px;">
                         <label for="tipo_rif" class="control-label">RIF</label>
                         <select style="padding-left:2px;" name="tipo_rif" id="tipo_rif" class="form-control" title="tipo de rif requerido">
-                            <option value="">-</option>
+                            
                             @foreach($data->rif as $rif)
                              <option value="{{$rif->id}}">{{strtoupper($rif->sigla)}}-</option>
                             @endforeach
@@ -160,7 +160,9 @@
                         <label for="rif" class="control-label" style="color:#fff;">.</label>
                         {{Form::text('rif',Input::old('rif',$data->data_user->rif),
                         array('autofocus','class' => 'form-control','id' => 'rif',
-                        'placeholder' => 'Ingrese su rif')
+                        'placeholder' => 'Ingrese su rif',
+                        'disabled'=>'disabled',
+                        'required' =>'required')
                         )}}
                     </div>
 
@@ -505,6 +507,7 @@
 
 
 </div>
+<div id="mensaje_max_family" class="form-group hide"></div>
 <!-- /div carga_familiar -->
 
                 <h3>PERSONA De CONTACTO EN CASO DE EMERGENCIA</h3>

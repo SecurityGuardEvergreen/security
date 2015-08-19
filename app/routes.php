@@ -162,6 +162,9 @@ Route::get('ir',function(){
 
 Route::get('pruebac',function(){
 
+$rif= Rif::where('id','!=',0)->get();
+
+var_dump($rif);
  // $data = Preficed::all();
  // var_dump($data);
 

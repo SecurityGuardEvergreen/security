@@ -9,10 +9,10 @@
  .logoP {
   max-width: 250px;
   height: 100px;
-  margin-left:-10px;
+
 }
 .logo-wP {
-  background: url(../images/logopf.png) center center no-repeat;
+  background: url(../images/logopfi.png) center center no-repeat;
   -webkit-background-size: 100%;
   background-size: 100%;
 }

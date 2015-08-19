@@ -66,11 +66,17 @@ function nameFormatter(value) {
 </section>
 
 <br><br>
-
+<div class="row">
+	<div class="col-sm-12 ">
+		<center>
+			<a href="/jornada/staff" class="btn btn-success">Nuevo registro</a>
+		</center>
+	</div>
+</div>
 <div class="container">
 	<div class="row">
 	<div class="col-md-12">
-		<div class="table-responsive ">
+		<div class="table-responsive">
 <!-- Fin tabla prueba -->
 			<table data-toggle="table"
 			    data-url="data_empleados"
@@ -80,11 +86,13 @@ function nameFormatter(value) {
 			    data-query-params="queryParams"
 			    data-pagination="true"
 			    data-classes="table table-hover"
-			       >
+			    data-sort-name="id" 
+			    data-sort-order="desc">
 			    <thead>
 			    <tr>
-		            <th data-field="nombre" data-sortable="true">Nombre</th>
-		            <th data-field="apellido" data-sortable="true">Apellido</th>
+			    	<th data-field="id" class="hide" data-sortable="true">id</th>
+			    	<th data-field="apellido" data-sortable="true">Apellido</th>
+		            <th data-field="nombre" data-sortable="true">Nombre</th>		            
 		            <th class="upper" data-field="full_ced" data-sortable="true" data-formatter="nameFormatter">Cédula</th>
 		            <th data-field="cargo" data-sortable="true">Cargo</th>
 		            <th data-field="centro" data-sortable="true">Centro de trabajo</th>

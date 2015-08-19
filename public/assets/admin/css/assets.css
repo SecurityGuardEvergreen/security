@@ -2160,6 +2160,11 @@ select.form-control {
     height: 55px;
     margin: 20px;
 }
+.logoP {
+    width: 200px;
+    height: 55px;
+    margin: 20px;
+}
 .logo-w {
     background: url(/assets/v3/prey-logo-b-e35bd60535c929614762bc0cbcdf1026.svg) center center no-repeat;
     -webkit-background-size: 100%;
@@ -2534,7 +2539,7 @@ select.form-control {
     animation: fadeIn 500ms forwards alternate;
     overflow: hidden;
 }
-#prey-login .form-login .logo-wrap {
+#prey-login .form-login .logo-wrap ,#prey-login .form-login .logo-wrapp {
     overflow: hidden;
     margin: 20px 0;
     -webkit-transform: translateZ(30px);
@@ -2545,6 +2550,7 @@ select.form-control {
     max-width: 190px;
     margin: 0;
 }
+
 #prey-login .form-login .current-form {
     padding: 20px;
 }

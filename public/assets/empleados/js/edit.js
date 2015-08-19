@@ -160,6 +160,10 @@ if($('#carga_edit').val()!= 0){
 
 // ===============Fin Carga Familiar==============
 
+// Asignado valiable para controlar el max familiar
+family_total_f = $('#cant_family').val();
+// Asignado valiable para controlar el max familiar
+
 // =============Determinando sexo family dinamic ==============
 tam_family=$('#cant_family').val();
 $('#n_familiar').val(tam_family);
@@ -199,6 +203,9 @@ if(tam_family>0){
 // ==================Botn borrar el familiar  ====================
 var id_eliminar = [];
 $('#parentescoAdd').on("click","#rmfaedit",function(){
+	family_total_f = family_total_f -1;
+	console.log('borrar');
+	console.log(family_total_f);
 
 	n_borrar = $(this).parent().parent().attr('id');
 	n_borrar = n_borrar.substring(11,12);

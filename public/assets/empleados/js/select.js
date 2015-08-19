@@ -2,11 +2,13 @@
 	var error_ced=false;
 	var error_rif=false;  //variable para conocer si se actualiza o se inserta un empleado
 	var error_edad=false;
+	var error_form=false;
 	var tem_ced='';
 	var tem_rif='';
 	var id_update='';
 	var increment = 1;
 	var validator;
+	var family_total_f = "";
 jQuery(document).ready(function() {
 resetn_nfamiliar();
 
@@ -108,6 +110,13 @@ $('#parentescoAdd').on("click","#rmfa",function(e){
 // Boton add parentesco
 $('#add_parentesco').click(function(e){
 	 increment = parseInt($('#n_familiar').val());
+	 
+	  console.log(family_total_f);
+	  console.log("incre "+increment);
+	 // Retringuiendo el tamaño de la carga familiar
+	 if(increment < 5 || family_total_f < 5){
+	 $('#mensaje_max_family').addClass('hide'); //ocultando mensaje de error de max familiar
+
      increment ++;
      // console.log(increment);
     $('#n_familiar').val(increment);
@@ -165,40 +174,7 @@ $('#add_parentesco').click(function(e){
         html = html + '</div>';
         // scrip
         html = html + '<div id="script'+increment+'" class="scriptf">';
-  //       html = html + '<script type="text/javascript">';
-  //       html = html + '$(function () {';
-  //       // datatimepicker
-  //       html = html + '$("#nacimientocontrolp'+increment+'").datetimepicker({';
-  //       html = html + 'locale: "es",';
-  //       html = html + 'format: "DD-MM-YYYY",';
-  //       html = html + 'maxDate: dateToday';
-  //       html = html + '})';
-
-		// html = html + '.on("dp.change", function(e) {';
-		// // html = html + 'var fecha'+increment+'="";';
-  //       html = html + 'fecha'+increment+' = $("#nacimientocontrolp'+increment+'").data("date");';
-  //       html = html + '$("#edadempleadofamilia'+increment+'").addClass("hide");';
-  //       html = html + 'if(fecha'+increment+'!=""){';
-  //       html = html + ' año = fecha'+increment+'.substring(6, 10);';
-  //       html = html + ' mes = fecha'+increment+'.substring(3, 5);';
-  //       html = html + ' dia = fecha'+increment+'.substring(0, 2);';
-  //       html = html + ' años = calcular_edad(dia+"/"+mes+"/"+año);';
-  //       html = html + 'if(años>1){';
-  //       html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
-  //       html = html + '$("#edadempleadofamilia'+increment+'").text(años+" años");';
-  //       html = html + '}else if(años<1){';
-  //       html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
-  //       html = html + '$("#edadempleadofamilia'+increment+'").text("Bebé sin el año cumplido");';
-  //       html = html + '}';
-  //       html = html + 'else if(años==1){';
-  //       html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
-  //       html = html + '$("#edadempleadofamilia'+increment+'").text(años+" año");';
-  //       html = html + '}';
-  //       html = html + '}';
-  //       html = html + '});';
-
-  //       // html = html + '';
-  //       html = html + '});';
+  
 
   //       html = html + '</script>';
         html = html + '<div>';
@@ -244,6 +220,25 @@ $('#add_parentesco').click(function(e){
 
       $('#script').append(script);
 	// console.log('boton');
+}else //condición contraria restricción carga familiar
+{
+	family_total_f = family_total_f -1; //restando max familiar para edit js
+	console.log("else famili "+family_total_f);
+max_mensaje_familia = '<br> <div class="alert alert-warning alert-dismissible" role="alert">';
+max_mensaje_familia = max_mensaje_familia + '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+max_mensaje_familia = max_mensaje_familia +  '<span aria-hidden="true">&times;</span>';
+max_mensaje_familia = max_mensaje_familia +  '</button>';
+max_mensaje_familia = max_mensaje_familia +  '<strong>Alerta !!!</strong> Excedíste el número de familiares permitidos. (<b>Aceptamos 5 cargas familiares a lo sumo</b>)';
+max_mensaje_familia = max_mensaje_familia +    '</div>';
+
+$('#mensaje_max_family').removeClass('hide');
+$('#mensaje_max_family').empty();
+$('#mensaje_max_family').append(max_mensaje_familia);
+}//fin if restringuiendo la carga familiar
+
+family_total_f = parseInt(family_total_f) + 1; // aumentando el max familiar
+
+
 });
 // =======================Fin add btn parentesco========================
 
@@ -281,11 +276,13 @@ validator = $('#form-update-data').validate({
 		    // alert("perfecto!!!");
 		    if(error_ced ==false && error_rif ==false && error_edad==false){
 		    	// console.log('No hay error');
+		    	error_form = false;
 		    	btn_guardar();
 		    }
 
 		  },
 	  	errorPlacement: function(error, element) {
+	  		error_form = true;
 		    if (element.attr("name") == "nacimiento"  ) {
 		      error.insertAfter(".nacimientocontrol");
 		    }else if(element.attr("name") == "centro" ){
@@ -396,6 +393,18 @@ $("input[name='family']").change(function() {
 		validarrif();
 	});
 	$('#tipo_rif').change(function(){
+		// Bloqueando o activando el input deacuerdo el estado del tipo rif
+		if($(this).val()!=0){
+			$('#rif').attr('disabled',false);
+			
+		}else{
+			$('#rif').val('');
+			$('#rif').attr('disabled',true);
+			$('#rif').removeClass('error');
+			$('#rif-error').remove();		
+			
+		}
+		// Bloqueando o activando el input deacuerdo el estado del tipo rif
 		validarrif();
 	});
 	// Fin Validando rif
@@ -416,8 +425,12 @@ $('#btn_reset').click(function(){
 	 tem_rif='';
 	 id_update='';
 	 increment = 1;
-	 validator.resetForm();
 
+	 if(error_form){
+	 	validator.resetForm();
+	 }
+	
+	 $('#mensaje_max_family').addClass('hide'); //ocultando mensaje de max familiar
 	 $('#parentescoAdd').empty();   // Borrando cargas familiaresd extras
 	 $('#btn_update').text('Agregar registro');   // Colocando el texto inicial al botón add
 	 $('#btn_print_f').addClass('disabled'); // Bloqueando btn imprimir
@@ -433,6 +446,7 @@ $('#btn_reset').click(function(){
 	 $('#edadempleadofamilia1').text('');
 	 $('#erroredadempleado').text('');
 	 $('#edadempleado').text('');
+	 $('#rif').attr('disabled',true); // bloqueando campo rif
 });
 // Fin btn reset
 
@@ -588,7 +602,7 @@ function validarced(){
 			var tipo = $('#tipo_ced').val();
 
 			$.ajax({
-			url: 'empleado_cd',
+			url: '/jornada/empleado_cd',
 			type: 'POST',
 			data: 'ced='+ced_insert+'&tipo='+tipo,
 				}).done(function ( response ){
@@ -610,7 +624,7 @@ function validarced(){
 			var tipo = $('#tipo_ced').val();
 
 			$.ajax({
-			url: 'empleado_cd',
+			url: '/jornada/empleado_cd',
 			type: 'POST',
 			data:  'ced='+ced_insert+'&tipo='+tipo,
 				}).done(function ( response ){
@@ -636,7 +650,7 @@ function validarrif(){
 			var rif_insert = $('#rif').val();
 			var tipo = $('#tipo_rif').val();
 			$.ajax({
-			url: 'empleado_rif',
+			url: '/jornada/empleado_rif',
 			type: 'POST',
 			data: 'rif='+rif_insert+'&tipo='+tipo,
 				}).done(function ( response ){
@@ -657,7 +671,7 @@ function validarrif(){
 			var rif_insert = $('#rif').val();
 			var tipo = $('#tipo_rif').val();
 			$.ajax({
-			url: 'empleado_rif',
+			url: '/jornada/empleado_rif',
 			type: 'POST',
 			data: 'rif='+rif_insert+'&tipo='+tipo,
 				}).done(function ( response ){
