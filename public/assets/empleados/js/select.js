@@ -140,7 +140,7 @@ $('#add_parentesco').click(function(e){
         // sexo
         html = html + '<div class="col-sm-3">';
         html = html + ' <label for="sexop'+increment+'" class="control-label">Sexo</label>';
-        html = html + '<select class="form-control sexop" id="sexop'+increment+'" name="sexop'+increment+'" >';
+        html = html + '<select required class="form-control sexop" id="sexop'+increment+'" name="sexop'+increment+'" >';
         html = html + '<option value="">-</option>';
         html = html + '<option value="1">Femenino</option>';
         html = html + '<option value="2">Masculino</option>';
@@ -165,42 +165,42 @@ $('#add_parentesco').click(function(e){
         html = html + '</div>';
         // scrip
         html = html + '<div id="script'+increment+'" class="scriptf">';
-        html = html + '<script type="text/javascript">';
-        html = html + '$(function () {';
-        // datatimepicker
-        html = html + '$("#nacimientocontrolp'+increment+'").datetimepicker({';
-        html = html + 'locale: "es",';
-        html = html + 'format: "DD-MM-YYYY",';
-        html = html + 'maxDate: dateToday';
-        html = html + '})';
+  //       html = html + '<script type="text/javascript">';
+  //       html = html + '$(function () {';
+  //       // datatimepicker
+  //       html = html + '$("#nacimientocontrolp'+increment+'").datetimepicker({';
+  //       html = html + 'locale: "es",';
+  //       html = html + 'format: "DD-MM-YYYY",';
+  //       html = html + 'maxDate: dateToday';
+  //       html = html + '})';
 
-		html = html + '.on("dp.change", function(e) {';
-		// html = html + 'var fecha'+increment+'="";';
-        html = html + 'fecha'+increment+' = $("#nacimientocontrolp'+increment+'").data("date");';
-        html = html + '$("#edadempleadofamilia'+increment+'").addClass("hide");';
-        html = html + 'if(fecha'+increment+'!=""){';
-        html = html + ' año = fecha'+increment+'.substring(6, 10);';
-        html = html + ' mes = fecha'+increment+'.substring(3, 5);';
-        html = html + ' dia = fecha'+increment+'.substring(0, 2);';
-        html = html + ' años = calcular_edad(dia+"/"+mes+"/"+año);';
-        html = html + 'if(años>1){';
-        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
-        html = html + '$("#edadempleadofamilia'+increment+'").text(años+" años");';
-        html = html + '}else if(años<1){';
-        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
-        html = html + '$("#edadempleadofamilia'+increment+'").text("Bebé sin el año cumplido");';
-        html = html + '}';
-        html = html + 'else if(años==1){';
-        html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
-        html = html + '$("#edadempleadofamilia'+increment+'").text(años+" año");';
-        html = html + '}';
-        html = html + '}';
-        html = html + '});';
+		// html = html + '.on("dp.change", function(e) {';
+		// // html = html + 'var fecha'+increment+'="";';
+  //       html = html + 'fecha'+increment+' = $("#nacimientocontrolp'+increment+'").data("date");';
+  //       html = html + '$("#edadempleadofamilia'+increment+'").addClass("hide");';
+  //       html = html + 'if(fecha'+increment+'!=""){';
+  //       html = html + ' año = fecha'+increment+'.substring(6, 10);';
+  //       html = html + ' mes = fecha'+increment+'.substring(3, 5);';
+  //       html = html + ' dia = fecha'+increment+'.substring(0, 2);';
+  //       html = html + ' años = calcular_edad(dia+"/"+mes+"/"+año);';
+  //       html = html + 'if(años>1){';
+  //       html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
+  //       html = html + '$("#edadempleadofamilia'+increment+'").text(años+" años");';
+  //       html = html + '}else if(años<1){';
+  //       html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
+  //       html = html + '$("#edadempleadofamilia'+increment+'").text("Bebé sin el año cumplido");';
+  //       html = html + '}';
+  //       html = html + 'else if(años==1){';
+  //       html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
+  //       html = html + '$("#edadempleadofamilia'+increment+'").text(años+" año");';
+  //       html = html + '}';
+  //       html = html + '}';
+  //       html = html + '});';
 
-        // html = html + '';
-        html = html + '});';
+  //       // html = html + '';
+  //       html = html + '});';
 
-        html = html + '</script>';
+  //       html = html + '</script>';
         html = html + '<div>';
 
         // ========Generando tabla familiar =====
@@ -217,7 +217,7 @@ $('#add_parentesco').click(function(e){
 
 
     $('#parentescoAdd').append(html);
-    
+
 
     update_familiar();
 
@@ -690,7 +690,7 @@ $('div.cuenta').each(function(index){
 
 // Label familiar
 $('#parentescoAdd span.label_family').each(function(index){
-	 
+
 	 if($('#cant_family').length>0){
 	 	mas = 1 + index;
 	 }else{
@@ -773,8 +773,7 @@ $('#parentescoAdd select.sexop').each(function(index){
 	$('#'+id_temp).attr('name','sexop'+mas);
 	$('#'+id_temp).attr('id','sexop'+mas);
 	$('#sexop'+mas).attr('placeholder','Ingrese el parentesco up '+mas);
-	console.log($('#sexop'+mas).attr('id'));
-	console.log($('#sexop'+mas).attr('name'));
+
 });
 
 // div nacimiento nacimientocontrolp
@@ -898,7 +897,9 @@ $('#parentescoAdd div.scriptf').each(function(index){
 	 	mas = index +2;
 	 }
 	 id_temp = $(this).attr('id');
+
 	$('#'+id_temp).empty();
+
 	$('#'+id_temp).attr('id','script'+mas);
 	 script ='';
 	    script = script + '<script type="text/javascript">';

@@ -38,7 +38,7 @@
             'class' => 'form-horizontal',
             'name'=>'form-update-data',
             'id'=>'form-update-data')) }}
-            
+
                 <div class="form-group">
                     <!-- &nbsp;&nbsp;&nbsp; -->
                     <label for="centro" class="control-label">Centro de trabajo </label>
@@ -64,7 +64,7 @@
                           Otro
                           </label>
                         </div>
-    
+
                     <input type="hidden" name="centro_edit" id="centro_edit" value="{{$data->data_user->centro}}">
                     </div>
 
@@ -359,17 +359,17 @@
                     </div>
                 </div>
                 <input type="hidden" name="carga_edit" id="carga_edit" value="{{$data->cargaf}}">
-                           
+
                 <div id="carga_familiar" class="hide">
-                
+
                     <h3>Carga familiar</h3>
     <!-- ===========Carga Familiar=========== -->
     @if($data->cargaf != 0)
-    
-    @else  
-    
+
+    @else
+
 <div class="form-group">
-       
+
      <div class="col-sm-12">
          <center><span class="label label-primary">Familiar # 1</span></center>
      </div>
@@ -451,7 +451,7 @@
 
                 <label for="fullnameEdit{{$key+1}}" class="control-label">Nombres </label>
                 <input type="text" name="fullnameEdit{{$key+1}}" id="fullnameEdit{{$key+1}}" value="{{$familia->nombre}}" placeholder="Nombres del familiar {{$key+1}}" title="Ingrese el nombre del familiar" class="form-control">
-                
+
             </div>
             <div class="col-sm-4">
                 <label for="apellidofamiliarEdit{{$key+1}}" class="control-label">Apellidos</label>
@@ -464,7 +464,7 @@
 
             <div class="col-sm-3">
                 <label for="parentescoEdit{{$key+1}}" class="control-label">Parentesco</label>
-                <input type="text" name="parentescoEdit{{$key+1}}" id="parentescoEdit{{$key+1}}" value="{{$familia->parentesco}}" placeholder="Parentesco del familiar {{$key+1}}" title="¿Cuál es su parentesco?" class="form-control">                
+                <input type="text" name="parentescoEdit{{$key+1}}" id="parentescoEdit{{$key+1}}" value="{{$familia->parentesco}}" placeholder="Parentesco del familiar {{$key+1}}" title="¿Cuál es su parentesco?" class="form-control">
             </div>
             <div class="col-sm-3">
                 <label for="sexop{{$key+1}}" class="control-label">Sexo</label>
@@ -477,25 +477,25 @@
             </div>
             <div class="col-sm-3">
               <label for="nacimientopEdit{{$key+1}}" class=" control-label">Fecha de nacimiento</label>
-                <div class='input-group date' id='nacimientocontrolp{{$key+1}}' >
+                <div class='input-group date' id='nacimientocontrolpEdit{{$key+1}}' >
                     <input type="text" class='form-control' id='nacimientopEdit{{$key+1}}' name='nacimientopEdit{{$key+1}}' value="{{$familia->nacimiento}}" placeholder='Fecha de nacimiento' title='Necesitamos saber cuando nació su familiar' >
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
-                
+
             </div>
-            <div id="script{{$key+1}}" class="scriptf"></div>
+            <div id="scriptEdit{{$key+1}}" class="scriptEdit"></div>
             <div class="col-sm-2">
                 <label class="control-label">Edad</label>
                 <br><br>
-                <span id="edadempleadofamilia{{$key+1}}" class="label label-success hide"></span>
+                <span id="edadempleadofamiliaEdit{{$key+1}}" class="label label-success hide"></span>
             </div>
 
         </div>
-        
+
         @endforeach
-@endif 
+@endif
 </div>
 <!-- /parentescoAdd -->
 <input type="hidden" id="n_familiar" name="n_familiar" value="1">
@@ -865,7 +865,7 @@ jQuery.namespace = function() {
       <td class="td_h" style="width:88px;">edad</td>
       <td class="td_h" style="width:88px;">sexo</td>
     </tr>
-    
+
     @if($data->cargaf != 0)
     @foreach($data->data_familiar as $key => $familia)
     <tr id="print_{{$key+1}}">
