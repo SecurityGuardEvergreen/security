@@ -5,7 +5,19 @@
 		[
 			[
 				"fa",
-				"Familiar"
+				"family_total_f"
+			],
+			[
+				"remove",
+				"removeClass"
+			],
+			[
+				"em",
+				"empty"
+			],
+			[
+				"u",
+				"update_fa1"
 			],
 			[
 				"va",
@@ -94,10 +106,6 @@
 			[
 				"s",
 				"script	Tag"
-			],
-			[
-				"em",
-				"empleados"
 			],
 			[
 				"pu",
@@ -263,7 +271,7 @@
 			"file": "app/routes.php",
 			"settings":
 			{
-				"buffer_size": 6006,
+				"buffer_size": 6061,
 				"line_ending": "Windows"
 			}
 		},
@@ -271,7 +279,7 @@
 			"file": "app/controllers/GestionController.php",
 			"settings":
 			{
-				"buffer_size": 14278,
+				"buffer_size": 14309,
 				"line_ending": "Windows"
 			}
 		},
@@ -287,15 +295,15 @@
 			"file": "app/views/empleados/resgistros.blade.php",
 			"settings":
 			{
-				"buffer_size": 3493,
+				"buffer_size": 3769,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/nginx/logs/error.log",
+			"file": "app/views/admin/system.blade.php",
 			"settings":
 			{
-				"buffer_size": 4244,
+				"buffer_size": 13125,
 				"line_ending": "Windows"
 			}
 		},
@@ -303,7 +311,7 @@
 			"file": "app/views/empleados/index.blade.php",
 			"settings":
 			{
-				"buffer_size": 35444,
+				"buffer_size": 35696,
 				"line_ending": "Windows"
 			}
 		},
@@ -319,7 +327,7 @@
 			"file": "public/assets/empleados/js/select.js",
 			"settings":
 			{
-				"buffer_size": 30352,
+				"buffer_size": 30426,
 				"line_ending": "Windows"
 			}
 		},
@@ -335,7 +343,7 @@
 			"file": "app/views/empleados/edit.blade.php",
 			"settings":
 			{
-				"buffer_size": 41519,
+				"buffer_size": 41527,
 				"line_ending": "Windows"
 			}
 		},
@@ -343,7 +351,7 @@
 			"file": "public/assets/empleados/js/edit.js",
 			"settings":
 			{
-				"buffer_size": 11665,
+				"buffer_size": 11946,
 				"line_ending": "Windows"
 			}
 		},
@@ -352,6 +360,30 @@
 			"settings":
 			{
 				"buffer_size": 1852,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/views/login/ingresar.blade.php",
+			"settings":
+			{
+				"buffer_size": 2236,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/assets/admin/css/assets.css",
+			"settings":
+			{
+				"buffer_size": 73480,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/assets/admin/css/style.css",
+			"settings":
+			{
+				"buffer_size": 2076,
 				"line_ending": "Windows"
 			}
 		}
@@ -380,6 +412,8 @@
 	},
 	"file_history":
 	[
+		"/C/nginx/logs/error.log",
+		"/C/nginx/stop.bat",
 		"/C/nginx/html/security_laravel_4/public/assets/movil/js/main.js",
 		"/C/nginx/html/security_laravel_4/public/assets/empleados/css/print.css",
 		"/C/nginx/html/security_laravel_4/public/assets/empleados/js/imp.js",
@@ -415,7 +449,6 @@
 		"/C/nginx1/logs/error.log",
 		"/C/nginx1/conf/nginx.conf",
 		"/C/Windows/System32/drivers/etc/hosts",
-		"/C/nginx/logs/error.log",
 		"/C/nginx/conf/nginx.conf",
 		"/C/nginx1/start.bat",
 		"/C/nginx1/stop.bat",
@@ -433,7 +466,6 @@
 		"/C/wamp/www/security_laravel_4/app/filters.php",
 		"/C/wamp/www/security_laravel_4/app/controllers/UserLogin.php",
 		"/C/nginx/start.bat",
-		"/C/nginx/stop.bat",
 		"/C/nginx/php/php.ini-production",
 		"/C/nginx/star.bat",
 		"/C/nginx/star",
@@ -477,6 +509,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"cant_fam",
+			"rif",
+			"logo",
 			"test",
 			"sexop",
 			"Nombre",
@@ -554,15 +589,15 @@
 					"file": "app/routes.php",
 					"settings":
 					{
-						"buffer_size": 6006,
+						"buffer_size": 6061,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2445,
-								2445
+								4920,
+								4889
 							]
 						],
 						"settings":
@@ -571,7 +606,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1061.0,
+						"translation.y": 2706.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -581,15 +616,15 @@
 					"file": "app/controllers/GestionController.php",
 					"settings":
 					{
-						"buffer_size": 14278,
+						"buffer_size": 14309,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12729,
-								12729
+								9489,
+								9489
 							]
 						],
 						"settings":
@@ -598,8 +633,8 @@
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 173.0,
-						"translation.y": 7021.0,
+						"translation.x": 0.0,
+						"translation.y": 5138.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -634,7 +669,7 @@
 			]
 		},
 		{
-			"selected": 7,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -642,15 +677,15 @@
 					"file": "app/views/empleados/resgistros.blade.php",
 					"settings":
 					{
-						"buffer_size": 3493,
+						"buffer_size": 3769,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								381,
-								381
+								2571,
+								2571
 							]
 						],
 						"settings":
@@ -658,59 +693,25 @@
 							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1490.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "/C/nginx/logs/error.log",
+					"file": "app/views/admin/system.blade.php",
 					"settings":
 					{
-						"buffer_size": 4244,
+						"buffer_size": 13125,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "app/views/empleados/index.blade.php",
-					"settings":
-					{
-						"buffer_size": 35444,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								31698,
-								31698
-							],
-							[
-								31960,
-								31960
-							],
-							[
-								34433,
-								34433
+								11692,
+								11692
 							]
 						],
 						"settings":
@@ -720,7 +721,35 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2815.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/views/empleados/index.blade.php",
+					"settings":
+					{
+						"buffer_size": 35696,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								22293,
+								22234
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7446.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -758,15 +787,19 @@
 					"file": "public/assets/empleados/js/select.js",
 					"settings":
 					{
-						"buffer_size": 30352,
+						"buffer_size": 30426,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12090,
-								10924
+								3370,
+								3370
+							],
+							[
+								3392,
+								3392
 							]
 						],
 						"settings":
@@ -775,7 +808,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4482.0,
+						"translation.y": 1789.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -813,15 +846,15 @@
 					"file": "app/views/empleados/edit.blade.php",
 					"settings":
 					{
-						"buffer_size": 41519,
+						"buffer_size": 41527,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								29805,
-								29813
+								818,
+								818
 							]
 						],
 						"settings":
@@ -830,8 +863,8 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 95.0,
-						"translation.y": 9669.0,
+						"translation.x": 0.0,
+						"translation.y": 325.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -841,15 +874,15 @@
 					"file": "public/assets/empleados/js/edit.js",
 					"settings":
 					{
-						"buffer_size": 11665,
+						"buffer_size": 11946,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11565,
-								11565
+								6610,
+								6610
 							]
 						],
 						"settings":
@@ -858,7 +891,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6228.0,
+						"translation.y": 3464.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -877,6 +910,89 @@
 							[
 								50,
 								50
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "app/views/login/ingresar.blade.php",
+					"settings":
+					{
+						"buffer_size": 2236,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								363,
+								359
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 108.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "public/assets/admin/css/assets.css",
+					"settings":
+					{
+						"buffer_size": 73480,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								62066,
+								62066
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 45656.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "public/assets/admin/css/style.css",
+					"settings":
+					{
+						"buffer_size": 2076,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								256,
+								256
 							]
 						],
 						"settings":
@@ -922,7 +1038,7 @@
 		"cols":
 		[
 			0.0,
-			0.0433651344319,
+			0.04,
 			1.0
 		],
 		"rows":
@@ -957,6 +1073,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 50.0,
+	"side_bar_width": 273.0,
 	"status_bar_visible": true
 }

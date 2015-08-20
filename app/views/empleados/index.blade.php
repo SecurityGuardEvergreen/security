@@ -653,10 +653,15 @@ jQuery.namespace = function() {
         <td style="width:190px;border-bottom-style:none;" width="200px">Documento No.:</td>
       </tr>
       <tr class="head">
-        <td style="text-align:right;border-top-style:none;"><b>EGS-AD-PR-02-F</b></td>
+        <td style="text-align:right;border-top-style:none;"><b>EGS-AD-RH-23-F</b></td>
       </tr>
       <tr>
-        <td colspan="3" style="text-align:center;">Actualización de datos de los empleados</td>
+        <td colspan="3" style="text-align:center; font-size:18"><b>Actualización de datos de los empleados</b></td>
+      </tr>
+      <tr>
+          <td style="width:190px;">Reemplaza a: <b>N/A</b></td>
+          <td style="width:190px;">Fecha de comprobación: <b>Agosto 2015</b></td>
+          <td style="width:190px;">Rev.No.: <b>0</b></td>
       </tr>
     </tbody>
   </table>

@@ -164,7 +164,7 @@ if($('#carga_edit').val()!= 0){
 family_total_f = $('#cant_family').val();
 // Asignado valiable para controlar el max familiar
 
-// =============Determinando sexo family dinamic ==============
+// =============Determinando sexo y parentesco family dinamic ==============
 tam_family=$('#cant_family').val();
 $('#n_familiar').val(tam_family);
 // console.log($('#n_familiar').val());
@@ -172,6 +172,8 @@ if(tam_family>0){
 
 	for (var i = 1; i <= tam_family; i++) {
 		$('#sexop'+i).val($('#edit_sexop'+i).val());
+		$('#parentescoEdit'+i).val($('#edit_parentesco'+i).val());
+		
 
 	};
 }
@@ -370,7 +372,13 @@ console.log(str);
 
 		setTimeout(
 			function(){
-				location.reload();
+
+				tipo_ced = $('#tipo_ced option:selected').text();
+				ced = $('#ced').val();
+				console.log(tipo_ced+ced); 
+				// location.reload();
+				window.location.href = '/jornada/edit/'+tipo_ced+ced;
+
 			},100
 			);
 

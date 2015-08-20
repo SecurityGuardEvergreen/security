@@ -404,11 +404,14 @@
     </div>
     <div class="col-sm-3">
         <label for="parentesco1" class="control-label">Parentesco</label>
-        {{Form::text('parentesco1',Input::old('parentesco1'),
-        array('autofocus','class' => 'form-control','id' => 'parentesco1',
-        'placeholder' => 'Ingrese el parentesco',
-        'title'=>'¿Cuál es su parentesco?')
-        )}}
+       
+        <select name="parentesco1" id="parentesco1" class="form-control" required title="¿Cuál es su parentesco?">
+            <option value="">-</option>
+            <option value="Hijo">Hijo</option>
+            <option value="Hija">Hija</option>
+            <option value="Esposo/a">Esposo/a</option>
+            <option value="Concubino/a">Concubino/a</option>
+        </select>
     </div>
     <div class="col-sm-3">
         <label for="sexop1" class="control-label">Sexo</label>
@@ -416,7 +419,6 @@
             <option value="">-</option>
             <option value="1">Femenino</option>
             <option value="2">Masculino</option>
-
         </select>
     </div>
     <div class="col-sm-3">
@@ -466,7 +468,15 @@
 
             <div class="col-sm-3">
                 <label for="parentescoEdit{{$key+1}}" class="control-label">Parentesco</label>
-                <input type="text" name="parentescoEdit{{$key+1}}" id="parentescoEdit{{$key+1}}" value="{{$familia->parentesco}}" placeholder="Parentesco del familiar {{$key+1}}" title="¿Cuál es su parentesco?" class="form-control">
+                
+                <select name="parentescoEdit{{$key+1}}" id="parentescoEdit{{$key+1}}" class="form-control" required>
+                    <option value="">-</option>
+                    <option value="Hijo">Hijo</option>
+                    <option value="Hija">Hija</option>
+                    <option value="Esposo/a">Esposo/a</option>
+                    <option value="Concubino/a">Concubino/a</option>
+                </select>
+                <input type="hidden" id="edit_parentesco{{$key+1}}" name="edit_parentesco{{$key+1}}" value="{{$familia->parentesco}}">
             </div>
             <div class="col-sm-3">
                 <label for="sexop{{$key+1}}" class="control-label">Sexo</label>
@@ -750,10 +760,15 @@ jQuery.namespace = function() {
         <td style="width:190px;border-bottom-style:none;" width="200px">Documento No.:</td>
       </tr>
       <tr class="head">
-        <td style="text-align:right;border-top-style:none;"><b>EGS-AD-PR-02-F</b></td>
+        <td style="text-align:right;border-top-style:none;"><b>EGS-AD-RH-23-F</b></td>
       </tr>
       <tr>
-        <td colspan="3" style="text-align:center;"><h4>Actualización de datos de los empleados</h4></td>
+        <td colspan="3" style="text-align:center; font-size:18"><b>Actualización de datos de los empleados</b></td>
+      </tr>
+      <tr>
+          <td style="width:190px;">Reemplaza a: <b>N/A</b></td>
+          <td style="width:190px;">Fecha de comprobación: <b>Agosto 2015</b></td>
+          <td style="width:190px;">Rev.No.: <b>0</b></td>
       </tr>
     </tbody>
   </table>

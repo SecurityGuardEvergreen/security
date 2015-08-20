@@ -285,7 +285,7 @@ public function data_empleados(){
         ->join('parroquias','empleados.parroquia_id','=','parroquias.id')
         ->select('estados.nombre as estado',
           'municipios.nombre as municipio','parroquias.nombre as parroquia',
-          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*',DB::raw('CONCAT(preficeds.sigla, "-", ci) as full_ced'))->get();
+          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*',DB::raw('CONCAT(preficeds.sigla, "-", ci) as full_ced'))->orderBy('id', 'DESC')->get();
 
     return json_encode($user);
 }
@@ -466,5 +466,23 @@ $respuesta['borrado_family_dinamic'] = $respu;
 return $respuesta;
 
 } // fin function save
+
+// funcion borrar empleado
+public function deleteempleado(){
+  $dele = Input::get('ids');
+  $respu = Empleado::destroy($dele);
+  $respuesta= array();
+  $respuesta['borrado'] = $respu;
+
+  if($respu){
+    $respuesta['mensaje'] = '<strong>Felicitaciones !!!</strong> El borrado de los registros fué realizado exitosamente.';
+    $respuesta['alert'] ='success' ;
+  }else{
+    $respuesta['mensaje'] = '<strong>Error !!!</strong> No se pudo ejecutar el borrado. comuniquese con el departamento de IT';
+     $respuesta['alert'] ='danger' ;
+  }
+  return $respuesta;
+}
+// Fin funcion borrar empleado
 
   } // Fin function

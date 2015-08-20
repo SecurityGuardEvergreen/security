@@ -67,7 +67,7 @@ Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 	Route::post('procesar','GestionController@procesar');
 	Route::post('procesar2','GestionController@procesar2');
 	Route::post('pdf','GestionController@pdf');
-
+	Route::post('deleteempleado','GestionController@deleteempleado');
 
 	Route::any('registros',array("before" => "roles:4-5,/",'uses' => 'GestionController@registros'));
 	Route::any('edit/{ced?}',array("before" => "roles:4-5,/",'uses' => 'GestionController@edit'));
@@ -196,10 +196,10 @@ Route::any('pdf2',function(){
 });
 
 Route::any('pdf3',function(){
-	// $data = array();
- //  // $data['empleado'] = array('nombre'=>'holas');
-  $pdf = PDF::loadView('pdf.index');
-  return $pdf->stream();
+	 // $data = array();
+  //    $data['empleado'] = array('nombre'=>'holas');
+  // $pdf = PDF::loadView('pdf.index');
+  // return $pdf->stream();
 
 	// return View::make('pdf.index');
 // return $pdf->download('invoice.pdf');

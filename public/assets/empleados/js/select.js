@@ -143,9 +143,17 @@ $('#add_parentesco').click(function(e){
         // parentesco
 
         html = html + '<div class="col-sm-3">';
-        html = html + '<label for="parentesco'+increment+'" class="control-label">Parentesco</label>';
-        html = html + '<input type="text" class="form-control parentesco" name="parentesco'+increment+'" id="parentesco'+increment+'" placeholder="Ingrese el parentesco" title="¿Cuál es su parentesco?" required>';
+        html = html + '<label for="parentesco'+increment+'" class="control-label">Parentesco</label>';        
+        html = html + '<select name="parentesco'+increment+'" id="parentesco'+increment+'" class="form-control parentesco" required title="¿Cuál es su parentesco?">';
+        html = html + '<option value="">-</option>';
+        html = html + '<option value="Hijo">Hijo</option>';
+        html = html + '<option value="Hija">Hija</option>';
+        html = html + '<option value="Esposo/a">Esposo/a</option>';
+        html = html + '<option value="Concubino/a">Concubino/a</option>';
+        html = html + '</select>';
+
         html = html + '</div> ';
+        
         // sexo
         html = html + '<div class="col-sm-3">';
         html = html + ' <label for="sexop'+increment+'" class="control-label">Sexo</label>';
