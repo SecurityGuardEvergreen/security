@@ -125,10 +125,7 @@ function nameFormatter(value) {
 	            <th data-field="cargo" data-sortable="true">Cargo</th>
 	            <th data-field="centro" data-sortable="true">Centro de trabajo</th>
 	            <th data-field="created_at" data-sortable="true">Creado</th>
-	            <th data-field="updated_at" data-sortable="true">Actualizado</th>
-	            <th data-field="estado" data-sortable="true">Estado</th>
-	            <th data-field="municipio" data-sortable="true">Municipio</th>
-	            <th data-field="parroquia" data-sortable="true">Parroquia</th>	            
+	            <th data-field="updated_at" data-sortable="true">Actualizado</th>	            
 	            <th data-field="rif" data-sortable="true" data-formatter="actionFormatter" data-events="actionEvents">Acción</th>
 	        </tr>
 		    </thead>

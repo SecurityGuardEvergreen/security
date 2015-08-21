@@ -384,3 +384,8 @@ border-color: #ac2925 !important;
 color:#fff !important;
 }
 /* a pedido Pedido de tony*/
+
+#discapacidad{
+    max-width: 915px;
+    /*min-width: 915px;*/
+}

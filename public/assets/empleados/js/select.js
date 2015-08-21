@@ -600,6 +600,116 @@ edad--;
 return edad;
 }
 //
+
+// Función calcular tiempo en la empresa
+function calcular_tiempo(dia,mes,año){
+	primerdia= 0;
+	 hoy = new Date()
+       
+	 curday = hoy.getDate();;
+	 curmon = hoy.getMonth() + 1;;
+	 curyear = hoy.getFullYear();;
+	 calday = dia;
+	 calmon = mes;
+	 calyear = año;
+	
+
+	 curd = new Date(curyear,curmon-1,curday);
+	 cald = new Date(calyear,calmon-1,calday);
+	
+	 diff =  Date.UTC(curyear,curmon-1,curday,0,0,0)
+		 - Date.UTC(calyear,calmon-1,calday,0,0,0);
+
+	 dife = datediff(curd,cald);
+	
+	if(dife[0]==1 && dife[1] ==1 && dife[2]==1){
+		edad =dife[0]+" año, "+dife[1]+" mes, y "+dife[2]+" día";
+	}else if(dife[0]==1 && dife[1] ==1 && dife[2]>0){
+		edad =dife[0]+" año, "+dife[1]+" mes, y "+dife[2]+" días";
+	}else if(dife[0]==1 && dife[1] >0 && dife[2]==1){
+		edad =dife[0]+" año, "+dife[1]+" meses, y "+dife[2]+" día";
+	}else if(dife[0]==1 && dife[1] >0 && dife[2]>0){
+		edad =dife[0]+" año, "+dife[1]+" meses, y "+dife[2]+" días";
+	}else if(dife[0]>0 && dife[1] ==1 && dife[2]==1){
+		edad =dife[0]+" años, "+dife[1]+" mes, y "+dife[2]+" día";
+	}else if(dife[0]>0 && dife[1] ==1 && dife[2]>0){
+		edad =dife[0]+" años, "+dife[1]+" mes, y "+dife[2]+" días";
+	}else if(dife[0]>0 && dife[1] >0 && dife[2]==1){
+		edad =dife[0]+" años, "+dife[1]+" meses, y "+dife[2]+" día";
+	}else if(dife[0]>0 && dife[1] >0 && dife[2]>0){
+		edad =dife[0]+" años, "+dife[1]+" meses, y "+dife[2]+" días";
+	}else if(dife[0]==1 && dife[1] ==1 && dife[2]==0){
+		edad =dife[0]+" año y "+dife[1]+" mes ";	
+	}else if(dife[0]==1 && dife[1] >0 && dife[2]==0){
+		edad =dife[0]+" año y "+dife[1]+" meses ";	
+	}else if(dife[0]>0 && dife[1] ==1 && dife[2]==0){
+		edad =dife[0]+" años y "+dife[1]+" meses ";	
+	}else if(dife[0]>0 && dife[1] >0 && dife[2]==0){
+		edad =dife[0]+" años y "+dife[1]+" meses ";	
+	}else if(dife[0]==1 && dife[1] ==0 && dife[2]==1){
+		edad =dife[0]+" año y "+dife[2]+" día";
+	}else if(dife[0]==1 && dife[1] ==0 && dife[2]>0){
+		edad =dife[0]+" año y "+dife[2]+" días";
+	}else if(dife[0]>0 && dife[1] ==0 && dife[2]==1){
+		edad =dife[0]+" años y "+dife[2]+" día";
+	}else if(dife[0]>0 && dife[1] ==0 && dife[2]>0){
+		edad =dife[0]+" años y "+dife[2]+" días";
+	}else if(dife[0]==1 && dife[1] ==0 && dife[2]==0){
+		edad = dife[0]+" año";
+	}else if(dife[0]>0 && dife[1] ==0 && dife[2]==0){
+		edad = dife[0]+" años";
+	}else if(dife[0]==0 && dife[1] ==1 && dife[2]==1){
+		edad =dife[1]+" mes, y "+dife[2]+" día";
+	}else if(dife[0]==0 && dife[1] ==1 && dife[2]>0){
+		edad =dife[1]+" mes, y "+dife[2]+" días";
+	}else if(dife[0]==0 && dife[1] >0 && dife[2]==1){
+		edad =dife[1]+" meses, y "+dife[2]+" día";
+	}else if(dife[0]==0 && dife[1] >0 && dife[2]>0){
+		edad =dife[1]+" meses, y "+dife[2]+" días";
+	}else if(dife[0]==0 && dife[1] ==1 && dife[2]==0){
+		edad =dife[1]+" mes";
+	}else if(dife[0]==0 && dife[1] >0 && dife[2]==0){
+		edad =dife[1]+" meses";
+	}else if(dife[0]==0 && dife[1] ==0 && dife[2]==1){
+		edad =dife[2]+" día";
+	}else if(dife[0]==0 && dife[1] ==0 && dife[2]>0){
+		edad =dife[2]+" días";
+	}else{
+		edad = "primer día de trabajo";
+		primerdia=1;
+	}
+	
+	 return [primerdia,edad];
+	
+
+
+}
+
+function datediff(date1, date2) 
+{
+    var y1 = date1.getFullYear(), m1 = date1.getMonth(), d1 = date1.getDate(),
+	 y2 = date2.getFullYear(), m2 = date2.getMonth(), d2 = date2.getDate();
+    if (d1 < d2) 
+    {
+        m1--;
+        d1 += DaysInMonth(y2, m2);
+    }
+    if (m1 < m2) 
+    {
+        y1--;
+        m1 += 12;
+    }
+    return [y1 - y2, m1 - m2, d1 - d2];
+}
+function DaysInMonth(Y, M) {
+    with (new Date(Y, M, 1, 12)) {
+      setDate(-2);
+      return getDate();
+    }
+}
+
+// Fin función calcular tiempo en la empresa
+
 function validarced(){
 	error_ced = false;
 
@@ -770,7 +880,7 @@ $('#parentescoAdd input.ced_familiar').each(function(index){
 });
 
 // parentesco
-$('#parentescoAdd input.parentesco').each(function(index){
+$('#parentescoAdd select.parentesco').each(function(index){
 	if($('#cant_family').length>0){
 	 	mas = 1 + index;
 	 }else{

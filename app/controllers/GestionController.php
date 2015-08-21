@@ -112,6 +112,7 @@ $respuesta = array('respuesta' => '',
   $telf_movil = Input::get('telf_movil');
   $educacion = Input::get('educacion');
   $cargo = Input::get('cargo');
+  $antiguedad = Input::get('ingreso');
   $estado = Input::get('estado');
   $municipio = Input::get('municipio');
   $parroquia = Input::get('parroquia');
@@ -157,6 +158,7 @@ $respuesta = array('respuesta' => '',
                     "telf" =>$telf_movil,
                     "educationlevel_id" =>$educacion,
                     "cargo_id" =>$cargo,
+                    "antiguedad" => $antiguedad,
                     "estado_id" =>$estado,
                     "municipio_id" =>$municipio,
                     "parroquia_id" =>$parroquia,
@@ -191,6 +193,7 @@ $respuesta = array('respuesta' => '',
     $empleado ->telf = $telf_movil;
     $empleado ->educationlevel_id =$educacion;
     $empleado ->cargo_id = $cargo;
+    $empleado ->antiguedad = $antiguedad;
     $empleado ->estado_id = $estado;
     $empleado ->municipio_id = $municipio;
     $empleado ->parroquia_id = $parroquia;
@@ -277,15 +280,24 @@ public function data_empleados(){
   // $user = User::join('types_users','users.typeuser_id','=','types_users.id')
   //   ->select('types_users.name as type','users.*')
   //   ->get();
+  // $condi = array();
+  $user_sesion_area = Auth::user()->area_update_id;
+  // var_dump($user_sesion_area);
+
+  // echo "<br>";
   $user = Empleado::join('preficeds','empleados.preficed_id','=','preficeds.id')
         ->join('rifs','empleados.prefirif_id','=','rifs.id')
         ->join('cargos','empleados.cargo_id','=','cargos.id')
         ->join('estados','empleados.estado_id','=','estados.id')
         ->join('municipios','empleados.municipio_id','=','municipios.id')
         ->join('parroquias','empleados.parroquia_id','=','parroquias.id')
-        ->select('estados.nombre as estado',
+        ->join('users','empleados.user_id','=','users.id')
+        ->select('estados.nombre as estado','users.area_update_id as update',
           'municipios.nombre as municipio','parroquias.nombre as parroquia',
-          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*',DB::raw('CONCAT(preficeds.sigla, "-", ci) as full_ced'))->orderBy('id', 'DESC')->get();
+          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*',
+          DB::raw('CONCAT(preficeds.sigla, "-", ci) as full_ced'))
+        // ->where('sexo_id','=',1)
+        ->orderBy('id', 'DESC')->get();
 
     return json_encode($user);
 }
@@ -337,6 +349,7 @@ $respuesta = array();
   $familiar = new Familiar;
   // Datos del empleado
   $centro = Input::get('centro');
+  $antiguedad = Input::get('ingreso');
   $nombre = Input::get('name');
   $secondname = Input::get('secondname');
   $lastname = Input::get('lastname');
@@ -391,6 +404,7 @@ $up_empleado_base = Empleado::where('id',$id_update)
   "telf" =>$telf_movil,
   "educationlevel_id" =>$educacion,
   "cargo_id" =>$cargo,
+  "antiguedad" => $antiguedad,
   "estado_id" =>$estado,
   "municipio_id" =>$municipio,
   "parroquia_id" =>$parroquia,

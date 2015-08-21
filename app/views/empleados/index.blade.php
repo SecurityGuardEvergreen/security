@@ -68,6 +68,8 @@
 
                     </div>
 
+
+
                     <div id="nombre_otro_centro" class="col-sm-6 hide">
                           <label for="input_nombre" class="control-label">Nombre del centro</label>
                           {{Form::text('input_nombre',Input::old('input_nombre'),
@@ -78,7 +80,31 @@
                           )}}
                       </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="ingreso" class=" control-label">Fecha de ingreso en nuestra empresa</label>
+                        <div class='input-group date ' id='ingreso'>
+                                    {{Form::text('ingreso',Input::old('ingreso'),
+                                    array('autofocus','class' => 'form-control','id' => 'ingreso',
+                                    'placeholder' => 'Fecha de ingreso',
+                                    'required'=>'required',
+                                    'title'=>'Necesitamos saber su antigüedad en la empresa')
+                                    )}}
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
 
+                        </div>
+
+                        <div style="margin-top:5px;">
+                            <span id="erroredadempleado" class="label label-danger hide"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <br><br>
+                        <div id="antigueadad" class="hide"></div>
+                    </div>
+                </div>
                 <div class="form-group">
 
                     <div class="col-sm-6">
@@ -385,12 +411,14 @@
                         <!-- <input type="text" class="form-control" name="ced_familiar1" id="ced_familiar1" placeholder="ingrese la cédula" required> -->
                     </div>
                     <div class="col-sm-3">
-                        <label for="parentesco1" class="control-label">Parentesco</label>
-                        {{Form::text('parentesco1',Input::old('parentesco1'),
-                        array('autofocus','class' => 'form-control','id' => 'parentesco1',
-                        'placeholder' => 'Ingrese el parentesco',
-                        'title'=>'¿Cuál es su parentesco?')
-                        )}}
+                       <label for="parentesco1" class="control-label">Parentesco</label>       
+                        <select name="parentesco1" id="parentesco1" class="form-control" required title="¿Cuál es su parentesco?">
+                            <option value="">-</option>
+                            <option value="Hijo">Hijo</option>
+                            <option value="Hija">Hija</option>
+                            <option value="Esposo/a">Esposo/a</option>
+                            <option value="Concubino/a">Concubino/a</option>
+                        </select>
                     </div>
                     <div class="col-sm-3">
                         <label for="sexop1" class="control-label">Sexo</label>
@@ -626,6 +654,39 @@ jQuery.namespace = function() {
               }//end primer if
 
                 });
+                 // Calcular tiempo en la empresa
+            $('#ingreso').datetimepicker({
+                    locale: 'es',
+                    format: 'DD-MM-YYYY',
+                    maxDate: dateToday
+                }).on("dp.change", function(e){
+                    fecha = $('#ingreso').data('date');
+                    if(fecha!=''){
+                        $('#antigueadad').empty();
+                        año = fecha.substring(6, 10);
+                        mes = fecha.substring(3, 5);
+                        dia = fecha.substring(0, 2);
+                        tiempo= calcular_tiempo(dia,mes,año);
+
+
+                            // console.log(mensajerespuestaOk);
+
+                        if(tiempo[0]==0){
+
+                        mensaje = 'El empleado tiene '+tiempo[1]+' trabajando con nosotros.';
+                        }else{
+                        mensaje = 'El empleado está en su '+tiempo[1]+' con nosotros.';
+                        }
+                        $('#antigueadad').removeClass('hide');
+
+                        msj_antigueadad ="<h5><span class='label label-primary'>";
+                        msj_antigueadad = msj_antigueadad + mensaje + "</span></h5>";
+                        $('#antigueadad').append(msj_antigueadad);
+
+
+                    } //end if fecha
+                });
+            // Calcular tiempo en la empresa
 
             });
 
@@ -655,14 +716,7 @@ jQuery.namespace = function() {
       <tr class="head">
         <td style="text-align:right;border-top-style:none;"><b>EGS-AD-RH-23-F</b></td>
       </tr>
-      <tr>
-        <td colspan="3" style="text-align:center; font-size:18"><b>Actualización de datos de los empleados</b></td>
-      </tr>
-      <tr>
-          <td style="width:190px;">Reemplaza a: <b>N/A</b></td>
-          <td style="width:190px;">Fecha de comprobación: <b>Agosto 2015</b></td>
-          <td style="width:190px;">Rev.No.: <b>0</b></td>
-      </tr>
+      
     </tbody>
   </table>
 

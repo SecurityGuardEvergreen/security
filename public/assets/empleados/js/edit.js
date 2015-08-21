@@ -23,7 +23,31 @@ $(function(){
 	}
 
 	// ============== Fin asignando el centro ================
+	// ===============Asignar la antiguedad======================
+	antiguedadEdit = $('#anti').val();
+	
+	if(antiguedadEdit!=""){
+	añoanti_edit = antiguedadEdit.substring(6, 10);
+	mesanti_edit = antiguedadEdit.substring(3, 5);
+	diaantiedit = antiguedadEdit.substring(0, 2);
+	
+	tiempoedit= calcular_tiempo(diaantiedit,mesanti_edit,añoanti_edit);
 
+	if(tiempoedit[0]==0){
+
+	mensajeedit = 'El empleado tiene '+tiempoedit[1]+' trabajando con nosotros.';
+	}else{
+	mensajeedit = 'El empleado está en su '+tiempoedit[1]+' con nosotros.';
+	}
+	$('#antigueadad').removeClass('hide');
+
+	msj_antigueadadEdit ="<h5><span class='label label-primary'>";
+	msj_antigueadadEdit = msj_antigueadadEdit + mensajeedit + "</span></h5>";
+	$('#antigueadad').append(msj_antigueadadEdit);
+	}
+	
+
+// ===============Fin signar la antiguedad===================
 	// ==================Asignando prefi cédula===============
 	cedprefi_edit = $('#cedprefi_edit').val();
 	$('#tipo_ced option:eq('+cedprefi_edit+')').prop('selected', true);
@@ -32,6 +56,9 @@ $(function(){
 	// ==================Asignando prefi rif===============
 	rifprefi_edit = $('#rifprefi_edit').val();
 	$('#tipo_rif').val(rifprefi_edit);
+	if(rifprefi_edit!=0){
+		$('#rif').attr('disabled',false);
+	}
 	// ==================Fin Asignando prefi rif===========
 
 	// ==================Asignando estado civil===============
@@ -172,6 +199,7 @@ if(tam_family>0){
 
 	for (var i = 1; i <= tam_family; i++) {
 		$('#sexop'+i).val($('#edit_sexop'+i).val());
+
 		$('#parentescoEdit'+i).val($('#edit_parentesco'+i).val());
 		
 

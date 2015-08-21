@@ -78,6 +78,33 @@
                           )}}
                       </div>
                 </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="ingreso" class=" control-label">Fecha de ingreso en nuestra empresa</label>
+                        <div class='input-group date nacimientocontrol' id='ingreso'>
+                                    {{Form::text('ingreso',Input::old('ingreso',$data->data_user->antiguedad),
+                                    array('autofocus','class' => 'form-control','id' => 'ingreso',
+                                    'placeholder' => 'Fecha de ingreso',
+                                    'required'=>'required',
+                                    'title'=>'Necesitamos saber su antigüedad en la empresa')
+                                    )}}
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+
+                        </div>
+                    
+                        <div style="margin-top:5px;">
+                            <span id="erroredadempleado" class="label label-danger hide"></span>
+                        </div>
+                        <input type="hidden" id="anti" name="anti" value="{{$data->data_user->antiguedad}}">
+                    </div>
+                    <div class="col-sm-8">
+                        <br><br>
+                        <div id="antigueadad" class="hide"></div>
+                    </div>
+                </div>
 
                 <div class="form-group">
 
@@ -733,8 +760,39 @@ jQuery.namespace = function() {
               }//end primer if
 
                 });
+            // Calcular tiempo en la empresa
+            $('#ingreso').datetimepicker({
+                    locale: 'es',
+                    format: 'DD-MM-YYYY',
+                    maxDate: dateToday
+                }).on("dp.change", function(e){
+                    fecha = $('#ingreso').data('date');
+                    if(fecha!=''){
+                        $('#antigueadad').empty();
+                        año = fecha.substring(6, 10);
+                        mes = fecha.substring(3, 5);
+                        dia = fecha.substring(0, 2);
+                        tiempo= calcular_tiempo(dia,mes,año);
 
-            });
+
+                            // console.log(mensajerespuestaOk);
+
+                        if(tiempo[0]==0){
+
+                        mensaje = 'El empleado tiene '+tiempo[1]+' trabajando con nosotros.';
+                        }else{
+                        mensaje = 'El empleado está en su '+tiempo[1]+' con nosotros.';
+                        }
+                        $('#antigueadad').removeClass('hide');
+                        msj_antigueadad ="<span class='label label-success'>";
+                        msj_antigueadad = msj_antigueadad + mensaje + "</span>";
+                        $('#antigueadad').append(msj_antigueadad);
+
+
+                    } //end if fecha
+                });
+            // Calcular tiempo en la empresa
+            }); // fin funtion main
 
 
 
