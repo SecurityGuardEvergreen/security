@@ -458,14 +458,21 @@ $('#btn_reset').click(function(){
 });
 // Fin btn reset
 
+// Check activar o desactivar centro de trabajo
+// tipo_user = $('#tipo_user').val();
+// area_acces = $('#area_acces').val();
 
-// // btn Imprimir
-// $('#btn_print').click(function(){
-// 	$('#print_f').append('<form id="gen_pdf" action="pdf" method="post"></form>');
-// 	$('#gen_pdf').append('<input type="hidden" id="id_registro" name="id_registro" value="'+id_update+'">');
-// 	$("#gen_pdf").submit();
-// });
-// // fin btn Imprimir
+// if(tipo_user==1 && area_acces=="all"){
+
+// }else if(area_acces==3){
+// 	$('#centroOpcion1').addClass('active');
+		
+// 			// radio[i].defaultChecked = true;
+// }
+
+
+// console.log(area_acces);
+// Check activar o desactivar centro de trabajo
 
 
 });//fin funcion main

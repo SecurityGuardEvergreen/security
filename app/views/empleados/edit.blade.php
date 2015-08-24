@@ -60,6 +60,14 @@
                           OP SANTA ROSA
                           </label>
                           <label class="btn btn-info btn-sm">
+                            <input type="radio" name="centro" id="centroOpcion6" value="TALADROS-NORTE" autocomplete="off"title="Seleccione un centro de trabajo" required>
+                          TALADROS-NORTE
+                          </label>
+                          <label class="btn btn-info btn-sm">
+                            <input type="radio" name="centro" id="centroOpcion7" value="TALADROS-ANACO" autocomplete="off"title="Seleccione un centro de trabajo" required>
+                          TALADROS-ANACO
+                          </label>
+                          <label class="btn btn-info btn-sm">
                             <input type="radio" name="centro" id="centroOpcion4" value="4" autocomplete="off"title="Seleccione un centro de trabajo" required>
                           Otro
                           </label>

@@ -5,7 +5,7 @@
     <title>{{$data->title}} | Evergreen Service C.A</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
@@ -41,7 +41,7 @@
                             <li><a href="#">Intranet</a>
                             </li>
                             @if(Auth::check())
-                                <li><a href="/salir">Salir</a></li>
+                                <li><a href="/salir">Salir ( {{Auth::user()->name}} )</a></li>
                             @endif
 
                         </ul>

@@ -88,7 +88,9 @@ Login -
 	@endif
   </li>
 
-<li>
+<li class="checkbox">
+<a href="forgot"><p class="recovery_pass">Olvidaste tu contrase&ntilde;a?</p></a>
+</li>
 	{{ Form::submit('Ingresar',array(
 	'id' => 'password',
 	'placeholder'=>'Tu contraseña',

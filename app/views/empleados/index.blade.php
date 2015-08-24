@@ -43,24 +43,35 @@
                     <!-- &nbsp;&nbsp;&nbsp; -->
                     <label for="centro" class="control-label">Centro de trabajo</label>
                     <div class="col-sm-12" id="centro_radio">
+                       
+                       <input type="hidden" id="area_acces" value="{{Auth::user()->area_update_id}}">
+                       <input type="hidden" id="tipo_user" value="{{Auth::user()->typeuser_id}}">
 
                         <div id="radios_centro" class="btn-group col-sm-12" data-toggle="buttons">
                           <label class="btn btn-info btn-sm ">
-                            <input type="radio" name="centro" id="centroOpcion1" value="OFICINA ANACO" autocomplete="off" title="Seleccione un centro de trabajo" required> OFICINA ANACO
+                            <input type="radio" name="centro" id="centroOpcion1"  value="OFICINA ANACO" autocomplete="off" title="Seleccione un centro de trabajo" required> OFICINA ANACO
                           </label>
                           <label class="btn btn-info btn-sm">
-                            <input type="radio" name="centro" id="centroOpcion2" value="CIMD LOMA LINDA" autocomplete="off"title="Seleccione un centro de trabajo" required> CIMD LOMA LINDA
+                            <input type="radio" name="centro" id="centroOpcion2"  value="CIMD LOMA LINDA" autocomplete="off"title="Seleccione un centro de trabajo" required> CIMD LOMA LINDA
                           </label>
                           <label class="btn btn-info btn-sm">
-                            <input type="radio" name="centro" id="centroOpcion3" value="CIMD SANTA ROSA" autocomplete="off"title="Seleccione un centro de trabajo" required>
+                            <input type="radio" name="centro" id="centroOpcion3"  value="CIMD SANTA ROSA" autocomplete="off"title="Seleccione un centro de trabajo" required>
                           CIMD SANTA ROSA
                           </label>
                           <label class="btn btn-info btn-sm">
-                            <input type="radio" name="centro" id="centroOpcion5" value="OP SANTA ROSA" autocomplete="off"title="Seleccione un centro de trabajo" required>
+                            <input type="radio" name="centro" id="centroOpcion5"  value="OP SANTA ROSA" autocomplete="off"title="Seleccione un centro de trabajo" required>
                           OP SANTA ROSA
                           </label>
                           <label class="btn btn-info btn-sm">
-                            <input type="radio" name="centro" id="centroOpcion4" value="4" autocomplete="off"title="Seleccione un centro de trabajo" required>
+                            <input type="radio" name="centro" id="centroOpcion6"  value="TALADROS-NORTE" autocomplete="off"title="Seleccione un centro de trabajo" required>
+                          TALADROS-NORTE
+                          </label>
+                          <label class="btn btn-info btn-sm">
+                            <input type="radio" name="centro" id="centroOpcion7"  value="TALADROS-ANACO" autocomplete="off"title="Seleccione un centro de trabajo" required>
+                          TALADROS-ANACO
+                          </label>
+                          <label class="btn btn-info btn-sm">
+                            <input type="radio" name="centro" id="centroOpcion4"  value="4" autocomplete="off"title="Seleccione un centro de trabajo" required>
                           Otro
                           </label>
                         </div>

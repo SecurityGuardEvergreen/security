@@ -281,11 +281,14 @@ public function data_empleados(){
   //   ->select('types_users.name as type','users.*')
   //   ->get();
   // $condi = array();
+  $tipo_user = Auth::user()->typeuser_id;
   $user_sesion_area = Auth::user()->area_update_id;
-  // var_dump($user_sesion_area);
+  // var_dump($tipo_user);
 
   // echo "<br>";
-  $user = Empleado::join('preficeds','empleados.preficed_id','=','preficeds.id')
+
+  if($tipo_user==1){
+    $user = Empleado::join('preficeds','empleados.preficed_id','=','preficeds.id')
         ->join('rifs','empleados.prefirif_id','=','rifs.id')
         ->join('cargos','empleados.cargo_id','=','cargos.id')
         ->join('estados','empleados.estado_id','=','estados.id')
@@ -296,8 +299,26 @@ public function data_empleados(){
           'municipios.nombre as municipio','parroquias.nombre as parroquia',
           'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*',
           DB::raw('CONCAT(preficeds.sigla, "-", ci) as full_ced'))
-        // ->where('sexo_id','=',1)
         ->orderBy('id', 'DESC')->get();
+  }else{
+
+    $user = Empleado::join('preficeds','empleados.preficed_id','=','preficeds.id')
+        ->join('rifs','empleados.prefirif_id','=','rifs.id')
+        ->join('cargos','empleados.cargo_id','=','cargos.id')
+        ->join('estados','empleados.estado_id','=','estados.id')
+        ->join('municipios','empleados.municipio_id','=','municipios.id')
+        ->join('parroquias','empleados.parroquia_id','=','parroquias.id')
+        ->join('users','empleados.user_id','=','users.id')
+        ->select('estados.nombre as estado','users.area_update_id as update',
+          'municipios.nombre as municipio','parroquias.nombre as parroquia',
+          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*',
+          DB::raw('CONCAT(preficeds.sigla, "-", ci) as full_ced'))
+        ->where('area_update_id','=',$user_sesion_area)
+        // ->orWhere('typeuser_id','=',1)
+        ->orderBy('id', 'DESC')->get();
+  }
+
+  
 
     return json_encode($user);
 }
@@ -384,7 +405,7 @@ $respuesta = array();
 
 // Actualizando datos del empleado
 
-$up_empleado_base = Empleado::where('id',$id_update)
+$up_empleado_base = DB::table('empleados')->where('id',$id_update)
 ->update(array(
   "centro"=>$centro,
   "nombre" =>$nombre,
