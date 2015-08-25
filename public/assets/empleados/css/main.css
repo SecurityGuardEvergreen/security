@@ -377,3 +377,15 @@ footer {
     right: 0px;
     margin-top: 70px;
 }
+/* a pedido Pedido de tony*/
+#radios_centro .active{
+background-color: #c9302c !important;
+border-color: #ac2925 !important;
+color:#fff !important;
+}
+/* a pedido Pedido de tony*/
+
+#discapacidad{
+    max-width: 915px;
+    /*min-width: 915px;*/
+}

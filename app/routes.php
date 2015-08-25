@@ -52,11 +52,11 @@ Route::group(array('before' => 'auth','prefix' => 'admin') ,function(){
 // =========GESTION=========
 Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 
-	Route::any('/',array("before" => "roles:4,/",function(){
+	Route::any('/',array("before" => "roles:1-4,/",function(){
 		return Redirect::to('jornada/staff');
 	}));
 
-	Route::any('gestion/',array("before" => "roles:4,/",'uses' => 'HomeController@dashboard'));
+	Route::any('gestion/',array("before" => "roles:1-4,/",'uses' => 'HomeController@dashboard'));
 	Route::get('staff','GestionController@index');
 	Route::get('estados', 'GestionController@estados');
 	Route::post('municipios','GestionController@municipios');
@@ -67,17 +67,17 @@ Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 	Route::post('procesar','GestionController@procesar');
 	Route::post('procesar2','GestionController@procesar2');
 	Route::post('pdf','GestionController@pdf');
+	Route::post('deleteempleado','GestionController@deleteempleado');
 
-
-	Route::any('registros',array("before" => "roles:4-5,/",'uses' => 'GestionController@registros'));
-	Route::any('edit/{ced?}',array("before" => "roles:4-5,/",'uses' => 'GestionController@edit'));
-	Route::post('save/',array("before" => "roles:4-5,/",'uses' => 'GestionController@save'));
+	Route::any('registros',array("before" => "roles:1-4-5,/",'uses' => 'GestionController@registros'));
+	Route::any('edit/{ced?}',array("before" => "roles:1-4-5,/",'uses' => 'GestionController@edit'));
+	Route::post('save/',array("before" => "roles:1-4-5,/",'uses' => 'GestionController@save'));
 
 	Route::get('gestion',function(){
 	return View::make('gestion.index');
 	});
 
-	Route::get('data_empleados',array('before'=>'roles:4-5,/','uses' =>'GestionController@data_empleados'));
+	Route::get('data_empleados',array('before'=>'roles:1-4-5,/','uses' =>'GestionController@data_empleados'));
 
 	// Route::any('system/{dato?}',array("before" => "roles:1-2-3,/",'uses' => 'HomeController@system'));
 	// Route::get('data_user',array('before'=>'roles:1-2-3,/','uses' =>'HomeController@datausers'));
@@ -162,6 +162,9 @@ Route::get('ir',function(){
 
 Route::get('pruebac',function(){
 
+$rif= Update::all();
+
+// print_r($rif);
  // $data = Preficed::all();
  // var_dump($data);
 
@@ -193,8 +196,8 @@ Route::any('pdf2',function(){
 });
 
 Route::any('pdf3',function(){
-	// $data = array();
- //  // $data['empleado'] = array('nombre'=>'holas');
+	 $data = array();
+     $data['empleado'] = array('nombre'=>'holas');
   $pdf = PDF::loadView('pdf.index');
   return $pdf->stream();
 

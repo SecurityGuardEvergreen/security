@@ -2,11 +2,13 @@
 	var error_ced=false;
 	var error_rif=false;  //variable para conocer si se actualiza o se inserta un empleado
 	var error_edad=false;
+	var error_form=false;
 	var tem_ced='';
 	var tem_rif='';
 	var id_update='';
 	var increment = 1;
 	var validator;
+	var family_total_f = "";
 jQuery(document).ready(function() {
 resetn_nfamiliar();
 
@@ -108,6 +110,13 @@ $('#parentescoAdd').on("click","#rmfa",function(e){
 // Boton add parentesco
 $('#add_parentesco').click(function(e){
 	 increment = parseInt($('#n_familiar').val());
+	 
+	  console.log(family_total_f);
+	  console.log("incre "+increment);
+	 // Retringuiendo el tamaño de la carga familiar
+	 if(increment < 5 || family_total_f < 5){
+	 $('#mensaje_max_family').addClass('hide'); //ocultando mensaje de error de max familiar
+
      increment ++;
      // console.log(increment);
     $('#n_familiar').val(increment);
@@ -134,9 +143,17 @@ $('#add_parentesco').click(function(e){
         // parentesco
 
         html = html + '<div class="col-sm-3">';
-        html = html + '<label for="parentesco'+increment+'" class="control-label">Parentesco</label>';
-        html = html + '<input type="text" class="form-control parentesco" name="parentesco'+increment+'" id="parentesco'+increment+'" placeholder="Ingrese el parentesco" title="¿Cuál es su parentesco?" required>';
+        html = html + '<label for="parentesco'+increment+'" class="control-label">Parentesco</label>';        
+        html = html + '<select name="parentesco'+increment+'" id="parentesco'+increment+'" class="form-control parentesco" required title="¿Cuál es su parentesco?">';
+        html = html + '<option value="">-</option>';
+        html = html + '<option value="Hijo">Hijo</option>';
+        html = html + '<option value="Hija">Hija</option>';
+        html = html + '<option value="Esposo/a">Esposo/a</option>';
+        html = html + '<option value="Concubino/a">Concubino/a</option>';
+        html = html + '</select>';
+
         html = html + '</div> ';
+        
         // sexo
         html = html + '<div class="col-sm-3">';
         html = html + ' <label for="sexop'+increment+'" class="control-label">Sexo</label>';
@@ -165,40 +182,7 @@ $('#add_parentesco').click(function(e){
         html = html + '</div>';
         // scrip
         html = html + '<div id="script'+increment+'" class="scriptf">';
-  //       html = html + '<script type="text/javascript">';
-  //       html = html + '$(function () {';
-  //       // datatimepicker
-  //       html = html + '$("#nacimientocontrolp'+increment+'").datetimepicker({';
-  //       html = html + 'locale: "es",';
-  //       html = html + 'format: "DD-MM-YYYY",';
-  //       html = html + 'maxDate: dateToday';
-  //       html = html + '})';
-
-		// html = html + '.on("dp.change", function(e) {';
-		// // html = html + 'var fecha'+increment+'="";';
-  //       html = html + 'fecha'+increment+' = $("#nacimientocontrolp'+increment+'").data("date");';
-  //       html = html + '$("#edadempleadofamilia'+increment+'").addClass("hide");';
-  //       html = html + 'if(fecha'+increment+'!=""){';
-  //       html = html + ' año = fecha'+increment+'.substring(6, 10);';
-  //       html = html + ' mes = fecha'+increment+'.substring(3, 5);';
-  //       html = html + ' dia = fecha'+increment+'.substring(0, 2);';
-  //       html = html + ' años = calcular_edad(dia+"/"+mes+"/"+año);';
-  //       html = html + 'if(años>1){';
-  //       html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
-  //       html = html + '$("#edadempleadofamilia'+increment+'").text(años+" años");';
-  //       html = html + '}else if(años<1){';
-  //       html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
-  //       html = html + '$("#edadempleadofamilia'+increment+'").text("Bebé sin el año cumplido");';
-  //       html = html + '}';
-  //       html = html + 'else if(años==1){';
-  //       html = html + '$("#edadempleadofamilia'+increment+'").removeClass("hide");';
-  //       html = html + '$("#edadempleadofamilia'+increment+'").text(años+" año");';
-  //       html = html + '}';
-  //       html = html + '}';
-  //       html = html + '});';
-
-  //       // html = html + '';
-  //       html = html + '});';
+  
 
   //       html = html + '</script>';
         html = html + '<div>';
@@ -244,6 +228,25 @@ $('#add_parentesco').click(function(e){
 
       $('#script').append(script);
 	// console.log('boton');
+}else //condición contraria restricción carga familiar
+{
+	family_total_f = family_total_f -1; //restando max familiar para edit js
+	console.log("else famili "+family_total_f);
+max_mensaje_familia = '<br> <div class="alert alert-warning alert-dismissible" role="alert">';
+max_mensaje_familia = max_mensaje_familia + '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+max_mensaje_familia = max_mensaje_familia +  '<span aria-hidden="true">&times;</span>';
+max_mensaje_familia = max_mensaje_familia +  '</button>';
+max_mensaje_familia = max_mensaje_familia +  '<strong>Alerta !!!</strong> Excedíste el número de familiares permitidos. (<b>Aceptamos 5 cargas familiares a lo sumo</b>)';
+max_mensaje_familia = max_mensaje_familia +    '</div>';
+
+$('#mensaje_max_family').removeClass('hide');
+$('#mensaje_max_family').empty();
+$('#mensaje_max_family').append(max_mensaje_familia);
+}//fin if restringuiendo la carga familiar
+
+family_total_f = parseInt(family_total_f) + 1; // aumentando el max familiar
+
+
 });
 // =======================Fin add btn parentesco========================
 
@@ -281,11 +284,13 @@ validator = $('#form-update-data').validate({
 		    // alert("perfecto!!!");
 		    if(error_ced ==false && error_rif ==false && error_edad==false){
 		    	// console.log('No hay error');
+		    	error_form = false;
 		    	btn_guardar();
 		    }
 
 		  },
 	  	errorPlacement: function(error, element) {
+	  		error_form = true;
 		    if (element.attr("name") == "nacimiento"  ) {
 		      error.insertAfter(".nacimientocontrol");
 		    }else if(element.attr("name") == "centro" ){
@@ -396,6 +401,18 @@ $("input[name='family']").change(function() {
 		validarrif();
 	});
 	$('#tipo_rif').change(function(){
+		// Bloqueando o activando el input deacuerdo el estado del tipo rif
+		if($(this).val()!=0){
+			$('#rif').attr('disabled',false);
+			
+		}else{
+			$('#rif').val('');
+			$('#rif').attr('disabled',true);
+			$('#rif').removeClass('error');
+			$('#rif-error').remove();		
+			
+		}
+		// Bloqueando o activando el input deacuerdo el estado del tipo rif
 		validarrif();
 	});
 	// Fin Validando rif
@@ -416,8 +433,12 @@ $('#btn_reset').click(function(){
 	 tem_rif='';
 	 id_update='';
 	 increment = 1;
-	 validator.resetForm();
 
+	 if(error_form){
+	 	validator.resetForm();
+	 }
+	
+	 $('#mensaje_max_family').addClass('hide'); //ocultando mensaje de max familiar
 	 $('#parentescoAdd').empty();   // Borrando cargas familiaresd extras
 	 $('#btn_update').text('Agregar registro');   // Colocando el texto inicial al botón add
 	 $('#btn_print_f').addClass('disabled'); // Bloqueando btn imprimir
@@ -433,17 +454,25 @@ $('#btn_reset').click(function(){
 	 $('#edadempleadofamilia1').text('');
 	 $('#erroredadempleado').text('');
 	 $('#edadempleado').text('');
+	 $('#rif').attr('disabled',true); // bloqueando campo rif
 });
 // Fin btn reset
 
+// Check activar o desactivar centro de trabajo
+// tipo_user = $('#tipo_user').val();
+// area_acces = $('#area_acces').val();
 
-// // btn Imprimir
-// $('#btn_print').click(function(){
-// 	$('#print_f').append('<form id="gen_pdf" action="pdf" method="post"></form>');
-// 	$('#gen_pdf').append('<input type="hidden" id="id_registro" name="id_registro" value="'+id_update+'">');
-// 	$("#gen_pdf").submit();
-// });
-// // fin btn Imprimir
+// if(tipo_user==1 && area_acces=="all"){
+
+// }else if(area_acces==3){
+// 	$('#centroOpcion1').addClass('active');
+		
+// 			// radio[i].defaultChecked = true;
+// }
+
+
+// console.log(area_acces);
+// Check activar o desactivar centro de trabajo
 
 
 });//fin funcion main
@@ -578,6 +607,116 @@ edad--;
 return edad;
 }
 //
+
+// Función calcular tiempo en la empresa
+function calcular_tiempo(dia,mes,año){
+	primerdia= 0;
+	 hoy = new Date()
+       
+	 curday = hoy.getDate();;
+	 curmon = hoy.getMonth() + 1;;
+	 curyear = hoy.getFullYear();;
+	 calday = dia;
+	 calmon = mes;
+	 calyear = año;
+	
+
+	 curd = new Date(curyear,curmon-1,curday);
+	 cald = new Date(calyear,calmon-1,calday);
+	
+	 diff =  Date.UTC(curyear,curmon-1,curday,0,0,0)
+		 - Date.UTC(calyear,calmon-1,calday,0,0,0);
+
+	 dife = datediff(curd,cald);
+	
+	if(dife[0]==1 && dife[1] ==1 && dife[2]==1){
+		edad =dife[0]+" año, "+dife[1]+" mes, y "+dife[2]+" día";
+	}else if(dife[0]==1 && dife[1] ==1 && dife[2]>0){
+		edad =dife[0]+" año, "+dife[1]+" mes, y "+dife[2]+" días";
+	}else if(dife[0]==1 && dife[1] >0 && dife[2]==1){
+		edad =dife[0]+" año, "+dife[1]+" meses, y "+dife[2]+" día";
+	}else if(dife[0]==1 && dife[1] >0 && dife[2]>0){
+		edad =dife[0]+" año, "+dife[1]+" meses, y "+dife[2]+" días";
+	}else if(dife[0]>0 && dife[1] ==1 && dife[2]==1){
+		edad =dife[0]+" años, "+dife[1]+" mes, y "+dife[2]+" día";
+	}else if(dife[0]>0 && dife[1] ==1 && dife[2]>0){
+		edad =dife[0]+" años, "+dife[1]+" mes, y "+dife[2]+" días";
+	}else if(dife[0]>0 && dife[1] >0 && dife[2]==1){
+		edad =dife[0]+" años, "+dife[1]+" meses, y "+dife[2]+" día";
+	}else if(dife[0]>0 && dife[1] >0 && dife[2]>0){
+		edad =dife[0]+" años, "+dife[1]+" meses, y "+dife[2]+" días";
+	}else if(dife[0]==1 && dife[1] ==1 && dife[2]==0){
+		edad =dife[0]+" año y "+dife[1]+" mes ";	
+	}else if(dife[0]==1 && dife[1] >0 && dife[2]==0){
+		edad =dife[0]+" año y "+dife[1]+" meses ";	
+	}else if(dife[0]>0 && dife[1] ==1 && dife[2]==0){
+		edad =dife[0]+" años y "+dife[1]+" meses ";	
+	}else if(dife[0]>0 && dife[1] >0 && dife[2]==0){
+		edad =dife[0]+" años y "+dife[1]+" meses ";	
+	}else if(dife[0]==1 && dife[1] ==0 && dife[2]==1){
+		edad =dife[0]+" año y "+dife[2]+" día";
+	}else if(dife[0]==1 && dife[1] ==0 && dife[2]>0){
+		edad =dife[0]+" año y "+dife[2]+" días";
+	}else if(dife[0]>0 && dife[1] ==0 && dife[2]==1){
+		edad =dife[0]+" años y "+dife[2]+" día";
+	}else if(dife[0]>0 && dife[1] ==0 && dife[2]>0){
+		edad =dife[0]+" años y "+dife[2]+" días";
+	}else if(dife[0]==1 && dife[1] ==0 && dife[2]==0){
+		edad = dife[0]+" año";
+	}else if(dife[0]>0 && dife[1] ==0 && dife[2]==0){
+		edad = dife[0]+" años";
+	}else if(dife[0]==0 && dife[1] ==1 && dife[2]==1){
+		edad =dife[1]+" mes, y "+dife[2]+" día";
+	}else if(dife[0]==0 && dife[1] ==1 && dife[2]>0){
+		edad =dife[1]+" mes, y "+dife[2]+" días";
+	}else if(dife[0]==0 && dife[1] >0 && dife[2]==1){
+		edad =dife[1]+" meses, y "+dife[2]+" día";
+	}else if(dife[0]==0 && dife[1] >0 && dife[2]>0){
+		edad =dife[1]+" meses, y "+dife[2]+" días";
+	}else if(dife[0]==0 && dife[1] ==1 && dife[2]==0){
+		edad =dife[1]+" mes";
+	}else if(dife[0]==0 && dife[1] >0 && dife[2]==0){
+		edad =dife[1]+" meses";
+	}else if(dife[0]==0 && dife[1] ==0 && dife[2]==1){
+		edad =dife[2]+" día";
+	}else if(dife[0]==0 && dife[1] ==0 && dife[2]>0){
+		edad =dife[2]+" días";
+	}else{
+		edad = "primer día de trabajo";
+		primerdia=1;
+	}
+	
+	 return [primerdia,edad];
+	
+
+
+}
+
+function datediff(date1, date2) 
+{
+    var y1 = date1.getFullYear(), m1 = date1.getMonth(), d1 = date1.getDate(),
+	 y2 = date2.getFullYear(), m2 = date2.getMonth(), d2 = date2.getDate();
+    if (d1 < d2) 
+    {
+        m1--;
+        d1 += DaysInMonth(y2, m2);
+    }
+    if (m1 < m2) 
+    {
+        y1--;
+        m1 += 12;
+    }
+    return [y1 - y2, m1 - m2, d1 - d2];
+}
+function DaysInMonth(Y, M) {
+    with (new Date(Y, M, 1, 12)) {
+      setDate(-2);
+      return getDate();
+    }
+}
+
+// Fin función calcular tiempo en la empresa
+
 function validarced(){
 	error_ced = false;
 
@@ -588,7 +727,7 @@ function validarced(){
 			var tipo = $('#tipo_ced').val();
 
 			$.ajax({
-			url: 'empleado_cd',
+			url: '/jornada/empleado_cd',
 			type: 'POST',
 			data: 'ced='+ced_insert+'&tipo='+tipo,
 				}).done(function ( response ){
@@ -610,7 +749,7 @@ function validarced(){
 			var tipo = $('#tipo_ced').val();
 
 			$.ajax({
-			url: 'empleado_cd',
+			url: '/jornada/empleado_cd',
 			type: 'POST',
 			data:  'ced='+ced_insert+'&tipo='+tipo,
 				}).done(function ( response ){
@@ -636,7 +775,7 @@ function validarrif(){
 			var rif_insert = $('#rif').val();
 			var tipo = $('#tipo_rif').val();
 			$.ajax({
-			url: 'empleado_rif',
+			url: '/jornada/empleado_rif',
 			type: 'POST',
 			data: 'rif='+rif_insert+'&tipo='+tipo,
 				}).done(function ( response ){
@@ -657,7 +796,7 @@ function validarrif(){
 			var rif_insert = $('#rif').val();
 			var tipo = $('#tipo_rif').val();
 			$.ajax({
-			url: 'empleado_rif',
+			url: '/jornada/empleado_rif',
 			type: 'POST',
 			data: 'rif='+rif_insert+'&tipo='+tipo,
 				}).done(function ( response ){
@@ -748,7 +887,7 @@ $('#parentescoAdd input.ced_familiar').each(function(index){
 });
 
 // parentesco
-$('#parentescoAdd input.parentesco').each(function(index){
+$('#parentescoAdd select.parentesco').each(function(index){
 	if($('#cant_family').length>0){
 	 	mas = 1 + index;
 	 }else{

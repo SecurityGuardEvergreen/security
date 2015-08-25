@@ -29,7 +29,8 @@ return array(
 	*/
 
 	// 'host' => 'smtp.gmail.com',
-	'host' => 'mail.rsmappdevelopers.com',
+	// 'host' => 'mail.rsmappdevelopers.com',
+	'host' => 'host.caracashosting20.com',
 
 	/*
 	|--------------------------------------------------------------------------

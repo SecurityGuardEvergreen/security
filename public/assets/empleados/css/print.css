@@ -110,6 +110,6 @@ body, #imprimir, #footer {
 @page {
   /*size: 5.5in 8.5in;*/
   /*margin: 20pt 30pt 0pt;*/
-  margin-bottom: 10pt;
+  /*margin-bottom: 10pt;*/
 }
 

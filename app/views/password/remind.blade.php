@@ -86,7 +86,7 @@ Forgot -
 </li>
 
 <li>
-<a class="btn-link btn-block" href="login">Regresar al login</a>
+<a class="btn-link btn-block" href="ingresar">Regresar al login</a>
 </li>
 </ul>
 

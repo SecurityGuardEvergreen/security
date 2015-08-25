@@ -16,10 +16,11 @@ Login -
 <div class="form-login">
 <div class="brand-update">
 
-<!-- End Google Tag Manager
-<figure class="logo-wrap">
+
+<!-- <figure class="logo-wrap">
 <div class="logo logo-w"></div>
 </figure> -->
+
 <figure class="logo-wrapp">
 <div class="logoP logo-wP"></div>
 </figure>
@@ -87,7 +88,9 @@ Login -
 	@endif
   </li>
 
-<li>
+<li class="checkbox">
+<a href="forgot"><p class="recovery_pass">Olvidaste tu contrase&ntilde;a?</p></a>
+</li>
 	{{ Form::submit('Ingresar',array(
 	'id' => 'password',
 	'placeholder'=>'Tu contraseña',

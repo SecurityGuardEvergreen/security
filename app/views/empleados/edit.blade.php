@@ -60,6 +60,14 @@
                           OP SANTA ROSA
                           </label>
                           <label class="btn btn-info btn-sm">
+                            <input type="radio" name="centro" id="centroOpcion6" value="TALADROS-NORTE" autocomplete="off"title="Seleccione un centro de trabajo" required>
+                          TALADROS-NORTE
+                          </label>
+                          <label class="btn btn-info btn-sm">
+                            <input type="radio" name="centro" id="centroOpcion7" value="TALADROS-ANACO" autocomplete="off"title="Seleccione un centro de trabajo" required>
+                          TALADROS-ANACO
+                          </label>
+                          <label class="btn btn-info btn-sm">
                             <input type="radio" name="centro" id="centroOpcion4" value="4" autocomplete="off"title="Seleccione un centro de trabajo" required>
                           Otro
                           </label>
@@ -77,6 +85,33 @@
                           'title'=>'Necesitamos el nombre del otro centro')
                           )}}
                       </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="ingreso" class=" control-label">Fecha de ingreso en nuestra empresa</label>
+                        <div class='input-group date nacimientocontrol' id='ingreso'>
+                                    {{Form::text('ingreso',Input::old('ingreso',$data->data_user->antiguedad),
+                                    array('autofocus','class' => 'form-control','id' => 'ingreso',
+                                    'placeholder' => 'Fecha de ingreso',
+                                    'required'=>'required',
+                                    'title'=>'Necesitamos saber su antigüedad en la empresa')
+                                    )}}
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+
+                        </div>
+                    
+                        <div style="margin-top:5px;">
+                            <span id="erroredadempleado" class="label label-danger hide"></span>
+                        </div>
+                        <input type="hidden" id="anti" name="anti" value="{{$data->data_user->antiguedad}}">
+                    </div>
+                    <div class="col-sm-8">
+                        <br><br>
+                        <div id="antigueadad" class="hide"></div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -149,7 +184,7 @@
                     <div class="col-sm-1" style="padding-right: 0px;">
                         <label for="tipo_rif" class="control-label">RIF</label>
                         <select style="padding-left:2px;" name="tipo_rif" id="tipo_rif" class="form-control" title="tipo de rif requerido">
-                            <option value="">-</option>
+                            
                             @foreach($data->rif as $rif)
                              <option value="{{$rif->id}}">{{strtoupper($rif->sigla)}}-</option>
                             @endforeach
@@ -160,7 +195,9 @@
                         <label for="rif" class="control-label" style="color:#fff;">.</label>
                         {{Form::text('rif',Input::old('rif',$data->data_user->rif),
                         array('autofocus','class' => 'form-control','id' => 'rif',
-                        'placeholder' => 'Ingrese su rif')
+                        'placeholder' => 'Ingrese su rif',
+                        'disabled'=>'disabled',
+                        'required' =>'required')
                         )}}
                     </div>
 
@@ -402,11 +439,14 @@
     </div>
     <div class="col-sm-3">
         <label for="parentesco1" class="control-label">Parentesco</label>
-        {{Form::text('parentesco1',Input::old('parentesco1'),
-        array('autofocus','class' => 'form-control','id' => 'parentesco1',
-        'placeholder' => 'Ingrese el parentesco',
-        'title'=>'¿Cuál es su parentesco?')
-        )}}
+       
+        <select name="parentesco1" id="parentesco1" class="form-control" required title="¿Cuál es su parentesco?">
+            <option value="">-</option>
+            <option value="Hijo">Hijo</option>
+            <option value="Hija">Hija</option>
+            <option value="Esposo/a">Esposo/a</option>
+            <option value="Concubino/a">Concubino/a</option>
+        </select>
     </div>
     <div class="col-sm-3">
         <label for="sexop1" class="control-label">Sexo</label>
@@ -414,7 +454,6 @@
             <option value="">-</option>
             <option value="1">Femenino</option>
             <option value="2">Masculino</option>
-
         </select>
     </div>
     <div class="col-sm-3">
@@ -464,7 +503,15 @@
 
             <div class="col-sm-3">
                 <label for="parentescoEdit{{$key+1}}" class="control-label">Parentesco</label>
-                <input type="text" name="parentescoEdit{{$key+1}}" id="parentescoEdit{{$key+1}}" value="{{$familia->parentesco}}" placeholder="Parentesco del familiar {{$key+1}}" title="¿Cuál es su parentesco?" class="form-control">
+                
+                <select name="parentescoEdit{{$key+1}}" id="parentescoEdit{{$key+1}}" class="form-control" required>
+                    <option value="">-</option>
+                    <option value="Hijo">Hijo</option>
+                    <option value="Hija">Hija</option>
+                    <option value="Esposo/a">Esposo/a</option>
+                    <option value="Concubino/a">Concubino/a</option>
+                </select>
+                <input type="hidden" id="edit_parentesco{{$key+1}}" name="edit_parentesco{{$key+1}}" value="{{$familia->parentesco}}">
             </div>
             <div class="col-sm-3">
                 <label for="sexop{{$key+1}}" class="control-label">Sexo</label>
@@ -505,6 +552,7 @@
 
 
 </div>
+<div id="mensaje_max_family" class="form-group hide"></div>
 <!-- /div carga_familiar -->
 
                 <h3>PERSONA De CONTACTO EN CASO DE EMERGENCIA</h3>
@@ -720,8 +768,39 @@ jQuery.namespace = function() {
               }//end primer if
 
                 });
+            // Calcular tiempo en la empresa
+            $('#ingreso').datetimepicker({
+                    locale: 'es',
+                    format: 'DD-MM-YYYY',
+                    maxDate: dateToday
+                }).on("dp.change", function(e){
+                    fecha = $('#ingreso').data('date');
+                    if(fecha!=''){
+                        $('#antigueadad').empty();
+                        año = fecha.substring(6, 10);
+                        mes = fecha.substring(3, 5);
+                        dia = fecha.substring(0, 2);
+                        tiempo= calcular_tiempo(dia,mes,año);
 
-            });
+
+                            // console.log(mensajerespuestaOk);
+
+                        if(tiempo[0]==0){
+
+                        mensaje = 'El empleado tiene '+tiempo[1]+' trabajando con nosotros.';
+                        }else{
+                        mensaje = 'El empleado está en su '+tiempo[1]+' con nosotros.';
+                        }
+                        $('#antigueadad').removeClass('hide');
+                        msj_antigueadad ="<span class='label label-success'>";
+                        msj_antigueadad = msj_antigueadad + mensaje + "</span>";
+                        $('#antigueadad').append(msj_antigueadad);
+
+
+                    } //end if fecha
+                });
+            // Calcular tiempo en la empresa
+            }); // fin funtion main
 
 
 
@@ -747,10 +826,15 @@ jQuery.namespace = function() {
         <td style="width:190px;border-bottom-style:none;" width="200px">Documento No.:</td>
       </tr>
       <tr class="head">
-        <td style="text-align:right;border-top-style:none;"><b>EGS-AD-PR-02-F</b></td>
+        <td style="text-align:right;border-top-style:none;"><b>EGS-AD-RH-23-F</b></td>
       </tr>
       <tr>
-        <td colspan="3" style="text-align:center;"><h4>Actualización de datos de los empleados</h4></td>
+        <td colspan="3" style="text-align:center; font-size:18"><b>Actualización de datos de los empleados</b></td>
+      </tr>
+      <tr>
+          <td style="width:190px;">Reemplaza a: <b>N/A</b></td>
+          <td style="width:190px;">Fecha de comprobación: <b>Agosto 2015</b></td>
+          <td style="width:190px;">Rev.No.: <b>0</b></td>
       </tr>
     </tbody>
   </table>

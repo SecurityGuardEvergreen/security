@@ -112,6 +112,7 @@ $respuesta = array('respuesta' => '',
   $telf_movil = Input::get('telf_movil');
   $educacion = Input::get('educacion');
   $cargo = Input::get('cargo');
+  $antiguedad = Input::get('ingreso');
   $estado = Input::get('estado');
   $municipio = Input::get('municipio');
   $parroquia = Input::get('parroquia');
@@ -157,6 +158,7 @@ $respuesta = array('respuesta' => '',
                     "telf" =>$telf_movil,
                     "educationlevel_id" =>$educacion,
                     "cargo_id" =>$cargo,
+                    "antiguedad" => $antiguedad,
                     "estado_id" =>$estado,
                     "municipio_id" =>$municipio,
                     "parroquia_id" =>$parroquia,
@@ -191,6 +193,7 @@ $respuesta = array('respuesta' => '',
     $empleado ->telf = $telf_movil;
     $empleado ->educationlevel_id =$educacion;
     $empleado ->cargo_id = $cargo;
+    $empleado ->antiguedad = $antiguedad;
     $empleado ->estado_id = $estado;
     $empleado ->municipio_id = $municipio;
     $empleado ->parroquia_id = $parroquia;
@@ -277,15 +280,45 @@ public function data_empleados(){
   // $user = User::join('types_users','users.typeuser_id','=','types_users.id')
   //   ->select('types_users.name as type','users.*')
   //   ->get();
-  $user = Empleado::join('preficeds','empleados.preficed_id','=','preficeds.id')
+  // $condi = array();
+  $tipo_user = Auth::user()->typeuser_id;
+  $user_sesion_area = Auth::user()->area_update_id;
+  // var_dump($tipo_user);
+
+  // echo "<br>";
+
+  if($tipo_user==1){
+    $user = Empleado::join('preficeds','empleados.preficed_id','=','preficeds.id')
         ->join('rifs','empleados.prefirif_id','=','rifs.id')
         ->join('cargos','empleados.cargo_id','=','cargos.id')
         ->join('estados','empleados.estado_id','=','estados.id')
         ->join('municipios','empleados.municipio_id','=','municipios.id')
         ->join('parroquias','empleados.parroquia_id','=','parroquias.id')
-        ->select('estados.nombre as estado',
+        ->join('users','empleados.user_id','=','users.id')
+        ->select('estados.nombre as estado','users.area_update_id as update',
           'municipios.nombre as municipio','parroquias.nombre as parroquia',
-          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*',DB::raw('CONCAT(preficeds.sigla, "-", ci) as full_ced'))->get();
+          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*',
+          DB::raw('CONCAT(preficeds.sigla, "-", ci) as full_ced'))
+        ->orderBy('id', 'DESC')->get();
+  }else{
+
+    $user = Empleado::join('preficeds','empleados.preficed_id','=','preficeds.id')
+        ->join('rifs','empleados.prefirif_id','=','rifs.id')
+        ->join('cargos','empleados.cargo_id','=','cargos.id')
+        ->join('estados','empleados.estado_id','=','estados.id')
+        ->join('municipios','empleados.municipio_id','=','municipios.id')
+        ->join('parroquias','empleados.parroquia_id','=','parroquias.id')
+        ->join('users','empleados.user_id','=','users.id')
+        ->select('estados.nombre as estado','users.area_update_id as update',
+          'municipios.nombre as municipio','parroquias.nombre as parroquia',
+          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*',
+          DB::raw('CONCAT(preficeds.sigla, "-", ci) as full_ced'))
+        ->where('area_update_id','=',$user_sesion_area)
+        // ->orWhere('typeuser_id','=',1)
+        ->orderBy('id', 'DESC')->get();
+  }
+
+  
 
     return json_encode($user);
 }
@@ -299,7 +332,7 @@ $data->preficed = Preficed::all();
 $data->rif= Rif::all();
 $data->educacion = Educationlevel::orderBy('id', 'asc')->get();
 $data->marital = Maritalstatu::orderBy('nombre', 'asc')->get();
-$data->title = "Edición del usuartio";
+$data->title = "Edición del usuario";
 
 $tipo = substr($ced,0,1);
 $ced = substr($ced, 2,strlen($ced));
@@ -311,6 +344,7 @@ $data_user = Empleado::join('preficeds','empleados.preficed_id','=','preficeds.i
         ->select('cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*')
         ->where('preficed_id','=',$prefi->id)
         ->where('ci','=',$ced)->first();
+
 $data_familiar = Familiar::where('empleado_id','=',$data_user->id)->get() ;
 
 
@@ -336,6 +370,7 @@ $respuesta = array();
   $familiar = new Familiar;
   // Datos del empleado
   $centro = Input::get('centro');
+  $antiguedad = Input::get('ingreso');
   $nombre = Input::get('name');
   $secondname = Input::get('secondname');
   $lastname = Input::get('lastname');
@@ -370,7 +405,7 @@ $respuesta = array();
 
 // Actualizando datos del empleado
 
-$up_empleado_base = Empleado::where('id',$id_update)
+$up_empleado_base = DB::table('empleados')->where('id',$id_update)
 ->update(array(
   "centro"=>$centro,
   "nombre" =>$nombre,
@@ -390,6 +425,7 @@ $up_empleado_base = Empleado::where('id',$id_update)
   "telf" =>$telf_movil,
   "educationlevel_id" =>$educacion,
   "cargo_id" =>$cargo,
+  "antiguedad" => $antiguedad,
   "estado_id" =>$estado,
   "municipio_id" =>$municipio,
   "parroquia_id" =>$parroquia,
@@ -430,7 +466,10 @@ $update_fa1 =   Familiar::where('id',Input::get('edit_id_familiar'.$i))
       ));
 
 } // fin for
-$respuesta['update_fa_dinamic'] = $update_fa1;
+if(!empty($update_fa1) ){
+  $respuesta['update_fa_dinamic'] = $update_fa1;
+}
+
 // Actualización dinámica del familiar 
 
 
@@ -462,5 +501,23 @@ $respuesta['borrado_family_dinamic'] = $respu;
 return $respuesta;
 
 } // fin function save
+
+// funcion borrar empleado
+public function deleteempleado(){
+  $dele = Input::get('ids');
+  $respu = Empleado::destroy($dele);
+  $respuesta= array();
+  $respuesta['borrado'] = $respu;
+
+  if($respu){
+    $respuesta['mensaje'] = '<strong>Felicitaciones !!!</strong> El borrado de los registros fué realizado exitosamente.';
+    $respuesta['alert'] ='success' ;
+  }else{
+    $respuesta['mensaje'] = '<strong>Error !!!</strong> No se pudo ejecutar el borrado. comuniquese con el departamento de IT';
+     $respuesta['alert'] ='danger' ;
+  }
+  return $respuesta;
+}
+// Fin funcion borrar empleado
 
   } // Fin function

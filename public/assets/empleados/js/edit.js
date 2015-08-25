@@ -23,7 +23,31 @@ $(function(){
 	}
 
 	// ============== Fin asignando el centro ================
+	// ===============Asignar la antiguedad======================
+	antiguedadEdit = $('#anti').val();
+	
+	if(antiguedadEdit!=""){
+	añoanti_edit = antiguedadEdit.substring(6, 10);
+	mesanti_edit = antiguedadEdit.substring(3, 5);
+	diaantiedit = antiguedadEdit.substring(0, 2);
+	
+	tiempoedit= calcular_tiempo(diaantiedit,mesanti_edit,añoanti_edit);
 
+	if(tiempoedit[0]==0){
+
+	mensajeedit = 'El empleado tiene '+tiempoedit[1]+' trabajando con nosotros.';
+	}else{
+	mensajeedit = 'El empleado está en su '+tiempoedit[1]+' con nosotros.';
+	}
+	$('#antigueadad').removeClass('hide');
+
+	msj_antigueadadEdit ="<h5><span class='label label-primary'>";
+	msj_antigueadadEdit = msj_antigueadadEdit + mensajeedit + "</span></h5>";
+	$('#antigueadad').append(msj_antigueadadEdit);
+	}
+	
+
+// ===============Fin signar la antiguedad===================
 	// ==================Asignando prefi cédula===============
 	cedprefi_edit = $('#cedprefi_edit').val();
 	$('#tipo_ced option:eq('+cedprefi_edit+')').prop('selected', true);
@@ -32,6 +56,9 @@ $(function(){
 	// ==================Asignando prefi rif===============
 	rifprefi_edit = $('#rifprefi_edit').val();
 	$('#tipo_rif').val(rifprefi_edit);
+	if(rifprefi_edit!=0){
+		$('#rif').attr('disabled',false);
+	}
 	// ==================Fin Asignando prefi rif===========
 
 	// ==================Asignando estado civil===============
@@ -160,7 +187,11 @@ if($('#carga_edit').val()!= 0){
 
 // ===============Fin Carga Familiar==============
 
-// =============Determinando sexo family dinamic ==============
+// Asignado valiable para controlar el max familiar
+family_total_f = $('#cant_family').val();
+// Asignado valiable para controlar el max familiar
+
+// =============Determinando sexo y parentesco family dinamic ==============
 tam_family=$('#cant_family').val();
 $('#n_familiar').val(tam_family);
 // console.log($('#n_familiar').val());
@@ -168,6 +199,9 @@ if(tam_family>0){
 
 	for (var i = 1; i <= tam_family; i++) {
 		$('#sexop'+i).val($('#edit_sexop'+i).val());
+
+		$('#parentescoEdit'+i).val($('#edit_parentesco'+i).val());
+		
 
 	};
 }
@@ -199,6 +233,9 @@ if(tam_family>0){
 // ==================Botn borrar el familiar  ====================
 var id_eliminar = [];
 $('#parentescoAdd').on("click","#rmfaedit",function(){
+	family_total_f = family_total_f -1;
+	console.log('borrar');
+	console.log(family_total_f);
 
 	n_borrar = $(this).parent().parent().attr('id');
 	n_borrar = n_borrar.substring(11,12);
@@ -363,7 +400,13 @@ console.log(str);
 
 		setTimeout(
 			function(){
-				location.reload();
+
+				tipo_ced = $('#tipo_ced option:selected').text();
+				ced = $('#ced').val();
+				console.log(tipo_ced+ced); 
+				// location.reload();
+				window.location.href = '/jornada/edit/'+tipo_ced+ced;
+
 			},100
 			);
 
