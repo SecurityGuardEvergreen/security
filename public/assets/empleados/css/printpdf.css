@@ -1,0 +1,143 @@
+
+
+table{
+  margin-bottom: 20px;
+  margin-top: -20px;
+}
+
+.page-break {
+    page-break-after: always;
+}
+.td-head{
+  width:220px;
+}
+.td_h{
+  font-weight: bold;
+width:220px;
+mso-border-alt:solid  .2pt;
+background:#D9D9D9 !important;
+text-transform:uppercase;
+padding:0pt 5.4pt 0pt 5.4pt;
+}
+.td_h-0{
+  font-weight: bold;
+width:102px;
+mso-border-alt:solid  .2pt;
+background:#D9D9D9 !important;
+text-transform:uppercase;
+padding:0pt 5.4pt 0pt 5.4pt;
+}
+.td_h-1{
+  font-weight: bold;
+width:161px;
+mso-border-alt:solid  .2pt;
+background:#D9D9D9 !important;
+text-transform:uppercase;
+padding:0pt 5.4pt 0pt 5.4pt;
+}
+.td_h-2{
+  font-weight: bold;
+width:338px;
+mso-border-alt:solid  .2pt;
+background:#D9D9D9 !important;
+text-transform:uppercase;
+padding:0pt 5.4pt 0pt 5.4pt;
+}
+
+td{
+
+border:solid  1.0pt;
+mso-border-alt:solid  .2pt;
+padding:2.5pt 5.4pt 2.5pt 5.4pt;
+font-family:"Arial",sans-serif;
+font-size: 9pt;
+text-transform: capitalize;
+
+}
+h5{
+text-transform:uppercase;
+}
+
+#footer p{
+font-family:"Arial",sans-serif;
+font-size: 8pt;
+margin:0px !important;
+
+}
+
+.ovalo{
+width: 70px;
+height: 100px;
+border: solid 1px #000;
+-moz-border-radius: 30px / 35px;
+-webkit-border-radius: 30px / 35px;
+border-radius: 30px / 35px;
+display:inline-block;
+margin-right: 10px;
+float: none
+}
+.center{
+  margin-top: 10px;
+  text-align:center;
+}
+
+body, #imprimir, #footer {
+  float: none !important;
+  width: auto !important;
+  margin:  0 !important;
+  padding: 0 !important;
+}
+.firma_left{
+  margin-top: 50px;
+  border-top: solid 1px #000;
+  width:300px;
+  padding-top: 10px;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.firma_right{
+  position: relative;
+  float: right;
+  clear: none;
+  display: block;
+  margin-top: 50px;
+  border-top: solid 1px #000;
+  width:300px;
+  padding-top: 10px;
+  text-transform: capitalize;
+  text-align: center;
+
+  /*margin-left: 20px;*/
+}
+
+.firma_left{
+  position: relative;
+  float: left;
+  clear: none;
+  display: block;
+  margin-top: 50px;
+  border-top: solid 1px #000;
+  width:300px;
+  padding-top: 10px;
+  text-transform: capitalize;
+  text-align: center;
+
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.calificativo{
+  position: relative;
+  font-family: "Times New Roman";
+  font-size: 10pt;
+  color: #626262 !important;
+}
+
+/*============Magia==========*/
+
+

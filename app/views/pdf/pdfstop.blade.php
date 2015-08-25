@@ -34,9 +34,8 @@
 <!-- =================== -->
 <!-- ==== Imprimir ===== -->
 <!-- =================== -->
-
-
- <table cellspacing="0" >
+<div class="header">
+     <table cellspacing="0" >
     <tbody>
       <tr class="head">
         <td class="td-head" style="" rowspan="2"><img src="assets/empleados/img/evergreen_logo_pdf.png" width="150"></td>
@@ -56,7 +55,8 @@
       </tr>
     </tbody>
   </table>
-
+</div>
+<!-- =====Header===== -->
 
 <div class="footer">
     
@@ -75,10 +75,10 @@ Page <span class="pagenum"></span>
 
 
 
-<div id="printe" style="">
+<div id="printe" style="margin-top:200px">
 
 
-  <h5>datos laborales </h5>
+  <h5>datos laborales {{$empleado['nombre']}}</h5>
   <table cellspacing="0">
     <tbody>
       <tr>
@@ -87,9 +87,9 @@ Page <span class="pagenum"></span>
         <td class="td_h" style="">cargo</td>
       </tr>
       <tr>
-        <td id="print_centro">{{$empleado[0]['centro']}}</td>
-        <td id="print_nivel_edu">{{$empleado[0]['niveledu']}}</td>
-        <td id="print_cargo">{{$empleado[0]['cargo']}}</td>
+        <td id="print_centro"></td>
+        <td id="print_nivel_edu"></td>
+        <td id="print_cargo"></td>
       </tr>
     </tbody>
   </table>
@@ -105,8 +105,8 @@ Page <span class="pagenum"></span>
       </tr>
      
       <tr>
-        <td colspan="2" id="print_nombre">{{$empleado[0]['nombre']}}</td>
-        <td colspan="2" id="print_segundonombre">{{$empleado[0]['segundo_nombre']}}</td>
+        <td colspan="2" id="print_nombre"></td>
+        <td colspan="2" id="print_segundonombre"></td>
       </tr>
 
       <tr>
@@ -114,8 +114,8 @@ Page <span class="pagenum"></span>
         <td class="td_h-2"  colspan="2">segundo apellido</td>
       </tr>
       <tr>
-        <td id="print_apellido" colspan="2">{{$empleado[0]['apellido']}}</td>
-        <td id="print_segundoapellido" colspan="2">{{$empleado[0]['segundo_apellido']}}</td>
+        <td id="print_apellido" colspan="2"></td>
+        <td id="print_segundoapellido" colspan="2"></td>
       </tr>
 
       <tr>
@@ -125,10 +125,10 @@ Page <span class="pagenum"></span>
         <td class="td_h-1">sexo</td>
       </tr>
       <tr>
-        <td id="print_ced">{{$empleado[0]['full_ced']}}</td>
-        <td id="print_rif">{{$empleado[0]['sigla_rif']}}-{{$empleado[0]['rif']}}</td>
-        <td id="print_estatocivil">{{$empleado[0]['marital']}}</td>
-        <td id="print_sexo">{{$empleado[0]['sexop']}}</td>
+        <td id="print_ced"></td>
+        <td id="print_rif"></td>
+        <td id="print_estatocivil"></td>
+        <td id="print_sexo"></td>
       </tr>
       <tr>
         <td class="td_h-1">fecha de nacimiento</td>
@@ -137,12 +137,17 @@ Page <span class="pagenum"></span>
         <td class="td_h-1">lateralidad</td>
       </tr>
       <tr>
-        <td id="print_nacimiento">{{$empleado[0]['fecha_nacimiento']}}</td>
-        <td id="print_edad">{{$empleado[0]['sexop']}}</td>
-        <td id="print_tiposangre">{{$empleado[0]['sangre_tipo']}}</td>
-        <td id="print_lateralidad">{{$empleado[0]['lateralidad']}}</td>
+        <td id="print_nacimiento">Elvis</td>
+        <td id="print_edad"></td>
+        <td id="print_tiposangre"></td>
+        <td id="print_lateralidad"></td>
       </tr>
-       
+      <tr>
+        <td class="td_h-1" colspan="4" >discapacidad</td>
+      </tr>
+      <tr>
+        <td colspan="4" id="print_discapacidad" ></td>
+      </tr> 
     </tbody>
 
   </table>
@@ -156,65 +161,19 @@ Page <span class="pagenum"></span>
     <td class="td_h" style="">parroquia</td>
   </tr>
   <tr>
-    <td id="print_estado">{{$empleado[0]['estado']}}</td>
-    <td id="print_municipio">{{$empleado[0]['municipio']}}</td>
-    <td id="print_parroquia">{{$empleado[0]['parroquia']}}</td>
+    <td id="print_estado"></td>
+    <td id="print_municipio"></td>
+    <td id="print_parroquia"></td>
   </tr>
   <tr>
     <td class="td_h" colspan="3">dirección</td>
   </tr>
   <tr>
-    <td id="print_direccion" colspan="3">{{$empleado[0]['direccion']}}</td>
+    <td id="print_direccion" colspan="3"></td>
   </tr>
 </tbody>
 </table>
 <!-- fin datos de residencia -->
-
-<h5>persona de contacto en caso de emergencia</h5>
-<table cellspacing="0">
-
-  <tbody>
-   
-     <tr>
-      <td class="td_h" style="">nombre completo</td>
-      <td class="td_h" style="">Relación</td>
-      <td class="td_h" style="">teléfono</td>
-     </tr>
-     <tr>
-       <td id="print_contac_nombre">{{$empleado[0]['nombre_contacto']}}</td>
-       <td id="print_contac_relacion">{{$empleado[0]['rela_contacto']}}</td>
-       <td id="print_contac_telf">{{$empleado[0]['telf_contacto']}}</td>
-     </tr>
-  </tbody>
-</table>
-
-</div>
-
-<br>
-
-<div class="firma_left">
-  <p id="print_empleado_firma" style="margin:0px !important;"></p>
-  <span class="calificativo">empleado</span>
-</div>
-
-
-<!-- ===========Carga familiar o Discapacidad ========= -->
-
-<div style="page-break-before:always">
-
-<!-- discapacidad -->
-<table cellspacing="0">
-  <tbody>
-    <tr>
-        <td class="td_h">discapacidad</td>
-      </tr>
-      <tr>
-        <td ></td>
-      </tr>
-  </tbody>
-</table>
-<!-- fin discapacidad -->
-<!-- Carga Familiar -->
 <h5>Carga Familiar</h5>
 <table cellspacing="0">
   <tbody id="tb_familiar">
@@ -226,32 +185,55 @@ Page <span class="pagenum"></span>
       <td class="td_h-0" style="">edad</td>
       <td class="td_h-0" style="">sexo</td>
     </tr>
- @foreach($familiar as $data)
- 
-   <tr>
-      <td> {{$data->nombre}}</td>
-      <td>{{$data->ced}}</td>
-      <td>{{$data->parentesco}}</td>
-      <td>{{$data->nacimiento}}</td>
-      <td></td>
-      <td>{{$data->sexof}}</td>
-    </tr>
-  @endforeach
+
+  </tbody>
+</table>
+<!-- Fin carga familiar -->
+<h5>persona de contacto en caso de emergencia</h5>
+<table cellspacing="0">
+
+  <tbody>
+   
+     <tr>
+      <td class="td_h" style="">nombre completo</td>
+      <td class="td_h" style="">Relación</td>
+      <td class="td_h" style="">teléfono</td>
+     </tr>
+     <tr>
+       <td id="print_contac_nombre"></td>
+       <td id="print_contac_relacion"></td>
+       <td id="print_contac_telf"></td>
+     </tr>
   </tbody>
 </table>
 
-
+</div>
 
 <br>
-<!-- Firma -->
+
 <div class="firma_left">
   <p id="print_empleado_firma" style="margin:0px !important;"></p>
   <span class="calificativo">empleado</span>
 </div>
-<!-- Firma -->
+<!-- <div class="firma_right">
+  <p style="margin:0px !important;">Guzmán desc</p>
+  <span class="calificativo">supervisor</span>
+</div> -->
 
 
-</div> 
+
+
+<!-- <br><br><br>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+<br><br><br>
+<br><br><br> -->
+
+<h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet dolorem blanditiis ad perferendis, labore delectus, facere mollitia eius distinctio voluptates aliquid doloremque fugiat est eum. Doloremque aut aperiam enim voluptatibus.</h1>
+<h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet dolorem blanditiis ad perferendis, labore delectus, facere mollitia eius distinctio voluptates aliquid doloremque fugiat est eum. Doloremque aut aperiam enim voluptatibus.</h1>
+<h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet dolorem blanditiis ad perferendis, labore delectus, facere mollitia eius distinctio voluptates aliquid doloremque fugiat est eum. Doloremque aut aperiam enim voluptatibus.</h1>
+<h1>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet dolorem blanditiis ad perferendis, labore delectus, facere mollitia eius distinctio voluptates aliquid doloremque fugiat est eum. Doloremque aut aperiam enim voluptatibus.</h1>
 
 </div>
 

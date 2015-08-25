@@ -196,13 +196,51 @@ Route::any('pdf2',function(){
 });
 
 Route::any('pdf3',function(){
-	 $data = array();
-     $data['empleado'] = array('nombre'=>'holas');
-  $pdf = PDF::loadView('pdf.index');
-  return $pdf->stream();
 
-	// return View::make('pdf.index');
-// return $pdf->download('invoice.pdf');
+
+
+	 $data = array();
+
+     // $data['empleado'] = array('nombre'=>'holas');
+	 $data['empleado'] = Empleado::join('preficeds','empleados.preficed_id','=','preficeds.id')
+        ->join('rifs','empleados.prefirif_id','=','rifs.id')
+        ->join('cargos','empleados.cargo_id','=','cargos.id')
+        ->join('estados','empleados.estado_id','=','estados.id')
+        ->join('municipios','empleados.municipio_id','=','municipios.id')
+        ->join('parroquias','empleados.parroquia_id','=','parroquias.id')
+        ->join('users','empleados.user_id','=','users.id')
+        ->join('maritalstatus','empleados.maritalstatus_id','=','maritalstatus.id')
+        ->join('educationlevels','empleados.educationlevel_id','=','educationlevels.id')
+        ->join('sexos','empleados.sexo_id','=','sexos.id')
+        ->select('estados.nombre as estado','users.area_update_id as update',
+        	'educationlevels.nombre as niveledu','maritalstatus.nombre as marital',
+          'municipios.nombre as municipio','parroquias.nombre as parroquia',
+          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*',
+          'sexos.name as sexop',
+          DB::raw('CONCAT(preficeds.sigla, "-", ci) as full_ced'))
+        ->where('empleados.id','=',150)
+        // ->orWhere('typeuser_id','=',1)
+        ->get();
+
+     $data['familiar'] = Familiar::join('sexos','familiars.sexo_id','=','sexos.id')
+     	->select('sexos.name as sexof','familiars.*')
+     	->where('familiars.empleado_id','=',150)->get();
+
+        // var_dump($data['empleado']);
+        // echo "<br><br>";
+
+        // if($data['familiar']->isEmpty()){
+        // 	echo "<br>Está vacia <br>";
+        // }else{
+        // 	echo "<br>Nooo vacia <br>";
+        // }
+        // var_dump($data['familiar']);
+
+
+$pdf = PDF::loadView('pdf.index',$data)->setPaper('a4');
+return $pdf->stream();
+
+
 });
 
 

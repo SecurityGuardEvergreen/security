@@ -717,7 +717,7 @@ jQuery.namespace = function() {
 <!-- =================== -->
 <div id="imprime">
 
-  <table >
+ <table >
     <tbody>
       <tr class="head">
         <td style="width:190px;" rowspan="2"><img src="/assets/empleados/img/evergreen_logo_pdf.png" width="150"></td>
@@ -727,10 +727,16 @@ jQuery.namespace = function() {
       <tr class="head">
         <td style="text-align:right;border-top-style:none;"><b>EGS-AD-RH-23-F</b></td>
       </tr>
-      
+      <tr>
+        <td colspan="3" style="text-align:center; font-size:18"><b>Actualización de datos de los empleados</b></td>
+      </tr>
+      <tr>
+          <td style="width:190px;">Reemplaza a: <b>N/A</b></td>
+          <td style="width:190px;">Fecha de comprobación: <b>Agosto 2015</b></td>
+          <td style="width:190px;">Rev.No.: <b>0</b></td>
+      </tr>
     </tbody>
   </table>
-
 
 
 <div id="printe" style="clear:both;" >
@@ -854,7 +860,7 @@ jQuery.namespace = function() {
   </tbody>
 </table>
 <!-- Fin carga familiar -->
-<h5>persona de contacto en casPrimer o de emergencia</h5>
+<h5>persona de contacto en caso de emergencia</h5>
 <table>
   <tbody>
      <tr>
