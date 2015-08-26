@@ -508,8 +508,8 @@
                         <!-- <div class="btn-group" role="group" aria-label="..."> -->
                             <button type="reset" id="btn_reset" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo registro</button>
                             <button  type="submit" id="btn_update" class="btn btn-success"><i class="fa fa-floppy-o"></i> Agregar registro</button>
-                            <a id="btn_print_f" class="btn btn-success disabled"><i class="fa fa-print"></i> Imprimir</a>
-
+                            <!-- <a id="btn_print_f" class="btn btn-success disabled"><i class="fa fa-print"></i> Imprimir</a> -->
+                            <a id="btn_print_pdf" target="_blank" class="btn btn-success disabled"><i class="fa fa-file-pdf-o"></i> PDF</a>
                         <!-- </div> -->
                   </center>
                     <br>
@@ -519,7 +519,8 @@
                 </div>
               </div>
             {{ Form::close() }}
-
+            <div id="pdf"></div>
+            
             <!-- /form user -->
 <!-- /form dos -->
 <!-- div print -->

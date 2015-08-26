@@ -82,7 +82,7 @@ border: solid 1px #000;
 border-radius: 30px / 35px;
 display:inline-block;
 margin-right: 10px;
-float: none
+float: left;
 }
 .center{
   margin-top: 10px;

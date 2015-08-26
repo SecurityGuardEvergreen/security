@@ -14,11 +14,10 @@
     position: fixed;
 }
 .header {
-    top: 0px;
-
+top: 20px;
 }
 .footer {
-    bottom: 70px;
+    bottom: 80px;
     font-size: 8pt;
 
 }
@@ -34,6 +33,10 @@
   top:-40px;
   font-size: 10pt;
 }
+.centrar{
+  /*text-align: center;*/
+  margin-left:250px;
+}
 </style>
 </head>
 <body>
@@ -48,7 +51,8 @@
 <div class="header">
  <div class="f_print">
     {{date("d-m-Y")}}
-  </div>
+ 
+ </div>
    <table cellspacing="0" >
     <tbody>
       <tr class="head">
@@ -73,7 +77,10 @@
 
 
 <div class="footer">
-<img src="barcode/{{$empleado[0]['full_ced']}}.png" width="300" height="50"></td>
+  <!-- width="300" height="50" -->
+<!-- <img src="barcode/{{$empleado[0]['full_ced']}}.png" width="300" height="55"> -->
+<div class="centrar">{{DNS1D::getBarcodeHTML($empleado[0]['full_ced']." ", "C39+",1,55)}}</div>
+
 <hr>
   <center>
     <p style="margin-top:0px;margin-bottom:0px;" >Av José Antonio Anzoátegui, Km 97
@@ -212,7 +219,7 @@ Página <span class="pagenum"></span>
   <span class="calificativo">empleado</span>
 </div>
 <!-- Firma -->
-
+<!-- <div class="ovalo"></div> -->
 
 <!-- ===========Carga familiar o Discapacidad ========= -->
 
@@ -231,7 +238,7 @@ Página <span class="pagenum"></span>
         <td class="td_main">incapacidad</td>
       </tr>
       <tr>
-        <td >Ninguna</td>
+        <td >{{$empleado[0]['discapacidad']}}</td>
       </tr>
   </tbody>
 </table>
@@ -255,7 +262,7 @@ Página <span class="pagenum"></span>
  @foreach($familiar as $data)
 
    <tr>
-      <td> {{$data->nombre}}</td>
+      <td> {{$data->nombre}} {{$data->apellido}}</td>
       @if($data->ced)
       <td>{{$data->ced}}</td>
       @else

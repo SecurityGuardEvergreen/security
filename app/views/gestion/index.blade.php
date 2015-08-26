@@ -23,9 +23,9 @@
 			</header>
 			<section class="color-7">
 				<nav class="cl-effect-1">
-					<a href="#">Sitio Web</a>
+					<!-- <a href="#">Sitio Web</a> -->
 					<a href="/ingresar">Actualizacion de empleados</a>
-					<a href="/login">App Security Guards</a>
+					<!-- <a href="/login">App Security Guards</a> -->
 
 				</nav>
 			</section>

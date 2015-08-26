@@ -180,16 +180,20 @@ Route::get('pruebac',function(){
 // echo DNS1D::getBarcodePNGPath("/barcode/34", "C39");
 
 
-echo DNS1D::getBarcodeHTML("4445645656", "C39");
+// echo DNS2D::getBarcodeHTML("Elvis", "QRCODE");
+// echo "<br><br><br>";
+// // echo DNS1D::getBarcodeSVG("4445645656", "C39",3,33);
+// echo '<img src="' .DNS1D::getBarcodePNG("4", "C39+",33,33) . '" alt="barcode"   />';
+//    DNS1D::getBarcodePNGPath("/barcode/TT-5465", "C39",2,66);
 
+	$a ="18205603";
 
+      echo  DNS1D::getBarcodePNG("4445645656", "I25+");
 
-// echo DNS2D::getBarcodePNGPath("4445645656", "PDF417");
+      echo  DNS1D::getBarcodeHTML($a, "I25+",1.5);
 
-
-
-// print_r($rif);
- // $data = Preficed::all();
+ 
+  // $data = Preficed::all();
  // var_dump($data);
 
 // foreach ($data as $key => $value) {

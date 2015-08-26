@@ -114,7 +114,7 @@ $('#add_parentesco').click(function(e){
 	  console.log(family_total_f);
 	  console.log("incre "+increment);
 	 // Retringuiendo el tamaño de la carga familiar
-	 if(increment < 5 || family_total_f < 5){
+	 if(increment < 10 || family_total_f < 10){
 	 $('#mensaje_max_family').addClass('hide'); //ocultando mensaje de error de max familiar
 
      increment ++;
@@ -236,7 +236,7 @@ max_mensaje_familia = '<br> <div class="alert alert-warning alert-dismissible" r
 max_mensaje_familia = max_mensaje_familia + '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
 max_mensaje_familia = max_mensaje_familia +  '<span aria-hidden="true">&times;</span>';
 max_mensaje_familia = max_mensaje_familia +  '</button>';
-max_mensaje_familia = max_mensaje_familia +  '<strong>Alerta !!!</strong> Excedíste el número de familiares permitidos. (<b>Aceptamos 5 cargas familiares a lo sumo</b>)';
+max_mensaje_familia = max_mensaje_familia +  '<strong>Alerta !!!</strong> Excedíste el número de familiares permitidos. (<b>Aceptamos 10 cargas familiares a lo sumo</b>)';
 max_mensaje_familia = max_mensaje_familia +    '</div>';
 
 $('#mensaje_max_family').removeClass('hide');
@@ -437,7 +437,7 @@ $('#btn_reset').click(function(){
 	 if(error_form){
 	 	validator.resetForm();
 	 }
-
+	 $('#btn_print_pdf').addClass('disabled');
 	 $('#mensaje_max_family').addClass('hide'); //ocultando mensaje de max familiar
 	 $('#parentescoAdd').empty();   // Borrando cargas familiaresd extras
 	 $('#btn_update').text('Agregar registro');   // Colocando el texto inicial al botón add
@@ -505,6 +505,7 @@ console.log(str);
 			mensaje = response.mensaje;
 			// Activar btn imprimir
 			$('#btn_print_f').removeClass('disabled');
+			$('#btn_print_pdf').removeClass('disabled');
 		}
 		if(response.update){
 			alertTipo = 'alert-info';
@@ -1069,4 +1070,17 @@ $('#parentescoAdd div.scriptf').each(function(index){
 
 
 }
+
+// ===Btn Pdf====
+$('#btn_print_pdf').click(function(){
+	$('#pdf').html('');
+	url = "/jornada/pdf";
+	form = $('<form action="' + url + '" method="post" target="_blank">' +
+  '<input type="hidden" name="id_empleado" value="' + id_update + '" />' +
+  '</form>');
+$('#pdf').append(form);
+form.submit();
+});
+
+// ===Btn Pdf====
 

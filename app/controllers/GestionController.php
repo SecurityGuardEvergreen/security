@@ -313,6 +313,7 @@ public function data_empleados(){
 
 public function edit($ced){
 $data = new stdclass;
+$data->tipo_contrato = Tipocontrato::all();
 $data->cargo = Cargo::all();
 $data->preficed = Preficed::all();
 $data->rif= Rif::all();
@@ -384,11 +385,16 @@ $respuesta = array();
   $telf_contacto =Input::get('telf_contacto');
   $rela_contacto = Input::get('rela_contacto');
   $id_update = Input::get('id_update_empleado');
+  $tipo_contrato = Input::get('tipo_contrato');
 
   $user_id_log = Auth::id();
 
-// Fin captura de datos
 
+// Fin captura de datos
+//Verificando si el tipo de contrato está vacío 
+  if($tipo_contrato=="")
+    $tipo_contrato = 4;
+//Verificando si el tipo de contrato está vacío 
 // Actualizando datos del empleado
 
 $up_empleado_base = DB::table('empleados')->where('id',$id_update)
@@ -420,7 +426,8 @@ $up_empleado_base = DB::table('empleados')->where('id',$id_update)
   "nombre_contacto" =>$nombre_contacto,
   "rela_contacto" =>$rela_contacto,
   "telf_contacto" =>$telf_contacto,
-  "user_id_update" =>$user_id_log
+  "user_id_update" =>$user_id_log,
+  "tipocontrato_id"=> $tipo_contrato
   ));
 
 // Actualizando datos del empleado
@@ -544,7 +551,8 @@ public function pdf(){
 
 
 // Generando barcode
-   DNS1D::getBarcodePNGPath("/barcode/".$data['empleado'][0]->full_ced, "C39");
+   DNS1D::getBarcodePNGPath("/barcode/".$data['empleado'][0]->full_ced, "C93",2,55);
+
 // Generando barcode
 
 $pdf = PDF::loadView('pdf.index',$data)->setPaper('a4');

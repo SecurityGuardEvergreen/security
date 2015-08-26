@@ -113,7 +113,20 @@
                         <div id="antigueadad" class="hide"></div>
                     </div>
                 </div>
-
+                <!-- Tipo de contrato -->
+                <div class="form-group">
+                    <div class="col-sm-4" style="padding-right: 0px;">
+                        <label for="tipo_contrato" class="control-label">Tipo de contrato</label>
+                        <select style="padding-left:2px;" name="tipo_contrato" id="tipo_contrato" required class="form-control" title="tipo de contrato requerido">
+                            <option value="">Tipo de contrato...</option>
+                            @foreach($data->tipo_contrato as $tipo_contrato)
+                             <option value="{{$tipo_contrato->id}}">-{{strtoupper($tipo_contrato->nombre)}}</option>
+                            @endforeach
+                        </select>
+                        <input type="hidden" name="tipocontrato_edit" id="tipocontrato_edit" value="{{$data->data_user->tipocontrato_id}}">
+                    </div>
+                </div>
+                <!-- /Tipo de contrato -->
                 <div class="form-group">
 
                     <div class="col-sm-6">
@@ -595,8 +608,8 @@
                         <!-- <div class="btn-group" role="group" aria-label="..."> -->
                             <a href="/jornada/staff" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo registro</a>
                             <button  type="submit" id="btn_save" class="btn btn-success"><i class="fa fa-floppy-o"></i> Guardar cambios</button>
-                            <a id="btn_print_f" class="btn btn-success "><i class="fa fa-print"></i> Imprimir</a>
-                            <a id="btn_print_pdf" target="_blank" class="btn btn-success "><i class="fa fa-file-pdf-o"></i> PDF</a>
+                            <!-- <a id="btn_print_f" class="btn btn-success "><i class="fa fa-print"></i> Imprimir</a> -->
+                            <a id="btn_print_pdfEdit" target="_blank" class="btn btn-success "><i class="fa fa-file-pdf-o"></i> PDF</a>
 
 
                         <!-- </div> -->

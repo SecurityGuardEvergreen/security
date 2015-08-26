@@ -48,6 +48,10 @@ $(function(){
 
 
 // ===============Fin signar la antiguedad===================
+
+//============Asignado tipo de contrato============ 
+$('#tipo_contrato').val($('#tipocontrato_edit').val());
+//============Fin Asignado tipo de contrato============
 	// ==================Asignando prefi cédula===============
 	cedprefi_edit = $('#cedprefi_edit').val();
 	$('#tipo_ced option:eq('+cedprefi_edit+')').prop('selected', true);
@@ -110,6 +114,7 @@ $(function(){
 	  function()
 	  {
 	  	estado_edit = $('#estado_edit').val();
+	  	// console.log(estado_edit)
 		$('#estado').val(estado_edit);
 
 		// ===========Asignando municipio===========
@@ -160,7 +165,7 @@ $(function(){
 		// ===========Fin Asignando municipio=======
 
 
-	  }, 600);
+	  }, 900);
 	// ==================Fin Asignando estado ===========
 
 // ==========Discapacidad=============
@@ -418,7 +423,7 @@ console.log(str);
 // ============ FIN Btn guardar cambios empleado============
 
 // ===Btn Pdf====
-$('#btn_print_pdf').click(function(){
+$('#btn_print_pdfEdit').click(function(){
 	url = "/jornada/pdf";
 	id_empleado=$('#id_update_empleado').val();
 	form = $('<form action="' + url + '" method="post" target="_blank">' +
