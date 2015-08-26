@@ -86,7 +86,7 @@
                           )}}
                       </div>
                 </div>
-                
+
                 <div class="form-group">
                     <div class="col-sm-4">
                         <label for="ingreso" class=" control-label">Fecha de ingreso en nuestra empresa</label>
@@ -102,7 +102,7 @@
                                     </span>
 
                         </div>
-                    
+
                         <div style="margin-top:5px;">
                             <span id="erroredadempleado" class="label label-danger hide"></span>
                         </div>
@@ -184,7 +184,7 @@
                     <div class="col-sm-1" style="padding-right: 0px;">
                         <label for="tipo_rif" class="control-label">RIF</label>
                         <select style="padding-left:2px;" name="tipo_rif" id="tipo_rif" class="form-control" title="tipo de rif requerido">
-                            
+
                             @foreach($data->rif as $rif)
                              <option value="{{$rif->id}}">{{strtoupper($rif->sigla)}}-</option>
                             @endforeach
@@ -439,7 +439,7 @@
     </div>
     <div class="col-sm-3">
         <label for="parentesco1" class="control-label">Parentesco</label>
-       
+
         <select name="parentesco1" id="parentesco1" class="form-control" required title="¿Cuál es su parentesco?">
             <option value="">-</option>
             <option value="Hijo">Hijo</option>
@@ -503,7 +503,7 @@
 
             <div class="col-sm-3">
                 <label for="parentescoEdit{{$key+1}}" class="control-label">Parentesco</label>
-                
+
                 <select name="parentescoEdit{{$key+1}}" id="parentescoEdit{{$key+1}}" class="form-control" required>
                     <option value="">-</option>
                     <option value="Hijo">Hijo</option>
@@ -596,6 +596,8 @@
                             <a href="/jornada/staff" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo registro</a>
                             <button  type="submit" id="btn_save" class="btn btn-success"><i class="fa fa-floppy-o"></i> Guardar cambios</button>
                             <a id="btn_print_f" class="btn btn-success "><i class="fa fa-print"></i> Imprimir</a>
+                            <a id="btn_print_pdf" target="_blank" class="btn btn-success "><i class="fa fa-file-pdf-o"></i> PDF</a>
+
 
                         <!-- </div> -->
                   </center>
@@ -607,6 +609,8 @@
               </div>
               <input type="hidden" id="dele" name="dele">
             {{ Form::close() }}
+
+            <div id="pdf"></div>
 
             <!-- /form user -->
 <!-- /form dos -->

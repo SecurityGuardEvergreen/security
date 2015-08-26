@@ -110,7 +110,7 @@ $('#parentescoAdd').on("click","#rmfa",function(e){
 // Boton add parentesco
 $('#add_parentesco').click(function(e){
 	 increment = parseInt($('#n_familiar').val());
-	 
+
 	  console.log(family_total_f);
 	  console.log("incre "+increment);
 	 // Retringuiendo el tamaño de la carga familiar
@@ -143,7 +143,7 @@ $('#add_parentesco').click(function(e){
         // parentesco
 
         html = html + '<div class="col-sm-3">';
-        html = html + '<label for="parentesco'+increment+'" class="control-label">Parentesco</label>';        
+        html = html + '<label for="parentesco'+increment+'" class="control-label">Parentesco</label>';
         html = html + '<select name="parentesco'+increment+'" id="parentesco'+increment+'" class="form-control parentesco" required title="¿Cuál es su parentesco?">';
         html = html + '<option value="">-</option>';
         html = html + '<option value="Hijo">Hijo</option>';
@@ -153,7 +153,7 @@ $('#add_parentesco').click(function(e){
         html = html + '</select>';
 
         html = html + '</div> ';
-        
+
         // sexo
         html = html + '<div class="col-sm-3">';
         html = html + ' <label for="sexop'+increment+'" class="control-label">Sexo</label>';
@@ -182,7 +182,7 @@ $('#add_parentesco').click(function(e){
         html = html + '</div>';
         // scrip
         html = html + '<div id="script'+increment+'" class="scriptf">';
-  
+
 
   //       html = html + '</script>';
         html = html + '<div>';
@@ -404,13 +404,13 @@ $("input[name='family']").change(function() {
 		// Bloqueando o activando el input deacuerdo el estado del tipo rif
 		if($(this).val()!=0){
 			$('#rif').attr('disabled',false);
-			
+
 		}else{
 			$('#rif').val('');
 			$('#rif').attr('disabled',true);
 			$('#rif').removeClass('error');
-			$('#rif-error').remove();		
-			
+			$('#rif-error').remove();
+
 		}
 		// Bloqueando o activando el input deacuerdo el estado del tipo rif
 		validarrif();
@@ -437,7 +437,7 @@ $('#btn_reset').click(function(){
 	 if(error_form){
 	 	validator.resetForm();
 	 }
-	
+
 	 $('#mensaje_max_family').addClass('hide'); //ocultando mensaje de max familiar
 	 $('#parentescoAdd').empty();   // Borrando cargas familiaresd extras
 	 $('#btn_update').text('Agregar registro');   // Colocando el texto inicial al botón add
@@ -458,21 +458,7 @@ $('#btn_reset').click(function(){
 });
 // Fin btn reset
 
-// Check activar o desactivar centro de trabajo
-// tipo_user = $('#tipo_user').val();
-// area_acces = $('#area_acces').val();
 
-// if(tipo_user==1 && area_acces=="all"){
-
-// }else if(area_acces==3){
-// 	$('#centroOpcion1').addClass('active');
-		
-// 			// radio[i].defaultChecked = true;
-// }
-
-
-// console.log(area_acces);
-// Check activar o desactivar centro de trabajo
 
 
 });//fin funcion main
@@ -612,23 +598,23 @@ return edad;
 function calcular_tiempo(dia,mes,año){
 	primerdia= 0;
 	 hoy = new Date()
-       
+
 	 curday = hoy.getDate();;
 	 curmon = hoy.getMonth() + 1;;
 	 curyear = hoy.getFullYear();;
 	 calday = dia;
 	 calmon = mes;
 	 calyear = año;
-	
+
 
 	 curd = new Date(curyear,curmon-1,curday);
 	 cald = new Date(calyear,calmon-1,calday);
-	
+
 	 diff =  Date.UTC(curyear,curmon-1,curday,0,0,0)
 		 - Date.UTC(calyear,calmon-1,calday,0,0,0);
 
 	 dife = datediff(curd,cald);
-	
+
 	if(dife[0]==1 && dife[1] ==1 && dife[2]==1){
 		edad =dife[0]+" año, "+dife[1]+" mes, y "+dife[2]+" día";
 	}else if(dife[0]==1 && dife[1] ==1 && dife[2]>0){
@@ -646,13 +632,13 @@ function calcular_tiempo(dia,mes,año){
 	}else if(dife[0]>0 && dife[1] >0 && dife[2]>0){
 		edad =dife[0]+" años, "+dife[1]+" meses, y "+dife[2]+" días";
 	}else if(dife[0]==1 && dife[1] ==1 && dife[2]==0){
-		edad =dife[0]+" año y "+dife[1]+" mes ";	
+		edad =dife[0]+" año y "+dife[1]+" mes ";
 	}else if(dife[0]==1 && dife[1] >0 && dife[2]==0){
-		edad =dife[0]+" año y "+dife[1]+" meses ";	
+		edad =dife[0]+" año y "+dife[1]+" meses ";
 	}else if(dife[0]>0 && dife[1] ==1 && dife[2]==0){
-		edad =dife[0]+" años y "+dife[1]+" meses ";	
+		edad =dife[0]+" años y "+dife[1]+" meses ";
 	}else if(dife[0]>0 && dife[1] >0 && dife[2]==0){
-		edad =dife[0]+" años y "+dife[1]+" meses ";	
+		edad =dife[0]+" años y "+dife[1]+" meses ";
 	}else if(dife[0]==1 && dife[1] ==0 && dife[2]==1){
 		edad =dife[0]+" año y "+dife[2]+" día";
 	}else if(dife[0]==1 && dife[1] ==0 && dife[2]>0){
@@ -685,23 +671,23 @@ function calcular_tiempo(dia,mes,año){
 		edad = "primer día de trabajo";
 		primerdia=1;
 	}
-	
+
 	 return [primerdia,edad];
-	
+
 
 
 }
 
-function datediff(date1, date2) 
+function datediff(date1, date2)
 {
     var y1 = date1.getFullYear(), m1 = date1.getMonth(), d1 = date1.getDate(),
 	 y2 = date2.getFullYear(), m2 = date2.getMonth(), d2 = date2.getDate();
-    if (d1 < d2) 
+    if (d1 < d2)
     {
         m1--;
         d1 += DaysInMonth(y2, m2);
     }
-    if (m1 < m2) 
+    if (m1 < m2)
     {
         y1--;
         m1 += 12;

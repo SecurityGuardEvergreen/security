@@ -69,21 +69,7 @@ public function empleado_rif(){
     ]);
 }
 
-public function pdf(){
-  $id = Input::get('id_registro');
-  $empleado = Empleado::where('id','=',$id)->first();
-  // echo "el registro es";
-  // echo $id."<br>";
-  // print_r($empleado);
-  // echo "<br>";
-  // var_dump($empleado->nombre);
 
-  $data = array();
-  $data['empleado'] = $empleado;
-  $pdf = PDF::loadView('pdf.index',$data);
-  return $pdf->stream();
-return $pdf->download('invoice.pdf');
-}
 // ==========Procesar datos creados
 public function procesar(){
 
@@ -318,7 +304,7 @@ public function data_empleados(){
         ->orderBy('id', 'DESC')->get();
   }
 
-  
+
 
     return json_encode($user);
 }
@@ -451,12 +437,12 @@ $n_familiar = Input::get('n_familiar');
 $familyInsert = $n_familiar - $familia_update;
 
 
-// Actualización dinámica del familiar 
-for ($i=1; $i <= $familia_update; $i++) { 
+// Actualización dinámica del familiar
+for ($i=1; $i <= $familia_update; $i++) {
   # code...
 
 $update_fa1 =   Familiar::where('id',Input::get('edit_id_familiar'.$i))
-    ->update(array(      
+    ->update(array(
       "nombre" =>Input::get('fullnameEdit'.$i),
       "apellido" =>Input::get('apellidofamiliarEdit'.$i),
       "ced" =>Input::get('ced_familiarEdit'.$i),
@@ -470,12 +456,12 @@ if(!empty($update_fa1) ){
   $respuesta['update_fa_dinamic'] = $update_fa1;
 }
 
-// Actualización dinámica del familiar 
+// Actualización dinámica del familiar
 
 
 // Inserción dinámica de los familiares
 
-for ($i=1; $i <= $familyInsert ; $i++) { 
+for ($i=1; $i <= $familyInsert ; $i++) {
   # code...
   $familiar ->nombre= Input::get('fullname'.$i);
   $familiar ->apellido= Input::get('apellidofamiliar'.$i);
@@ -486,7 +472,7 @@ for ($i=1; $i <= $familyInsert ; $i++) {
   $familiar ->empleado_id= $id_update;
   $familiar->save();
 }
-// Inserción dinámica de los familiares 
+// Inserción dinámica de los familiares
 
 
 
@@ -519,5 +505,54 @@ public function deleteempleado(){
   return $respuesta;
 }
 // Fin funcion borrar empleado
+
+
+// ==============PDF===============
+public function pdf(){
+  $id_empleado = Input::get('id_empleado');
+  $data = array();
+
+
+
+     // $data['empleado'] = array('nombre'=>'holas');
+   $data['empleado'] = Empleado::join('preficeds','empleados.preficed_id','=','preficeds.id')
+        ->join('rifs','empleados.prefirif_id','=','rifs.id')
+        ->join('cargos','empleados.cargo_id','=','cargos.id')
+        ->join('estados','empleados.estado_id','=','estados.id')
+        ->join('municipios','empleados.municipio_id','=','municipios.id')
+        ->join('parroquias','empleados.parroquia_id','=','parroquias.id')
+        ->join('users','empleados.user_id','=','users.id')
+        ->join('maritalstatus','empleados.maritalstatus_id','=','maritalstatus.id')
+        ->join('educationlevels','empleados.educationlevel_id','=','educationlevels.id')
+        ->join('sexos','empleados.sexo_id','=','sexos.id')
+        ->select('estados.nombre as estado','users.area_update_id as update',
+          'educationlevels.nombre as niveledu','maritalstatus.nombre as marital',
+          'municipios.nombre as municipio','parroquias.nombre as parroquia',
+          'cargos.nombre as cargo','rifs.sigla as sigla_rif','empleados.*',
+          'sexos.name as sexop',
+          DB::raw('CONCAT(preficeds.sigla, "-", ci) as full_ced'))
+        ->where('empleados.id','=',$id_empleado)
+        // ->orWhere('typeuser_id','=',1)
+        ->get();
+
+
+
+
+     $data['familiar'] = Familiar::join('sexos','familiars.sexo_id','=','sexos.id')
+      ->select('sexos.name as sexof','familiars.*')
+      ->where('familiars.empleado_id','=',$id_empleado)->get();
+
+
+// Generando barcode
+   DNS1D::getBarcodePNGPath("/barcode/".$data['empleado'][0]->full_ced, "C39");
+// Generando barcode
+
+$pdf = PDF::loadView('pdf.index',$data)->setPaper('a4');
+return $pdf->stream();
+
+
+
+}
+// ==============PDF===============
 
   } // Fin function

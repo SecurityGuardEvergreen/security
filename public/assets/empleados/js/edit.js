@@ -25,12 +25,12 @@ $(function(){
 	// ============== Fin asignando el centro ================
 	// ===============Asignar la antiguedad======================
 	antiguedadEdit = $('#anti').val();
-	
+
 	if(antiguedadEdit!=""){
 	añoanti_edit = antiguedadEdit.substring(6, 10);
 	mesanti_edit = antiguedadEdit.substring(3, 5);
 	diaantiedit = antiguedadEdit.substring(0, 2);
-	
+
 	tiempoedit= calcular_tiempo(diaantiedit,mesanti_edit,añoanti_edit);
 
 	if(tiempoedit[0]==0){
@@ -45,7 +45,7 @@ $(function(){
 	msj_antigueadadEdit = msj_antigueadadEdit + mensajeedit + "</span></h5>";
 	$('#antigueadad').append(msj_antigueadadEdit);
 	}
-	
+
 
 // ===============Fin signar la antiguedad===================
 	// ==================Asignando prefi cédula===============
@@ -201,7 +201,7 @@ if(tam_family>0){
 		$('#sexop'+i).val($('#edit_sexop'+i).val());
 
 		$('#parentescoEdit'+i).val($('#edit_parentesco'+i).val());
-		
+
 
 	};
 }
@@ -403,7 +403,7 @@ console.log(str);
 
 				tipo_ced = $('#tipo_ced option:selected').text();
 				ced = $('#ced').val();
-				console.log(tipo_ced+ced); 
+				console.log(tipo_ced+ced);
 				// location.reload();
 				window.location.href = '/jornada/edit/'+tipo_ced+ced;
 
@@ -416,3 +416,16 @@ console.log(str);
 
 }
 // ============ FIN Btn guardar cambios empleado============
+
+// ===Btn Pdf====
+$('#btn_print_pdf').click(function(){
+	url = "/jornada/pdf";
+	id_empleado=$('#id_update_empleado').val();
+	form = $('<form action="' + url + '" method="post" target="_blank">' +
+  '<input type="hidden" name="id_empleado" value="' + id_empleado + '" />' +
+  '</form>');
+$('#pdf').append(form);
+form.submit();
+});
+
+// ===Btn Pdf====

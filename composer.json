@@ -5,7 +5,8 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"barryvdh/laravel-dompdf": "0.4.*"
+		"barryvdh/laravel-dompdf": "0.4.*",
+		"dinesh/barcode": "V3.0"
 
 	},
 	"autoload": {
@@ -15,7 +16,8 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"app/tests/TestCase.php",
+			"app/helpers.php"
 		]
 	},
 	"scripts": {

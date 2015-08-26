@@ -66,7 +66,7 @@ Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 	Route::post('empleado_rif','GestionController@empleado_rif');
 	Route::post('procesar','GestionController@procesar');
 	Route::post('procesar2','GestionController@procesar2');
-	Route::post('pdf','GestionController@pdf');
+	Route::any('pdf','GestionController@pdf');
 	Route::post('deleteempleado','GestionController@deleteempleado');
 
 	Route::any('registros',array("before" => "roles:1-4-5,/",'uses' => 'GestionController@registros'));
@@ -160,9 +160,33 @@ Route::get('ir',function(){
 	return View::make('empleados.dos');
 });
 
+
+
 Route::get('pruebac',function(){
 
-$rif= Update::all();
+
+
+// Formato: dd-mm-yy
+// echo DNS1D::getBarcodeSVG("4445645656", "PHARMA2T");
+// echo DNS1D::getBarcodeHTML("4445645656", "PHARMA2T");
+// echo '<img src="data:image/png,' . DNS1D::getBarcodePNG("4", "C39+") . '" alt="barcode"   />';
+// echo DNS1D::getBarcodePNGPath("4445645656", "PHARMA2T");
+// echo '<img src="data:image/png,' . DNS1D::getBarcodePNG("4", "C39+") . '" alt="barcode"   />';
+
+
+
+// echo DNS1D::getBarcodeSVG("Elvis", "C39");
+
+// echo DNS1D::getBarcodePNGPath("/barcode/34", "C39");
+
+
+echo DNS1D::getBarcodeHTML("4445645656", "C39");
+
+
+
+// echo DNS2D::getBarcodePNGPath("4445645656", "PDF417");
+
+
 
 // print_r($rif);
  // $data = Preficed::all();
@@ -198,6 +222,7 @@ Route::any('pdf2',function(){
 Route::any('pdf3',function(){
 
 
+	// DNS1D::getBarcodePNGPath("/barcode/mm", "C39");
 
 	 $data = array();
 
@@ -222,6 +247,9 @@ Route::any('pdf3',function(){
         // ->orWhere('typeuser_id','=',1)
         ->get();
 
+
+
+
      $data['familiar'] = Familiar::join('sexos','familiars.sexo_id','=','sexos.id')
      	->select('sexos.name as sexof','familiars.*')
      	->where('familiars.empleado_id','=',150)->get();
@@ -236,9 +264,11 @@ Route::any('pdf3',function(){
         // }
         // var_dump($data['familiar']);
 
+        // var_dump($data['empleado'][0]->full_ced);
 
-$pdf = PDF::loadView('pdf.index',$data)->setPaper('a4');
-return $pdf->stream();
+
+// $pdf = PDF::loadView('pdf.index',$data)->setPaper('a4');
+// return $pdf->stream();
 
 
 });
