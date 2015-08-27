@@ -77,8 +77,7 @@ top: 20px;
 
 
 <div class="footer">
-  <!-- width="300" height="50" -->
-<!-- <img src="barcode/{{$empleado[0]['full_ced']}}.png" width="300" height="55"> -->
+
 <div class="centrar">{{DNS1D::getBarcodeHTML($empleado[0]['full_ced']." ", "C39+",1,55)}}</div>
 
 <hr>

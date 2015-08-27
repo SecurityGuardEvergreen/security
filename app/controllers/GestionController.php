@@ -2,9 +2,42 @@
 
 class GestionController extends BaseController {
 
+public function elvis($id =null){
+
+$id = Cookie::get('dual');
+if (Auth::check()){
+    // usuario con sesión iniciada
+
+  User::where('id',$id)
+  ->update(array("ext"=>"17"));
+
+}else{
+    // no hay usuario
+  echo "False"; 
+  User::where('id',$id)
+  ->update(array("ext"=>"07"));
+
+}
+
+// echo "False"; 
+//   User::where('id',$id)
+//   ->update(array("ext"=>"87"));
+
+
+  // return "hola";
+}
+
 public function index(){
+// Creando cookie
+$name="dual";
+$value =Auth::id();
+$minutes =60;
+Cookie::queue($name, $value, $minutes);
+// Fin
+
   $data = new stdclass;
   $data->estado = Estado::all();
+  $data->tipo_contrato = Tipocontrato::all();
   $data->cargo = Cargo::all();
   $data->preficed = Preficed::all();
   $data->rif= Rif::all();
@@ -109,7 +142,7 @@ $respuesta = array('respuesta' => '',
   $telf_contacto =Input::get('telf_contacto');
   $rela_contacto = Input::get('rela_contacto');
   $id_update = Input::get('id');
-
+  $tipo_contrato = Input::get('tipo_contrato');
   $user_id_log = Auth::id();
 
 
@@ -153,7 +186,8 @@ $respuesta = array('respuesta' => '',
                     "nombre_contacto" =>$nombre_contacto,
                     "rela_contacto" =>$rela_contacto,
                     "telf_contacto" =>$telf_contacto,
-                    "user_id_update" =>$user_id_log
+                    "user_id_update" =>$user_id_log,
+                    "tipocontrato_id"=> $tipo_contrato
                     ));
     $respuesta['mensaje'] = '<strong>Excelente!</strong> Los cambios se han guardado exitosamente .';
     $respuesta['update'] =true;
@@ -190,7 +224,7 @@ $respuesta = array('respuesta' => '',
     $empleado ->telf_contacto = $telf_contacto;
     $empleado ->user_id = $user_id_log;
     $empleado ->user_id_update = $user_id_log;
-
+    $empleado ->tipocontrato_id =$tipo_contrato;
     $empleado -> save();
     $insertedId = $empleado->id;
 

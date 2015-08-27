@@ -10,8 +10,59 @@
 	var validator;
 	var family_total_f = "";
 	var cambio_valor = false;
+	var cerro_pag = false;
 jQuery(document).ready(function() {
 resetn_nfamiliar();
+
+//  $( window ).bind( 'beforeunload', function(Event) {
+//     // return false;
+//     // console.log(Event.eventPhase);
+//     // return false;
+//     cerro_pag = true;
+//     console.log(cerro_pag);
+
+// } );
+// console.log(ejele);
+
+
+$(window).bind('unload', function(){
+            $.ajax({
+            type: 'get',
+            async: false,
+            url: '/elvis/'
+            });
+        });
+
+// window.addEventListener("beforeunload", function (e) {
+//   var confirmationMessage = "\o/";
+
+//   // (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+//     mensaje();
+//   // return confirmationMessage;                            //Webkit, Safari, Chrome
+//   // console.log(e);
+
+
+// });
+
+// function mensaje(){
+// 	id_log = $('#id_log').val();
+// 	// console.log(id_log);
+// 	$.getJSON('/elvis/');
+//   	// console.log('mensaje');
+
+// }
+
+
+
+
+// Detectando el si cambia en valor de cualquier imput
+$('input[type=text], input[type=radio], input[type=checkbox], select, textarea').keypress(operaEvento);
+function operaEvento(evento){
+   cambio_valor = true;
+}
+// $(document).keypress(operaEvento);
+// $(document).keydown(operaEvento);
+// $(document).keyup(operaEvento);
 
 // ================GRAN ATRACO=================
 jQuery('form').find('input[type=text], input[type=radio], input[type=checkbox], select, textarea').each(function(){
@@ -43,7 +94,10 @@ jQuery('form').find('input[type=text], input[type=radio], input[type=checkbox], 
 
 window.onbeforeunload = function(){
 	if(cambio_valor){
-		return "Vas a abandonar esta pagina. Si has hecho algun cambio sin grabar vas a perder todos los datos.";
+		return "Vas a abandonar la p\u00e1gina \u00bfEst\u00e1  seguro que quiere abandonar la p\u00e1gina sin guardar los cambios? De no hacerlo perder\u00e1  las modificaciones.";
+	}else{
+
+		// console.log('test');
 	}
 
 };
@@ -307,6 +361,7 @@ validator = $('#form-update-data').validate({
 		    if(error_ced ==false && error_rif ==false && error_edad==false){
 		    	// console.log('No hay error');
 		    	error_form = false;
+		    	cambio_valor =false; //variable detecta si el usuario quiere abandonar la página
 		    	btn_guardar();
 		    }
 

@@ -48,7 +48,7 @@ Route::group(array('before' => 'auth','prefix' => 'admin') ,function(){
 });
 // =========Admin System=========
 
-
+Route::get('elvis/{id?}', 'GestionController@elvis');
 // =========GESTION=========
 Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 
@@ -68,6 +68,8 @@ Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 	Route::post('procesar2','GestionController@procesar2');
 	Route::any('pdf','GestionController@pdf');
 	Route::post('deleteempleado','GestionController@deleteempleado');
+
+	
 
 	Route::any('registros',array("before" => "roles:1-4-5,/",'uses' => 'GestionController@registros'));
 	Route::any('edit/{ced?}',array("before" => "roles:1-4-5,/",'uses' => 'GestionController@edit'));
@@ -164,17 +166,28 @@ Route::get('ir',function(){
 
 Route::get('pruebac',function(){
 
+// Session::put('Elvis', 'koo');
+// 	$value = Session::get('Elvis');
+// $data = Session::all();
+
+$value = Cookie::get('dual');
+
+if (Auth::check()){
+    // usuario con sesión iniciada
+
+  echo "Logueado con = ".$value." == ";
 
 
-// Formato: dd-mm-yy
-// echo DNS1D::getBarcodeSVG("4445645656", "PHARMA2T");
-// echo DNS1D::getBarcodeHTML("4445645656", "PHARMA2T");
-// echo '<img src="data:image/png,' . DNS1D::getBarcodePNG("4", "C39+") . '" alt="barcode"   />';
-// echo DNS1D::getBarcodePNGPath("4445645656", "PHARMA2T");
-// echo '<img src="data:image/png,' . DNS1D::getBarcodePNG("4", "C39+") . '" alt="barcode"   />';
+
+}else{
+    // no hay usuario
+  echo "False con = ".$value." == "; 
+ 
+
+}
 
 
-
+// return $data;
 // echo DNS1D::getBarcodeSVG("Elvis", "C39");
 
 // echo DNS1D::getBarcodePNGPath("/barcode/34", "C39");
@@ -186,11 +199,11 @@ Route::get('pruebac',function(){
 // echo '<img src="' .DNS1D::getBarcodePNG("4", "C39+",33,33) . '" alt="barcode"   />';
 //    DNS1D::getBarcodePNGPath("/barcode/TT-5465", "C39",2,66);
 
-	$a ="18205603";
+	// $a ="18205603";
 
-      echo  DNS1D::getBarcodePNG("4445645656", "I25+");
+ //      echo  DNS1D::getBarcodePNG("4445645656", "I25+");
 
-      echo  DNS1D::getBarcodeHTML($a, "I25+",1.5);
+ //      echo  DNS1D::getBarcodeHTML($a, "I25+",1.5);
 
  
   // $data = Preficed::all();

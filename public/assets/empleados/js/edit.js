@@ -286,7 +286,7 @@ validator = $('#form-update-data').validate({
 		    // alert("perfecto!!!");
 		    if(error_ced ==false && error_rif ==false && error_edad==false){
 		    	// console.log('No hay error');
-
+		    	cambio_valor = false; // Variable origin select.js para controlar si se abandona la pág
 		    	btn_guardar_cambios();
 		    }
 

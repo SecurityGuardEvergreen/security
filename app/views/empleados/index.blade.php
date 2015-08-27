@@ -104,18 +104,29 @@
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
-
                         </div>
 
-                        <div style="margin-top:5px;">
-                            <span id="erroredadempleado" class="label label-danger hide"></span>
-                        </div>
+                        
                     </div>
                     <div class="col-sm-8">
                         <br><br>
                         <div id="antigueadad" class="hide"></div>
                     </div>
                 </div>
+                 <!-- Tipo de contrato -->
+                <div class="form-group">
+                    <div class="col-sm-4" style="padding-right: 0px;">
+                        <label for="tipo_contrato" class="control-label">Condición de empleo</label>
+                        <select style="padding-left:2px;" name="tipo_contrato" id="tipo_contrato" required class="form-control" title="tipo de contrato requerido">
+                            <option value="">Tipo de contrato...</option>
+                            @foreach($data->tipo_contrato as $tipo_contrato)
+                             <option value="{{$tipo_contrato->id}}">-{{strtoupper($tipo_contrato->nombre)}}</option>
+                            @endforeach
+                        </select>
+                        
+                    </div>
+                </div>
+                <!-- /Tipo de contrato -->
                 <div class="form-group">
 
                     <div class="col-sm-6">

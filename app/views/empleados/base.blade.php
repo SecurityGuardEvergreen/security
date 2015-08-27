@@ -17,11 +17,13 @@
     <link rel="stylesheet" href="/assets/empleados/css/main.css">
     <link rel="stylesheet" href="/assets/empleados/css/responsive.css">
     <!-- // <script src="/assets/empleados/js/vendor/modernizr-2.6.2.min.js"></script> -->
+
 </head>
 
-<body>
-@yield('content')
+<body >
 
+@yield('content')
+<input type="hidden" id="id_log" value="{{Auth::id()}}">
 
     <!-- FOOTER -->
     <footer>
@@ -52,7 +54,7 @@
                 <!-- FOOTER CONTENT -->
                 <div class="col-md-6">
                     <div class="footer-content text-right">
-                        <p>&copy; 2015 Todos los derechos reservados, <a href="#">Evergreen Service c.a</a>
+                        <p style="font-size:8pt;">&copy; 2015 Todos los derechos reservados. Versión beta 0.9.27.08.2015 <a href="#">Evergreen Service c.a</a>
                         </p>
                     </div>
                 </div>
