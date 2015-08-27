@@ -49,7 +49,7 @@ $(function(){
 
 // ===============Fin signar la antiguedad===================
 
-//============Asignado tipo de contrato============ 
+//============Asignado tipo de contrato============
 $('#tipo_contrato').val($('#tipocontrato_edit').val());
 //============Fin Asignado tipo de contrato============
 	// ==================Asignando prefi cédula===============

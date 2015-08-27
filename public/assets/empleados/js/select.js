@@ -9,12 +9,17 @@
 	var increment = 1;
 	var validator;
 	var family_total_f = "";
+	var cambio_valor = false;
 jQuery(document).ready(function() {
 resetn_nfamiliar();
 
 // ================GRAN ATRACO=================
 jQuery('form').find('input[type=text], input[type=radio], input[type=checkbox], select, textarea').each(function(){
+
 		  jQuery(this).change(function(){
+		  		// Verificando si se cambia el valor de un elemento
+		  		cambio_valor = true;
+		  		// Verificando si se cambia el valor de un elemento
 				jQuery(this).val($.trim($(this).val()));
 
 				 	if (jQuery(this).val().match(/([\<])([^\>]{1,})*([\>])/i) == null)
@@ -26,6 +31,23 @@ jQuery('form').find('input[type=text], input[type=radio], input[type=checkbox], 
 		  });
 	});
 // ================GRAN ATRACO=================
+
+
+// Chequeando si quieren abandonar el dom si se ha realizado algun cambio sin guardar
+
+// $(window).bind("beforeunload", function(eEvent) {
+//        if(cambio_valor){
+//              eEvent.returnValue "Vas a abandonar esta pagina. Si has hecho algun cambio sin grabar vas a perder todos los datos.";
+//        }
+// }
+
+window.onbeforeunload = function(){
+	if(cambio_valor){
+		return "Vas a abandonar esta pagina. Si has hecho algun cambio sin grabar vas a perder todos los datos.";
+	}
+
+};
+// Chequeando si quieren abandonar el dom si se ha realizado algun cambio sin guardar
 
 
 	//Al iniciar mandamos consultar todos los paises que se mantienen en nuestra base de datos atravez de la ruta paises
