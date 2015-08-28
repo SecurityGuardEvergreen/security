@@ -4,21 +4,20 @@ class GestionController extends BaseController {
 
 public function elvis($id =null){
 
-$id = Cookie::get('dual');
+
+
+// $id_cookie = Cookie::get('dual');
+// Session::put('Elvis', 'Nose');
+// verificaruserlogin($id);
+  $id_user = Auth::id();
+
 if (Auth::check()){
     // usuario con sesión iniciada
 
-  User::where('id',$id)
-  ->update(array("ext"=>"17"));
-
-}else{
-    // no hay usuario
-  echo "False"; 
-  User::where('id',$id)
-  ->update(array("ext"=>"07"));
+  User::where('id',$id_user)
+  ->update(array("activo"=>"1"));
 
 }
-
 // echo "False"; 
 //   User::where('id',$id)
 //   ->update(array("ext"=>"87"));

@@ -1,0 +1,12 @@
+Activar eventos
+SET GLOBAL event_scheduler = ON;
+crear eventos
+CREATE EVENT actualizate
+    ON SCHEDULE EVERY 2 minute
+    DO
+      UPDATE security_guard.users SET activo = 0;
+      
+ver eventos
+ SHOW events
+ ver procesos
+SHOW processlist;

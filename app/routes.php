@@ -48,7 +48,7 @@ Route::group(array('before' => 'auth','prefix' => 'admin') ,function(){
 });
 // =========Admin System=========
 
-Route::get('elvis/{id?}', 'GestionController@elvis');
+
 // =========GESTION=========
 Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 
@@ -68,7 +68,7 @@ Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 	Route::post('procesar2','GestionController@procesar2');
 	Route::any('pdf','GestionController@pdf');
 	Route::post('deleteempleado','GestionController@deleteempleado');
-
+	Route::post('elvis/{id?}', 'GestionController@elvis');
 	
 
 	Route::any('registros',array("before" => "roles:1-4-5,/",'uses' => 'GestionController@registros'));
@@ -167,61 +167,27 @@ Route::get('ir',function(){
 Route::get('pruebac',function(){
 
 // Session::put('Elvis', 'koo');
-// 	$value = Session::get('Elvis');
+	$value = Auth::user()->activo;
 // $data = Session::all();
 
-$value = Cookie::get('dual');
+// $value = Cookie::get('dual');
 
-if (Auth::check()){
-    // usuario con sesión iniciada
+// if (Auth::check()){
+//     // usuario con sesión iniciada
 
-  echo "Logueado con = ".$value." == ";
+//   echo "Logueado con = ".$value." == ";
 
 
 
-}else{
-    // no hay usuario
-  echo "False con = ".$value." == "; 
+// }else{
+//     // no hay usuario
+//   echo "False con = ".$value." == "; 
  
 
-}
-
-
-// return $data;
-// echo DNS1D::getBarcodeSVG("Elvis", "C39");
-
-// echo DNS1D::getBarcodePNGPath("/barcode/34", "C39");
-
-
-// echo DNS2D::getBarcodeHTML("Elvis", "QRCODE");
-// echo "<br><br><br>";
-// // echo DNS1D::getBarcodeSVG("4445645656", "C39",3,33);
-// echo '<img src="' .DNS1D::getBarcodePNG("4", "C39+",33,33) . '" alt="barcode"   />';
-//    DNS1D::getBarcodePNGPath("/barcode/TT-5465", "C39",2,66);
-
-	// $a ="18205603";
-
- //      echo  DNS1D::getBarcodePNG("4445645656", "I25+");
-
- //      echo  DNS1D::getBarcodeHTML($a, "I25+",1.5);
-
- 
-  // $data = Preficed::all();
- // var_dump($data);
-
-// foreach ($data as $key => $value) {
-// 	# code...
-// 	var_dump($value->nombre);
 // }
 
-	// $ced_empleado='18205603';
-	// $rif='18205603-7';
-	// $id_empleado = Empleado::where('ci', '=', $ced_empleado)
- //                            	->where('rif','=', $rif)
- //                            ->get();
+echo $value;
 
-
- //    var_dump($id_empleado->isEmpty());
 
 
 });

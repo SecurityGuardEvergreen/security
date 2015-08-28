@@ -50,8 +50,10 @@ Login -
 			@if(Session::get('msg'))
 				{{ Session::get('msg') }}
 				<p>Si desea ingresar nuevamente introduzca sus credenciales</p>
+			@elseif(Session::get('error_message_duplicada_sesion'))
+				 <span style="color: #d9534f;">{{ Session::get('error_message_duplicada_sesion') }}</span>
 			@elseif(Session::get('error_message'))
-			 <span style="color: #d9534f;">{{ Session::get('error_message') }}</span>
+			 <span style="color: #d9534f;">{{ Session::get('error_message') }} </span>
 			 	Necesitamos nuevamente sus credenciales, por favor.
 
 			  @else

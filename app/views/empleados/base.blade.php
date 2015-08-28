@@ -23,7 +23,7 @@
 <body >
 
 @yield('content')
-<input type="hidden" id="id_log" value="{{Auth::id()}}">
+
 
     <!-- FOOTER -->
     <footer>
@@ -69,6 +69,17 @@
 
 
 @yield('js')
+<script type="text/javascript">
+function actualizaestado(){
+$.ajax({
+        type: 'post',
+        async: false,
+        url: '/jornada/elvis/'
+        });
+}
 
+
+setInterval(actualizaestado, 3000);
+</script>
 </body>
 </html>

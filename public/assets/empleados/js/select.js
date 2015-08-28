@@ -10,7 +10,7 @@
 	var validator;
 	var family_total_f = "";
 	var cambio_valor = false;
-	var cerro_pag = false;
+	var cerro_pag = true;
 jQuery(document).ready(function() {
 resetn_nfamiliar();
 
@@ -25,13 +25,7 @@ resetn_nfamiliar();
 // console.log(ejele);
 
 
-$(window).bind('unload', function(){
-            $.ajax({
-            type: 'get',
-            async: false,
-            url: '/elvis/'
-            });
-        });
+
 
 // window.addEventListener("beforeunload", function (e) {
 //   var confirmationMessage = "\o/";
@@ -534,6 +528,7 @@ $('#btn_reset').click(function(){
 	 $('#rif').attr('disabled',true); // bloqueando campo rif
 });
 // Fin btn reset
+
 
 
 

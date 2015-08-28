@@ -308,7 +308,19 @@ validator = $('#form-update-data').validate({
 });
 // Fin validando el formulario con jquery validator
 
+// // Boton ver registros
+// $('#registros').click(function(){
+// 	cerro_pag = false;
+// 	window.location.href = '../registros';
+// });
+// // Boton ver registros
 
+// // Boton ir a staff
+// $('#staff').click(function(){
+// 	cerro_pag = false;
+// 	window.location.href = '/jornada/staff'
+// });
+// // Boton ir a staff
 
 });//fin main function
 

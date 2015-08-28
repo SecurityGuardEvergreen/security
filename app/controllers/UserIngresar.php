@@ -35,11 +35,19 @@ class UserIngresar extends BaseController {
 
 			// Actualizar si activo
 			$id = Auth::id();
+			$activo = Auth::user()->activo;
+
+			if($activo = 1){
+			return Redirect::back()
+			->with('error_message_duplicada_sesion','Éste usuario ya está logueado en otro equipo !!!');
+			}else{
 
 			$user = User::find($id );
 			$user->activo = 1;
 			$user->save();
 			return Redirect::to('jornada');
+			}
+			
 		}else{
 			return Redirect::back()
 			->with('error_message','Los datos suministrados son incorrectos !!!');
@@ -58,8 +66,18 @@ class UserIngresar extends BaseController {
 	{
 		if(Auth::check())
 		{
+			// $id = Auth::id();
+			$activo = Auth::user()->activo;
 
+			if($activo){
+			return View::make('login.ingresar')
+			->with('error_message_duplicada_sesion','El usuario ya está logueado en otro equipo!!!');
+				// echo "nada";
+			}else{
 			return Redirect::to('jornada');
+			}
+			// return echo "hola";
+			// echo "string";
 		}
 		else
 		{
