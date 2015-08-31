@@ -1,4 +1,5 @@
 $(function(){
+var contar_edit =0;
 	// ============== asignando el centro ================
 	radio= $("input[name=centro]");
 	radio_edit = $('#centro_edit').val();
@@ -23,6 +24,8 @@ $(function(){
 	}
 
 	// ============== Fin asignando el centro ================
+
+
 	// ===============Asignar la antiguedad======================
 	antiguedadEdit = $('#anti').val();
 
@@ -322,7 +325,78 @@ validator = $('#form-update-data').validate({
 // });
 // // Boton ir a staff
 
-});//fin main function
+// Bloquear campos
+bloquear();
+// fin bloquear campos
+
+// ===========Check la edición===========
+$('#edit').click(function(){
+	contar_edit++;
+	$('#mensaje_edit').html('');
+	$(this).html('');
+	$(this).append('Procesando...'); 
+	// console.log('contando '+contar_edit);
+	id_edit = $('#id_update_empleado').val();
+
+	// verificando si se está editando el registro
+	$.ajax({
+        type: 'post',
+        async: false,
+        url: '/jornada/verificar_edit/'+id_edit
+        }).done(function(response){
+
+        	
+        	if(response==0){
+        		if(contar_edit >1){ 
+        		mensaje = "<strong>Notificación!!!.</strong> El registro fue actualizado ";
+				mensaje = mensaje +"recientemente y recargaremos la página en segundos.";
+				// mensaje = mensaje + "para ver .";
+
+				mensaje_edit ="<div class='alert alert-success alert-dismissible' role='alert'>";
+				mensaje_edit = mensaje_edit + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+				mensaje_edit = mensaje_edit + mensaje + "</div>";    			
+				$('#mensaje_edit').append(mensaje_edit);   		
+					setInterval(actualizar_edit, 3000);
+        		}else{
+        			$.ajax({
+		        type: 'post',
+		        async: false,
+		        url: '/jornada/editando/'+id_edit
+		        });
+		        edit = true;
+		        desbloquear();
+		        cambio_valor = true;
+				$('#edit').html('');
+				$('#edit').append('Editando');
+				$('#edit').addClass('disabled');
+        		}
+        		
+        	}else{
+        		$('#edit').html('');
+				$('#edit').append('Editar');
+
+        		mensaje = "<strong>Uy, el registro está en edición!!!.</strong> El usuario <strong>";
+        		mensaje = mensaje + response[0].name +"</strong> lo está modificando. Vuelva a verificar mas tarde ";
+        		mensaje = mensaje + "para comprobar que ya puede editarlo.";
+
+        		mensaje_edit ="<div class='alert alert-warning alert-dismissible' role='alert'>";
+    			mensaje_edit = mensaje_edit + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+    			mensaje_edit = mensaje_edit + mensaje + "</div>";
+    			
+    			$('#mensaje_edit').append(mensaje_edit);
+        		// $('#edit').removeClass('active'); 
+        	}
+
+        });
+
+	
+});
+// ===========Fin Check la edición===========
+
+});
+//===================================================== 
+//================== FIN MAIN FUNCTION ================
+//===================================================== 
 
 // ============Function Generar script==============
 function generarscript(){
@@ -446,3 +520,27 @@ form.submit();
 });
 
 // ===Btn Pdf====
+
+// =================Bloquear y desbloquear campos=================
+function bloquear(){
+ $("#form-update-data :input[type='text']").attr('disabled',true);
+ $("#form-update-data select").attr('disabled',true);
+ $("#form-update-data :input[type='radio']").parent().addClass('disabled');
+ $("#form-update-data a").addClass('disabled');
+ $("#form-update-data button").addClass('disabled');
+}
+function desbloquear(){
+ $("#form-update-data :input[type='text']").attr('disabled',false);
+ $("#form-update-data select").attr('disabled',false);
+ $("#form-update-data :input[type='radio']").attr('disabled',false);
+ $("#form-update-data :input[type='radio']").parent().removeClass('disabled');
+ $("#form-update-data a").removeClass('disabled');
+ $("#form-update-data button").removeClass('disabled');
+}
+// =================Bloquear y desbloquear campos=================
+
+// Recargar la página si estuvoi actualñizada
+function actualizar_edit(){
+		location.reload();
+}
+//Fin recargar la página si estuvoi actualñizada 

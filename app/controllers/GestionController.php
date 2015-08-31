@@ -4,11 +4,6 @@ class GestionController extends BaseController {
 
 public function elvis($id =null){
 
-
-
-// $id_cookie = Cookie::get('dual');
-// Session::put('Elvis', 'Nose');
-// verificaruserlogin($id);
   $id_user = Auth::id();
 
 if (Auth::check()){
@@ -18,12 +13,28 @@ if (Auth::check()){
   ->update(array("activo"=>"1"));
 
 }
-// echo "False"; 
-//   User::where('id',$id)
-//   ->update(array("ext"=>"87"));
 
+}
 
-  // return "hola";
+public function editando($id =null){
+  Empleado::where('id',$id)
+  ->update(array("edit_status"=>"1","user_edit_actual"=>Auth::id()));
+}
+
+public function verificar_edit($id = null){
+ $data_edit = Empleado::join('users','empleados.user_edit_actual','=','users.id')
+                ->select('edit_status','users.name')
+                ->where('empleados.id','=',$id)->get();
+if($data_edit->isEmpty())
+return 0;
+else
+return $data_edit;
+  
+}
+public function edit_end($id = null)
+{
+   Empleado::where('id',$id)
+  ->update(array("edit_status"=>"0","user_edit_actual"=>"null"));
 }
 
 public function index(){
@@ -186,7 +197,9 @@ $respuesta = array('respuesta' => '',
                     "rela_contacto" =>$rela_contacto,
                     "telf_contacto" =>$telf_contacto,
                     "user_id_update" =>$user_id_log,
-                    "tipocontrato_id"=> $tipo_contrato
+                    "tipocontrato_id"=> $tipo_contrato,
+                    "edit_status"=>"0",
+                    "user_edit_actual"=>"0"
                     ));
     $respuesta['mensaje'] = '<strong>Excelente!</strong> Los cambios se han guardado exitosamente .';
     $respuesta['update'] =true;
@@ -460,7 +473,9 @@ $up_empleado_base = DB::table('empleados')->where('id',$id_update)
   "rela_contacto" =>$rela_contacto,
   "telf_contacto" =>$telf_contacto,
   "user_id_update" =>$user_id_log,
-  "tipocontrato_id"=> $tipo_contrato
+  "tipocontrato_id"=> $tipo_contrato,
+  "edit_status"=>"0",
+  "user_edit_actual"=>"0"
   ));
 
 // Actualizando datos del empleado

@@ -28,9 +28,15 @@
             <div class="row">
 
         <a href="../registros" class="btn btn-success" id="registros" name="registros">Ver registros</a>
-<!-- <input class="btn btn-primary" type="button" id="print" value="Imprimir"> -->
+        <a id="edit" class="btn btn-primary ">Editar</a>
+        <div class="row">
+            <br>
+            <div id="mensaje_edit"></div>
+        </div>
+
                 <!-- CONTACT FORM -->
 <div class="col-md-10 col-md-offset-1 text-left wow fadeInLeft" data-wow-duration="1s">
+
 <!-- Form dos -->
 {{ Form::open(array(
             'url'  => 'jornada/save',
@@ -45,7 +51,7 @@
                     <div class="col-sm-12" id="centro_radio">
 
                         <div id="radios_centro" class="btn-group col-sm-12" data-toggle="buttons">
-                          <label class="btn btn-info btn-sm ">
+                          <label class="btn btn-info btn-sm">
                             <input type="radio" name="centro" id="centroOpcion1" value="OFICINA ANACO" autocomplete="off" title="Seleccione un centro de trabajo" required> OFICINA ANACO
                           </label>
                           <label class="btn btn-info btn-sm">
@@ -74,6 +80,7 @@
                         </div>
 
                     <input type="hidden" name="centro_edit" id="centro_edit" value="{{$data->data_user->centro}}">
+                    <input type="hidden" name="tipo_user" id="tipo_user" value="{{Auth::user()->typeuser_id}}">
                     </div>
 
                     <div id="nombre_otro_centro" class="col-sm-6 hide">

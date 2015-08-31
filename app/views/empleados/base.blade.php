@@ -79,7 +79,7 @@ $.ajax({
 }
 
 
-setInterval(actualizaestado, 3000);
+setInterval(actualizaestado, 60000*2);
 </script>
 </body>
 </html>

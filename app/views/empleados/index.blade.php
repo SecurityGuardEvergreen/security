@@ -44,9 +44,7 @@
                     <label for="centro" class="control-label">Centro de trabajo</label>
                     <div class="col-sm-12" id="centro_radio">
                        
-                       <input type="hidden" id="area_acces" value="{{Auth::user()->area_update_id}}">
-                       <input type="hidden" id="tipo_user" value="{{Auth::user()->typeuser_id}}">
-
+                       
                         <div id="radios_centro" class="btn-group col-sm-12" data-toggle="buttons">
                           <label class="btn btn-info btn-sm ">
                             <input type="radio" name="centro" id="centroOpcion1"  value="OFICINA ANACO" autocomplete="off" title="Seleccione un centro de trabajo" required> OFICINA ANACO
@@ -75,8 +73,8 @@
                           Otro
                           </label>
                         </div>
-
-
+                        <input type="hidden" name="centro_edit" id="centro_edit" value="{{Auth::user()->area_update_id}}">
+                        <input type="hidden" name="tipo_user" id="tipo_user" value="{{Auth::user()->typeuser_id}}">        
                     </div>
 
 

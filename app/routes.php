@@ -69,6 +69,10 @@ Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 	Route::any('pdf','GestionController@pdf');
 	Route::post('deleteempleado','GestionController@deleteempleado');
 	Route::post('elvis/{id?}', 'GestionController@elvis');
+	Route::post('editando/{id?}','GestionController@editando');
+	Route::post('edit_end/{id?}','GestionController@edit_end');
+	Route::post('verificar_edit/{id?}','GestionController@verificar_edit');
+	
 	
 
 	Route::any('registros',array("before" => "roles:1-4-5,/",'uses' => 'GestionController@registros'));

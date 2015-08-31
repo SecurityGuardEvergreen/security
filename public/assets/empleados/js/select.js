@@ -11,6 +11,9 @@
 	var family_total_f = "";
 	var cambio_valor = false;
 	var cerro_pag = true;
+	var edit = false;
+	var id_edit = "";
+	var user_edit = "";
 jQuery(document).ready(function() {
 resetn_nfamiliar();
 
@@ -46,7 +49,34 @@ resetn_nfamiliar();
 
 // }
 
-
+	// ================Look centro por tipo de usuario========
+	centro_edit_user = $('#centro_edit').val();
+	tipo_user = $('#tipo_user').val();
+	$('#radios_centro label').addClass('disabled'); // desactivando radios
+	
+	if(tipo_user==1){
+		
+		$('#radios_centro label').removeClass('disabled'); // activandolos todos
+	}else if(centro_edit_user==1){	//Santa rosa	
+		
+		$('#centroOpcion3').parent().removeClass('disabled');
+	}else if(centro_edit_user==2){	// Loma Linda
+		
+		$('#centroOpcion2').parent().removeClass('disabled');
+	}else if(centro_edit_user==3){	// Anaco 
+		
+		$('#centroOpcion1').parent().removeClass('disabled');
+		$('#centroOpcion6').parent().removeClass('disabled');
+		$('#centroOpcion7').parent().removeClass('disabled');
+		$('#centroOpcion4').parent().removeClass('disabled');
+	}else if(centro_edit_user==4){ // Op Santa Rosa
+		
+		$('#centroOpcion5').parent().removeClass('disabled');
+	}else if(centro_edit_user==5){
+		
+		$('#radios_centro label').removeClass('disabled'); // activandolos todos
+	}
+	// ================Look centro por tipo de usuario========
 
 
 // Detectando el si cambia en valor de cualquier imput
@@ -87,7 +117,14 @@ jQuery('form').find('input[type=text], input[type=radio], input[type=checkbox], 
 // }
 
 window.onbeforeunload = function(){
-	if(cambio_valor){
+	if(cambio_valor){	
+		if(edit ){
+		$.ajax({
+        type: 'post',
+        async: false,
+        url: '/jornada/edit_end/'+id_edit
+        });
+		}	
 		return "Vas a abandonar la p\u00e1gina \u00bfEst\u00e1  seguro que quiere abandonar la p\u00e1gina sin guardar los cambios? De no hacerlo perder\u00e1  las modificaciones.";
 	}else{
 
