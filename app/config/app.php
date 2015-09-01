@@ -95,6 +95,7 @@ return array(
 	*/
 
 	'providers' => array(
+		'Maatwebsite\Excel\ExcelServiceProvider',
 		'Dinesh\Barcode\BarcodeServiceProvider',
 		'Barryvdh\DomPDF\ServiceProvider',
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
@@ -151,8 +152,9 @@ return array(
 	*/
 
 	'aliases' => array(
-		'DNS1D' => 'Dinesh\Barcode\Facades\DNS1DFacade',
-        'DNS2D' => 'Dinesh\Barcode\Facades\DNS2DFacade',
+		'Excel' 		  => 'Maatwebsite\Excel\Facades\Excel',
+		'DNS1D' 		  => 'Dinesh\Barcode\Facades\DNS1DFacade',
+        'DNS2D' 		  => 'Dinesh\Barcode\Facades\DNS2DFacade',
 		'PDF' 			  => 'Barryvdh\DomPDF\Facade',
 		'App'             => 'Illuminate\Support\Facades\App',
 		'Artisan'         => 'Illuminate\Support\Facades\Artisan',

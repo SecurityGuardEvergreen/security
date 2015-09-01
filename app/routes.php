@@ -48,7 +48,7 @@ Route::group(array('before' => 'auth','prefix' => 'admin') ,function(){
 });
 // =========Admin System=========
 
-
+Route::get('excel','ExportController@excel');
 // =========GESTION=========
 Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 

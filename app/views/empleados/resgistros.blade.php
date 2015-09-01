@@ -3,8 +3,11 @@
 @section('js')
 <!-- ==========table=========== -->
 <link rel="stylesheet" href="/assets/admin/asset/css/bootstrap-table.css">
+<script src="/packages/tableExport/tableExport.js"></script>
+<script src="/packages/tableExport/jquery.base64.js"></script>
 <script src="/assets/admin/js/bootstrap-table.js"></script>
 <script src="/assets/admin/js/bootstrap-table-es-MX.js"></script>
+<script src="/packages/tableExport/bootstrap-table-export.js"></script>
 <!-- ===========table========= -->
 <style type="text/css">
 	.ml10 {
@@ -114,7 +117,8 @@ function nameFormatter(value) {
 		    data-classes="table table-hover"
 		    data-click-to-select="true"
 		    data-toolbar="#toolbar"
-
+            data-show-export="true"
+            data-export-types="['csv', 'excel']"
 		    >
 		    <thead>
 		    <tr>
@@ -144,6 +148,7 @@ function nameFormatter(value) {
 <script src="/assets/empleados/js/wow.min.js"></script>
 <script src="/assets/empleados/js/prettyPhoto.js"></script>
 <script src="/assets/empleados/js/owl.carousel.min.js"></script>
+
 
 
 <script>
