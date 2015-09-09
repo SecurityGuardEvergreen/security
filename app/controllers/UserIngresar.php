@@ -45,7 +45,7 @@ class UserIngresar extends BaseController {
 			$user = User::find($id );
 			$user->activo = 1;
 			$user->save();
-			return Redirect::to('jornada');
+			return Redirect::to('gde/jornada');
 			}
 			
 		}else{
@@ -74,7 +74,7 @@ class UserIngresar extends BaseController {
 			->with('error_message_duplicada_sesion','El usuario ya está logueado en otro equipo!!!');
 				// echo "nada";
 			}else{
-			return Redirect::to('jornada');
+			return Redirect::to('gde/jornada');
 			}
 			// return echo "hola";
 			// echo "string";
@@ -94,7 +94,7 @@ class UserIngresar extends BaseController {
 		if(Auth::check())
 		{
 
-			return Redirect::to('jornada');
+			return Redirect::to('gde/jornada');
 		}
 		else
 		{
@@ -114,7 +114,7 @@ class UserIngresar extends BaseController {
 			$user->save();
 
 			Auth::logout();
-		return Redirect::to('gestion');
+		return Redirect::to('/');
 	}
 	// fin logout
 

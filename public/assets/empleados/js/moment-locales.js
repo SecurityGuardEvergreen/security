@@ -1898,7 +1898,7 @@
         'moment construction falls back to js Date. This is ' +
         'discouraged and will be removed in upcoming major ' +
         'release. Please refer to ' +
-        'https://github.com/moment/moment/issues/1407 for more info.',
+        ' for more info.',
         function (config) {
             config._d = new Date(config._i + (config._useUTC ? ' UTC' : ''));
         }
@@ -2448,7 +2448,7 @@
         },
 
         min: deprecate(
-                 'moment().min is deprecated, use moment.min instead. https://github.com/moment/moment/issues/1548',
+                 'moment().min is deprecated, use moment.min instead. ',
                  function (other) {
                      other = moment.apply(null, arguments);
                      return other < this ? this : other;
@@ -2456,7 +2456,7 @@
          ),
 
         max: deprecate(
-                'moment().max is deprecated, use moment.max instead. https://github.com/moment/moment/issues/1548',
+                'moment().max is deprecated, use moment.max instead. ',
                 function (other) {
                     other = moment.apply(null, arguments);
                     return other > this ? this : other;
@@ -2465,7 +2465,7 @@
 
         zone : deprecate(
                 'moment().zone is deprecated, use moment().utcOffset instead. ' +
-                'https://github.com/moment/moment/issues/1779',
+                '',
                 function (input, keepLocalTime) {
                     if (input != null) {
                         if (typeof input !== 'string') {

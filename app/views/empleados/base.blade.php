@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/assets/empleados/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/empleados/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/empleados/css/animate.css">
-    <link rel="stylesheet" href="/assets/empleados/css/prettyPhoto.css">
+    <!-- <link rel="stylesheet" href="/assets/empleados/css/prettyPhoto.css"> -->
     <link rel="stylesheet" href="/assets/empleados/css/owl.carousel.css">
     <link rel="stylesheet" href="/assets/empleados/css/main.css">
     <link rel="stylesheet" href="/assets/empleados/css/responsive.css">
@@ -43,7 +43,7 @@
                             <li><a href="#">Intranet</a>
                             </li>
                             @if(Auth::check())
-                                <li><a href="/salir">Salir ( {{Auth::user()->name}} )</a></li>
+                                <li><a href="/gde/salir">Salir ( {{Auth::user()->name}} )</a></li>
                             @endif
 
                         </ul>
@@ -74,7 +74,7 @@ function actualizaestado(){
 $.ajax({
         type: 'post',
         async: false,
-        url: '/jornada/elvis/'
+        url: '/gde/jornada/elvis/'
         });
 }
 

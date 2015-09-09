@@ -19,7 +19,7 @@
 
 		<h3 style="color:#086634">{{trans('register.reestablecer')}}</h3>
 		<p style="margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;color:#5a5a5a;line-height:150%;margin-bottom:15px;text-align:center;font-size:13px">
-			{{trans('register.restablecer_pass')}} : {{ URL::to('password/reset', array($token)) }}.<br/>
+			{{trans('register.restablecer_pass')}} : {{ URL::to('gde/password/reset', array($token)) }}.<br/>
 			{{trans('register.enlace_caducara')}}  {{ Config::get('auth.reminder.expire', 60) }} {{trans('register.minutos')}}.<br>
 			{{trans('register.gracias')}}
 		</p>

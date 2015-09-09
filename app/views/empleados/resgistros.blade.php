@@ -89,7 +89,7 @@ function nameFormatter(value) {
 	<div class="col-sm-12 ">
 		<div class="container" id="mesajeresponse"></div>
 		<center>
-			<a href="/jornada/staff" class="btn btn-success">Nuevo registro</a>
+			<a href="/gde/jornada/staff" class="btn btn-success">Nuevo registro</a>
 		</center>
 	</div>
 </div>
@@ -269,7 +269,7 @@ function nameFormatter(value) {
     }
     function eliminarregistro(ids){
     	$.ajax({
-					url: '/jornada/deleteempleado',
+					url: '/gde/jornada/deleteempleado',
 					type: 'POST',
 					data: 'ids='+ ids,
 					beforeSend:function(){

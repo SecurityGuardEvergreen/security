@@ -11,10 +11,21 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('movil.index');
+// --------------------------------------
+// 	Inicio de la ruta principal gestion
+// --------------------------------------
+
+Route::get('/',function(){
+	return View::make('gestion.index');
 });
+
+
+// Route::get('/', function()
+// {
+// 	return View::make('movil.index');
+// });
+
+
 
 
 
@@ -30,15 +41,6 @@ Route::group(array('before' => 'auth','prefix' => 'admin') ,function(){
 	Route::get('data_user',array('before'=>'roles:1-2-3,/','uses' =>'HomeController@datausers'));
 
 
-
-
-	// Route::get('new_post',array("before" => "roles:1-2-3,admin", function()
-	// {
-
-	// 	return "Como mínimo tu role debe ser editor, tu eres " . getRole(Auth::user()->type_user_id);
-
-	// }));
-
 	Route::get('sin_acceso',function(){
 		return "no tienes acceso =(";
 	});
@@ -49,11 +51,39 @@ Route::group(array('before' => 'auth','prefix' => 'admin') ,function(){
 // =========Admin System=========
 
 Route::get('excel','ExportController@excel');
-// =========GESTION=========
+
+/*
+|-------------------------------------------------
+| Init Prefix sistema de gestión de empleados GDE
+|-------------------------------------------------
+*/
+
+// Group main rout
+Route::group(array('prefix'=>'gde'),function(){
+
+	Route::any('/',function(){
+		return Redirect::to('gde/ingresar');
+	});
+
+	Route::get('ingresar','UserIngresar@login');
+	// login
+	Route::post('ingresar','UserIngresar@user');
+	Route::get('salir', 'UserIngresar@logout');
+	// Remider
+	Route::get('forgot','RemindersControllerGestion@getRemind');
+	Route::post('forgot','RemindersControllerGestion@postRemind');
+	Route::get('password/reset/{token?}','RemindersControllerGestion@getReset');
+	Route::post('password/reset/t','RemindersControllerGestion@postReset');
+
+
+// ----------------------------------------------------
+//           Sub group con prefix jornada
+// ---------------------------------------------------- 
+
 Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 
 	Route::any('/',array("before" => "roles:1-4,/",function(){
-		return Redirect::to('jornada/staff');
+		return Redirect::to('gde/jornada/registros');
 	}));
 
 	Route::any('gestion/',array("before" => "roles:1-4,/",'uses' => 'HomeController@dashboard'));
@@ -95,6 +125,20 @@ Route::group(array('before' => 'gestionAuth','prefix' => 'jornada') ,function(){
 
 
 });
+// ----------------------------------------------------
+//        End Sub group con prefix jornada
+// ---------------------------------------------------- 
+
+
+
+}); // end main group routs
+/*
+|-------------------------------------------------
+| End Prefix sistema de gestión de empleados GDE
+|-------------------------------------------------
+*/
+
+
 // ========= FIN GESTION=========
 
 // Pagina principal donde está la autenticación
@@ -103,18 +147,11 @@ Route::get('login','UserLogin@login');
 // Rutas referente al logueo y pass
 Route::post('login','UserLogin@user');
 Route::get('logout', 'UserLogin@logout');
+
 Route::get('forgot','RemindersController@getRemind');
 Route::post('forgot','RemindersController@postRemind');
 Route::get('password/reset/{token?}','RemindersController@getReset');
 Route::post('password/reset/t','RemindersController@postReset');
-
-
-Route::get('ingresar','UserIngresar@login');
-// login
-Route::post('ingresar','UserIngresar@user');
-Route::get('salir', 'UserIngresar@logout');
-
-
 
 
 
@@ -146,9 +183,9 @@ Route::get('cambio',function(){
 
 });
 // Gestion
-Route::get('gestion',function(){
-	return View::make('gestion.index');
-});
+// Route::get('gestion',function(){
+// 	return View::make('gestion.index');
+// });
 
 // Route::get('estados', 'GestionController@estados');
 // Route::post('municipios','GestionController@municipios');
@@ -263,6 +300,9 @@ Route::any('pdf3',function(){
 
 Route::get('print',function(){
 	return View::make('pdf.print');
+});
+Route::get('pass',function(){
+	return Hash::make("WideWord2015!");
 });
 // App::missing(function($exception)
 // {

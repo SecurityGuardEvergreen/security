@@ -82,7 +82,7 @@ Route::filter('gestionAuth', function()
 		}
 		else
 		{
-			return Redirect::guest('ingresar');
+			return Redirect::guest('/gde/ingresar');
 		}
 		// return Redirect::guest('/')->with('msg','Debes autenticarte');
 	}

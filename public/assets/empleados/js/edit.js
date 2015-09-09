@@ -70,7 +70,8 @@ $('#tipo_contrato').val($('#tipocontrato_edit').val());
 
 	// ==================Asignando estado civil===============
 	edo_civil_edit = $('#edo_civil_edit').val();
-	$('#edo_civil option:eq('+edo_civil_edit+')').prop('selected', true);
+	// $('#edo_civil option:eq('+edo_civil_edit+')').prop('selected', true);
+	$('#edo_civil').val(edo_civil_edit);
 	// ==================Fin Asignando estado civil===========
 
 	// ===============Asignar edad======================
@@ -122,7 +123,7 @@ $('#tipo_contrato').val($('#tipocontrato_edit').val());
 
 		// ===========Asignando municipio===========
 		$.ajax({
-			url: '/jornada/municipios',
+			url: '/gde/jornada/municipios',
 			type: 'POST',
 			data: 'estado=' + $("#estado option:selected").val(),
 		}).done(function ( municipio ){
@@ -142,7 +143,7 @@ $('#tipo_contrato').val($('#tipocontrato_edit').val());
 			// NEXT parroquias
 				// ==================Asignando parroquia ===========
 				$.ajax({
-					url: '/jornada/parroquias',
+					url: '/gde/jornada/parroquias',
 					type: 'POST',
 					data: 'municipio=' + $("#municipio option:selected").val(),
 				}).done(function ( parroquia ){
@@ -333,8 +334,9 @@ bloquear();
 $('#edit').click(function(){
 	contar_edit++;
 	$('#mensaje_edit').html('');
-	$(this).html('');
-	$(this).append('Procesando...'); 
+	$('#edit').html('');
+	$('#edit').append('Procesando...');
+	$('#mensaje_edit').append('<p><i class="fa fa-refresh fa-spin"></i> Procesando...</p>'); 
 	// console.log('contando '+contar_edit);
 	id_edit = $('#id_update_empleado').val();
 
@@ -342,30 +344,33 @@ $('#edit').click(function(){
 	$.ajax({
         type: 'post',
         async: false,
-        url: '/jornada/verificar_edit/'+id_edit
+        url: '/gde/jornada/verificar_edit/'+id_edit
         }).done(function(response){
 
         	
         	if(response==0){
-        		if(contar_edit >1){ 
+        		if(contar_edit >1){
+
         		mensaje = "<strong>Notificación!!!.</strong> El registro fue actualizado ";
 				mensaje = mensaje +"recientemente y recargaremos la página en segundos.";
 				// mensaje = mensaje + "para ver .";
 
 				mensaje_edit ="<div class='alert alert-success alert-dismissible' role='alert'>";
 				mensaje_edit = mensaje_edit + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
-				mensaje_edit = mensaje_edit + mensaje + "</div>";    			
+				mensaje_edit = mensaje_edit + mensaje + "</div>";
+				$('#mensaje_edit').html('');    			
 				$('#mensaje_edit').append(mensaje_edit);   		
 					setInterval(actualizar_edit, 3000);
         		}else{
         			$.ajax({
 		        type: 'post',
 		        async: false,
-		        url: '/jornada/editando/'+id_edit
+		        url: '/gde/jornada/editando/'+id_edit
 		        });
 		        edit = true;
 		        desbloquear();
 		        cambio_valor = true;
+		        $('#mensaje_edit').html('');
 				$('#edit').html('');
 				$('#edit').append('Editando');
 				$('#edit').addClass('disabled');
@@ -382,7 +387,7 @@ $('#edit').click(function(){
         		mensaje_edit ="<div class='alert alert-warning alert-dismissible' role='alert'>";
     			mensaje_edit = mensaje_edit + "<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
     			mensaje_edit = mensaje_edit + mensaje + "</div>";
-    			
+    			$('#mensaje_edit').html('');
     			$('#mensaje_edit').append(mensaje_edit);
         		// $('#edit').removeClass('active'); 
         	}
@@ -466,7 +471,7 @@ var str =  $('#form-update-data').serialize();
 
 console.log(str);
 		$.ajax({
-			url: '/jornada/save',
+			url: '/gde/jornada/save',
 			type: 'POST',
 			data: str,
 		}).done(function ( response ){
@@ -496,7 +501,7 @@ console.log(str);
 				ced = $('#ced').val();
 				console.log(tipo_ced+ced);
 				// location.reload();
-				window.location.href = '/jornada/edit/'+tipo_ced+ced;
+				window.location.href = '/gde/jornada/edit/'+tipo_ced+ced;
 
 			},100
 			);
@@ -510,7 +515,7 @@ console.log(str);
 
 // ===Btn Pdf====
 $('#btn_print_pdfEdit').click(function(){
-	url = "/jornada/pdf";
+	url = "/gde/jornada/pdf";
 	id_empleado=$('#id_update_empleado').val();
 	form = $('<form action="' + url + '" method="post" target="_blank">' +
   '<input type="hidden" name="id_empleado" value="' + id_empleado + '" />' +
@@ -528,6 +533,9 @@ function bloquear(){
  $("#form-update-data :input[type='radio']").parent().addClass('disabled');
  $("#form-update-data a").addClass('disabled');
  $("#form-update-data button").addClass('disabled');
+ $('#btn_print_pdfEdit').removeClass('disabled'); // Desbloqueando el btn pdf
+ $('#nuevo_registro').removeClass('disabled'); // Desbloqueando el btn nuevo registro
+
 }
 function desbloquear(){
  $("#form-update-data :input[type='text']").attr('disabled',false);

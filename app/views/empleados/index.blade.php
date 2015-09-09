@@ -553,7 +553,7 @@
 <script src="/assets/empleados/js/plugins.js"></script>
 <script src="/assets/empleados/js/bootstrap.min.js"></script>
 <script src="/assets/empleados/js/wow.min.js"></script>
-<script src="/assets/empleados/js/prettyPhoto.js"></script>
+<!-- <script src="/assets/empleados/js/prettyPhoto.js"></script> -->
 <script src="/assets/empleados/js/owl.carousel.min.js"></script>
     <script src="/assets/empleados/js/main.js"></script>
     <script src="/assets/empleados/js/moment-locales.js"></script>

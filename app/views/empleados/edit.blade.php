@@ -611,7 +611,7 @@
                         <div id="mensajeajax"></div>
 
                         <!-- <div class="btn-group" role="group" aria-label="..."> -->
-                            <a href="/jornada/staff" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo registro</a>
+                            <a id="nuevo_registro" href="/gde/jornada/staff" class="btn btn-primary"><i class="fa fa-plus"></i> Nuevo registro</a>
                             <button  type="submit" id="btn_save" class="btn btn-success"><i class="fa fa-floppy-o"></i> Guardar cambios</button>
                             <!-- <a id="btn_print_f" class="btn btn-success "><i class="fa fa-print"></i> Imprimir</a> -->
                             <a id="btn_print_pdfEdit" target="_blank" class="btn btn-success "><i class="fa fa-file-pdf-o"></i> PDF</a>

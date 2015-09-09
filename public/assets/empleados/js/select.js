@@ -122,12 +122,12 @@ window.onbeforeunload = function(){
 		$.ajax({
         type: 'post',
         async: false,
-        url: '/jornada/edit_end/'+id_edit
+        url: '/gde/jornada/edit_end/'+id_edit
         });
 		}	
 		return "Vas a abandonar la p\u00e1gina \u00bfEst\u00e1  seguro que quiere abandonar la p\u00e1gina sin guardar los cambios? De no hacerlo perder\u00e1  las modificaciones.";
 	}else{
-
+		
 		// console.log('test');
 	}
 
@@ -136,7 +136,7 @@ window.onbeforeunload = function(){
 
 
 	//Al iniciar mandamos consultar todos los paises que se mantienen en nuestra base de datos atravez de la ruta paises
-	$.getJSON('/jornada/estados', function( estados ){
+	$.getJSON('/gde/jornada/estados', function( estados ){
 		$('#estado').html('');
 		$('#estado').append($('<option></option>').text('Seleccione un estado....').val(''));
 		$.each(estados, function(i) {
@@ -149,7 +149,7 @@ window.onbeforeunload = function(){
     //Cargando el municipio al cambiar el estado
 	$("#estado").change( function(event) {
 		$.ajax({
-			url: '/jornada/municipios',
+			url: '/gde/jornada/municipios',
 			type: 'POST',
 			data: 'estado=' + $("#estado option:selected").val(),
 		}).done(function ( municipio ){
@@ -170,7 +170,7 @@ window.onbeforeunload = function(){
 		// console.log('si');
 		var str =  $('#form-update-data').serialize();
 		$.ajax({
-			url: '/jornada/parroquias',
+			url: '/gde/jornada/parroquias',
 			type: 'POST',
 			data: str,
 		}).done(function ( parroquia ){
@@ -823,7 +823,7 @@ function validarced(){
 			var tipo = $('#tipo_ced').val();
 
 			$.ajax({
-			url: '/jornada/empleado_cd',
+			url: '/gde/jornada/empleado_cd',
 			type: 'POST',
 			data: 'ced='+ced_insert+'&tipo='+tipo,
 				}).done(function ( response ){
@@ -845,7 +845,7 @@ function validarced(){
 			var tipo = $('#tipo_ced').val();
 
 			$.ajax({
-			url: '/jornada/empleado_cd',
+			url: '/gde/jornada/empleado_cd',
 			type: 'POST',
 			data:  'ced='+ced_insert+'&tipo='+tipo,
 				}).done(function ( response ){
@@ -871,7 +871,7 @@ function validarrif(){
 			var rif_insert = $('#rif').val();
 			var tipo = $('#tipo_rif').val();
 			$.ajax({
-			url: '/jornada/empleado_rif',
+			url: '/gde/jornada/empleado_rif',
 			type: 'POST',
 			data: 'rif='+rif_insert+'&tipo='+tipo,
 				}).done(function ( response ){
@@ -892,7 +892,7 @@ function validarrif(){
 			var rif_insert = $('#rif').val();
 			var tipo = $('#tipo_rif').val();
 			$.ajax({
-			url: '/jornada/empleado_rif',
+			url: '/gde/jornada/empleado_rif',
 			type: 'POST',
 			data: 'rif='+rif_insert+'&tipo='+tipo,
 				}).done(function ( response ){
@@ -1183,7 +1183,7 @@ $('#parentescoAdd div.scriptf').each(function(index){
 // ===Btn Pdf====
 $('#btn_print_pdf').click(function(){
 	$('#pdf').html('');
-	url = "/jornada/pdf";
+	url = "/gde/jornada/pdf";
 	form = $('<form action="' + url + '" method="post" target="_blank">' +
   '<input type="hidden" name="id_empleado" value="' + id_update + '" />' +
   '</form>');

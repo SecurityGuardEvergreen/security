@@ -31,7 +31,7 @@ Login -
 
 
 {{ Form::open(array(
-	'url' => 'ingresar',
+	'url' => 'gde/ingresar',
 	'method' => 'post',
 	'class' => 'form form-session',
 	'id' => 'new-session')) }}
